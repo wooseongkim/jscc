@@ -1,0 +1,39 @@
+seed: 11
+device: auto
+model:
+  layers: 4
+  frames: 12
+  latent_dim: 8
+  channel_uses: [8, 6]
+  channel_state_dim: 8
+  hidden_dim: 128
+  target_power: 1.0
+codec:
+  waveform_samples: 768
+channel:
+  snr_db: [-2.0, 5.0, 12.0]
+  jsr_db: [-10.0, 0.0, 8.0]
+  jammer_types: [barrage, narrowband, burst, pilot]
+  jammed_fraction: 0.25
+  pilot_spacing: 4
+  # Used as the time-axis spacing when model.channel_uses is an OFDM [K,N] grid.
+  pilot_time_spacing: 4
+eval:
+  batches: 2
+  batch_size: 8
+  checkpoint: artifacts/jscc.pt
+  output_csv: artifacts/eval.csv
+  plot_dir: artifacts/plots
+  adaptation_modes: [uniform, rule_based, learned_gate]
+  transmitter_csi: true
+  allocation_modes: [uniform, random, reliability_greedy]
+  layer_importance_order: [0, 1, 2, 3]
+  refiner_modes: [no_refiner, refiner_oracle_mask, refiner_estimated_mask]
+  unreliable_fraction: 0.25
+  paired_seed: 2027
+  # Add "oracle" here to report a perfect-CSI upper-bound baseline.
+  equalizer_modes: [estimated]
+  rule_gate_thresholds_db: [0.0, 6.0, 12.0]
+  learned_gate_hidden_dim: 32
+  layer_weights: [4.0, 2.0, 1.0, 1.0]
+  enable_optional_wer: false

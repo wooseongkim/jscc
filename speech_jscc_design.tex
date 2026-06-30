@@ -1,0 +1,471 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=25mm]{geometry}
+\usepackage{kotex}
+\usepackage{amsmath,amssymb,amsfonts,bm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\lstdefinestyle{promptstyle}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    columns=fullflexible,
+    backgroundcolor=\color{gray!5}
+}
+
+\title{재밍 환경에서 Speech-to-Speech JSCC를 위한 권장 아키텍처,\newline 채널 적응적 레이어 사용 및 재밍 적응 방법}
+\author{Speech JSCC 설계 초안}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{전제 및 설계 방향}
+본 문서는 무선 재밍 환경에서 speech-to-speech JSCC를 구현하기 위한 1차 설계안이다. 여기서는 ASR/TTS, KG 기반 symbolic semantic side channel, 디지털 FEC 기반 RVQ index 전송을 주력 구조로 사용하지 않는다. 기본 방향은 다음과 같다.
+
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{
+\centering
+\textbf{Speech waveform $\rightarrow$ neural speech codec representation $\rightarrow$ JSCC encoder $\rightarrow$ wireless channel with jamming $\rightarrow$ JSCC decoder $\rightarrow$ codec decoder $\rightarrow$ speech waveform}
+}}
+\end{center}
+
+즉, 목표는 RVQ codebook index를 bit-perfect하게 복원하는 것이 아니라, 재밍과 Rayleigh fading으로 왜곡된 수신 신호로부터 speech representation을 복원하여 최종 waveform의 명료도, 음질, 화자성, 작전 키워드 전달률을 유지하는 것이다.
+
+\section{5. 권장 아키텍처}
+
+\subsection{5.1 전체 송수신 구조}
+송신 음성을 $\bm{s}\in\mathbb{R}^{T_s}$라고 하자. 사전 학습된 speech codec encoder를 $E_{\psi}$, decoder를 $D_{\psi}$라고 둔다. 초기 구현에서는 $E_{\psi}$와 $D_{\psi}$를 freeze하고, JSCC encoder/decoder만 학습한다.
+
+SpeechTokenizer, EnCodec, Mimi류 codec은 음성을 연속 latent 또는 RVQ 기반 codebook representation으로 변환한다. RVQ layer 수를 $L$이라고 하면, 시간 index $t$와 RVQ layer $\ell$에 대해
+\begin{equation}
+    q_{\ell,t} \in \{1,2,\ldots,K_{\ell}\}, \qquad \ell=1,\ldots,L,\quad t=1,\ldots,T
+\end{equation}
+와 같은 codebook index를 얻을 수 있다. 각 codebook을 $\mathcal{C}_{\ell}=\{\bm{c}_{\ell,1},\ldots,\bm{c}_{\ell,K_{\ell}}\}$라고 하면, index에 대응하는 embedding은
+\begin{equation}
+    \bm{e}_{\ell,t} = \bm{c}_{\ell,q_{\ell,t}} \in \mathbb{R}^{d_{\ell}}
+\end{equation}
+이다. 본 JSCC 시스템에서는 $q_{\ell,t}$를 binary index로 변환하여 전송하는 것이 아니라, layer별 embedding sequence
+\begin{equation}
+    \bm{E}=\{\bm{e}_{\ell,t}: \ell=1,\ldots,L,\ t=1,\ldots,T\}
+\end{equation}
+또는 pre-quantization latent를 JSCC encoder 입력으로 사용한다.
+
+JSCC encoder $f_{\theta}$는 speech codec representation과 채널 상태 벡터 $\bm{c}$를 입력받아 complex channel symbols $\bm{x}\in\mathbb{C}^{M}$를 생성한다.
+\begin{equation}
+    \bm{x} = f_{\theta}(\bm{E},\bm{c}), \qquad
+    \frac{1}{M}\mathbb{E}\left[\|\bm{x}\|_2^2\right] \le P_s.
+\end{equation}
+여기서 $\bm{c}$는 추정 SNR/SINR, CSI 품질, jammer-to-signal ratio(JSR), 재밍 mask 통계 등을 포함한다.
+
+수신기는 채널 출력 $\bm{y}$와 추정 채널 상태 $\hat{\bm{c}}$를 입력으로 받아 reconstructed codec representation을 생성한다.
+\begin{equation}
+    \hat{\bm{E}} = g_{\phi}(\bm{y},\hat{\bm{c}}).
+\end{equation}
+그 후 codec decoder가 waveform을 복원한다.
+\begin{equation}
+    \hat{\bm{s}} = D_{\psi}(\hat{\bm{E}}).
+\end{equation}
+
+\subsection{5.2 Rayleigh fading 및 재밍 채널}
+1차 구현에서는 단순 Rayleigh fading을 사용한다. flat fading 모델은
+\begin{equation}
+    \bm{y} = h\bm{x} + g\bm{j} + \bm{n}
+\end{equation}
+로 둔다. 여기서
+\begin{equation}
+    h\sim \mathcal{CN}(0,1), \qquad g\sim \mathcal{CN}(0,1), \qquad \bm{n}\sim \mathcal{CN}(\bm{0},N_0\bm{I})
+\end{equation}
+이고 $\bm{j}$는 jammer signal이다. 송신 전력과 재밍 전력을 각각 $P_s$와 $P_j$라고 하면,
+\begin{equation}
+    \mathrm{JSR}=\frac{P_j}{P_s}, \qquad
+    \gamma_{\mathrm{eff}} = \frac{|h|^2 P_s}{|g|^2 P_j + N_0}
+\end{equation}
+로 effective SINR을 정의한다.
+
+OFDM 확장 모델에서는 subcarrier $k$와 OFDM symbol index $m$에 대해
+\begin{equation}
+    Y_{k,m}=H_{k,m}X_{k,m}+G_{k,m}J_{k,m}+N_{k,m}
+\end{equation}
+를 사용한다. 이 경우 재밍은 시간--주파수 mask $\Omega_J$로 표현할 수 있다.
+\begin{equation}
+    J_{k,m}=\mathbb{I}\{(k,m)\in\Omega_J\}\sqrt{P_{j,k,m}}U_{k,m}, \qquad U_{k,m}\sim\mathcal{CN}(0,1).
+\end{equation}
+
+\subsection{5.3 Soft codebook projection}
+JSCC decoder가 hard index를 직접 출력하도록 강제하면, 재밍 상황에서 작은 왜곡이 큰 index 오류로 바뀔 수 있다. 따라서 수신기는 layer별 token distribution 또는 continuous embedding을 출력하도록 설계한다.
+
+JSCC decoder 출력에서 layer $\ell$, time $t$의 logit을 $\bm{a}_{\ell,t}\in\mathbb{R}^{K_{\ell}}$라고 하면,
+\begin{equation}
+    \pi_{\ell,t,k}=\frac{\exp(a_{\ell,t,k}/\tau)}{\sum_{r=1}^{K_{\ell}}\exp(a_{\ell,t,r}/\tau)}
+\end{equation}
+이고, soft codebook projection은
+\begin{equation}
+    \tilde{\bm{e}}_{\ell,t}=\sum_{k=1}^{K_{\ell}}\pi_{\ell,t,k}\bm{c}_{\ell,k}
+\end{equation}
+이다. 학습 중에는 soft projection을 사용하고, 평가 시에는 필요에 따라
+\begin{equation}
+    \hat{q}_{\ell,t}=\arg\max_k \pi_{\ell,t,k}
+\end{equation}
+를 사용해 hard projection도 비교한다.
+
+\subsection{5.4 Latent refinement module}
+재밍이 강하면 $g_{\phi}$가 출력한 $\hat{\bm{E}}$에 잔류 왜곡이 남는다. 이를 줄이기 위해 optional refinement network $R_{\omega}$를 둔다.
+\begin{equation}
+    \tilde{\bm{E}} = R_{\omega}(\hat{\bm{E}},\hat{\bm{c}}), \qquad
+    \hat{\bm{s}} = D_{\psi}(\tilde{\bm{E}}).
+\end{equation}
+$R_{\omega}$는 temporal context와 RVQ layer context를 모두 보는 작은 Transformer, Conformer, 또는 temporal convolution network로 구현할 수 있다. 1차 구현에서는 $R_{\omega}$를 제외한 baseline을 먼저 만들고, 이후 ablation으로 추가한다.
+
+\subsection{5.5 학습 목적함수}
+전체 학습 loss는 codec latent reconstruction, waveform/perceptual reconstruction, speaker similarity, intelligibility 관련 loss를 결합한다.
+\begin{equation}
+\begin{aligned}
+    \mathcal{L}_{\mathrm{total}}
+    =&\ \lambda_{\mathrm{lat}}\mathcal{L}_{\mathrm{lat}}
+    +\lambda_{\mathrm{tok}}\mathcal{L}_{\mathrm{tok}}
+    +\lambda_{\mathrm{stft}}\mathcal{L}_{\mathrm{STFT}} \\
+    &+\lambda_{\mathrm{spk}}\mathcal{L}_{\mathrm{spk}}
+    +\lambda_{\mathrm{int}}\mathcal{L}_{\mathrm{int}}
+    +\lambda_{\mathrm{pow}}\mathcal{L}_{\mathrm{power}}.
+\end{aligned}
+\end{equation}
+기본 latent loss는
+\begin{equation}
+    \mathcal{L}_{\mathrm{lat}}=\sum_{\ell=1}^{L}w_{\ell}\sum_{t=1}^{T}\|\bm{e}_{\ell,t}-\hat{\bm{e}}_{\ell,t}\|_2^2
+\end{equation}
+이다. 여기서 $w_{\ell}$은 layer 중요도이다. token CE loss를 사용할 경우
+\begin{equation}
+    \mathcal{L}_{\mathrm{tok}}=-\sum_{\ell=1}^{L} w_{\ell}\sum_{t=1}^{T}\log \pi_{\ell,t,q_{\ell,t}}
+\end{equation}
+로 둔다. 전력 제약은
+\begin{equation}
+    \mathcal{L}_{\mathrm{power}}=\left[\frac{1}{M}\|\bm{x}\|_2^2-P_s\right]_{+}^{2}
+\end{equation}
+로 둘 수 있다.
+
+\subsection{5.6 단계적 학습 전략}
+\begin{enumerate}[label=\arabic*)]
+    \item \textbf{Codec freeze 단계}: $E_{\psi},D_{\psi}$를 고정하고 $f_{\theta},g_{\phi}$만 학습한다.
+    \item \textbf{Latent-only 단계}: waveform decoder까지 연결하지 않고 $\mathcal{L}_{\mathrm{lat}}$와 $\mathcal{L}_{\mathrm{tok}}$만으로 학습한다.
+    \item \textbf{Waveform 연결 단계}: $D_{\psi}$를 연결하여 STFT/mel loss와 perceptual metric을 추가한다.
+    \item \textbf{Jamming curriculum 단계}: AWGN $\rightarrow$ Rayleigh $\rightarrow$ barrage jamming $\rightarrow$ narrowband/burst jamming 순서로 channel distribution을 넓힌다.
+    \item \textbf{Refinement 추가 단계}: baseline 수렴 후 $R_{\omega}$를 추가하고 강한 JSR 구간에서 성능을 비교한다.
+\end{enumerate}
+
+\section{6. 채널 적응적 레이어 사용}
+
+\subsection{6.1 의미 정리}
+여기서 ``레이어 사용''은 neural network layer를 송신한다는 뜻이 아니다. 송수신기는 pretrained speech codec encoder/decoder와 codebook을 이미 공유하고 있다. 채널 적응적 레이어 사용이란 RVQ layer별 codec representation $\bm{E}_1,\ldots,\bm{E}_L$에 대해, 채널 상태에 따라 JSCC encoder가 할당하는 표현력, channel symbol 수, 전력, gating weight를 바꾸는 것을 의미한다.
+
+\subsection{6.2 Layer-wise gating}
+채널 상태 벡터를
+\begin{equation}
+    \bm{c}=[\hat{\gamma}_{\mathrm{eff}},\widehat{\mathrm{JSR}},\mathrm{NMSE}_{\mathrm{CSI}},p_{\mathrm{jam}},\rho_{\mathrm{mask}}]^{\top}
+\end{equation}
+라고 하자. $p_{\mathrm{jam}}$은 jammer type posterior, $\rho_{\mathrm{mask}}$는 jammed resource ratio이다. Layer gate는
+\begin{equation}
+    \bm{\alpha}=\sigma\left(\mathrm{MLP}_{\eta}(\bm{c})\right), \qquad \alpha_{\ell}\in[0,1]
+\end{equation}
+로 정의한다. JSCC encoder 입력은
+\begin{equation}
+    \bm{E}'_{\ell}=\alpha_{\ell}\bm{E}_{\ell}, \qquad \ell=1,\ldots,L
+\end{equation}
+로 조정된다. 채널이 좋으면 $\alpha_{\ell}\approx 1$이 모든 layer에 대해 유지되고, 채널이 나쁘면 content-sensitive layer의 $\alpha_{\ell}$만 크게 유지된다.
+
+\subsection{6.3 Layer-wise channel-use allocation}
+전체 channel symbol budget을 $M$이라고 하자. Layer $\ell$에 할당되는 channel use 수를 $M_{\ell}$로 두면,
+\begin{equation}
+    \sum_{\ell=1}^{L}M_{\ell}\le M, \qquad M_{\ell}\ge 0.
+\end{equation}
+채널 상태 기반 allocation은
+\begin{equation}
+    \beta_{\ell}=\frac{\exp(u_{\ell})}{\sum_{r=1}^{L}\exp(u_r)}, \qquad
+    \bm{u}=\mathrm{MLP}_{\xi}(\bm{c})
+\end{equation}
+로 계산하고,
+\begin{equation}
+    M_{\ell}=\left\lfloor M\beta_{\ell}\right\rfloor
+\end{equation}
+로 둘 수 있다. 단, content-sensitive layer에는 최소 channel use를 보장한다.
+\begin{equation}
+    M_{\ell}\ge M_{\ell}^{\min}, \qquad \ell\in\mathcal{B}
+\end{equation}
+여기서 $\mathcal{B}$는 base representation layer 집합이다.
+
+\subsection{6.4 Layer-wise power allocation}
+동일한 channel use를 쓰더라도 layer별 power를 다르게 줄 수 있다.
+\begin{equation}
+    \sum_{\ell=1}^{L}P_{\ell}\le P_{\mathrm{tot}}, \qquad
+    P_{\ell}=P_{\mathrm{tot}}\frac{\exp(v_{\ell})}{\sum_{r=1}^{L}\exp(v_r)}, \quad \bm{v}=\mathrm{MLP}_{\zeta}(\bm{c}).
+\end{equation}
+layer $\ell$의 JSCC symbol을 $\bm{x}_{\ell}$이라고 하면 최종 송신 symbol은
+\begin{equation}
+    \bm{x}=\sum_{\ell=1}^{L}\sqrt{P_{\ell}}\frac{\bm{x}_{\ell}}{\sqrt{\mathbb{E}\|\bm{x}_{\ell}\|_2^2}}
+\end{equation}
+로 구성할 수 있다.
+
+\subsection{6.5 Rule-based 초기 정책}
+처음부터 gate와 allocation을 모두 학습하면 디버깅이 어렵다. 따라서 1차 구현에서는 threshold 기반 rule을 사용한다.
+\begin{equation}
+\mathcal{A}(\hat{\gamma}_{\mathrm{eff}})=
+\begin{cases}
+\{1,2,\ldots,L\}, & \hat{\gamma}_{\mathrm{eff}}\ge \Gamma_3,\\
+\{1,2,\ldots,L_2\}, & \Gamma_2\le \hat{\gamma}_{\mathrm{eff}}<\Gamma_3,\\
+\{1,2,\ldots,L_1\}, & \Gamma_1\le \hat{\gamma}_{\mathrm{eff}}<\Gamma_2,\\
+\mathcal{B}, & \hat{\gamma}_{\mathrm{eff}}<\Gamma_1,
+\end{cases}
+\end{equation}
+여기서 $\mathcal{A}$는 활성화되는 RVQ representation layer 집합이다. 예를 들어 $L=8$, $L_2=6$, $L_1=4$, $\mathcal{B}=\{1,2\}$로 둘 수 있다. 이 수치는 가정이므로 반드시 layer ablation으로 검증한다.
+
+\subsection{6.6 Layer ablation을 통한 중요도 추정}
+각 RVQ layer의 중요도는 실험적으로 추정한다. layer subset $\mathcal{S}\subseteq\{1,\ldots,L\}$만 유지하고 나머지를 mask 또는 zero로 둔 후 waveform을 복원한다.
+\begin{equation}
+    \hat{\bm{s}}_{\mathcal{S}} = D_{\psi}\left(\{\bm{E}_{\ell}:\ell\in\mathcal{S}\},\{\bm{0}:\ell\notin\mathcal{S}\}\right).
+\end{equation}
+layer $\ell$의 intelligibility sensitivity는
+\begin{equation}
+    \Delta_{\ell}^{\mathrm{WER}}=\mathrm{WER}(\hat{\bm{s}}_{\setminus \ell})-\mathrm{WER}(\hat{\bm{s}}_{\mathrm{all}})
+\end{equation}
+로 정의할 수 있다. speaker sensitivity는 speaker embedding function $\Phi_{\mathrm{spk}}$를 사용해
+\begin{equation}
+    \Delta_{\ell}^{\mathrm{spk}}=\
+    \cos\left(\Phi_{\mathrm{spk}}(\bm{s}),\Phi_{\mathrm{spk}}(\hat{\bm{s}}_{\mathrm{all}})\right)
+    -
+    \cos\left(\Phi_{\mathrm{spk}}(\bm{s}),\Phi_{\mathrm{spk}}(\hat{\bm{s}}_{\setminus \ell})\right)
+\end{equation}
+로 계산한다. 최종 layer weight는
+\begin{equation}
+    w_{\ell}=a\Delta_{\ell}^{\mathrm{WER}}+b\Delta_{\ell}^{\mathrm{STOI}}+c\Delta_{\ell}^{\mathrm{spk}}
+\end{equation}
+처럼 둘 수 있다.
+
+\section{7. 재밍 적응 방법}
+
+\subsection{7.1 재밍 모델}
+1차 시뮬레이터는 다음 jammer를 지원한다.
+
+\paragraph{Barrage jamming}
+전체 대역 또는 전체 symbol에 white Gaussian jammer를 더한다.
+\begin{equation}
+    \bm{j}\sim\mathcal{CN}(\bm{0},P_j\bm{I}).
+\end{equation}
+
+\paragraph{Narrowband jamming}
+OFDM resource 중 일부 subcarrier 집합 $\mathcal{K}_J$만 공격한다.
+\begin{equation}
+    J_{k,m}=\mathbb{I}\{k\in\mathcal{K}_J\}\sqrt{P_j}U_{k,m}.
+\end{equation}
+
+\paragraph{Burst jamming}
+특정 시간 구간 $\mathcal{T}_J$만 공격한다.
+\begin{equation}
+    J_{k,m}=\mathbb{I}\{m\in\mathcal{T}_J\}\sqrt{P_j}U_{k,m}.
+\end{equation}
+
+\paragraph{Pilot jamming}
+pilot resource $\Omega_P$에 집중적으로 재밍을 가한다.
+\begin{equation}
+    J_{k,m}=\mathbb{I}\{(k,m)\in\Omega_P\}\sqrt{P_j}U_{k,m}.
+\end{equation}
+이는 CSI 추정 오차를 증가시켜 JSCC decoder 조건 정보 $\hat{\bm{c}}$를 악화시킨다.
+
+\subsection{7.2 Jamming-augmented training}
+재밍 적응의 가장 기본은 학습 시 다양한 jammer distribution을 포함하는 것이다. 학습 objective는
+\begin{equation}
+    \min_{\theta,\phi,\omega}\ \mathbb{E}_{\bm{s}\sim\mathcal{D}}\mathbb{E}_{h,g,\bm{j},\bm{n}\sim\mathcal{P}_{\mathrm{ch}}}
+    \left[\mathcal{L}_{\mathrm{total}}(\bm{s},\hat{\bm{s}})\right]
+\end{equation}
+이다. 여기서 $\mathcal{P}_{\mathrm{ch}}$는 SNR, JSR, Rayleigh fading, jammer type, jammer mask를 모두 randomize한다.
+
+더 강한 robust training은 worst-case 항을 추가한다.
+\begin{equation}
+    \min_{\theta,\phi,\omega}\ \mathbb{E}_{\bm{s},h,n}\left[
+    \mathcal{L}_{\mathrm{nominal}}
+    +\rho\max_{\bm{j}\in\mathcal{J}(P_j,\Omega_J)}
+    \mathcal{L}_{\mathrm{total}}(\bm{s},\hat{\bm{s}})
+    \right].
+\end{equation}
+실제 구현에서는 max-jammer를 완전히 풀기보다, 학습 batch마다 여러 jammer 후보를 샘플링하고 loss가 큰 case를 선택한다.
+
+\subsection{7.3 Channel-state conditioned decoding}
+JSCC decoder는 수신 신호만 보는 것이 아니라 채널 상태와 재밍 상태를 조건으로 받아야 한다.
+\begin{equation}
+    \hat{\bm{E}}=g_{\phi}(\bm{y},\hat{\bm{c}}), \qquad
+    \hat{\bm{c}}=[\hat{\gamma}_{\mathrm{eff}},\widehat{\mathrm{JSR}},\mathrm{NMSE}_{\mathrm{CSI}},\hat{p}_{\mathrm{jam}},\hat{\rho}_{\mathrm{mask}}].
+\end{equation}
+Pilot 기반 CSI 추정은
+\begin{equation}
+    \hat{H}_{k,m}^{\mathrm{LS}}=\frac{Y_{k,m}}{X_{k,m}}, \qquad (k,m)\in\Omega_P
+\end{equation}
+로 시작하고, CSI 품질은
+\begin{equation}
+    \mathrm{NMSE}_{\mathrm{CSI}}=\frac{\mathbb{E}\left[\|H-\hat{H}\|_2^2\right]}{\mathbb{E}\left[\|H\|_2^2\right]}
+\end{equation}
+로 측정한다. 실제 수신기에서는 $H$를 알 수 없으므로 validation에서는 true NMSE를 기록하고, online decoder 조건에는 residual error, pilot EVM, jammer energy estimate 등을 넣는다.
+
+\subsection{7.4 Jammer-aware layer allocation}
+재밍이 일부 시간--주파수 resource에 집중되면, content-sensitive layer representation을 상대적으로 깨끗한 resource에 할당한다. OFDM resource $r=(k,m)$의 신뢰도를
+\begin{equation}
+    R_r=\frac{|\hat{H}_r|^2}{\hat{\sigma}_{J,r}^2+\hat{\sigma}_{N}^2+\epsilon}
+\end{equation}
+로 두고, layer $\ell$의 중요도를 $w_{\ell}$라고 하자. resource assignment는 다음 문제로 쓸 수 있다.
+\begin{equation}
+\begin{aligned}
+    \max_{a_{\ell,r}}\quad & \sum_{\ell=1}^{L}\sum_{r\in\mathcal{R}} w_{\ell}a_{\ell,r}\log(1+R_r)\\
+    \mathrm{s.t.}\quad & \sum_{\ell=1}^{L}a_{\ell,r}\le 1,\quad a_{\ell,r}\in\{0,1\},\\
+    & \sum_{r\in\mathcal{R}}a_{\ell,r}=M_{\ell}.
+\end{aligned}
+\end{equation}
+1차 구현에서는 이 최적화를 풀지 말고, $R_r$를 기준으로 resource를 정렬한 뒤 중요 layer부터 배정하는 greedy policy를 사용한다.
+
+\subsection{7.5 재밍 적응형 latent denoising}
+재밍으로 인한 왜곡은 random noise와 달리 특정 resource 또는 시간 구간에 구조적으로 나타난다. 따라서 refinement network는 jammer mask estimate를 조건으로 사용한다.
+\begin{equation}
+    \tilde{\bm{E}}=R_{\omega}(\hat{\bm{E}},\hat{\bm{M}}_J,\hat{\bm{c}})
+\end{equation}
+여기서 $\hat{\bm{M}}_J\in[0,1]^{K\times M}$는 resource별 재밍 가능성 map이다. denoising loss는 강한 재밍 구간의 layer reconstruction을 더 크게 가중한다.
+\begin{equation}
+    \mathcal{L}_{\mathrm{denoise}}=\sum_{\ell,t}\left(w_{\ell}+\mu\hat{m}_{t}\right)\|\bm{e}_{\ell,t}-\tilde{\bm{e}}_{\ell,t}\|_2^2.
+\end{equation}
+
+\subsection{7.6 평가 지표}
+최소한 다음 지표를 보고한다.
+\begin{itemize}
+    \item \textbf{무선 계층}: effective SINR, JSR, CSI NMSE, pilot EVM.
+    \item \textbf{codec/latent 계층}: layer별 embedding MSE, token top-1/top-5 accuracy, soft projection entropy.
+    \item \textbf{음성 계층}: STOI, PESQ 또는 ViSQOL, multi-scale STFT distance, SI-SDR.
+    \item \textbf{화자성}: speaker embedding cosine similarity.
+    \item \textbf{작전 통신 명료성}: keyword accuracy, command word accuracy, optional ASR-WER. ASR은 시스템 구성 요소가 아니라 평가 도구로만 사용한다.
+\end{itemize}
+
+\section{Codex 개발 계획 및 지시사항}
+
+\subsection{개발 원칙}
+\begin{enumerate}[label=\arabic*)]
+    \item 먼저 speech 모델 없이 synthetic latent tensor로 JSCC와 channel/jammer를 검증한다.
+    \item 그 다음 SpeechTokenizer 또는 EnCodec wrapper를 붙인다.
+    \item codec encoder/decoder는 freeze하고, JSCC encoder/decoder와 optional refiner만 학습한다.
+    \item 디지털 FEC/index 전송 구현으로 흐르지 않도록 한다. 본 프로젝트의 핵심은 continuous/soft codec representation JSCC이다.
+    \item 모든 실험은 config 파일로 재현 가능해야 한다.
+\end{enumerate}
+
+\subsection{권장 프로젝트 구조}
+\begin{lstlisting}[style=promptstyle]
+speech-jscc/
+  configs/
+    base.yaml
+    channel_rayleigh.yaml
+    jammer.yaml
+    model_jscc.yaml
+    train.yaml
+  src/
+    codecs/
+      base_codec.py
+      speechtokenizer_wrapper.py
+      encodec_wrapper.py
+    channels/
+      rayleigh.py
+      ofdm.py
+      jammer.py
+      pilot.py
+      metrics.py
+    models/
+      jscc_encoder.py
+      jscc_decoder.py
+      layer_gate.py
+      soft_codebook.py
+      latent_refiner.py
+    losses/
+      latent_losses.py
+      spectral_losses.py
+      speaker_losses.py
+    data/
+      speech_dataset.py
+      collate.py
+    train/
+      train_latent_jscc.py
+      train_waveform_jscc.py
+    eval/
+      eval_ablation.py
+      eval_jamming.py
+      eval_metrics.py
+  tests/
+    test_channel_shapes.py
+    test_power_constraint.py
+    test_jammer_energy.py
+    test_soft_codebook.py
+  scripts/
+    run_ablation.sh
+    run_jamming_sweep.sh
+  notebooks/
+    01_channel_validation.ipynb
+    02_layer_ablation.ipynb
+    03_jamming_results.ipynb
+\end{lstlisting}
+
+\subsection{Codex 입력 프롬프트 예시}
+아래 프롬프트를 VS Code 터미널에서 Codex CLI에 순차적으로 입력한다.
+
+\paragraph{Prompt 1: 프로젝트 스캐폴드 생성}
+\begin{lstlisting}[style=promptstyle]
+Create a PyTorch research project for speech-to-speech JSCC under Rayleigh fading and jamming. Do not implement digital FEC or bit-level RVQ index transmission. The project must use continuous or soft codec representations as the JSCC source. Create the directory structure, config files, and minimal runnable training/evaluation scripts. Add pytest tests for tensor shapes and power normalization.
+\end{lstlisting}
+
+\paragraph{Prompt 2: Rayleigh channel and jammer module}
+\begin{lstlisting}[style=promptstyle]
+Implement src/channels/rayleigh.py and src/channels/jammer.py. Use complex PyTorch tensors. The Rayleigh channel should support flat fading and optional OFDM resource grids. The jammer module should support barrage, narrowband, burst, and pilot jamming masks. Include functions to compute effective SINR, JSR, and jammer mask statistics. Add unit tests that verify signal power, jammer power, and output tensor shapes.
+\end{lstlisting}
+
+\paragraph{Prompt 3: JSCC encoder/decoder}
+\begin{lstlisting}[style=promptstyle]
+Implement src/models/jscc_encoder.py and jscc_decoder.py. The encoder maps codec latent tensors of shape [B, L, T, D] plus channel-state vector c to complex channel symbols [B, M] or [B, K, N]. Enforce average power normalization. The decoder maps received complex symbols plus channel-state vector to reconstructed latent tensors [B, L, T, D]. Include layer gating and optional layer-wise power allocation, but keep the first version simple and deterministic.
+\end{lstlisting}
+
+\paragraph{Prompt 4: Soft codebook projection}
+\begin{lstlisting}[style=promptstyle]
+Implement src/models/soft_codebook.py. It should support two modes: (1) continuous latent reconstruction loss, and (2) soft codebook projection from token logits to codebook embeddings using temperature-scaled softmax. Include top-k token accuracy computation for analysis only. Do not convert the communication system into a digital index transmission pipeline.
+\end{lstlisting}
+
+\paragraph{Prompt 5: Codec wrapper}
+\begin{lstlisting}[style=promptstyle]
+Create src/codecs/base_codec.py with an abstract interface: encode_waveform, decode_representation, get_codebook, representation_shape. Then create a placeholder SpeechTokenizerWrapper and EnCodecWrapper. If external pretrained models are unavailable, implement a mock codec that produces deterministic random latent tensors and reconstructs a dummy waveform so the JSCC pipeline can be tested end-to-end.
+\end{lstlisting}
+
+\paragraph{Prompt 6: Training loop}
+\begin{lstlisting}[style=promptstyle]
+Implement train_latent_jscc.py. It should load codec representations, sample random SNR/JSR/jammer types per batch, pass through JSCC encoder, Rayleigh+jamming channel, JSCC decoder, and compute layer-weighted latent MSE plus power penalty. Log loss, effective SINR, JSR, layer-wise MSE, and reconstruction examples. Add config options for layer weights, SNR range, JSR range, and jammer probabilities.
+\end{lstlisting}
+
+\paragraph{Prompt 7: Evaluation sweep}
+\begin{lstlisting}[style=promptstyle]
+Implement eval_jamming.py to sweep SNR, JSR, jammer type, and layer adaptation modes. Compare: uniform JSCC, rule-based channel-adaptive layer gating, and learned gating if available. Save CSV results and plots for layer-wise MSE, waveform metrics placeholders, and effective SINR. Keep ASR/WER only as optional evaluation, not part of the communication pipeline.
+\end{lstlisting}
+
+\paragraph{Prompt 8: Documentation}
+\begin{lstlisting}[style=promptstyle]
+Write README.md explaining that this project studies speech-to-speech JSCC using neural speech codec representations under Rayleigh fading and jamming. Clearly state that the system does not use ASR/TTS as the main communication path, does not transmit model weights, and does not implement digital FEC-based RVQ index transmission. Include quickstart commands, config descriptions, and experiment commands.
+\end{lstlisting}
+
+\section*{참고자료}
+\begin{itemize}
+    \item X. Zhang et al., ``SpeechTokenizer: Unified Speech Tokenizer for Speech Language Models'', arXiv:2308.16692.
+    \item E. Bourtsoulatze, D. B. Kurka, D. G\"und\"uz, ``Deep Joint Source-Channel Coding for Wireless Image Transmission'', arXiv:1809.01733.
+    \item Kyutai Labs, Moshi and Mimi documentation/repository. Mimi is a streaming neural audio codec used in Moshi.
+    \item OpenAI Developers, Codex CLI documentation.
+\end{itemize}
+
+\end{document}

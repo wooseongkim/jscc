@@ -1,0 +1,50 @@
+seed: 7
+device: auto
+model:
+  layers: 4
+  frames: 12
+  latent_dim: 8
+  channel_uses: [8, 6]
+  channel_state_dim: 8
+  hidden_dim: 128
+  target_power: 1.0
+codec:
+  waveform_samples: 768
+data:
+  # Optional .pt tensor [N,L,T,D], or a dict containing "representations".
+  # Null uses deterministic mock-codec representations of synthetic waveforms.
+  representations_path: null
+channel:
+  snr_db_range: [-2.0, 15.0]
+  jsr_db_range: [-10.0, 8.0]
+  jammer_probabilities:
+    barrage: 0.40
+    narrowband: 0.25
+    burst: 0.25
+    pilot: 0.10
+  jammed_fraction: 0.25
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+train:
+  steps: 20
+  batch_size: 8
+  learning_rate: 0.001
+  layer_weights: [4.0, 2.0, 1.0, 1.0]
+  power_penalty_weight: 0.01
+  gate_mode: learned_gate
+  transmitter_csi: true
+  learned_gate_hidden_dim: 32
+  lambda_budget: 0.01
+  lambda_smooth: 0.005
+  lambda_refine: 1.0
+  refiner_hidden_dim: 64
+  refiner_mask_mode: estimated
+  unreliable_fraction: 0.25
+  allocation_mode: reliability_greedy
+  layer_importance_order: [0, 1, 2, 3]
+  gradient_clip_norm: 5.0
+  log_every: 5
+  metrics_jsonl: artifacts/train_metrics.jsonl
+  reconstruction_dir: artifacts/reconstructions
+  reconstruction_examples: 2
+  checkpoint: artifacts/jscc.pt

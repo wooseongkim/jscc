@@ -1,0 +1,470 @@
+from __future__ import annotations
+
+import argparse
+import csv
+import random
+from pathlib import Path
+from typing import Any
+
+import torch
+from torch import Tensor, nn
+
+from speech_jscc.channels import compute_jsr
+from speech_jscc.config import load_config, resolve_device
+from speech_jscc.experiment import build_components
+from evaluation.paired import (
+    estimate_transmitter_feedback,
+    generate_paired_evaluation_batch,
+    run_mode_on_paired_batch,
+)
+from channels.reliability import estimate_unreliable_mask
+from models.channel_state import SINR_INDEX
+from models.learned_gate import LearnedLayerGate, load_learned_gate_checkpoint
+from models.latent_refiner import LatentRefiner, load_latent_refiner_checkpoint
+
+
+def rule_based_layer_gates(
+    channel_state: Tensor,
+    layers: int,
+    thresholds_db: list[float],
+) -> Tensor:
+    """Activate a deterministic prefix from post-estimation effective SINR."""
+    if channel_state.ndim != 2:
+        raise ValueError("channel_state must have shape [B,C]")
+    quality_db = channel_state[:, SINR_INDEX] * 20.0
+    thresholds = torch.as_tensor(thresholds_db, device=quality_db.device, dtype=quality_db.dtype)
+    if thresholds.shape != (layers - 1,):
+        raise ValueError("rule_gate_thresholds_db must contain L-1 values")
+    if thresholds.numel() > 1 and torch.any(thresholds[1:] < thresholds[:-1]):
+        raise ValueError("rule gate thresholds must be nondecreasing")
+    enhancement = quality_db[:, None] >= thresholds[None, :]
+    return torch.cat(
+        (quality_db.new_ones((quality_db.shape[0], 1)), enhancement.to(quality_db.dtype)),
+        dim=1,
+    )
+
+
+def _load_checkpoint(
+    checkpoint: Path,
+    model: nn.Module,
+    config: dict[str, Any],
+    device: torch.device,
+) -> LearnedLayerGate | None:
+    if not checkpoint.exists():
+        print(f"warning: {checkpoint} not found; evaluating random model initialization")
+        return None
+    state = torch.load(checkpoint, map_location=device, weights_only=True)
+    model.load_state_dict(state["model"])
+    print(f"loaded={checkpoint}")
+    learned_state = state.get("learned_gate")
+    if learned_state is None:
+        return None
+    if "state_dict" in learned_state:
+        gate = load_learned_gate_checkpoint(learned_state, device)
+    else:
+        gate = LearnedLayerGate(
+            config["model"]["channel_state_dim"],
+            config["model"]["layers"],
+            config["eval"].get("learned_gate_hidden_dim", 32),
+        ).to(device)
+        gate.load_state_dict(learned_state)
+    gate.eval()
+    return gate
+
+
+def _load_refiner(checkpoint: Path, device: torch.device) -> LatentRefiner | None:
+    if not checkpoint.exists():
+        return None
+    state = torch.load(checkpoint, map_location=device, weights_only=True)
+    payload = state.get("latent_refiner")
+    if payload is None:
+        return None
+    refiner = load_latent_refiner_checkpoint(payload, device)
+    refiner.eval()
+    return refiner
+
+
+def available_adaptation_modes(
+    requested: list[str],
+    learned_gate: LearnedLayerGate | None,
+) -> list[str]:
+    supported = {"uniform", "rule_based", "learned", "learned_gate"}
+    unknown = set(requested) - supported
+    if unknown:
+        raise ValueError(f"unsupported adaptation modes: {sorted(unknown)}")
+    modes = [
+        mode
+        for mode in requested
+        if mode not in {"learned", "learned_gate"} or learned_gate is not None
+    ]
+    if any(mode in {"learned", "learned_gate"} for mode in requested) and learned_gate is None:
+        print("learned gating requested but checkpoint has no 'learned_gate' state; skipping")
+    if not modes:
+        raise ValueError("no available adaptation modes")
+    return modes
+
+
+def _gates_for_mode(
+    mode: str,
+    state: Tensor,
+    layers: int,
+    thresholds_db: list[float],
+    learned_gate: LearnedLayerGate | None,
+) -> Tensor:
+    if mode == "uniform":
+        return state.new_ones((state.shape[0], layers))
+    if mode == "rule_based":
+        return rule_based_layer_gates(state, layers, thresholds_db)
+    if mode in {"learned", "learned_gate"} and learned_gate is not None:
+        return learned_gate(state)
+    raise RuntimeError(f"adaptation mode {mode!r} is unavailable")
+
+
+def evaluate_paired_condition(
+    codec,
+    model,
+    learned_gate: LearnedLayerGate | None,
+    config: dict[str, Any],
+    device: torch.device,
+    modes: list[str],
+    jammer_type: str,
+    snr_value: float,
+    jsr_value: float,
+    equalizer: str,
+    seed_base: int,
+    latent_refiner: LatentRefiner | None = None,
+) -> list[dict[str, Any]]:
+    eval_config = config["eval"]
+    channel_config = config["channel"]
+    layers = config["model"]["layers"]
+    layer_weights = torch.as_tensor(
+        eval_config["layer_weights"], device=device, dtype=torch.float32
+    )
+    if layer_weights.shape != (layers,) or torch.any(layer_weights < 0) or layer_weights.sum() <= 0:
+        raise ValueError("eval.layer_weights must contain L nonnegative values with positive sum")
+
+    allocation_modes = eval_config.get("allocation_modes", ["uniform"])
+    requested_refiner_modes = eval_config.get("refiner_modes", ["no_refiner"])
+    refiner_modes = [
+        mode
+        for mode in requested_refiner_modes
+        if mode == "no_refiner" or latent_refiner is not None
+    ]
+    keys = [
+        (mode, allocation_mode, refiner_mode)
+        for mode in modes
+        for allocation_mode in allocation_modes
+        for refiner_mode in refiner_modes
+    ]
+    accumulators: dict[tuple[str, str, str], dict[str, list[Tensor]]] = {
+        key: {
+            "layer_mse": [],
+            "latent_loss": [],
+            "waveform_loss": [],
+            "effective_sinr": [],
+            "measured_jsr": [],
+            "active_layers": [],
+            "mask_ratio": [],
+            "csi_nmse": [],
+            "pilot_evm": [],
+            "alpha": [],
+            "encoder_state": [],
+            "decoder_state": [],
+        }
+        for key in keys
+    }
+    channel_shape = tuple(model.encoder.channel_shape)
+    fading = "flat" if len(channel_shape) == 1 else "ofdm"
+    with torch.no_grad():
+        for batch_index in range(eval_config["batches"]):
+            batch_size = eval_config["batch_size"]
+            paired_batch = generate_paired_evaluation_batch(
+                codec,
+                batch_size=batch_size,
+                waveform_samples=config["codec"]["waveform_samples"],
+                channel_shape=channel_shape,
+                snr_db=snr_value,
+                jsr_db=jsr_value,
+                jammer_type=jammer_type,
+                jammed_fraction=channel_config["jammed_fraction"],
+                pilot_spacing=channel_config.get("pilot_spacing", 4),
+                pilot_time_spacing=channel_config.get("pilot_time_spacing"),
+                target_power=config["model"]["target_power"],
+                seed=seed_base + batch_index,
+                device=device,
+                fading=fading,
+            )
+            feedback = estimate_transmitter_feedback(
+                paired_batch,
+                transmitter_csi=eval_config.get("transmitter_csi", True),
+                fading=fading,
+            )
+            state = feedback["state"]
+            reliability = feedback["reliability"]
+            for mode in modes:
+                gates = _gates_for_mode(
+                    mode,
+                    state,
+                    layers,
+                    eval_config["rule_gate_thresholds_db"],
+                    learned_gate,
+                )
+                for allocation_mode in allocation_modes:
+                    result = run_mode_on_paired_batch(
+                        codec,
+                        model,
+                        paired_batch,
+                        state,
+                        gates,
+                        equalizer=equalizer,
+                        fading=fading,
+                        allocation_mode=allocation_mode,
+                        importance_order=eval_config.get("layer_importance_order"),
+                        resource_reliability=reliability,
+                    )
+                    estimated_mask = estimate_unreliable_mask(
+                        reliability, eval_config.get("unreliable_fraction", 0.25)
+                    )
+                    for refiner_mode in refiner_modes:
+                        if refiner_mode == "no_refiner":
+                            reconstruction = result["reconstruction"]
+                        elif refiner_mode == "refiner_oracle_mask":
+                            reconstruction = latent_refiner(
+                                result["reconstruction"],
+                                result["decoder_state"],
+                                paired_batch.jammer_mask,
+                            )
+                        elif refiner_mode == "refiner_estimated_mask":
+                            reconstruction = latent_refiner(
+                                result["reconstruction"],
+                                result["decoder_state"],
+                                estimated_mask,
+                            )
+                        else:
+                            raise ValueError(f"unsupported refiner mode: {refiner_mode}")
+                        layer_mse = (
+                            reconstruction - paired_batch.representation
+                        ).square().mean(dim=(0, 2, 3))
+                        accumulator = accumulators[(mode, allocation_mode, refiner_mode)]
+                        accumulator["layer_mse"].append(layer_mse)
+                        accumulator["latent_loss"].append(
+                            (layer_mse * layer_weights).sum() / layer_weights.sum()
+                        )
+                        decoded_waveform = codec.decode_representation(reconstruction)
+                        accumulator["waveform_loss"].append(
+                            (decoded_waveform - paired_batch.waveform).square().mean()
+                        )
+                        accumulator["effective_sinr"].append(
+                            (10.0 * torch.log10(
+                                result["post_equalization_sinr"].clamp_min(1e-12)
+                            )).mean()
+                        )
+                        accumulator["measured_jsr"].append(
+                            compute_jsr(result["transmitted"], result["jammer"], db=True).mean()
+                        )
+                        accumulator["active_layers"].append(gates.sum(dim=1).mean())
+                        accumulator["mask_ratio"].append(result["jammer_mask"].float().mean())
+                        accumulator["csi_nmse"].append(result["csi_nmse"].mean())
+                        accumulator["pilot_evm"].append(result["pilot_evm"].mean())
+                        accumulator["alpha"].append(gates.mean(dim=0))
+                        accumulator["encoder_state"].append(result["encoder_state"].mean(dim=0))
+                        accumulator["decoder_state"].append(result["decoder_state"].mean(dim=0))
+
+    rows = []
+    for mode, allocation_mode, refiner_mode in keys:
+        accumulator = accumulators[(mode, allocation_mode, refiner_mode)]
+        mean_layer_mse = torch.stack(accumulator["layer_mse"]).mean(dim=0)
+        row: dict[str, Any] = {
+            "adaptation_mode": mode,
+            "allocation_mode": allocation_mode,
+            "refiner_mode": refiner_mode,
+            "equalizer": equalizer,
+            "paired_seed": seed_base,
+            "jammer": jammer_type,
+            "snr_db": float(snr_value),
+            "jsr_db": float(jsr_value),
+            "latent_mse": torch.stack(accumulator["latent_loss"]).mean().item(),
+            "waveform_mse": torch.stack(accumulator["waveform_loss"]).mean().item(),
+            "effective_sinr_db": torch.stack(accumulator["effective_sinr"]).mean().item(),
+            "measured_jsr_db": torch.stack(accumulator["measured_jsr"]).mean().item(),
+            "csi_nmse": torch.stack(accumulator["csi_nmse"]).mean().item(),
+            "pilot_evm": torch.stack(accumulator["pilot_evm"]).mean().item(),
+            "mean_active_layers": torch.stack(accumulator["active_layers"]).mean().item(),
+            "jammer_mask_ratio": torch.stack(accumulator["mask_ratio"]).mean().item(),
+            "stoi_placeholder": "",
+            "pesq_placeholder": "",
+            "speaker_similarity_placeholder": "",
+            "wer_optional": "",
+        }
+        for layer, value in enumerate(mean_layer_mse.tolist(), start=1):
+            row[f"layer_{layer}_mse"] = value
+        mean_alpha = torch.stack(accumulator["alpha"]).mean(dim=0)
+        for layer, value in enumerate(mean_alpha.tolist(), start=1):
+            row[f"alpha_{layer}"] = value
+        mean_encoder_state = torch.stack(accumulator["encoder_state"]).mean(dim=0)
+        mean_decoder_state = torch.stack(accumulator["decoder_state"]).mean(dim=0)
+        for index, value in enumerate(mean_encoder_state.tolist()):
+            row[f"encoder_c_{index}"] = value
+        for index, value in enumerate(mean_decoder_state.tolist()):
+            row[f"decoder_c_{index}"] = value
+        rows.append(row)
+    return rows
+
+
+def save_plots(rows: list[dict[str, Any]], output_dir: Path, layers: int) -> list[Path]:
+    import os
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    os.environ.setdefault("MPLCONFIGDIR", str(output_dir / ".matplotlib"))
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    groups = list(
+        dict.fromkeys(
+            (
+                str(row["adaptation_mode"]),
+                str(row.get("allocation_mode", "uniform")),
+                str(row.get("refiner_mode", "no_refiner")),
+                str(row.get("equalizer", "estimated")),
+            )
+            for row in rows
+        )
+    )
+    snr_values = sorted({float(row["snr_db"]) for row in rows})
+    paths: list[Path] = []
+
+    fig, axis = plt.subplots(figsize=(7, 4))
+    for mode, allocation, refiner, equalizer in groups:
+        values = [
+            sum(
+                float(row[f"layer_{layer}_mse"])
+                for row in rows
+                if row["adaptation_mode"] == mode
+                and row.get("allocation_mode", "uniform") == allocation
+                and row.get("refiner_mode", "no_refiner") == refiner
+                and row.get("equalizer", "estimated") == equalizer
+            )
+            / sum(
+                1
+                for row in rows
+                if row["adaptation_mode"] == mode
+                and row.get("allocation_mode", "uniform") == allocation
+                and row.get("refiner_mode", "no_refiner") == refiner
+                and row.get("equalizer", "estimated") == equalizer
+            )
+            for layer in range(1, layers + 1)
+        ]
+        axis.plot(
+            range(1, layers + 1),
+            values,
+            marker="o",
+            label=f"{mode}/{allocation}/{refiner}/{equalizer}",
+        )
+    axis.set(xlabel="Codec layer", ylabel="Mean latent MSE", title="Layer-wise reconstruction")
+    axis.legend()
+    axis.grid(alpha=0.25)
+    path = output_dir / "layer_mse.png"
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
+    paths.append(path)
+
+    for metric, ylabel, filename, title in (
+        ("waveform_mse", "Waveform MSE", "waveform_metrics.png", "Reconstructed waveform metrics"),
+        ("effective_sinr_db", "Effective SINR (dB)", "effective_sinr.png", "Effective SINR"),
+    ):
+        fig, axis = plt.subplots(figsize=(7, 4))
+        for mode, allocation, refiner, equalizer in groups:
+            values = []
+            for snr in snr_values:
+                selected = [
+                    float(row[metric])
+                    for row in rows
+                    if row["adaptation_mode"] == mode
+                    and row.get("allocation_mode", "uniform") == allocation
+                    and row.get("refiner_mode", "no_refiner") == refiner
+                    and row.get("equalizer", "estimated") == equalizer
+                    and float(row["snr_db"]) == snr
+                ]
+                values.append(sum(selected) / len(selected))
+            axis.plot(
+                snr_values,
+                values,
+                marker="o",
+                label=f"{mode}/{allocation}/{refiner}/{equalizer}",
+            )
+        axis.set(xlabel="Nominal SNR (dB)", ylabel=ylabel, title=title)
+        axis.legend()
+        axis.grid(alpha=0.25)
+        path = output_dir / filename
+        fig.tight_layout()
+        fig.savefig(path, dpi=150)
+        plt.close(fig)
+        paths.append(path)
+    return paths
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Sweep fading, jamming, and JSCC adaptation")
+    parser.add_argument("--config", default="configs/eval.yaml")
+    parser.add_argument("--checkpoint", default=None)
+    args = parser.parse_args()
+    config = load_config(args.config)
+    torch.manual_seed(config["seed"])
+    random.seed(config["seed"])
+    device = resolve_device(config["device"])
+    codec, model = build_components(config, device)
+    checkpoint = Path(args.checkpoint or config["eval"]["checkpoint"])
+    learned_gate = _load_checkpoint(checkpoint, model, config, device)
+    latent_refiner = _load_refiner(checkpoint, device)
+    model.eval()
+    modes = available_adaptation_modes(config["eval"]["adaptation_modes"], learned_gate)
+
+    rows = []
+    condition_index = 0
+    for jammer_type in config["channel"]["jammer_types"]:
+        for snr_db in config["channel"]["snr_db"]:
+            for jsr_db in config["channel"]["jsr_db"]:
+                seed_base = config["eval"].get("paired_seed", config["seed"]) + condition_index * 10_000
+                for equalizer in config["eval"].get("equalizer_modes", ["estimated"]):
+                    condition_rows = evaluate_paired_condition(
+                        codec,
+                        model,
+                        learned_gate,
+                        config,
+                        device,
+                        modes,
+                        jammer_type,
+                        snr_db,
+                        jsr_db,
+                        equalizer,
+                        seed_base,
+                        latent_refiner,
+                    )
+                    rows.extend(condition_rows)
+                    for row in condition_rows:
+                        mode = row["adaptation_mode"]
+                        print(
+                            f"mode={mode} allocation={row['allocation_mode']} "
+                            f"refiner={row['refiner_mode']} eq={equalizer} jammer={jammer_type} "
+                            f"snr={snr_db:g} jsr={jsr_db:g} latent_mse={row['latent_mse']:.6f} "
+                            f"sinr={row['effective_sinr_db']:.2f}dB nmse={row['csi_nmse']:.4f}"
+                        )
+                condition_index += 1
+
+    output = Path(config["eval"]["output_csv"])
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    plot_paths = save_plots(rows, Path(config["eval"]["plot_dir"]), config["model"]["layers"])
+    print(f"rows={len(rows)} csv={output} plots={','.join(map(str, plot_paths))}")
+    if config["eval"].get("enable_optional_wer", False):
+        print("optional WER requested but no ASR evaluator is configured; CSV field remains empty")
+
+
+if __name__ == "__main__":
+    main()
