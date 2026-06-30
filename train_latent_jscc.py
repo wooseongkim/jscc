@@ -25,8 +25,14 @@ from models.learned_gate import (
     save_learned_gate_checkpoint,
 )
 from speech_jscc.channels import compute_jsr
+from speech_jscc.checkpoint import build_checkpoint_metadata, normalization_config
 from speech_jscc.config import load_config, resolve_device
-from speech_jscc.data import synthetic_waveforms
+from speech_jscc.data import (
+    CachedCodecDataset,
+    codec_cache_namespace,
+    resolve_waveform_splits,
+    synthetic_waveforms,
+)
 from speech_jscc.experiment import build_components
 
 
@@ -56,31 +62,61 @@ def layer_weighted_latent_mse(
     reconstruction: Tensor,
     target: Tensor,
     layer_weights: Tensor,
+    normalization: str | dict[str, Any] = "none",
 ) -> tuple[Tensor, Tensor]:
-    """Return normalized weighted loss and detached per-layer MSE `[L]`."""
+    """Return weighted loss and raw detached per-layer MSE `[L]`.
+
+    ``per_layer_power`` divides each layer error by that target layer's power,
+    preventing high-energy early RVQ layers from dominating solely by scale.
+    """
     if reconstruction.shape != target.shape or reconstruction.ndim != 4:
         raise ValueError("reconstruction and target must match [B,L,T,D]")
     weights = layer_weights.to(device=reconstruction.device, dtype=reconstruction.dtype)
     if weights.shape != (target.shape[1],) or torch.any(weights < 0) or weights.sum() <= 0:
         raise ValueError("layer_weights must contain L nonnegative values with positive sum")
     per_layer = (reconstruction - target).square().mean(dim=(0, 2, 3))
-    loss = (per_layer * weights).sum() / weights.sum()
+    options = {"mode": normalization} if isinstance(normalization, str) else normalization
+    mode = options.get("mode", "none")
+    epsilon = float(options.get("epsilon", 1e-8))
+    if mode in {"none", "raw"}:
+        loss_values = per_layer
+    elif mode in {"per_layer_power", "per_layer_nmse"}:
+        target_power = target.square().mean(dim=(0, 2, 3)).detach()
+        loss_values = per_layer / target_power.clamp_min(epsilon)
+    elif mode == "global_power":
+        loss_values = per_layer / target.square().mean().detach().clamp_min(epsilon)
+    else:
+        raise ValueError(
+            "latent normalization mode must be none, per_layer_power, or global_power"
+        )
+    loss = (loss_values * weights).sum() / weights.sum()
     return loss, per_layer.detach()
 
 
 class RepresentationSource:
-    """Load precomputed codec tensors or encode synthetic waveform batches."""
+    """Load precomputed tensors, a waveform corpus, or mock synthetic inputs."""
 
-    def __init__(self, config: dict[str, Any], codec, device: torch.device):
+    def __init__(
+        self,
+        config: dict[str, Any],
+        codec,
+        device: torch.device,
+        split: str = "train",
+    ):
         self.config = config
         self.codec = codec
         self.device = device
+        self.split = split
         self.store: Tensor | None = None
+        self.dataset: CachedCodecDataset | None = None
+        self.generator = torch.Generator().manual_seed(
+            int(config.get("seed", 0)) + (0 if split == "train" else 100_000)
+        )
         path_value = config.get("data", {}).get("representations_path")
         if path_value:
             loaded = torch.load(Path(path_value), map_location="cpu", weights_only=True)
             if isinstance(loaded, dict):
-                loaded = loaded.get("representations")
+                loaded = loaded.get(split, loaded.get("representations"))
             if not isinstance(loaded, Tensor) or loaded.ndim != 4:
                 raise ValueError("representation file must be a tensor or contain 'representations' [N,L,T,D]")
             if tuple(loaded.shape[1:]) != codec.representation_shape:
@@ -89,15 +125,50 @@ class RepresentationSource:
                     f"codec shape {codec.representation_shape}"
                 )
             self.store = loaded.to(dtype=torch.float32)
+            return
+
+        train_paths, val_paths = resolve_waveform_splits(
+            config.get("data", {}), config.get("seed", 0)
+        )
+        paths = train_paths if split == "train" else val_paths
+        if paths:
+            sample_rate = int(getattr(codec, "sample_rate", config["codec"].get("sample_rate", 16000)))
+            cache_dir = config.get("data", {}).get("latent_cache_dir")
+            self.dataset = CachedCodecDataset(
+                paths,
+                codec,
+                sample_rate=sample_rate,
+                waveform_samples=config["codec"]["waveform_samples"],
+                device=device,
+                split=split,
+                cache_dir=cache_dir,
+                cache_namespace=codec_cache_namespace(config, codec),
+            )
 
     @property
     def description(self) -> str:
-        return "precomputed" if self.store is not None else "mock-codec synthetic waveforms"
+        if self.store is not None:
+            return "precomputed" if self.split == "train" else "precomputed:val"
+        if self.dataset is not None:
+            cache = "cached" if self.dataset.cache_dir is not None else "uncached"
+            return f"waveform_corpus:{self.split}:{cache}"
+        return "mock-codec synthetic waveforms"
 
     def next_batch(self, batch_size: int) -> tuple[Tensor, Tensor | None]:
         if self.store is not None:
-            indices = torch.randint(0, self.store.shape[0], (batch_size,))
+            indices = torch.randint(
+                0, self.store.shape[0], (batch_size,), generator=self.generator
+            )
             return self.store[indices].to(self.device), None
+        if self.dataset is not None:
+            indices = torch.randint(
+                0, len(self.dataset), (batch_size,), generator=self.generator
+            ).tolist()
+            examples = [self.dataset[index] for index in indices]
+            return (
+                torch.stack([example[0] for example in examples]),
+                torch.stack([example[1] for example in examples]),
+            )
         waveform = synthetic_waveforms(
             batch_size,
             self.config["codec"]["waveform_samples"],
@@ -114,7 +185,7 @@ def joint_learned_gate_step(
     learned_gate: LearnedLayerGate,
     latent_refiner: LatentRefiner,
     paired_batch: PairedEvaluationBatch,
-    optimizer: torch.optim.Optimizer,
+    optimizer: torch.optim.Optimizer | None,
     layer_weights: Tensor,
     *,
     lambda_budget: float,
@@ -127,6 +198,7 @@ def joint_learned_gate_step(
     allocation_mode: str = "reliability_greedy",
     importance_order: list[int] | tuple[int, ...] | None = None,
     unreliable_fraction: float = 0.25,
+    latent_normalization: str | dict[str, Any] = "none",
 ) -> dict[str, Tensor]:
     """Run one joint JSCC/gate update on a fixed channel realization."""
     channel_shape = tuple(model.encoder.channel_shape)
@@ -155,6 +227,7 @@ def joint_learned_gate_step(
         result["reconstruction"],
         paired_batch.representation,
         layer_weights,
+        latent_normalization,
     )
     if refiner_mask_mode == "oracle":
         refiner_mask = paired_batch.jammer_mask
@@ -166,7 +239,7 @@ def joint_learned_gate_step(
         result["reconstruction"], result["decoder_state"], refiner_mask
     )
     refine_loss, refined_layer_mse = layer_weighted_latent_mse(
-        refined, paired_batch.representation, layer_weights
+        refined, paired_batch.representation, layer_weights, latent_normalization
     )
     budget_loss = gate_budget_loss(alpha)
     smoothness_loss = gate_smoothness_loss(alpha)
@@ -180,16 +253,17 @@ def joint_learned_gate_step(
         + float(lambda_smooth) * smoothness_loss
         + float(power_penalty_weight) * power_penalty
     )
-    optimizer.zero_grad(set_to_none=True)
-    total_loss.backward()
-    if gradient_clip_norm is not None:
-        torch.nn.utils.clip_grad_norm_(
-            list(model.parameters())
-            + list(learned_gate.parameters())
-            + list(latent_refiner.parameters()),
-            gradient_clip_norm,
-        )
-    optimizer.step()
+    if optimizer is not None:
+        optimizer.zero_grad(set_to_none=True)
+        total_loss.backward()
+        if gradient_clip_norm is not None:
+            torch.nn.utils.clip_grad_norm_(
+                list(model.parameters())
+                + list(learned_gate.parameters())
+                + list(latent_refiner.parameters()),
+                gradient_clip_norm,
+            )
+        optimizer.step()
     return {
         "loss": total_loss.detach(),
         "reconstruction_loss": reconstruction_loss.detach(),
@@ -262,7 +336,16 @@ def main() -> None:
         config["model"]["channel_state_dim"],
         config["train"].get("refiner_hidden_dim", 64),
     ).to(device)
-    source = RepresentationSource(config, codec, device)
+    source = RepresentationSource(config, codec, device, split="train")
+    validation_source = RepresentationSource(config, codec, device, split="val")
+    if config["codec"].get("type", "mock").lower() == "speechtokenizer":
+        if source.dataset is None and source.store is None:
+            raise ValueError(
+                "SpeechTokenizer training requires data.waveform_dir, waveform_paths, "
+                "train/val manifests, or precomputed representations"
+            )
+        if codec.model.training or any(parameter.requires_grad for parameter in codec.parameters()):
+            raise RuntimeError("SpeechTokenizer must remain frozen during JSCC training")
 
     train_config = config["train"]
     channel_config = config["channel"]
@@ -284,7 +367,12 @@ def main() -> None:
     log_path = Path(train_config["metrics_jsonl"])
     log_path.parent.mkdir(parents=True, exist_ok=True)
     reconstruction_dir = Path(train_config["reconstruction_dir"])
-    print(f"device={device} representation_source={source.description}")
+    latent_normalization = normalization_config(config)
+    print(
+        f"device={device} representation_source={source.description} "
+        f"validation_source={validation_source.description} "
+        f"latent_normalization={latent_normalization['mode']}"
+    )
 
     model.train()
     learned_gate.train()
@@ -334,6 +422,7 @@ def main() -> None:
                 allocation_mode=train_config.get("allocation_mode", "reliability_greedy"),
                 importance_order=train_config.get("layer_importance_order"),
                 unreliable_fraction=train_config.get("unreliable_fraction", 0.25),
+                latent_normalization=latent_normalization,
             )
 
             should_log = step == 1 or step % train_config["log_every"] == 0
@@ -364,7 +453,53 @@ def main() -> None:
                     "alpha_mean": step_result["alpha"].mean(dim=0).cpu().tolist(),
                     "encoder_state_mean": step_result["encoder_state"].mean(dim=0).cpu().tolist(),
                     "decoder_state_mean": step_result["decoder_state"].mean(dim=0).cpu().tolist(),
+                    "latent_normalization": latent_normalization,
                 }
+                if validation_source.dataset is not None or validation_source.store is not None:
+                    val_target, val_waveform = validation_source.next_batch(
+                        train_config.get("val_batch_size", batch_size)
+                    )
+                    val_batch = generate_paired_evaluation_batch(
+                        codec,
+                        batch_size=val_target.shape[0],
+                        waveform_samples=config["codec"]["waveform_samples"],
+                        channel_shape=channel_shape,
+                        snr_db=snr_value,
+                        jsr_db=jsr_value,
+                        jammer_type=jammer_type,
+                        jammed_fraction=channel_config["jammed_fraction"],
+                        pilot_spacing=channel_config.get("pilot_spacing", 4),
+                        pilot_time_spacing=channel_config.get("pilot_time_spacing"),
+                        target_power=config["model"]["target_power"],
+                        seed=config["seed"] + 1_000_000 + step,
+                        device=device,
+                        fading=fading,
+                        waveform=val_waveform,
+                        representation=val_target,
+                    )
+                    with torch.no_grad():
+                        val_result = joint_learned_gate_step(
+                            codec,
+                            model,
+                            learned_gate,
+                            latent_refiner,
+                            val_batch,
+                            None,
+                            layer_weights,
+                            lambda_budget=train_config["lambda_budget"],
+                            lambda_smooth=train_config["lambda_smooth"],
+                            lambda_refine=train_config["lambda_refine"],
+                            power_penalty_weight=train_config["power_penalty_weight"],
+                            transmitter_csi=train_config.get("transmitter_csi", True),
+                            refiner_mask_mode=train_config.get("refiner_mask_mode", "estimated"),
+                            allocation_mode=train_config.get("allocation_mode", "reliability_greedy"),
+                            importance_order=train_config.get("layer_importance_order"),
+                            unreliable_fraction=train_config.get("unreliable_fraction", 0.25),
+                            latent_normalization=latent_normalization,
+                        )
+                    metrics["val_loss"] = val_result["loss"].item()
+                    metrics["val_latent_loss"] = val_result["reconstruction_loss"].item()
+                    metrics["val_layer_mse"] = val_result["per_layer_mse"].cpu().tolist()
                 example_path = _save_examples(
                     reconstruction_dir,
                     step,
@@ -383,6 +518,11 @@ def main() -> None:
 
     checkpoint = Path(train_config["checkpoint"])
     checkpoint.parent.mkdir(parents=True, exist_ok=True)
+    metadata = build_checkpoint_metadata(
+        config,
+        codec,
+        representation_source=source.description,
+    )
     torch.save(
         {
             "model": model.state_dict(),
@@ -391,6 +531,7 @@ def main() -> None:
             "latent_refiner": save_latent_refiner_checkpoint(latent_refiner),
             "step": train_config["steps"],
             "config": config,
+            "metadata": metadata,
         },
         checkpoint,
     )

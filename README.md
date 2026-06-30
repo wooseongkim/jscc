@@ -41,7 +41,7 @@ usefully when learned complex symbols are distorted by fading and jamming.
 ## Implemented components
 
 - Continuous codec interface with deterministic mock codec
-- Placeholder SpeechTokenizer and EnCodec adapters with mock fallback
+- Real SpeechTokenizer continuous-embedding adapter and EnCodec placeholder
 - Complex JSCC encoder and decoder
 - Exact per-example average transmit-power normalization
 - Flat Rayleigh fading and optional OFDM resource grids
@@ -103,10 +103,25 @@ python train_latent_jscc.py --config configs/train.yaml
 python eval_jamming.py --config configs/eval.yaml
 # Equivalent paired-evaluation entry point:
 python paired_eval.py --config configs/eval.yaml
+
+# Evaluate the pretrained SpeechTokenizer itself:
+python eval_speechtokenizer.py
+
+# Smoke-test SpeechTokenizer through the complete JSCC path:
+python paired_eval.py --config configs/eval_speechtokenizer.yaml
+
+# Train JSCC on frozen SpeechTokenizer continuous embeddings:
+python train_latent_jscc.py --config configs/train_speechtokenizer.yaml
 ```
 
 The default configuration is intentionally small and uses the mock codec, so it
 does not download pretrained weights or speech datasets.
+
+> **Warning:** untrained SpeechTokenizer-latent checkpoint MSE is path-check only.
+> A SpeechTokenizer latent MSE is a performance result only when the checkpoint
+> metadata identifies it as `speechtokenizer_latent_jscc` trained from waveform
+> corpus latents. Random initialization, missing metadata, and the earlier smoke
+> test must not be reported as model performance.
 
 ## Training
 
@@ -127,14 +142,22 @@ For each batch the trainer:
 7. jointly optimizes JSCC and learned-gate parameters using reconstruction,
    gate-budget, gate-smoothness, and optional transmit-power penalties.
 
+For real SpeechTokenizer training, place WAV files under `data/speech` (or set
+explicit train/validation manifests) and run `configs/train_speechtokenizer.yaml`.
+The split is deterministic. SpeechTokenizer is frozen and excluded from the
+optimizer; only the JSCC model, learned gate, and latent refiner are trained.
+Set `data.latent_cache_dir` to cache `[L,T,D]` continuous embeddings after their
+first encoding. Set it to `null` to encode waveforms on every access.
+
 To train from precomputed codec representations, set
 `data.representations_path` to a `.pt` file containing a tensor with shape
 `[N,L,T,D]`, or a dictionary whose `representations` value has that shape.
 
-Training outputs:
+The mock and SpeechTokenizer outputs are intentionally separated:
 
 ```text
-artifacts/jscc.pt                    Model, optimizer, step, and config
+artifacts/checkpoints/mock_continuous_jscc.pt
+artifacts/checkpoints/speechtokenizer_latent_jscc.pt
 artifacts/train_metrics.jsonl        Per-log-step metrics
 artifacts/reconstructions/*.pt       Target/reconstructed latent and waveform examples
 ```
@@ -144,7 +167,9 @@ effective SINR, requested and measured JSR, jammer type, mask ratio, and
 layer-wise MSE.
 It also logs per-layer alpha values and the complete encoder/decoder state vectors.
 The checkpoint stores the learned-gate architecture and weights under
-`learned_gate`.
+`learned_gate`. Its metadata records `codec_name`, latent shape, sample rate,
+frame rate, normalization, source type, and whether SpeechTokenizer MSE is a
+valid trained-checkpoint metric.
 
 ## Evaluation experiments
 
@@ -192,9 +217,12 @@ artifacts/plots/waveform_metrics.png
 artifacts/plots/effective_sinr.png
 ```
 
-The CSV contains weighted latent MSE, one MSE column per codec layer, waveform
+The CSV contains raw weighted latent MSE, normalized training-style latent loss,
+one MSE column per codec layer, waveform
 MSE, effective SINR, measured JSR, active-layer count, and jammer-mask ratio.
-It also reports CSI NMSE and pilot EVM.
+It also reports CSI NMSE, pilot EVM, checkpoint kind, codec name, evaluation
+data source, and `metric_interpretation` (`trained_checkpoint_performance` or
+`smoke_test_path_check`).
 STOI, PESQ, speaker similarity, and WER columns are placeholders for optional
 post-reconstruction evaluators. They are not part of encoding or transmission.
 
@@ -220,6 +248,9 @@ post-reconstruction evaluators. They are not part of encoding or transmission.
 | Key | Description |
 | --- | --- |
 | `data.representations_path` | Optional precomputed `[N,L,T,D]` tensor |
+| `data.waveform_dir` / manifests | Real waveform corpus and deterministic train/val source |
+| `data.val_fraction` | Deterministic validation fraction when using a directory |
+| `data.latent_cache_dir` | Optional split-specific continuous-latent disk cache |
 | `channel.snr_db_range` | Uniform training SNR range `[min,max]` |
 | `channel.jsr_db_range` | Uniform training JSR range `[min,max]` |
 | `channel.jammer_probabilities` | Nonnegative jammer probabilities summing to one |
@@ -230,6 +261,7 @@ post-reconstruction evaluators. They are not part of encoding or transmission.
 | `train.batch_size` | Examples per step |
 | `train.learning_rate` | Adam learning rate |
 | `train.layer_weights` | One latent-MSE weight per codec layer |
+| `train.latent_normalization` | `none`, `per_layer_power`, or `global_power` |
 | `train.power_penalty_weight` | Multiplier for the average-power penalty |
 | `train.lambda_budget` | Weight for `mean(sum(alpha))` |
 | `train.lambda_smooth` | Weight for adjacent-layer alpha total variation |
@@ -279,16 +311,20 @@ get_codebook()                            # optional [L,K,D] embeddings
 representation_shape                     # (L,T,D)
 ```
 
-`SpeechTokenizerWrapper` and `EnCodecWrapper` accept a project-specific
-`BaseCodec` adapter when external dependencies and pretrained weights are
-available. Without one, they use `MockContinuousCodec`. Integrations must expose
-continuous embeddings or soft distributions to JSCC; they must not introduce a
-digital RVQ-index/FEC transport path.
+`SpeechTokenizerWrapper` loads the official SpeechTokenizer config/checkpoint,
+calls `forward_feature()` for all requested RVQ layers, and exposes the resulting
+quantized embeddings as `[B,L,T,D]`. Decoding sums the continuous layer
+embeddings and calls the pretrained waveform decoder directly. RVQ indices are
+used only by the standalone equivalence sanity check and are never transmitted.
+
+Install the upstream repository and its inference dependency, then provide
+`codec.type: speechtokenizer`, `config_path`, `checkpoint_path`,
+`waveform_samples`, and `n_q`. The `EnCodecWrapper` remains a placeholder.
 
 ## Baseline assumptions
 
-- The default channel uses perfect receiver knowledge of the simulated signal
-  fading coefficient for one-tap equalization.
+- Evaluation uses pilot LS estimated CSI by default; perfect CSI is an optional
+  oracle baseline.
 - Fading is flat for `[B,M]` input. `[B,K,N]` enables an OFDM resource grid.
 - JSR normalization is measured over all resources, so sparse jammers
   concentrate their energy on active mask elements.

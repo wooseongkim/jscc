@@ -1,0 +1,66 @@
+seed: 23
+device: auto
+model:
+  # Runtime values are read from SpeechTokenizer.
+  layers: 8
+  frames: 50
+  latent_dim: 1024
+  channel_uses: [64, 32]
+  channel_state_dim: 8
+  hidden_dim: 32
+  target_power: 1.0
+codec:
+  type: speechtokenizer
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  freeze: true
+  sample_rate: 16000
+  waveform_samples: 16000
+  n_q: 8
+data:
+  # Either use waveform_dir + deterministic val_fraction, or explicit manifests.
+  waveform_dir: data/speech
+  waveform_glob: "**/*.wav"
+  val_fraction: 0.1
+  # train_manifest: data/manifests/train.txt
+  # val_manifest: data/manifests/val.txt
+  # Set null to re-encode every epoch. Cached values are continuous embeddings.
+  latent_cache_dir: artifacts/latent_cache/speechtokenizer_hubert_avg_2s
+channel:
+  snr_db_range: [-2.0, 15.0]
+  jsr_db_range: [-10.0, 8.0]
+  jammer_probabilities:
+    barrage: 0.40
+    narrowband: 0.25
+    burst: 0.25
+    pilot: 0.10
+  jammed_fraction: 0.25
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+train:
+  steps: 10000
+  batch_size: 4
+  val_batch_size: 4
+  learning_rate: 0.0001
+  layer_weights: [4.0, 2.0, 1.0, 1.0, 0.5, 0.5, 0.25, 0.25]
+  latent_normalization:
+    mode: per_layer_power
+    epsilon: 1.0e-6
+  power_penalty_weight: 0.01
+  gate_mode: learned_gate
+  transmitter_csi: true
+  learned_gate_hidden_dim: 64
+  lambda_budget: 0.01
+  lambda_smooth: 0.005
+  lambda_refine: 1.0
+  refiner_hidden_dim: 64
+  refiner_mask_mode: estimated
+  unreliable_fraction: 0.25
+  allocation_mode: reliability_greedy
+  layer_importance_order: [0, 1, 2, 3, 4, 5, 6, 7]
+  gradient_clip_norm: 5.0
+  log_every: 100
+  metrics_jsonl: artifacts/logs/speechtokenizer_train_metrics.jsonl
+  reconstruction_dir: artifacts/reconstructions/speechtokenizer
+  reconstruction_examples: 2
+  checkpoint: artifacts/checkpoints/speechtokenizer_latent_jscc.pt

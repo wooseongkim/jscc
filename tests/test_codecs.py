@@ -1,5 +1,6 @@
 import pytest
 import torch
+from pathlib import Path
 
 from speech_jscc.codecs import (
     BaseCodec,
@@ -72,3 +73,24 @@ def test_requested_src_codec_namespace_is_available():
     codec = SourceTreeMockCodec(2, 4, 3, 80, seed=1)
     assert codec.encode_waveform(torch.zeros(1, 80)).shape == (1, 2, 4, 3)
 
+
+@pytest.mark.skipif(
+    not Path("artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt").exists(),
+    reason="official SpeechTokenizer checkpoint is not installed",
+)
+def test_real_speechtokenizer_continuous_embedding_round_trip():
+    wrapper = SpeechTokenizerWrapper(
+        config_path="artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json",
+        checkpoint_path="artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt",
+        waveform_samples=640,
+        n_q=2,
+        fallback_to_mock=False,
+    )
+    waveform = torch.zeros(1, 640)
+    representation = wrapper.encode_waveform(waveform)
+    reconstruction = wrapper.decode_representation(representation)
+
+    assert representation.shape == (1, *wrapper.representation_shape)
+    assert wrapper.representation_shape[0] == 2
+    assert reconstruction.shape == waveform.shape
+    assert wrapper.get_codebook().shape[:2] == (2, 1024)

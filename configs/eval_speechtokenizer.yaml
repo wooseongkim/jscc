@@ -1,0 +1,53 @@
+seed: 23
+device: auto
+model:
+  # These are validated/updated from the loaded codec at runtime.
+  layers: 8
+  frames: 10
+  latent_dim: 1024
+  channel_uses: [16, 8]
+  channel_state_dim: 8
+  hidden_dim: 32
+  target_power: 1.0
+codec:
+  type: speechtokenizer
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  waveform_samples: 3200
+  n_q: 8
+  freeze: true
+# Add the same waveform_dir/manifests used for the validation split to evaluate
+# real speech. Without this section, the command remains a synthetic path smoke test.
+# data:
+#   waveform_dir: data/speech
+#   waveform_glob: "**/*.wav"
+#   val_fraction: 0.1
+#   latent_cache_dir: artifacts/latent_cache/speechtokenizer_hubert_avg_2s
+channel:
+  snr_db: [8.0]
+  jsr_db: [0.0]
+  jammer_types: [pilot]
+  jammed_fraction: 0.25
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+eval:
+  batches: 1
+  batch_size: 1
+  checkpoint: artifacts/checkpoints/speechtokenizer_latent_jscc.pt
+  output_csv: artifacts/speechtokenizer_eval.csv
+  plot_dir: artifacts/speechtokenizer_plots
+  adaptation_modes: [uniform]
+  transmitter_csi: true
+  allocation_modes: [uniform]
+  layer_importance_order: [0, 1, 2, 3, 4, 5, 6, 7]
+  refiner_modes: [no_refiner]
+  unreliable_fraction: 0.25
+  paired_seed: 3027
+  equalizer_modes: [estimated]
+  rule_gate_thresholds_db: [-5.0, 0.0, 3.0, 6.0, 9.0, 12.0, 15.0]
+  learned_gate_hidden_dim: 32
+  layer_weights: [4.0, 2.0, 1.0, 1.0, 0.5, 0.5, 0.25, 0.25]
+  latent_normalization:
+    mode: per_layer_power
+    epsilon: 1.0e-6
+  enable_optional_wer: false

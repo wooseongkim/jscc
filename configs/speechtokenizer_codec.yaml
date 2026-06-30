@@ -1,0 +1,7 @@
+codec:
+  type: speechtokenizer
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  waveform_samples: 16000
+  n_q: 8
+

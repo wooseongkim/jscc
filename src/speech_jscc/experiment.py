@@ -7,14 +7,34 @@ from evaluation.paired import (
     generate_paired_evaluation_batch,
     run_mode_on_paired_batch,
 )
-from speech_jscc.codecs import MockContinuousCodec
+from speech_jscc.codecs import MockContinuousCodec, SpeechTokenizerWrapper
 from speech_jscc.models import SpeechJSCC
 
 
 def build_components(config: dict, device: torch.device):
     model_cfg = config["model"]
-    shape = (model_cfg["layers"], model_cfg["frames"], model_cfg["latent_dim"])
-    codec = MockContinuousCodec(*shape, config["codec"]["waveform_samples"]).to(device)
+    codec_cfg = config["codec"]
+    codec_type = codec_cfg.get("type", "mock").lower()
+    if codec_type == "mock":
+        configured_shape = (model_cfg["layers"], model_cfg["frames"], model_cfg["latent_dim"])
+        codec = MockContinuousCodec(
+            *configured_shape, codec_cfg["waveform_samples"], seed=codec_cfg.get("seed", 0)
+        ).to(device)
+    elif codec_type == "speechtokenizer":
+        codec = SpeechTokenizerWrapper(
+            config_path=codec_cfg["config_path"],
+            checkpoint_path=codec_cfg["checkpoint_path"],
+            waveform_samples=codec_cfg["waveform_samples"],
+            n_q=codec_cfg.get("n_q"),
+            fallback_to_mock=False,
+            freeze=codec_cfg.get("freeze", True),
+        ).to(device)
+        if not codec_cfg.get("freeze", True):
+            raise ValueError("SpeechTokenizer fine-tuning is not supported; set codec.freeze: true")
+    else:
+        raise ValueError(f"unsupported codec type: {codec_type}")
+    shape = codec.representation_shape
+    model_cfg["layers"], model_cfg["frames"], model_cfg["latent_dim"] = shape
     model = SpeechJSCC(
         shape,
         model_cfg["channel_uses"],

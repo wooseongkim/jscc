@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+import importlib.util
+import sys
+import types
+from pathlib import Path
 from typing import Any
 
+import torch
 from torch import Tensor
+from torch.nn import functional as F
 
 from speech_jscc.codecs.base import BaseCodec
 from speech_jscc.codecs.mock import MockContinuousCodec
@@ -39,12 +45,130 @@ class _Wrapper(BaseCodec):
         return self.codec.decode_representation(representation)
 
 
-class SpeechTokenizerWrapper(_Wrapper):
-    external_name = "SpeechTokenizer"
+def _speech_tokenizer_class():
+    """Import the inference model without requiring optional trainer dependencies."""
+    try:
+        from speechtokenizer import SpeechTokenizer
 
-    def __init__(self, codec: BaseCodec | None = None, *, fallback_to_mock: bool = True,
-                 mock_config: dict[str, Any] | None = None):
-        super().__init__(codec, fallback_to_mock, mock_config)
+        return SpeechTokenizer
+    except ModuleNotFoundError as import_error:
+        package_spec = importlib.util.find_spec("speechtokenizer")
+        if package_spec is None or not package_spec.submodule_search_locations:
+            raise ImportError("SpeechTokenizer is not installed") from import_error
+        package_dir = Path(next(iter(package_spec.submodule_search_locations)))
+        alias = "_speech_jscc_speechtokenizer"
+        if alias not in sys.modules:
+            package = types.ModuleType(alias)
+            package.__path__ = [str(package_dir)]
+            package.__package__ = alias
+            sys.modules[alias] = package
+        model_name = f"{alias}.model"
+        if model_name not in sys.modules:
+            model_spec = importlib.util.spec_from_file_location(model_name, package_dir / "model.py")
+            if model_spec is None or model_spec.loader is None:
+                raise ImportError("cannot load SpeechTokenizer inference model") from import_error
+            module = importlib.util.module_from_spec(model_spec)
+            sys.modules[model_name] = module
+            model_spec.loader.exec_module(module)
+        return sys.modules[model_name].SpeechTokenizer
+
+
+class SpeechTokenizerWrapper(BaseCodec):
+    """Continuous SpeechTokenizer RVQ-embedding adapter for JSCC.
+
+    The wrapper calls `forward_feature` and transports `[B,L,T,D]` embedding
+    tensors. RVQ indices are never exposed to the communication system.
+    """
+
+    def __init__(
+        self,
+        codec: BaseCodec | None = None,
+        *,
+        config_path: str | Path | None = None,
+        checkpoint_path: str | Path | None = None,
+        waveform_samples: int | None = None,
+        n_q: int | None = None,
+        fallback_to_mock: bool = True,
+        mock_config: dict[str, Any] | None = None,
+        freeze: bool = True,
+    ):
+        super().__init__()
+        self.using_mock = False
+        self.codec: BaseCodec | None = None
+        self.model = None
+        if codec is not None:
+            if not isinstance(codec, BaseCodec):
+                raise TypeError("codec must implement BaseCodec")
+            self.codec = codec
+            return
+        if config_path is None or checkpoint_path is None:
+            if not fallback_to_mock:
+                raise ValueError("SpeechTokenizer requires config_path and checkpoint_path")
+            self.codec = MockContinuousCodec(**(mock_config or {}))
+            self.using_mock = True
+            return
+        if waveform_samples is None or waveform_samples <= 0:
+            raise ValueError("waveform_samples must be positive for SpeechTokenizer")
+
+        model_class = _speech_tokenizer_class()
+        self.model = model_class.load_from_checkpoint(str(config_path), str(checkpoint_path))
+        self.model.eval()
+        self.frozen = bool(freeze)
+        if freeze:
+            self.model.requires_grad_(False)
+        self.waveform_samples = int(waveform_samples)
+        self.sample_rate = int(self.model.sample_rate)
+        self.n_q = int(n_q or self.model.n_q)
+        if not 1 <= self.n_q <= self.model.n_q:
+            raise ValueError(f"n_q must be between 1 and {self.model.n_q}")
+        with torch.inference_mode():
+            encoded = self.model.encoder(torch.zeros(1, 1, self.waveform_samples))
+        self.frames = int(encoded.shape[-1])
+        self.latent_dim = int(encoded.shape[1])
+        self.frame_rate = float(self.sample_rate / self.model.downsample_rate)
+
+    def train(self, mode: bool = True):
+        """Keep a frozen pretrained codec in inference mode during JSCC training."""
+        super().train(mode)
+        if self.model is not None and getattr(self, "frozen", False):
+            self.model.eval()
+        return self
+
+    @property
+    def representation_shape(self) -> tuple[int, int, int]:
+        if self.codec is not None:
+            return self.codec.representation_shape
+        return self.n_q, self.frames, self.latent_dim
+
+    def get_codebook(self) -> Tensor | None:
+        if self.codec is not None:
+            return self.codec.get_codebook()
+        layers = self.model.quantizer.vq.layers[: self.n_q]
+        return torch.stack([layer.codebook.squeeze(0) for layer in layers], dim=0)
+
+    def encode_waveform(self, waveform: Tensor) -> Tensor:
+        if self.codec is not None:
+            return self.codec.encode_waveform(waveform)
+        if waveform.ndim != 2 or waveform.shape[1] != self.waveform_samples:
+            raise ValueError(f"waveform must have shape [B,{self.waveform_samples}]")
+        with torch.no_grad():
+            layers = self.model.forward_feature(
+                waveform.unsqueeze(1), layers=list(range(self.n_q))
+            )
+        return torch.stack([layer.permute(0, 2, 1) for layer in layers], dim=1)
+
+    def decode_representation(self, representation: Tensor) -> Tensor:
+        if self.codec is not None:
+            return self.codec.decode_representation(representation)
+        if representation.ndim != 4 or tuple(representation.shape[1:]) != self.representation_shape:
+            raise ValueError(f"representation must have shape [B,{self.representation_shape}]")
+        quantized = representation.permute(0, 1, 3, 2).sum(dim=1)
+        waveform = self.model.decoder(quantized).squeeze(1)
+        if waveform.shape[-1] > self.waveform_samples:
+            waveform = waveform[..., : self.waveform_samples]
+        elif waveform.shape[-1] < self.waveform_samples:
+            waveform = F.pad(waveform, (0, self.waveform_samples - waveform.shape[-1]))
+        return waveform
 
 
 class EnCodecWrapper(_Wrapper):

@@ -10,7 +10,13 @@ import torch
 from torch import Tensor, nn
 
 from speech_jscc.channels import compute_jsr
+from speech_jscc.checkpoint import (
+    codec_name,
+    normalization_config,
+    validate_checkpoint_metadata,
+)
 from speech_jscc.config import load_config, resolve_device
+from speech_jscc.data import CachedCodecDataset, codec_cache_namespace, resolve_waveform_splits
 from speech_jscc.experiment import build_components
 from evaluation.paired import (
     estimate_transmitter_feedback,
@@ -49,12 +55,27 @@ def _load_checkpoint(
     model: nn.Module,
     config: dict[str, Any],
     device: torch.device,
+    codec=None,
 ) -> LearnedLayerGate | None:
     if not checkpoint.exists():
         print(f"warning: {checkpoint} not found; evaluating random model initialization")
+        model.checkpoint_metadata = {}
+        model.metric_interpretation = "smoke_test_path_check"
         return None
     state = torch.load(checkpoint, map_location=device, weights_only=True)
     model.load_state_dict(state["model"])
+    metadata = state.get("metadata", {})
+    if metadata:
+        if codec is None:
+            raise ValueError("codec is required to validate checkpoint metadata")
+        validate_checkpoint_metadata(metadata, config, codec)
+    model.checkpoint_metadata = metadata
+    model.metric_interpretation = (
+        "trained_checkpoint_performance"
+        if metadata.get("speech_tokenizer_metric_valid", False)
+        or metadata.get("codec_name") == "mock_continuous"
+        else "smoke_test_path_check"
+    )
     print(f"loaded={checkpoint}")
     learned_state = state.get("learned_gate")
     if learned_state is None:
@@ -142,6 +163,36 @@ def evaluate_paired_condition(
     )
     if layer_weights.shape != (layers,) or torch.any(layer_weights < 0) or layer_weights.sum() <= 0:
         raise ValueError("eval.layer_weights must contain L nonnegative values with positive sum")
+    metadata = getattr(model, "checkpoint_metadata", {})
+    normalization = metadata.get(
+        "normalization", normalization_config(config, section="eval")
+    )
+    normalization_mode = normalization.get("mode", "none")
+    epsilon = float(normalization.get("epsilon", 1e-8))
+    if normalization_mode not in {
+        "none", "raw", "per_layer_power", "per_layer_nmse", "global_power"
+    }:
+        raise ValueError(f"unsupported latent normalization mode: {normalization_mode}")
+
+    validation_dataset = None
+    train_paths, val_paths = resolve_waveform_splits(config.get("data", {}), config["seed"])
+    if val_paths:
+        sample_rate = int(getattr(codec, "sample_rate", config["codec"].get("sample_rate", 16000)))
+        validation_dataset = CachedCodecDataset(
+            val_paths,
+            codec,
+            sample_rate=sample_rate,
+            waveform_samples=config["codec"]["waveform_samples"],
+            device=device,
+            split="val",
+            cache_dir=config.get("data", {}).get("latent_cache_dir"),
+            cache_namespace=codec_cache_namespace(config, codec),
+        )
+    metric_interpretation = getattr(
+        model, "metric_interpretation", "smoke_test_path_check"
+    )
+    if codec_name(config) == "speechtokenizer" and validation_dataset is None:
+        metric_interpretation = "smoke_test_path_check"
 
     allocation_modes = eval_config.get("allocation_modes", ["uniform"])
     requested_refiner_modes = eval_config.get("refiner_modes", ["no_refiner"])
@@ -160,6 +211,7 @@ def evaluate_paired_condition(
         key: {
             "layer_mse": [],
             "latent_loss": [],
+            "latent_mse": [],
             "waveform_loss": [],
             "effective_sinr": [],
             "measured_jsr": [],
@@ -178,6 +230,14 @@ def evaluate_paired_condition(
     with torch.no_grad():
         for batch_index in range(eval_config["batches"]):
             batch_size = eval_config["batch_size"]
+            waveform = representation = None
+            if validation_dataset is not None:
+                examples = [
+                    validation_dataset[(batch_index * batch_size + offset) % len(validation_dataset)]
+                    for offset in range(batch_size)
+                ]
+                representation = torch.stack([example[0] for example in examples])
+                waveform = torch.stack([example[1] for example in examples])
             paired_batch = generate_paired_evaluation_batch(
                 codec,
                 batch_size=batch_size,
@@ -193,6 +253,8 @@ def evaluate_paired_condition(
                 seed=seed_base + batch_index,
                 device=device,
                 fading=fading,
+                waveform=waveform,
+                representation=representation,
             )
             feedback = estimate_transmitter_feedback(
                 paired_batch,
@@ -247,8 +309,26 @@ def evaluate_paired_condition(
                         ).square().mean(dim=(0, 2, 3))
                         accumulator = accumulators[(mode, allocation_mode, refiner_mode)]
                         accumulator["layer_mse"].append(layer_mse)
-                        accumulator["latent_loss"].append(
+                        accumulator["latent_mse"].append(
                             (layer_mse * layer_weights).sum() / layer_weights.sum()
+                        )
+                        accumulator["latent_loss"].append(
+                            (
+                                (
+                                    layer_mse
+                                    if normalization_mode in {"none", "raw"}
+                                    else layer_mse
+                                    / (
+                                        paired_batch.representation.square()
+                                        .mean(dim=(0, 2, 3))
+                                        .clamp_min(epsilon)
+                                        if normalization_mode in {"per_layer_power", "per_layer_nmse"}
+                                        else paired_batch.representation.square().mean().clamp_min(epsilon)
+                                    )
+                                )
+                                * layer_weights
+                            ).sum()
+                            / layer_weights.sum()
                         )
                         decoded_waveform = codec.decode_representation(reconstruction)
                         accumulator["waveform_loss"].append(
@@ -283,7 +363,13 @@ def evaluate_paired_condition(
             "jammer": jammer_type,
             "snr_db": float(snr_value),
             "jsr_db": float(jsr_value),
-            "latent_mse": torch.stack(accumulator["latent_loss"]).mean().item(),
+            "latent_mse": torch.stack(accumulator["latent_mse"]).mean().item(),
+            "latent_loss": torch.stack(accumulator["latent_loss"]).mean().item(),
+            "latent_loss_normalization": normalization_mode,
+            "metric_interpretation": metric_interpretation,
+            "checkpoint_kind": metadata.get("checkpoint_kind", "untrained_or_legacy"),
+            "codec_name": codec_name(config),
+            "evaluation_data": "validation_waveforms" if validation_dataset is not None else "synthetic_smoke",
             "waveform_mse": torch.stack(accumulator["waveform_loss"]).mean().item(),
             "effective_sinr_db": torch.stack(accumulator["effective_sinr"]).mean().item(),
             "measured_jsr_db": torch.stack(accumulator["measured_jsr"]).mean().item(),
@@ -417,8 +503,20 @@ def main() -> None:
     device = resolve_device(config["device"])
     codec, model = build_components(config, device)
     checkpoint = Path(args.checkpoint or config["eval"]["checkpoint"])
-    learned_gate = _load_checkpoint(checkpoint, model, config, device)
+    learned_gate = _load_checkpoint(checkpoint, model, config, device, codec)
     latent_refiner = _load_refiner(checkpoint, device)
+    if codec_name(config) == "speechtokenizer" and getattr(
+        model, "metric_interpretation", "smoke_test_path_check"
+    ) != "trained_checkpoint_performance":
+        print(
+            "WARNING: untrained SpeechTokenizer-latent checkpoint MSE is path-check only; "
+            "do not report it as model performance."
+        )
+    elif codec_name(config) == "speechtokenizer" and not config.get("data"):
+        print(
+            "WARNING: no validation waveform corpus is configured; this evaluation remains "
+            "a path smoke test even with a trained checkpoint."
+        )
     model.eval()
     modes = available_adaptation_modes(config["eval"]["adaptation_modes"], learned_gate)
 
@@ -450,6 +548,8 @@ def main() -> None:
                             f"mode={mode} allocation={row['allocation_mode']} "
                             f"refiner={row['refiner_mode']} eq={equalizer} jammer={jammer_type} "
                             f"snr={snr_db:g} jsr={jsr_db:g} latent_mse={row['latent_mse']:.6f} "
+                            f"latent_loss={row['latent_loss']:.6f} "
+                            f"status={row['metric_interpretation']} "
                             f"sinr={row['effective_sinr_db']:.2f}dB nmse={row['csi_nmse']:.4f}"
                         )
                 condition_index += 1

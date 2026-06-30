@@ -9,11 +9,13 @@ model:
   hidden_dim: 128
   target_power: 1.0
 codec:
+  type: mock
   waveform_samples: 768
 data:
   # Optional .pt tensor [N,L,T,D], or a dict containing "representations".
   # Null uses deterministic mock-codec representations of synthetic waveforms.
   representations_path: null
+  # Mock baseline only. Real SpeechTokenizer training uses train_speechtokenizer.yaml.
 channel:
   snr_db_range: [-2.0, 15.0]
   jsr_db_range: [-10.0, 8.0]
@@ -30,6 +32,9 @@ train:
   batch_size: 8
   learning_rate: 0.001
   layer_weights: [4.0, 2.0, 1.0, 1.0]
+  latent_normalization:
+    mode: none
+    epsilon: 1.0e-8
   power_penalty_weight: 0.01
   gate_mode: learned_gate
   transmitter_csi: true
@@ -47,4 +52,4 @@ train:
   metrics_jsonl: artifacts/train_metrics.jsonl
   reconstruction_dir: artifacts/reconstructions
   reconstruction_examples: 2
-  checkpoint: artifacts/jscc.pt
+  checkpoint: artifacts/checkpoints/mock_continuous_jscc.pt

@@ -9,6 +9,7 @@ model:
   hidden_dim: 128
   target_power: 1.0
 codec:
+  type: mock
   waveform_samples: 768
 channel:
   snr_db: [-2.0, 5.0, 12.0]
