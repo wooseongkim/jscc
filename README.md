@@ -226,6 +226,53 @@ data source, and `metric_interpretation` (`trained_checkpoint_performance` or
 STOI, PESQ, speaker similarity, and WER columns are placeholders for optional
 post-reconstruction evaluators. They are not part of encoding or transmission.
 
+## Full WAV-to-WAV JSCC inference
+
+`infer_jscc_wav.py` runs one input WAV through the full continuous-latent JSCC
+chain and exports the reconstructed Rx waveform. Unlike `eval_jamming.py`, this
+entry point writes a WAV file. Unlike `eval_speechtokenizer.py`, it includes the
+JSCC encoder/decoder, Rayleigh fading, AWGN, jammer, pilot CSI estimation, and
+equalization.
+
+Mock smoke test:
+
+```bash
+python infer_jscc_wav.py \
+  --config configs/eval.yaml \
+  --input data/example.wav \
+  --output artifacts/inference/rx_mock.wav \
+  --snr-db 8 \
+  --jsr-db 0 \
+  --jammer pilot \
+  --adaptation-mode uniform \
+  --allocation-mode uniform \
+  --save-pt artifacts/inference/rx_mock.pt \
+  --metrics-json artifacts/inference/rx_mock_metrics.json
+```
+
+SpeechTokenizer checkpoint use:
+
+```bash
+python infer_jscc_wav.py \
+  --config configs/eval_speechtokenizer.yaml \
+  --checkpoint artifacts/checkpoints/speechtokenizer_latent_jscc.pt \
+  --input data/speech/example.wav \
+  --output artifacts/inference/rx_speechtokenizer.wav \
+  --snr-db 5 \
+  --jsr-db 0 \
+  --jammer pilot \
+  --adaptation-mode learned_gate \
+  --allocation-mode reliability_greedy \
+  --refiner-mode refiner_estimated_mask
+```
+
+The CLI prints JSON metrics to stdout and can also save them with
+`--metrics-json`. Use `--save-pt` to store source waveform, target latent,
+raw/final reconstructed latents, decoded waveform, transmitted/received complex
+resources, estimated channel, jammer tensors, pilot/jammer masks, channel-state
+vectors, layer gates, and the metrics dictionary. If `learned_gate` or a refiner
+mode is requested, the checkpoint must contain the corresponding module state.
+
 ## Configuration reference
 
 ### Shared model and codec settings
