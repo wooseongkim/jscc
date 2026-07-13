@@ -44,6 +44,10 @@ class _Wrapper(BaseCodec):
     def decode_representation(self, representation: Tensor) -> Tensor:
         return self.codec.decode_representation(representation)
 
+    def official_reconstruct_waveform(self, waveform: Tensor) -> Tensor:
+        representation = self.encode_waveform(waveform)
+        return self.decode_representation(representation)
+
 
 def _speech_tokenizer_class():
     """Import the inference model without requiring optional trainer dependencies."""
@@ -151,10 +155,24 @@ class SpeechTokenizerWrapper(BaseCodec):
             return self.codec.encode_waveform(waveform)
         if waveform.ndim != 2 or waveform.shape[1] != self.waveform_samples:
             raise ValueError(f"waveform must have shape [B,{self.waveform_samples}]")
+        if not torch.isfinite(waveform).all():
+            raise ValueError("waveform contains NaN or Inf")
+        self.model.eval()
         with torch.no_grad():
             layers = self.model.forward_feature(
                 waveform.unsqueeze(1), layers=list(range(self.n_q))
             )
+        if len(layers) != self.n_q:
+            raise RuntimeError(f"SpeechTokenizer returned {len(layers)} layers, expected {self.n_q}")
+        expected_shape = tuple(layers[0].shape)
+        for index, layer in enumerate(layers):
+            if tuple(layer.shape) != expected_shape:
+                raise RuntimeError(
+                    f"SpeechTokenizer layer {index} shape {tuple(layer.shape)} "
+                    f"does not match layer 0 shape {expected_shape}"
+                )
+            if not torch.isfinite(layer).all():
+                raise RuntimeError(f"SpeechTokenizer layer {index} contains NaN or Inf")
         return torch.stack([layer.permute(0, 2, 1) for layer in layers], dim=1)
 
     def decode_representation(self, representation: Tensor) -> Tensor:
@@ -162,13 +180,49 @@ class SpeechTokenizerWrapper(BaseCodec):
             return self.codec.decode_representation(representation)
         if representation.ndim != 4 or tuple(representation.shape[1:]) != self.representation_shape:
             raise ValueError(f"representation must have shape [B,{self.representation_shape}]")
+        if not torch.isfinite(representation).all():
+            raise ValueError("representation contains NaN or Inf")
+        self.model.eval()
         quantized = representation.permute(0, 1, 3, 2).sum(dim=1)
+        expected_quantized_shape = (representation.shape[0], self.latent_dim, self.frames)
+        if tuple(quantized.shape) != expected_quantized_shape:
+            raise RuntimeError(
+                "continuous_sum decoder input shape mismatch: "
+                f"got {tuple(quantized.shape)}, expected {expected_quantized_shape}"
+            )
         waveform = self.model.decoder(quantized).squeeze(1)
         if waveform.shape[-1] > self.waveform_samples:
             waveform = waveform[..., : self.waveform_samples]
         elif waveform.shape[-1] < self.waveform_samples:
             waveform = F.pad(waveform, (0, self.waveform_samples - waveform.shape[-1]))
+        if not torch.isfinite(waveform).all():
+            raise RuntimeError("decoded waveform contains NaN or Inf")
         return waveform
+
+    def official_reconstruct_waveform(self, waveform: Tensor) -> Tensor:
+        """Reconstruct with the official SpeechTokenizer code path.
+
+        This intentionally goes through `encode()` RVQ codes and `decode(codes)`
+        instead of the JSCC-facing continuous `[B,L,T,D]` representation.
+        """
+        if self.codec is not None:
+            representation = self.codec.encode_waveform(waveform)
+            return self.codec.decode_representation(representation)
+        if waveform.ndim != 2 or waveform.shape[1] != self.waveform_samples:
+            raise ValueError(f"waveform must have shape [B,{self.waveform_samples}]")
+        if not torch.isfinite(waveform).all():
+            raise ValueError("waveform contains NaN or Inf")
+        self.model.eval()
+        with torch.no_grad():
+            codes = self.model.encode(waveform.unsqueeze(1), n_q=self.n_q)
+            waveform_out = self.model.decode(codes).squeeze(1)
+        if waveform_out.shape[-1] > self.waveform_samples:
+            waveform_out = waveform_out[..., : self.waveform_samples]
+        elif waveform_out.shape[-1] < self.waveform_samples:
+            waveform_out = F.pad(waveform_out, (0, self.waveform_samples - waveform_out.shape[-1]))
+        if not torch.isfinite(waveform_out).all():
+            raise RuntimeError("official decoded waveform contains NaN or Inf")
+        return waveform_out
 
 
 class EnCodecWrapper(_Wrapper):

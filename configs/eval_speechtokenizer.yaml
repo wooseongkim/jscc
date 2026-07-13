@@ -22,6 +22,8 @@ codec:
 #   waveform_dir: data/speech
 #   waveform_glob: "**/*.wav"
 #   val_fraction: 0.1
+#   valid_manifest: manifests/mini_librispeech/valid.jsonl
+#   test_manifest: manifests/mini_librispeech/test.jsonl
 #   latent_cache_dir: artifacts/latent_cache/speechtokenizer_hubert_avg_2s
 channel:
   snr_db: [8.0]
@@ -50,4 +52,5 @@ eval:
   latent_normalization:
     mode: per_layer_power
     epsilon: 1.0e-6
+  enable_stoi: false
   enable_optional_wer: false

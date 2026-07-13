@@ -22,8 +22,10 @@ data:
   waveform_dir: data/speech
   waveform_glob: "**/*.wav"
   val_fraction: 0.1
-  # train_manifest: data/manifests/train.txt
-  # val_manifest: data/manifests/val.txt
+  # Mini LibriSpeech manifest example after running scripts/make_librispeech_manifest.py:
+  # train_manifest: manifests/mini_librispeech/train.jsonl
+  # valid_manifest: manifests/mini_librispeech/valid.jsonl
+  # test_manifest: manifests/mini_librispeech/test.jsonl
   # Set null to re-encode every epoch. Cached values are continuous embeddings.
   latent_cache_dir: artifacts/latent_cache/speechtokenizer_hubert_avg_2s
 channel:

@@ -37,4 +37,5 @@ eval:
   rule_gate_thresholds_db: [0.0, 6.0, 12.0]
   learned_gate_hidden_dim: 32
   layer_weights: [4.0, 2.0, 1.0, 1.0]
+  enable_stoi: false
   enable_optional_wer: false

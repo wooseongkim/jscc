@@ -110,8 +110,11 @@ def test_infer_jscc_wav_mock_smoke_exports_wav_metrics_and_tensors(tmp_path: Pat
     assert stdout_metrics["adaptation_mode"] == "uniform"
     assert "latent_mse" in stdout_metrics
     assert "effective_sinr_db" in stdout_metrics
+    assert isinstance(stdout_metrics["si_sdr_db"], float)
+    assert stdout_metrics["stoi_available"] is False
 
     payload = torch.load(tensors_path, map_location="cpu", weights_only=True)
     assert "decoded_waveform" in payload
     assert "final_reconstruction" in payload
+    assert payload["metrics"]["si_sdr_db"] == stdout_metrics["si_sdr_db"]
     assert payload["decoded_waveform"].shape == (1, 384)

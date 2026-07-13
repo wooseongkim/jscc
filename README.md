@@ -123,6 +123,55 @@ does not download pretrained weights or speech datasets.
 > corpus latents. Random initialization, missing metadata, and the earlier smoke
 > test must not be reported as model performance.
 
+## Mini LibriSpeech manifests
+
+This repository expects the local Mini LibriSpeech extraction to use the standard
+LibriSpeech layout:
+
+```text
+data/mini_librispeech/LibriSpeech/
+  train-clean-5/<speaker>/<chapter>/*.flac
+  dev-clean-2/<speaker>/<chapter>/*.flac
+  test-clean/<speaker>/<chapter>/*.flac
+  */*/*/*.trans.txt
+```
+
+Create JSONL manifests for SpeechTokenizer/JSCC training and evaluation:
+
+```bash
+python scripts/make_librispeech_manifest.py \
+  --root data/mini_librispeech/LibriSpeech \
+  --out_dir manifests/mini_librispeech
+```
+
+The command writes:
+
+```text
+manifests/mini_librispeech/train.jsonl
+manifests/mini_librispeech/valid.jsonl
+manifests/mini_librispeech/test.jsonl
+```
+
+Each JSONL record contains `utt_id`, repo-relative `audio_path`, `speaker_id`,
+`chapter_id`, `split`, `text`, `duration_sec`, `sample_rate`, and
+`num_samples`. Use `--absolute-paths` only when the manifest must be tied to one
+machine-specific checkout.
+
+Training can read the JSONL manifests directly:
+
+```yaml
+data:
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+  test_manifest: manifests/mini_librispeech/test.jsonl
+  sample_rate: 16000
+```
+
+`train_manifest` and `valid_manifest` are used by the current training path;
+`test_manifest` is preserved for held-out evaluation and ASR/WER tooling. Mini
+LibriSpeech is useful for smoke tests and pipeline validation. Final quality
+claims should be repeated on full LibriSpeech `test-clean` or a larger corpus.
+
 ## Training
 
 Run the default latent experiment:
@@ -218,13 +267,250 @@ artifacts/plots/effective_sinr.png
 ```
 
 The CSV contains raw weighted latent MSE, normalized training-style latent loss,
-one MSE column per codec layer, waveform
-MSE, effective SINR, measured JSR, active-layer count, and jammer-mask ratio.
+one MSE column per codec layer, waveform MSE, SI-SDR, optional STOI, effective
+SINR, measured JSR, active-layer count, and jammer-mask ratio.
 It also reports CSI NMSE, pilot EVM, checkpoint kind, codec name, evaluation
 data source, and `metric_interpretation` (`trained_checkpoint_performance` or
 `smoke_test_path_check`).
-STOI, PESQ, speaker similarity, and WER columns are placeholders for optional
-post-reconstruction evaluators. They are not part of encoding or transmission.
+PESQ/ViSQOL, speaker similarity, and WER columns remain optional placeholder or
+future-work post-reconstruction evaluators. They are not part of encoding or
+transmission.
+
+## Audio quality metrics
+
+SI-SDR is computed by default whenever both the reference waveform and decoded
+waveform are available. It reports scale-invariant waveform distortion in dB
+and is included in `eval_jamming.py` CSV rows as `si_sdr_db`.
+
+STOI is an optional intelligibility metric backed by `pystoi`. It is disabled by
+default so the base test and smoke-test environment does not need the package.
+Install and enable it explicitly:
+
+```bash
+python -m pip install pystoi
+# or install the project extra:
+python -m pip install -e '.[audio-metrics]'
+```
+
+Then set:
+
+```yaml
+eval:
+  enable_stoi: true
+```
+
+and run:
+
+```bash
+python eval_jamming.py --config configs/eval_speechtokenizer.yaml
+```
+
+`stoi_available` and `stoi_error` in the CSV describe whether STOI actually ran.
+For synthetic smoke-test waveforms, SI-SDR is still mechanically valid, but
+STOI should not be interpreted as speech intelligibility. PESQ/ViSQOL, speaker
+similarity, and WER are still optional placeholder or future-work evaluators.
+ASR/WER must remain a post-reconstruction evaluation tool, not part of the
+communication path.
+
+## Codec-only SpeechTokenizer evaluation with latent perturbation
+
+Before training JSCC, evaluate the speech codec by itself. This path does not
+instantiate the JSCC encoder/decoder, does not use Rayleigh fading, does not use
+wireless AWGN, and does not report JSR or effective SINR.
+
+Clean codec reconstruction means:
+
+```text
+waveform -> SpeechTokenizer encode -> continuous latent -> SpeechTokenizer decode
+```
+
+Latent noise sensitivity adds Gaussian perturbation directly to the continuous
+latent tensor before decoding. `latent_noise_snr_db` is a latent-domain
+perturbation SNR, not wireless channel SNR:
+
+```text
+waveform -> SpeechTokenizer encode -> latent + Gaussian noise -> SpeechTokenizer decode
+```
+
+Run a small validation check:
+
+```bash
+python eval_codec_only.py \
+  --config configs/train_speechtokenizer.yaml \
+  --manifest manifests/mini_librispeech/valid.jsonl \
+  --split valid \
+  --max_items 20 \
+  --batch_size 2 \
+  --enable_latent_noise_sweep true \
+  --latent_noise_snr_db 30 20 10 5 0 \
+  --output_dir runs/codec_only/valid_20_noise
+```
+
+Run a larger held-out check:
+
+```bash
+python eval_codec_only.py \
+  --config configs/train_speechtokenizer.yaml \
+  --manifest manifests/mini_librispeech/test.jsonl \
+  --split test \
+  --max_items 100 \
+  --batch_size 4 \
+  --enable_latent_noise_sweep true \
+  --latent_noise_snr_db 30 20 10 5 0 \
+  --output_dir runs/codec_only/test_100_noise
+```
+
+To diagnose clean reconstruction quality, compare the official SpeechTokenizer
+RVQ-code path with the JSCC-facing continuous-latent path and optionally align
+metrics by peak cross-correlation:
+
+```bash
+python eval_codec_only.py \
+  --config configs/train_speechtokenizer.yaml \
+  --manifest manifests/mini_librispeech/test.jsonl \
+  --split test \
+  --max_items 100 \
+  --batch_size 4 \
+  --decode_mode both \
+  --metric_align peak_xcorr \
+  --max_lag_samples 1000 \
+  --snr_scale_match true \
+  --metric_zero_mean true \
+  --enable_latent_noise_sweep true \
+  --latent_noise_snr_db 30 20 10 5 0 \
+  --output_dir runs/codec_only/test_100_noise_diag
+```
+
+For fixed baseline reporting, enable the four-protocol comparison table. It
+records A: no alignment/no scale matching, B: no alignment/scale matching,
+C: peak cross-correlation/no scale matching, and D: peak cross-correlation/scale
+matching. The recommended main protocol is D with `metric_zero_mean=true`; also
+report the `metric_align=none` rows for comparison.
+
+```bash
+python eval_codec_only.py \
+  --config configs/train_speechtokenizer.yaml \
+  --manifest manifests/mini_librispeech/test.jsonl \
+  --split test \
+  --max_items 100 \
+  --batch_size 4 \
+  --decode_mode both \
+  --metric_align peak_xcorr \
+  --max_lag_samples 1000 \
+  --snr_scale_match true \
+  --metric_zero_mean true \
+  --protocol_comparison true \
+  --output_dir runs/codec_only/test_100_protocol_diag
+```
+
+To check crop-length sensitivity, pass multiple `--waveform_samples` values:
+
+```bash
+python eval_codec_only.py \
+  --config configs/train_speechtokenizer.yaml \
+  --manifest manifests/mini_librispeech/test.jsonl \
+  --split test \
+  --max_items 100 \
+  --batch_size 4 \
+  --decode_mode both \
+  --metric_align peak_xcorr \
+  --snr_scale_match true \
+  --metric_zero_mean true \
+  --protocol_comparison true \
+  --waveform_samples 16000 32000 48000 \
+  --output_dir runs/codec_only/test_100_length_sweep
+```
+
+`--decode_mode official` uses SpeechTokenizer `encode()` and `decode(codes)`
+directly. `--decode_mode continuous_sum` uses the continuous `[B,L,T,D]`
+representation used by JSCC experiments. `--decode_mode both` records both
+metrics and their gap. The latent-noise sweep remains based on the
+continuous-sum path, because that is the path JSCC transports.
+
+Outputs include `summary.json`, `per_utterance_metrics.csv`,
+`decode_comparison_metrics.csv`, optional `baseline_protocol_comparison.csv`,
+`baseline_protocol_comparison.md`, `baseline_protocol_comparison.pdf`,
+`latent_noise_sweep_metrics.csv`, `report.md`, up to five WAV examples by
+default, worst-SI-SDR WAV examples in `worst_samples/`, detailed outlier
+artifacts in `outliers/<utt_id>/`, and plots for clean waveform SNR, SI-SDR,
+per-layer latent energy, and latent-noise sweeps. These results are codec
+reconstruction upper bounds and latent error tolerance references for later
+JSCC experiments.
+
+## Codec-only baseline protocol
+
+SpeechTokenizer official `encode()` -> `decode(codes)` reconstruction and the
+current `continuous_sum` reconstruction are equivalent in clean codec-only
+evaluation. The JSCC source representation in this project is not a digital RVQ
+bitstream; it is the continuous post-quantized RVQ codebook embedding tensor
+`[B,L,T,D]`, summed across layers at the SpeechTokenizer decoder input.
+
+Use this protocol for the main clean codec-only baseline:
+
+```text
+waveform_samples = 32000
+duration = 2 seconds at 16 kHz
+metric_align = peak_xcorr
+snr_scale_match = true
+metric_zero_mean = true
+outlier threshold = SI-SDR <= -10 dB
+```
+
+Report mean, median, std, p10, p90, min, max, and outlier count. Main results
+must keep all samples; outlier-excluded values are diagnostic only. The fixed
+test_100 result under this protocol is:
+
+```text
+waveform SNR mean = 5.26917 dB
+SI-SDR mean = 3.63291 dB
+STFT L1 mean = 0.0572535
+outlier count = 0 / 100
+```
+
+The 1-second setting is retained for latency-oriented JSCC experiments, not as
+the representative codec-only baseline:
+
+```text
+waveform_samples = 16000
+protocol D waveform SNR mean = 5.30472 dB
+protocol D SI-SDR mean = 3.56680 dB
+protocol D STFT L1 mean = 0.0583944
+outlier count = 1 / 100
+```
+
+The known 1-second outlier is `1188-133604-0012` at
+`data/mini_librispeech/LibriSpeech/test-clean/1188/133604/1188-133604-0012.flac`.
+The 3-second setting gives the lowest STFT L1 in the comparison, but its SI-SDR
+is lower than the 2-second setting, so 2 seconds is the main baseline. Protocol
+A (`metric_align=none`, `snr_scale_match=false`) is kept only as a raw
+backward-compatible reference or appendix result.
+
+Run the final baseline directly:
+
+```bash
+python eval_codec_only.py \
+  --config configs/codec_only_baseline.yaml \
+  --manifest manifests/mini_librispeech/test.jsonl \
+  --split test \
+  --max_items 100 \
+  --batch_size 4 \
+  --waveform_samples 32000 \
+  --metric_align peak_xcorr \
+  --snr_scale_match true \
+  --metric_zero_mean true \
+  --protocol_comparison true \
+  --output_dir runs/codec_only/test_100_2s_final_protocol
+```
+
+Or regenerate the full length/protocol comparison:
+
+```bash
+PYTHON=.venv/bin/python scripts/run_codec_protocol_comparison.sh
+```
+
+Latent-noise sweeps should use the same 2-second protocol when they are compared
+against the main clean baseline. `latent_noise_snr_db` is latent-domain
+perturbation SNR, not wireless SNR.
 
 ## Full WAV-to-WAV JSCC inference
 
@@ -267,11 +553,13 @@ python infer_jscc_wav.py \
 ```
 
 The CLI prints JSON metrics to stdout and can also save them with
-`--metrics-json`. Use `--save-pt` to store source waveform, target latent,
-raw/final reconstructed latents, decoded waveform, transmitted/received complex
-resources, estimated channel, jammer tensors, pilot/jammer masks, channel-state
-vectors, layer gates, and the metrics dictionary. If `learned_gate` or a refiner
-mode is requested, the checkpoint must contain the corresponding module state.
+`--metrics-json`; the metrics include SI-SDR and optional STOI when
+`eval.enable_stoi` is true and `pystoi` is installed. Use `--save-pt` to store
+source waveform, target latent, raw/final reconstructed latents, decoded
+waveform, transmitted/received complex resources, estimated channel, jammer
+tensors, pilot/jammer masks, channel-state vectors, layer gates, and the
+metrics dictionary. If `learned_gate` or a refiner mode is requested, the
+checkpoint must contain the corresponding module state.
 
 ## Configuration reference
 
@@ -343,6 +631,7 @@ mode is requested, the checkpoint must contain the corresponding module state.
 | `eval.equalizer_modes` | `estimated` and optional perfect-CSI `oracle` |
 | `eval.rule_gate_thresholds_db` | `L-1` nondecreasing layer activation thresholds |
 | `eval.layer_weights` | Layer weights for aggregate latent MSE |
+| `eval.enable_stoi` | Enables optional `pystoi` STOI calculation after waveform reconstruction |
 | `eval.output_csv` | Result table path |
 | `eval.plot_dir` | Summary plot directory |
 | `eval.enable_optional_wer` | Flags optional post-reconstruction WER; an external evaluator is still required |
@@ -361,8 +650,10 @@ representation_shape                     # (L,T,D)
 `SpeechTokenizerWrapper` loads the official SpeechTokenizer config/checkpoint,
 calls `forward_feature()` for all requested RVQ layers, and exposes the resulting
 quantized embeddings as `[B,L,T,D]`. Decoding sums the continuous layer
-embeddings and calls the pretrained waveform decoder directly. RVQ indices are
-used only by the standalone equivalence sanity check and are never transmitted.
+embeddings and calls the pretrained waveform decoder directly. For codec-only
+diagnostics, `official_reconstruct_waveform()` also exposes the upstream
+`encode()` -> `decode(codes)` reconstruction path. RVQ indices are used only by
+standalone codec diagnostics and are never transmitted by JSCC.
 
 Install the upstream repository and its inference dependency, then provide
 `codec.type: speechtokenizer`, `config_path`, `checkpoint_path`,

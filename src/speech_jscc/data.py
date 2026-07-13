@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 import struct
 from pathlib import Path
@@ -35,18 +36,31 @@ def _read_manifest(path: str | Path) -> list[Path]:
         value = line.strip()
         if not value or value.startswith("#"):
             continue
+        if manifest.suffix.lower() == ".jsonl":
+            payload = json.loads(value)
+            if "audio_path" not in payload:
+                raise ValueError(f"{manifest} JSONL records must contain audio_path")
+            value = str(payload["audio_path"])
         item = Path(value)
-        paths.append(item if item.is_absolute() else manifest.parent / item)
+        if item.is_absolute():
+            paths.append(item)
+            continue
+        manifest_relative = manifest.parent / item
+        cwd_relative = Path.cwd() / item
+        paths.append(manifest_relative if manifest_relative.exists() else cwd_relative)
     return paths
 
 
 def resolve_waveform_splits(data_config: dict[str, Any], seed: int) -> tuple[list[Path], list[Path]]:
     """Resolve explicit manifests or make a deterministic directory split."""
     train_manifest = data_config.get("train_manifest")
-    val_manifest = data_config.get("val_manifest")
+    val_manifest = data_config.get("val_manifest", data_config.get("valid_manifest"))
     if train_manifest or val_manifest:
         if not train_manifest or not val_manifest:
-            raise ValueError("data.train_manifest and data.val_manifest must be provided together")
+            raise ValueError(
+                "data.train_manifest and data.val_manifest/data.valid_manifest "
+                "must be provided together"
+            )
         return _read_manifest(train_manifest), _read_manifest(val_manifest)
 
     configured = data_config.get("waveform_paths")
@@ -110,42 +124,53 @@ def load_waveform_segment(
             waveform = waveform.mean(dim=0)
     else:
         try:
-            import torchaudio
+            import soundfile as sf
         except ImportError:
-            payload = path.read_bytes()
-            if payload[:4] != b"RIFF" or payload[8:12] != b"WAVE":
-                raise ValueError(f"{path} is not a RIFF/WAVE file")
-            offset, fmt, frame_bytes = 12, None, None
-            while offset + 8 <= len(payload):
-                chunk_id = payload[offset : offset + 4]
-                chunk_size = struct.unpack_from("<I", payload, offset + 4)[0]
-                chunk = payload[offset + 8 : offset + 8 + chunk_size]
-                if chunk_id == b"fmt ":
-                    fmt = struct.unpack_from("<HHIIHH", chunk)
-                elif chunk_id == b"data":
-                    frame_bytes = bytearray(chunk)
-                offset += 8 + chunk_size + (chunk_size % 2)
-            if fmt is None or frame_bytes is None:
-                raise ValueError(f"{path} is missing WAV fmt or data")
-            audio_format, channels, source_rate, _, _, bits = fmt
-            if audio_format == 1 and bits == 8:
-                waveform = (
-                    torch.frombuffer(frame_bytes, dtype=torch.uint8).float() - 128.0
-                ) / 128.0
-            elif audio_format == 1 and bits == 16:
-                waveform = torch.frombuffer(frame_bytes, dtype=torch.int16).float() / 32768.0
-            elif audio_format == 1 and bits == 32:
-                waveform = torch.frombuffer(frame_bytes, dtype=torch.int32).float() / 2147483648.0
-            elif audio_format == 3 and bits == 32:
-                waveform = torch.frombuffer(frame_bytes, dtype=torch.float32).float()
-            else:
-                raise ValueError(
-                    f"unsupported WAV format={audio_format}, bits={bits} in {path}"
-                )
-            waveform = waveform.reshape(-1, channels).mean(dim=1)
+            sf = None
+        if sf is not None:
+            array, source_rate = sf.read(str(path), dtype="float32", always_2d=True)
+            waveform = torch.from_numpy(array).float().mean(dim=1)
         else:
-            waveform, source_rate = torchaudio.load(str(path))
-            waveform = waveform.float().mean(dim=0)
+            try:
+                import torchaudio
+            except ImportError:
+                payload = path.read_bytes()
+                if payload[:4] != b"RIFF" or payload[8:12] != b"WAVE":
+                    raise ValueError(
+                        f"{path} is not a RIFF/WAVE file; install soundfile or torchaudio "
+                        "to load compressed audio"
+                    )
+                offset, fmt, frame_bytes = 12, None, None
+                while offset + 8 <= len(payload):
+                    chunk_id = payload[offset : offset + 4]
+                    chunk_size = struct.unpack_from("<I", payload, offset + 4)[0]
+                    chunk = payload[offset + 8 : offset + 8 + chunk_size]
+                    if chunk_id == b"fmt ":
+                        fmt = struct.unpack_from("<HHIIHH", chunk)
+                    elif chunk_id == b"data":
+                        frame_bytes = bytearray(chunk)
+                    offset += 8 + chunk_size + (chunk_size % 2)
+                if fmt is None or frame_bytes is None:
+                    raise ValueError(f"{path} is missing WAV fmt or data")
+                audio_format, channels, source_rate, _, _, bits = fmt
+                if audio_format == 1 and bits == 8:
+                    waveform = (
+                        torch.frombuffer(frame_bytes, dtype=torch.uint8).float() - 128.0
+                    ) / 128.0
+                elif audio_format == 1 and bits == 16:
+                    waveform = torch.frombuffer(frame_bytes, dtype=torch.int16).float() / 32768.0
+                elif audio_format == 1 and bits == 32:
+                    waveform = torch.frombuffer(frame_bytes, dtype=torch.int32).float() / 2147483648.0
+                elif audio_format == 3 and bits == 32:
+                    waveform = torch.frombuffer(frame_bytes, dtype=torch.float32).float()
+                else:
+                    raise ValueError(
+                        f"unsupported WAV format={audio_format}, bits={bits} in {path}"
+                    )
+                waveform = waveform.reshape(-1, channels).mean(dim=1)
+            else:
+                waveform, source_rate = torchaudio.load(str(path))
+                waveform = waveform.float().mean(dim=0)
     if waveform.ndim != 1:
         raise ValueError(f"waveform {path} must resolve to one dimension")
     if source_rate != sample_rate:

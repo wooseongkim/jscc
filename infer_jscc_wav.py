@@ -27,6 +27,7 @@ from speech_jscc.checkpoint import codec_name
 from speech_jscc.config import load_config, resolve_device
 from speech_jscc.data import load_waveform_segment
 from speech_jscc.experiment import build_components
+from speech_jscc.metrics import summarize_audio_metrics
 
 
 ADAPTATION_MODES = ("uniform", "rule_based", "learned_gate")
@@ -234,6 +235,12 @@ def run_inference(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, T
     waveform_mse = (decoded_waveform - paired_batch.waveform).square().mean()
     effective_sinr_db = 10.0 * torch.log10(result["post_equalization_sinr"].clamp_min(1e-12))
     measured_jsr_db = compute_jsr(result["transmitted"], result["jammer"], db=True)
+    audio_metrics = summarize_audio_metrics(
+        paired_batch.waveform,
+        decoded_waveform,
+        sample_rate,
+        enable_stoi=bool(config.get("eval", {}).get("enable_stoi", False)),
+    )
     metrics = {
         "input": str(args.input),
         "output": str(args.output),
@@ -250,6 +257,10 @@ def run_inference(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, T
         "refiner_mode": args.refiner_mode,
         "latent_mse": _scalar(latent_mse),
         "waveform_mse": _scalar(waveform_mse),
+        "si_sdr_db": audio_metrics["si_sdr_db"],
+        "stoi": audio_metrics["stoi"],
+        "stoi_available": audio_metrics["stoi_available"],
+        "stoi_error": audio_metrics["stoi_error"],
         "effective_sinr_db": _scalar(effective_sinr_db),
         "measured_jsr_db": _scalar(measured_jsr_db),
         "csi_nmse": _scalar(result["csi_nmse"]),

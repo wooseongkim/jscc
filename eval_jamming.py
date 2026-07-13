@@ -18,6 +18,7 @@ from speech_jscc.checkpoint import (
 from speech_jscc.config import load_config, resolve_device
 from speech_jscc.data import CachedCodecDataset, codec_cache_namespace, resolve_waveform_splits
 from speech_jscc.experiment import build_components
+from speech_jscc.metrics import summarize_audio_metrics
 from evaluation.paired import (
     estimate_transmitter_feedback,
     generate_paired_evaluation_batch,
@@ -157,6 +158,7 @@ def evaluate_paired_condition(
 ) -> list[dict[str, Any]]:
     eval_config = config["eval"]
     channel_config = config["channel"]
+    sample_rate = int(getattr(codec, "sample_rate", config["codec"].get("sample_rate", 16000)))
     layers = config["model"]["layers"]
     layer_weights = torch.as_tensor(
         eval_config["layer_weights"], device=device, dtype=torch.float32
@@ -177,7 +179,6 @@ def evaluate_paired_condition(
     validation_dataset = None
     train_paths, val_paths = resolve_waveform_splits(config.get("data", {}), config["seed"])
     if val_paths:
-        sample_rate = int(getattr(codec, "sample_rate", config["codec"].get("sample_rate", 16000)))
         validation_dataset = CachedCodecDataset(
             val_paths,
             codec,
@@ -207,12 +208,16 @@ def evaluate_paired_condition(
         for allocation_mode in allocation_modes
         for refiner_mode in refiner_modes
     ]
-    accumulators: dict[tuple[str, str, str], dict[str, list[Tensor]]] = {
+    accumulators: dict[tuple[str, str, str], dict[str, list[Any]]] = {
         key: {
             "layer_mse": [],
             "latent_loss": [],
             "latent_mse": [],
             "waveform_loss": [],
+            "si_sdr": [],
+            "stoi": [],
+            "stoi_available": [],
+            "stoi_error": [],
             "effective_sinr": [],
             "measured_jsr": [],
             "active_layers": [],
@@ -330,10 +335,34 @@ def evaluate_paired_condition(
                             ).sum()
                             / layer_weights.sum()
                         )
-                        decoded_waveform = codec.decode_representation(reconstruction)
-                        accumulator["waveform_loss"].append(
-                            (decoded_waveform - paired_batch.waveform).square().mean()
-                        )
+                        if refiner_mode == "no_refiner":
+                            decoded_waveform = result["decoded_waveform"]
+                        else:
+                            decoded_waveform = codec.decode_representation(reconstruction)
+                        if paired_batch.waveform is not None:
+                            accumulator["waveform_loss"].append(
+                                (decoded_waveform - paired_batch.waveform).square().mean()
+                            )
+                            audio_metrics = summarize_audio_metrics(
+                                paired_batch.waveform,
+                                decoded_waveform,
+                                sample_rate,
+                                enable_stoi=bool(eval_config.get("enable_stoi", False)),
+                            )
+                            accumulator["si_sdr"].append(
+                                decoded_waveform.new_tensor(float(audio_metrics["si_sdr_db"]))
+                            )
+                            if audio_metrics["stoi"] is not None:
+                                accumulator["stoi"].append(
+                                    decoded_waveform.new_tensor(float(audio_metrics["stoi"]))
+                                )
+                            accumulator["stoi_available"].append(
+                                decoded_waveform.new_tensor(
+                                    1.0 if audio_metrics["stoi_available"] else 0.0
+                                )
+                            )
+                            if audio_metrics["stoi_error"]:
+                                accumulator["stoi_error"].append(str(audio_metrics["stoi_error"]))
                         accumulator["effective_sinr"].append(
                             (10.0 * torch.log10(
                                 result["post_equalization_sinr"].clamp_min(1e-12)
@@ -354,6 +383,27 @@ def evaluate_paired_condition(
     for mode, allocation_mode, refiner_mode in keys:
         accumulator = accumulators[(mode, allocation_mode, refiner_mode)]
         mean_layer_mse = torch.stack(accumulator["layer_mse"]).mean(dim=0)
+        waveform_mse = (
+            torch.stack(accumulator["waveform_loss"]).mean().item()
+            if accumulator["waveform_loss"]
+            else ""
+        )
+        si_sdr_db = (
+            torch.stack(accumulator["si_sdr"]).mean().item()
+            if accumulator["si_sdr"]
+            else ""
+        )
+        stoi = (
+            torch.stack(accumulator["stoi"]).mean().item()
+            if accumulator["stoi"]
+            else ""
+        )
+        stoi_available = (
+            bool(torch.stack(accumulator["stoi_available"]).max().item())
+            if accumulator["stoi_available"]
+            else False
+        )
+        stoi_error = "; ".join(sorted(set(accumulator["stoi_error"])))
         row: dict[str, Any] = {
             "adaptation_mode": mode,
             "allocation_mode": allocation_mode,
@@ -370,14 +420,17 @@ def evaluate_paired_condition(
             "checkpoint_kind": metadata.get("checkpoint_kind", "untrained_or_legacy"),
             "codec_name": codec_name(config),
             "evaluation_data": "validation_waveforms" if validation_dataset is not None else "synthetic_smoke",
-            "waveform_mse": torch.stack(accumulator["waveform_loss"]).mean().item(),
+            "waveform_mse": waveform_mse,
+            "si_sdr_db": si_sdr_db,
+            "stoi": stoi,
+            "stoi_available": stoi_available,
+            "stoi_error": stoi_error,
             "effective_sinr_db": torch.stack(accumulator["effective_sinr"]).mean().item(),
             "measured_jsr_db": torch.stack(accumulator["measured_jsr"]).mean().item(),
             "csi_nmse": torch.stack(accumulator["csi_nmse"]).mean().item(),
             "pilot_evm": torch.stack(accumulator["pilot_evm"]).mean().item(),
             "mean_active_layers": torch.stack(accumulator["active_layers"]).mean().item(),
             "jammer_mask_ratio": torch.stack(accumulator["mask_ratio"]).mean().item(),
-            "stoi_placeholder": "",
             "pesq_placeholder": "",
             "speaker_similarity_placeholder": "",
             "wer_optional": "",
@@ -465,16 +518,18 @@ def save_plots(rows: list[dict[str, Any]], output_dir: Path, layers: int) -> lis
         for mode, allocation, refiner, equalizer in groups:
             values = []
             for snr in snr_values:
-                selected = [
-                    float(row[metric])
-                    for row in rows
-                    if row["adaptation_mode"] == mode
-                    and row.get("allocation_mode", "uniform") == allocation
-                    and row.get("refiner_mode", "no_refiner") == refiner
-                    and row.get("equalizer", "estimated") == equalizer
-                    and float(row["snr_db"]) == snr
-                ]
-                values.append(sum(selected) / len(selected))
+                selected = []
+                for row in rows:
+                    if (
+                        row["adaptation_mode"] == mode
+                        and row.get("allocation_mode", "uniform") == allocation
+                        and row.get("refiner_mode", "no_refiner") == refiner
+                        and row.get("equalizer", "estimated") == equalizer
+                        and float(row["snr_db"]) == snr
+                        and row.get(metric) not in {"", None}
+                    ):
+                        selected.append(float(row[metric]))
+                values.append(sum(selected) / len(selected) if selected else float("nan"))
             axis.plot(
                 snr_values,
                 values,
