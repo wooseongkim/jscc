@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Any
 
 import torch
 from torch import Tensor
@@ -46,6 +47,7 @@ class PairedEvaluationBatch:
     signal_fading: Tensor
     jammer_fading: Tensor
     jammer_mask: Tensor
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 def _complex_normal(
@@ -76,6 +78,11 @@ def generate_paired_evaluation_batch(
     seed: int,
     device: torch.device,
     fading: str = "auto",
+    num_taps: int = 6,
+    pdp_decay: float = 0.7,
+    channel_estimator: str = "auto",
+    estimator_num_taps: int | None = None,
+    estimator_ridge_lambda: float = 1.0e-6,
     waveform: Tensor | None = None,
     representation: Tensor | None = None,
 ) -> PairedEvaluationBatch:
@@ -126,9 +133,28 @@ def generate_paired_evaluation_batch(
         torch.zeros_like(reference),
         snr_values,
         fading=fading,
+        num_taps=num_taps,
+        pdp_decay=pdp_decay,
         noise=torch.zeros_like(reference),
         generator=generator,
     )
+    metadata: dict[str, Any] = {
+        "fading": realization.get("fading_model", fading),
+        "num_taps": int(num_taps),
+        "pdp_decay": float(pdp_decay),
+        "pdp": realization.get("pdp"),
+        "block_fading_over_time": bool(realization.get("block_fading_over_time", False)),
+        "assume_ideal_cp": bool(realization.get("assume_ideal_cp", False)),
+        "channel_estimator": channel_estimator,
+        "estimator_num_taps": int(estimator_num_taps or num_taps),
+        "estimator_ridge_lambda": float(estimator_ridge_lambda),
+        "snr_reference": "transmit_power",
+        "jammer_channel": (
+            "independent_multipath"
+            if realization.get("fading_model", fading) == "multipath_block"
+            else "independent_rayleigh"
+        ),
+    }
     return PairedEvaluationBatch(
         seed=seed,
         jammer_type=jammer_type,
@@ -144,6 +170,7 @@ def generate_paired_evaluation_batch(
         signal_fading=realization["signal_fading"],
         jammer_fading=realization["jammer_fading"],
         jammer_mask=jammer_mask,
+        metadata=metadata,
     )
 
 
@@ -194,6 +221,9 @@ def estimate_transmitter_feedback(
     *,
     transmitter_csi: bool = True,
     fading: str = "auto",
+    channel_estimator: str = "auto",
+    estimator_num_taps: int | None = None,
+    estimator_ridge_lambda: float = 1.0e-6,
 ) -> dict[str, Tensor]:
     """Measure mode-independent state and resource reliability from shared pilots."""
     mask_dimensions = tuple(range(1, batch.jammer_mask.ndim))
@@ -217,7 +247,15 @@ def estimate_transmitter_feedback(
         jammer_fading=batch.jammer_fading,
         noise=batch.noise,
     )
-    estimated_channel = estimate_channel_ls(channel["received"], pilots, batch.pilot_mask)
+    estimated_channel = estimate_channel_ls(
+        channel["received"],
+        pilots,
+        batch.pilot_mask,
+        fading=fading,
+        channel_estimator=channel_estimator,
+        estimator_num_taps=estimator_num_taps or batch.metadata.get("estimator_num_taps"),
+        estimator_ridge_lambda=estimator_ridge_lambda,
+    )
     state = _state_from_channel(
         batch,
         transmitted,
@@ -252,9 +290,17 @@ def estimate_transmitter_channel_state(
     *,
     transmitter_csi: bool = True,
     fading: str = "auto",
+    channel_estimator: str = "auto",
+    estimator_num_taps: int | None = None,
+    estimator_ridge_lambda: float = 1.0e-6,
 ) -> Tensor:
     return estimate_transmitter_feedback(
-        batch, transmitter_csi=transmitter_csi, fading=fading
+        batch,
+        transmitter_csi=transmitter_csi,
+        fading=fading,
+        channel_estimator=channel_estimator,
+        estimator_num_taps=estimator_num_taps,
+        estimator_ridge_lambda=estimator_ridge_lambda,
     )["state"]
 
 
@@ -267,6 +313,9 @@ def run_mode_on_paired_batch(
     *,
     equalizer: str = "estimated",
     fading: str = "auto",
+    channel_estimator: str = "auto",
+    estimator_num_taps: int | None = None,
+    estimator_ridge_lambda: float = 1.0e-6,
     allocation_mode: str = "uniform",
     importance_order: tuple[int, ...] | list[int] | None = None,
     resource_reliability: Tensor | None = None,
@@ -304,7 +353,15 @@ def run_mode_on_paired_batch(
         jammer_fading=batch.jammer_fading,
         noise=batch.noise,
     )
-    estimated_channel = estimate_channel_ls(channel["received"], pilots, batch.pilot_mask)
+    estimated_channel = estimate_channel_ls(
+        channel["received"],
+        pilots,
+        batch.pilot_mask,
+        fading=fading,
+        channel_estimator=channel_estimator,
+        estimator_num_taps=estimator_num_taps or batch.metadata.get("estimator_num_taps"),
+        estimator_ridge_lambda=estimator_ridge_lambda,
+    )
     equalizer_channel = batch.signal_fading if equalizer == "oracle" else estimated_channel
     equalized = equalize_with_csi(channel["received"], equalizer_channel)
     post_equalization_sinr = _post_equalization_sinr(
@@ -347,9 +404,7 @@ def run_mode_on_paired_batch(
         "decoder_state": receiver_state,
         "decoded_waveform": decoded_waveform,
         "csi_nmse": csi_nmse(batch.signal_fading, estimated_channel),
-        "pilot_evm": pilot_evm(
-            channel["received"], pilots, batch.pilot_mask, batch.signal_fading
-        ),
+        "pilot_evm": pilot_evm(channel["received"], pilots, batch.pilot_mask, estimated_channel),
         "layer_gates": encoder_aux["layer_gates"],
         "layer_power_fractions": encoder_aux["layer_power_fractions"],
     }

@@ -29,7 +29,7 @@ speechtokenizer = [
 where = ["src"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 testpaths = ["tests"]
 markers = [
   "slow: tests that exercise large optional models or long CPU paths",

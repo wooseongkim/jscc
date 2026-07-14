@@ -28,6 +28,7 @@ from channels.reliability import estimate_unreliable_mask
 from models.channel_state import SINR_INDEX
 from models.learned_gate import LearnedLayerGate, load_learned_gate_checkpoint
 from models.latent_refiner import LatentRefiner, load_latent_refiner_checkpoint
+from speech_jscc.layer_importance import resolve_layer_importance_config
 
 
 def rule_based_layer_gates(
@@ -220,6 +221,7 @@ def evaluate_paired_condition(
             "stoi_error": [],
             "effective_sinr": [],
             "measured_jsr": [],
+            "post_channel_jsr": [],
             "active_layers": [],
             "mask_ratio": [],
             "csi_nmse": [],
@@ -231,7 +233,10 @@ def evaluate_paired_condition(
         for key in keys
     }
     channel_shape = tuple(model.encoder.channel_shape)
-    fading = "flat" if len(channel_shape) == 1 else "ofdm"
+    fading = channel_config.get("fading", "flat" if len(channel_shape) == 1 else "ofdm")
+    channel_estimator = channel_config.get("channel_estimator", "auto")
+    estimator_num_taps = channel_config.get("estimator_num_taps")
+    estimator_ridge_lambda = channel_config.get("estimator_ridge_lambda", 1e-6)
     with torch.no_grad():
         for batch_index in range(eval_config["batches"]):
             batch_size = eval_config["batch_size"]
@@ -258,6 +263,11 @@ def evaluate_paired_condition(
                 seed=seed_base + batch_index,
                 device=device,
                 fading=fading,
+                num_taps=channel_config.get("num_taps", 6),
+                pdp_decay=channel_config.get("pdp_decay", 0.7),
+                channel_estimator=channel_estimator,
+                estimator_num_taps=estimator_num_taps,
+                estimator_ridge_lambda=estimator_ridge_lambda,
                 waveform=waveform,
                 representation=representation,
             )
@@ -265,6 +275,9 @@ def evaluate_paired_condition(
                 paired_batch,
                 transmitter_csi=eval_config.get("transmitter_csi", True),
                 fading=fading,
+                channel_estimator=channel_estimator,
+                estimator_num_taps=estimator_num_taps,
+                estimator_ridge_lambda=estimator_ridge_lambda,
             )
             state = feedback["state"]
             reliability = feedback["reliability"]
@@ -285,6 +298,9 @@ def evaluate_paired_condition(
                         gates,
                         equalizer=equalizer,
                         fading=fading,
+                        channel_estimator=channel_estimator,
+                        estimator_num_taps=estimator_num_taps,
+                        estimator_ridge_lambda=estimator_ridge_lambda,
                         allocation_mode=allocation_mode,
                         importance_order=eval_config.get("layer_importance_order"),
                         resource_reliability=reliability,
@@ -371,6 +387,9 @@ def evaluate_paired_condition(
                         accumulator["measured_jsr"].append(
                             compute_jsr(result["transmitted"], result["jammer"], db=True).mean()
                         )
+                        accumulator["post_channel_jsr"].append(
+                            result["post_channel_jsr"].clamp_min(1e-12).log10().mul(10.0).mean()
+                        )
                         accumulator["active_layers"].append(gates.sum(dim=1).mean())
                         accumulator["mask_ratio"].append(result["jammer_mask"].float().mean())
                         accumulator["csi_nmse"].append(result["csi_nmse"].mean())
@@ -427,8 +446,13 @@ def evaluate_paired_condition(
             "stoi_error": stoi_error,
             "effective_sinr_db": torch.stack(accumulator["effective_sinr"]).mean().item(),
             "measured_jsr_db": torch.stack(accumulator["measured_jsr"]).mean().item(),
+            "post_channel_jsr_db": torch.stack(accumulator["post_channel_jsr"]).mean().item(),
             "csi_nmse": torch.stack(accumulator["csi_nmse"]).mean().item(),
             "pilot_evm": torch.stack(accumulator["pilot_evm"]).mean().item(),
+            "fading_model": channel_config.get("fading", "flat" if len(channel_shape) == 1 else "ofdm"),
+            "channel_estimator": channel_config.get("channel_estimator", "auto"),
+            "estimator_num_taps": channel_config.get("estimator_num_taps", ""),
+            "estimator_ridge_lambda": channel_config.get("estimator_ridge_lambda", ""),
             "mean_active_layers": torch.stack(accumulator["active_layers"]).mean().item(),
             "jammer_mask_ratio": torch.stack(accumulator["mask_ratio"]).mean().item(),
             "pesq_placeholder": "",
@@ -557,6 +581,26 @@ def main() -> None:
     random.seed(config["seed"])
     device = resolve_device(config["device"])
     codec, model = build_components(config, device)
+    resolved_importance = resolve_layer_importance_config(
+        config,
+        section="eval",
+        expected_representation_shape=codec.representation_shape,
+    )
+    if resolved_importance.artifact_path is not None:
+        eval_config = config["eval"]
+        if resolved_importance.layer_weights is not None:
+            eval_config["layer_weights"] = resolved_importance.layer_weights
+        if resolved_importance.layer_importance_order is not None:
+            eval_config["layer_importance_order"] = resolved_importance.layer_importance_order
+        if resolved_importance.base_layers is not None:
+            eval_config["base_layers"] = resolved_importance.base_layers
+        print(
+            "layer_importance_artifact="
+            f"{resolved_importance.artifact_path} hash={resolved_importance.artifact_hash} "
+            f"weights={eval_config.get('layer_weights')} "
+            f"order={eval_config.get('layer_importance_order')} "
+            f"base_layers={eval_config.get('base_layers')}"
+        )
     checkpoint = Path(args.checkpoint or config["eval"]["checkpoint"])
     learned_gate = _load_checkpoint(checkpoint, model, config, device, codec)
     latent_refiner = _load_refiner(checkpoint, device)

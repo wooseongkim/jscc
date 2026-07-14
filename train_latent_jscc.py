@@ -34,6 +34,7 @@ from speech_jscc.data import (
     synthetic_waveforms,
 )
 from speech_jscc.experiment import build_components
+from speech_jscc.layer_importance import resolve_layer_importance_config
 
 
 def _validate_range(name: str, bounds: list[float]) -> tuple[float, float]:
@@ -199,6 +200,9 @@ def joint_learned_gate_step(
     importance_order: list[int] | tuple[int, ...] | None = None,
     unreliable_fraction: float = 0.25,
     latent_normalization: str | dict[str, Any] = "none",
+    channel_estimator: str = "auto",
+    estimator_num_taps: int | None = None,
+    estimator_ridge_lambda: float = 1.0e-6,
 ) -> dict[str, Tensor]:
     """Run one joint JSCC/gate update on a fixed channel realization."""
     channel_shape = tuple(model.encoder.channel_shape)
@@ -207,6 +211,9 @@ def joint_learned_gate_step(
         paired_batch,
         transmitter_csi=transmitter_csi,
         fading=fading,
+        channel_estimator=channel_estimator,
+        estimator_num_taps=estimator_num_taps,
+        estimator_ridge_lambda=estimator_ridge_lambda,
     )
     transmitter_state = feedback["state"].detach()
     reliability = feedback["reliability"].detach()
@@ -219,6 +226,9 @@ def joint_learned_gate_step(
         alpha,
         equalizer="estimated",
         fading=fading,
+        channel_estimator=channel_estimator,
+        estimator_num_taps=estimator_num_taps,
+        estimator_ridge_lambda=estimator_ridge_lambda,
         allocation_mode=allocation_mode,
         importance_order=importance_order,
         resource_reliability=reliability,
@@ -348,6 +358,25 @@ def main() -> None:
             raise RuntimeError("SpeechTokenizer must remain frozen during JSCC training")
 
     train_config = config["train"]
+    resolved_importance = resolve_layer_importance_config(
+        config,
+        section="train",
+        expected_representation_shape=codec.representation_shape,
+    )
+    if resolved_importance.artifact_path is not None:
+        if resolved_importance.layer_weights is not None:
+            train_config["layer_weights"] = resolved_importance.layer_weights
+        if resolved_importance.layer_importance_order is not None:
+            train_config["layer_importance_order"] = resolved_importance.layer_importance_order
+        if resolved_importance.base_layers is not None:
+            train_config["base_layers"] = resolved_importance.base_layers
+        print(
+            "layer_importance_artifact="
+            f"{resolved_importance.artifact_path} hash={resolved_importance.artifact_hash} "
+            f"weights={train_config.get('layer_weights')} "
+            f"order={train_config.get('layer_importance_order')} "
+            f"base_layers={train_config.get('base_layers')}"
+        )
     channel_config = config["channel"]
     layer_weights = torch.tensor(train_config["layer_weights"], device=device, dtype=torch.float32)
     if layer_weights.shape != (config["model"]["layers"],):
@@ -385,7 +414,9 @@ def main() -> None:
             jsr_value = sample_uniform_db(1, jsr_range, device).item()
             jammer_type = sample_jammer_type(probabilities)
             channel_shape = tuple(model.encoder.channel_shape)
-            fading = "flat" if len(channel_shape) == 1 else "ofdm"
+            fading = channel_config.get(
+                "fading", "flat" if len(channel_shape) == 1 else "ofdm"
+            )
             paired_batch = generate_paired_evaluation_batch(
                 codec,
                 batch_size=batch_size,
@@ -401,6 +432,11 @@ def main() -> None:
                 seed=config["seed"] + step,
                 device=device,
                 fading=fading,
+                num_taps=channel_config.get("num_taps", 6),
+                pdp_decay=channel_config.get("pdp_decay", 0.7),
+                channel_estimator=channel_config.get("channel_estimator", "auto"),
+                estimator_num_taps=channel_config.get("estimator_num_taps"),
+                estimator_ridge_lambda=channel_config.get("estimator_ridge_lambda", 1e-6),
                 waveform=waveform,
                 representation=target,
             )
@@ -418,6 +454,9 @@ def main() -> None:
                 power_penalty_weight=train_config["power_penalty_weight"],
                 gradient_clip_norm=train_config.get("gradient_clip_norm"),
                 transmitter_csi=train_config.get("transmitter_csi", True),
+                channel_estimator=channel_config.get("channel_estimator", "auto"),
+                estimator_num_taps=channel_config.get("estimator_num_taps"),
+                estimator_ridge_lambda=channel_config.get("estimator_ridge_lambda", 1e-6),
                 refiner_mask_mode=train_config.get("refiner_mask_mode", "estimated"),
                 allocation_mode=train_config.get("allocation_mode", "reliability_greedy"),
                 importance_order=train_config.get("layer_importance_order"),
@@ -474,6 +513,11 @@ def main() -> None:
                         seed=config["seed"] + 1_000_000 + step,
                         device=device,
                         fading=fading,
+                        num_taps=channel_config.get("num_taps", 6),
+                        pdp_decay=channel_config.get("pdp_decay", 0.7),
+                        channel_estimator=channel_config.get("channel_estimator", "auto"),
+                        estimator_num_taps=channel_config.get("estimator_num_taps"),
+                        estimator_ridge_lambda=channel_config.get("estimator_ridge_lambda", 1e-6),
                         waveform=val_waveform,
                         representation=val_target,
                     )
@@ -491,6 +535,9 @@ def main() -> None:
                             lambda_refine=train_config["lambda_refine"],
                             power_penalty_weight=train_config["power_penalty_weight"],
                             transmitter_csi=train_config.get("transmitter_csi", True),
+                            channel_estimator=channel_config.get("channel_estimator", "auto"),
+                            estimator_num_taps=channel_config.get("estimator_num_taps"),
+                            estimator_ridge_lambda=channel_config.get("estimator_ridge_lambda", 1e-6),
                             refiner_mask_mode=train_config.get("refiner_mask_mode", "estimated"),
                             allocation_mode=train_config.get("allocation_mode", "reliability_greedy"),
                             importance_order=train_config.get("layer_importance_order"),
@@ -523,6 +570,16 @@ def main() -> None:
         codec,
         representation_source=source.description,
     )
+    if resolved_importance.artifact_path is not None:
+        metadata["layer_importance"] = {
+            "path": resolved_importance.artifact_path,
+            "artifact_hash": resolved_importance.artifact_hash,
+            "layer_weights_mean_one": resolved_importance.artifact.layer_weights_mean_one
+            if resolved_importance.artifact is not None
+            else None,
+            "layer_importance_order": resolved_importance.layer_importance_order,
+            "base_layers": resolved_importance.base_layers,
+        }
     torch.save(
         {
             "model": model.state_dict(),

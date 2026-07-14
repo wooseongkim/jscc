@@ -85,6 +85,192 @@ def interpolate_pilot_estimates(sparse_estimate: Tensor, pilot_mask: Tensor) -> 
     return output
 
 
+def _interp_frequency(values: Tensor, pilot_indices: Tensor, subcarriers: int) -> Tensor:
+    if pilot_indices.numel() < 1:
+        raise ValueError("at least one unique pilot subcarrier is required")
+    if pilot_indices.numel() == 1:
+        return values[0].expand(subcarriers)
+    order = pilot_indices.argsort()
+    xp = pilot_indices[order]
+    fp = values[order]
+    grid = torch.arange(subcarriers, device=values.device, dtype=xp.dtype)
+    right = torch.searchsorted(xp, grid, right=False).clamp(max=xp.numel() - 1)
+    left = (right - 1).clamp(min=0)
+    left_edge = grid <= xp[0]
+    right_edge = grid >= xp[-1]
+    left = torch.where(left_edge, torch.zeros_like(left), left)
+    right = torch.where(left_edge, torch.zeros_like(right), right)
+    left = torch.where(right_edge, torch.full_like(left, xp.numel() - 1), left)
+    right = torch.where(right_edge, torch.full_like(right, xp.numel() - 1), right)
+    x0 = xp[left].to(values.real.dtype)
+    x1 = xp[right].to(values.real.dtype)
+    weight = ((grid.to(values.real.dtype) - x0) / (x1 - x0).clamp_min(1.0)).clamp(0.0, 1.0)
+    return fp[left] * (1.0 - weight) + fp[right] * weight
+
+
+def estimate_ofdm_block_ls(
+    received: Tensor,
+    pilots: Tensor,
+    pilot_mask: Tensor,
+    eps: float = 1e-12,
+) -> Tensor:
+    """Estimate block-fading OFDM CSI by averaging pilots over time.
+
+    The estimator computes LS values at pilot positions, averages repeated
+    observations for each pilot subcarrier over OFDM symbols, interpolates
+    missing subcarriers along frequency, and expands the result across time.
+    It does not access oracle channel coefficients.
+    """
+    if received.ndim != 3 or received.shape != pilots.shape:
+        raise ValueError("block OFDM LS requires matching [B,K,N] received and pilot tensors")
+    mask = torch.broadcast_to(pilot_mask.to(received.device, torch.bool), received.shape)
+    if torch.any(mask.sum(dim=(1, 2)) == 0):
+        raise ValueError("every batch item requires at least one pilot")
+    if not torch.isfinite(received).all() or not torch.isfinite(pilots).all():
+        raise ValueError("received and pilots must be finite")
+    batch, subcarriers, symbols = received.shape
+    response = torch.empty((batch, subcarriers), device=received.device, dtype=received.dtype)
+    for batch_index in range(batch):
+        pilot_subcarriers = torch.nonzero(mask[batch_index].any(dim=1), as_tuple=False).flatten()
+        if pilot_subcarriers.numel() < 1:
+            raise ValueError("every batch item requires at least one unique pilot subcarrier")
+        averaged = []
+        for subcarrier in pilot_subcarriers:
+            time_mask = mask[batch_index, subcarrier]
+            pilot_values = pilots[batch_index, subcarrier, time_mask]
+            received_values = received[batch_index, subcarrier, time_mask]
+            safe = torch.where(
+                pilot_values.abs() > eps,
+                pilot_values,
+                torch.full_like(pilot_values, eps),
+            )
+            averaged.append((received_values / safe).mean())
+        response[batch_index] = _interp_frequency(
+            torch.stack(averaged),
+            pilot_subcarriers.to(received.device),
+            subcarriers,
+        )
+    return response[:, :, None].expand(batch, subcarriers, symbols)
+
+
+def dft_tap_matrix(
+    pilot_subcarriers: Tensor,
+    num_taps: int,
+    subcarriers: int,
+    *,
+    dtype: torch.dtype,
+    device: torch.device,
+) -> Tensor:
+    """Partial forward-FFT DFT matrix matching `torch.fft.fft(taps, n=K)`."""
+    if int(num_taps) < 1:
+        raise ValueError("num_taps must be at least 1")
+    if int(num_taps) > int(subcarriers):
+        raise ValueError("num_taps must not exceed the number of subcarriers")
+    real_dtype = torch.float64 if dtype == torch.complex128 else torch.float32
+    k = pilot_subcarriers.to(device=device, dtype=real_dtype)[:, None]
+    l = torch.arange(int(num_taps), device=device, dtype=real_dtype)[None, :]
+    phase = -2.0 * torch.pi * k * l / float(subcarriers)
+    return torch.exp(torch.complex(torch.zeros_like(phase), phase)).to(dtype=dtype)
+
+
+def estimate_ofdm_dft_tap_ls(
+    received: Tensor,
+    pilots: Tensor,
+    pilot_mask: Tensor,
+    num_taps: int,
+    ridge_lambda: float = 1.0e-6,
+    return_diagnostics: bool = False,
+    eps: float = 1e-12,
+) -> Tensor | tuple[Tensor, dict[str, Tensor | float]]:
+    """Estimate finite TDL taps from sparse OFDM pilots using ridge LS.
+
+    Solves `(F_P^H F_P + lambda I) h = F_P^H H_bar_P`, where `F_P` uses the
+    same forward FFT convention as `torch.fft.fft(taps, n=K)`.
+    """
+    if not torch.is_complex(received) or not torch.is_complex(pilots):
+        raise ValueError("received and pilots must be complex tensors")
+    if received.ndim != 3 or received.shape != pilots.shape:
+        raise ValueError("DFT tap LS requires matching [B,K,N] received and pilot tensors")
+    if int(num_taps) < 1:
+        raise ValueError("num_taps must be at least 1")
+    if float(ridge_lambda) < 0.0:
+        raise ValueError("ridge_lambda must be nonnegative")
+    mask = torch.broadcast_to(pilot_mask.to(received.device, torch.bool), received.shape)
+    batch, subcarriers, symbols = received.shape
+    if int(num_taps) > subcarriers:
+        raise ValueError("num_taps must not exceed the number of subcarriers")
+    if torch.any(mask.sum(dim=(1, 2)) == 0):
+        raise ValueError("every batch item requires at least one pilot")
+    if not torch.isfinite(received).all() or not torch.isfinite(pilots).all():
+        raise ValueError("received and pilots must be finite")
+
+    unique_mask = mask.any(dim=(0, 2))
+    pilot_subcarriers = torch.nonzero(unique_mask, as_tuple=False).flatten()
+    if pilot_subcarriers.numel() < int(num_taps):
+        raise ValueError("DFT tap LS requires at least num_taps unique pilot subcarriers")
+    counts = mask[:, pilot_subcarriers, :].sum(dim=2)
+    if torch.any(counts == 0):
+        raise ValueError("every selected pilot subcarrier requires at least one observation")
+    observations = []
+    for subcarrier in pilot_subcarriers:
+        time_mask = mask[:, subcarrier, :]
+        pilot_values = pilots[:, subcarrier, :]
+        received_values = received[:, subcarrier, :]
+        safe = torch.where(
+            pilot_values.abs() > eps,
+            pilot_values,
+            torch.full_like(pilot_values, eps),
+        )
+        ls_values = received_values / safe
+        summed = (ls_values * time_mask).sum(dim=1)
+        count = time_mask.sum(dim=1).clamp_min(1)
+        observations.append(summed / count.to(received.real.dtype))
+    h_bar = torch.stack(observations, dim=1)
+
+    matrix = dft_tap_matrix(
+        pilot_subcarriers,
+        int(num_taps),
+        subcarriers,
+        dtype=received.dtype,
+        device=received.device,
+    )
+    rank = torch.linalg.matrix_rank(matrix)
+    condition_number = torch.linalg.cond(matrix)
+    if float(ridge_lambda) == 0.0 and (
+        int(rank.item()) < int(num_taps) or float(condition_number.detach().cpu().item()) > 1e6
+    ):
+        raise ValueError("DFT pilot matrix is rank deficient or ill-conditioned with ridge_lambda=0")
+    gram = matrix.conj().transpose(0, 1) @ matrix
+    rhs = h_bar @ matrix.conj()
+    identity = torch.eye(int(num_taps), device=received.device, dtype=received.dtype)
+    regularized = gram + float(ridge_lambda) * identity
+    taps = torch.linalg.solve(regularized[None, :, :].expand(batch, -1, -1), rhs[:, :, None]).squeeze(-1)
+    full_matrix = dft_tap_matrix(
+        torch.arange(subcarriers, device=received.device),
+        int(num_taps),
+        subcarriers,
+        dtype=received.dtype,
+        device=received.device,
+    )
+    response_1d = taps @ full_matrix.transpose(0, 1)
+    estimate = response_1d[:, :, None].expand(batch, subcarriers, symbols)
+    if not torch.isfinite(estimate).all():
+        raise ValueError("DFT tap LS produced non-finite channel estimates")
+    if not return_diagnostics:
+        return estimate
+    diagnostics: dict[str, Tensor | float] = {
+        "estimated_taps": taps,
+        "unique_pilot_subcarriers": pilot_subcarriers,
+        "pilot_observation_count_per_subcarrier": torch.zeros(
+            batch, subcarriers, device=received.device, dtype=torch.long
+        ),
+        "dft_matrix_condition_number": condition_number.detach(),
+        "ridge_lambda": float(ridge_lambda),
+    }
+    diagnostics["pilot_observation_count_per_subcarrier"][:, pilot_subcarriers] = counts
+    return estimate, diagnostics
+
+
 def estimate_ofdm_ls(received: Tensor, pilots: Tensor, pilot_mask: Tensor, eps: float = 1e-12) -> Tensor:
     """Estimate pilot positions by LS and interpolate all time-frequency resources."""
     if received.ndim != 3 or received.shape != pilots.shape:
@@ -103,11 +289,40 @@ def estimate_ofdm_ls(received: Tensor, pilots: Tensor, pilot_mask: Tensor, eps: 
     return interpolate_pilot_estimates(sparse, mask)
 
 
-def estimate_channel_ls(received: Tensor, pilots: Tensor, pilot_mask: Tensor) -> Tensor:
+def estimate_channel_ls(
+    received: Tensor,
+    pilots: Tensor,
+    pilot_mask: Tensor,
+    *,
+    fading: str = "auto",
+    channel_estimator: str = "auto",
+    estimator_num_taps: int | None = None,
+    estimator_ridge_lambda: float = 1.0e-6,
+) -> Tensor:
     """Dispatch block-flat or OFDM pilot LS estimation."""
+    if channel_estimator not in {"auto", "inverse_distance_2d", "block_frequency_ls", "dft_tap_ls"}:
+        raise ValueError(
+            "channel_estimator must be auto, inverse_distance_2d, block_frequency_ls, or dft_tap_ls"
+        )
     if received.ndim == 2:
+        if channel_estimator != "auto":
+            raise ValueError("flat channels only support the auto/flat LS estimator")
         return estimate_flat_ls(received, pilots, pilot_mask)
     if received.ndim == 3:
+        if channel_estimator == "dft_tap_ls":
+            if estimator_num_taps is None:
+                raise ValueError("dft_tap_ls requires estimator_num_taps")
+            return estimate_ofdm_dft_tap_ls(
+                received,
+                pilots,
+                pilot_mask,
+                int(estimator_num_taps),
+                float(estimator_ridge_lambda),
+            )
+        if channel_estimator == "block_frequency_ls" or (
+            channel_estimator == "auto" and fading == "multipath_block"
+        ):
+            return estimate_ofdm_block_ls(received, pilots, pilot_mask)
         return estimate_ofdm_ls(received, pilots, pilot_mask)
     raise ValueError("received must be [B,M] or [B,K,N]")
 
@@ -162,7 +377,9 @@ __all__ = [
     "csi_nmse",
     "equalize_with_csi",
     "estimate_channel_ls",
+    "estimate_ofdm_dft_tap_ls",
     "estimate_flat_ls",
+    "estimate_ofdm_block_ls",
     "estimate_ofdm_ls",
     "insert_pilots",
     "interpolate_pilot_estimates",
@@ -170,4 +387,3 @@ __all__ = [
     "pilot_evm",
     "remove_pilot_resources",
 ]
-

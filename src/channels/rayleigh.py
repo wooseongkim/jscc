@@ -5,6 +5,8 @@ import math
 import torch
 from torch import Tensor, nn
 
+from channels.multipath import multipath_block_fading
+
 
 def _real_dtype(dtype: torch.dtype) -> torch.dtype:
     return torch.float64 if dtype == torch.complex128 else torch.float32
@@ -46,7 +48,12 @@ def _fading_shape(signal: Tensor, fading: str) -> tuple[int, ...]:
         return (signal.shape[0],) + (1,) * (signal.ndim - 1)
     if fading == "ofdm" and signal.ndim == 3:
         return tuple(signal.shape)
-    raise ValueError("fading must be 'auto', 'flat', or 'ofdm' (OFDM requires [B, K, N])")
+    if fading == "multipath_block" and signal.ndim == 3:
+        return tuple(signal.shape)
+    raise ValueError(
+        "fading must be 'auto', 'flat', 'ofdm', or 'multipath_block' "
+        "(OFDM modes require [B, K, N])"
+    )
 
 
 def compute_effective_sinr(
@@ -70,6 +77,23 @@ def compute_effective_sinr(
     return 10.0 * torch.log10(ratio.clamp_min(eps)) if db else ratio
 
 
+def post_channel_jsr(
+    faded_signal: Tensor,
+    faded_jammer: Tensor,
+    *,
+    db: bool = False,
+    eps: float = 1e-12,
+) -> Tensor:
+    """Return realized post-channel JSR from faded signal and jammer powers."""
+    if faded_signal.shape != faded_jammer.shape:
+        raise ValueError("faded signal and jammer must have matching shapes")
+    dimensions = tuple(range(1, faded_signal.ndim))
+    ratio = faded_jammer.abs().square().mean(dimensions) / faded_signal.abs().square().mean(
+        dimensions
+    ).clamp_min(eps)
+    return 10.0 * torch.log10(ratio.clamp_min(eps)) if db else ratio
+
+
 def rayleigh_channel(
     transmitted: Tensor,
     jammer: Tensor | None = None,
@@ -81,6 +105,8 @@ def rayleigh_channel(
     noise: Tensor | None = None,
     generator: torch.Generator | None = None,
     equalizer_epsilon: float = 1e-6,
+    num_taps: int = 6,
+    pdp_decay: float = 0.7,
 ) -> dict[str, Tensor]:
     """Apply Rayleigh fading, optional jamming, and complex AWGN.
 
@@ -95,11 +121,34 @@ def rayleigh_channel(
         jammer = torch.zeros_like(transmitted)
     if jammer.shape != transmitted.shape or not torch.is_complex(jammer):
         raise ValueError("jammer must be a matching complex tensor")
+    if fading == "auto":
+        fading = "flat" if transmitted.ndim == 2 else "ofdm"
     coefficient_shape = _fading_shape(transmitted, fading)
-    if signal_fading is None:
-        signal_fading = _complex_normal(coefficient_shape, transmitted, generator)
-    if jammer_fading is None:
-        jammer_fading = _complex_normal(coefficient_shape, transmitted, generator)
+    diagnostics: dict[str, Tensor | str | bool] = {"fading_model": fading}
+    if fading == "multipath_block" and (signal_fading is None or jammer_fading is None):
+        multipath = multipath_block_fading(
+            batch_size=transmitted.shape[0],
+            subcarriers=transmitted.shape[1],
+            ofdm_symbols=transmitted.shape[2],
+            num_taps=num_taps,
+            pdp_decay=pdp_decay,
+            reference=transmitted,
+            generator=generator,
+        )
+        if signal_fading is None:
+            signal_fading = multipath["signal_fading"]
+            diagnostics["signal_taps"] = multipath["signal_taps"]
+        if jammer_fading is None:
+            jammer_fading = multipath["jammer_fading"]
+            diagnostics["jammer_taps"] = multipath["jammer_taps"]
+        diagnostics["pdp"] = multipath["pdp"]
+        diagnostics["block_fading_over_time"] = True
+        diagnostics["assume_ideal_cp"] = True
+    else:
+        if signal_fading is None:
+            signal_fading = _complex_normal(coefficient_shape, transmitted, generator)
+        if jammer_fading is None:
+            jammer_fading = _complex_normal(coefficient_shape, transmitted, generator)
     try:
         torch.broadcast_shapes(tuple(transmitted.shape), tuple(signal_fading.shape))
         torch.broadcast_shapes(tuple(transmitted.shape), tuple(jammer_fading.shape))
@@ -134,16 +183,27 @@ def rayleigh_channel(
         "noise": noise,
         "noise_power": noise_power,
         "effective_sinr": effective_sinr,
+        "post_channel_jsr": post_channel_jsr(faded_signal, faded_jammer),
+        **diagnostics,
     }
 
 
 class RayleighChannel(nn.Module):
     """Module wrapper around :func:`rayleigh_channel`."""
 
-    def __init__(self, fading: str = "auto", equalizer_epsilon: float = 1e-6):
+    def __init__(
+        self,
+        fading: str = "auto",
+        equalizer_epsilon: float = 1e-6,
+        *,
+        num_taps: int = 6,
+        pdp_decay: float = 0.7,
+    ):
         super().__init__()
         self.fading = fading
         self.equalizer_epsilon = equalizer_epsilon
+        self.num_taps = int(num_taps)
+        self.pdp_decay = float(pdp_decay)
 
     def forward(
         self,
@@ -157,4 +217,6 @@ class RayleighChannel(nn.Module):
             snr_db,
             fading=self.fading,
             equalizer_epsilon=self.equalizer_epsilon,
+            num_taps=self.num_taps,
+            pdp_decay=self.pdp_decay,
         )

@@ -59,7 +59,7 @@ def run_batch(codec, model, config: dict, batch_size: int, device: torch.device,
     kinds = channel_cfg.get("jammer_types") or list(channel_cfg["jammer_probabilities"])
     kind = jammer_kind or kinds[0]
     channel_shape = tuple(model.encoder.channel_shape)
-    fading = "flat" if len(channel_shape) == 1 else "ofdm"
+    fading = channel_cfg.get("fading", "flat" if len(channel_shape) == 1 else "ofdm")
     paired = generate_paired_evaluation_batch(
         codec,
         batch_size=batch_size,
@@ -75,11 +75,31 @@ def run_batch(codec, model, config: dict, batch_size: int, device: torch.device,
         seed=config["seed"],
         device=device,
         fading=fading,
+        num_taps=channel_cfg.get("num_taps", 6),
+        pdp_decay=channel_cfg.get("pdp_decay", 0.7),
+        channel_estimator=channel_cfg.get("channel_estimator", "auto"),
+        estimator_num_taps=channel_cfg.get("estimator_num_taps"),
+        estimator_ridge_lambda=channel_cfg.get("estimator_ridge_lambda", 1e-6),
     )
-    channel_state = estimate_transmitter_channel_state(paired, fading=fading)
+    channel_state = estimate_transmitter_channel_state(
+        paired,
+        fading=fading,
+        channel_estimator=channel_cfg.get("channel_estimator", "auto"),
+        estimator_num_taps=channel_cfg.get("estimator_num_taps"),
+        estimator_ridge_lambda=channel_cfg.get("estimator_ridge_lambda", 1e-6),
+    )
     gates = channel_state.new_ones((batch_size, config["model"]["layers"]))
     result = run_mode_on_paired_batch(
-        codec, model, paired, channel_state, gates, equalizer="estimated", fading=fading
+        codec,
+        model,
+        paired,
+        channel_state,
+        gates,
+        equalizer="estimated",
+        fading=fading,
+        channel_estimator=channel_cfg.get("channel_estimator", "auto"),
+        estimator_num_taps=channel_cfg.get("estimator_num_taps"),
+        estimator_ridge_lambda=channel_cfg.get("estimator_ridge_lambda", 1e-6),
     )
     return {
         "waveform": paired.waveform,
