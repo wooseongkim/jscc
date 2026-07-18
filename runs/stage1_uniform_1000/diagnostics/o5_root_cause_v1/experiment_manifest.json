@@ -1,0 +1,14 @@
+{
+  "diagnostic_type": "o5_root_cause_fixed_realization",
+  "conditions": [
+    "clean_awgn_reference",
+    "data_only_barrage_estimated_csi",
+    "data_only_barrage_oracle_csi",
+    "full_barrage_estimated_csi",
+    "full_barrage_oracle_csi",
+    "full_barrage_oracle_subtraction",
+    "pilot_only_jammer_estimated_csi"
+  ],
+  "steps": 500,
+  "seed": 23
+}

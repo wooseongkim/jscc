@@ -1,0 +1,1 @@
+diagnose_o5_root_cause.py --config configs/train_stage1_fixed_tx_uniform.yaml --condition full_barrage_estimated_csi --steps 3 --seed 23 --output_dir runs/o5_smoke

@@ -1,0 +1,95 @@
+channel:
+  assume_ideal_cp: true
+  block_fading_over_time: true
+  channel_estimator: dft_tap_ls
+  clean_probability: 0.2
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-06
+  fading: multipath_block
+  jammed_fraction: 0.25
+  jammer_probabilities:
+    barrage: 0.4
+    burst: 0.25
+    narrowband: 0.25
+    pilot: 0.1
+  jsr_db_range:
+  - -10.0
+  - 8.0
+  num_taps: 6
+  pdp: exponential
+  pdp_decay: 0.7
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  snr_db_range:
+  - -2.0
+  - 15.0
+codec:
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  freeze: true
+  n_q: 8
+  sample_rate: 16000
+  type: speechtokenizer
+  waveform_samples: 16000
+data:
+  latent_cache_dir: artifacts/latent_cache/stage1_fixed_tx_speechtokenizer_1s
+  test_manifest: manifests/mini_librispeech/test.jsonl
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+device: auto
+model:
+  channel_state_dim: 8
+  channel_uses: 1920
+  frames: 50
+  grid_shape:
+  - 64
+  - 32
+  hidden_dim: 32
+  latent_dim: 1024
+  layers: 8
+  target_power: 1.0
+o5_diagnostic:
+  condition: pilot_only_jammer_estimated_csi
+  requested_jsr_db: 0.0
+seed: 23
+train:
+  allocation_mode: uniform
+  batch_size: 4
+  best_checkpoint_metric: val_weighted_latent_loss
+  checkpoint_best: artifacts/checkpoints/stage1_fixed_tx_uniform_best.pt
+  checkpoint_every: 1000
+  checkpoint_last: artifacts/checkpoints/stage1_fixed_tx_uniform_last.pt
+  early_stopping_patience: 10
+  equalizer: estimated
+  gate_mode: all_ones
+  gradient_clip_norm: 5.0
+  latent_normalization:
+    epsilon: 1.0e-06
+    mode: per_layer_power
+  layer_weights:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  learning_rate: 0.0001
+  log_every: 50
+  metrics_jsonl: artifacts/logs/stage1_fixed_tx_uniform_metrics.jsonl
+  optimizer: adam
+  power_mode: uniform
+  receiver_state_mode: observable_v1
+  reconstruction_dir: artifacts/reconstructions/stage1_fixed_tx_uniform
+  reconstruction_every: 1000
+  reconstruction_examples: 2
+  steps: 20000
+  training_stage: stage1_fixed_tx
+  transmitter_state_mode: neutral
+  use_jammer_estimator: false
+  use_learned_gate: false
+  use_refiner: false
+  val_batch_size: 4
+  validate_every: 500
+  weight_decay: 0.0

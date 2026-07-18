@@ -1,0 +1,79 @@
+{
+  "clean_awgn_reference": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "3ddd59719298a6b1149b77b0e15556f8ebf7b8651b1ddc6116a20821f86c5ae3",
+    "jammer_channel": "40f3b7d68dfb67ada97ca223c557d3339b7601e44e5f7ab39cf3f378100f97a9",
+    "awgn": "7ccc557f1f1f633d60dc47c8f494b82aa0cb80b8f6ac0b8c78f772e1a26e8525",
+    "raw_jammer_waveform": "c0ff05e49fbfe4adeb98e36a0ffb52a9897832c2a8bcdb13f7a524911378477f",
+    "jammer_mask": "86209fad0bbab7d71f9dbf1ef65f952a4b1541ec634fb0fee78a27a7a7b2b712",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2d9e9766583934257b0fab1c0b67c30b5550c5b79f1825a0f0b60a9949a9b6a6"
+  },
+  "data_only_barrage_estimated_csi": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "3ddd59719298a6b1149b77b0e15556f8ebf7b8651b1ddc6116a20821f86c5ae3",
+    "jammer_channel": "40f3b7d68dfb67ada97ca223c557d3339b7601e44e5f7ab39cf3f378100f97a9",
+    "awgn": "7ccc557f1f1f633d60dc47c8f494b82aa0cb80b8f6ac0b8c78f772e1a26e8525",
+    "raw_jammer_waveform": "fd937a20fa25a5d7d095a266f75bce576c1ea97641597a1f5e57e0c62cd04c45",
+    "jammer_mask": "9a874c204ebf16f5410eb60d93558f4decae25d714d6d8649a5ea5ef5b5d4a14",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2d9e9766583934257b0fab1c0b67c30b5550c5b79f1825a0f0b60a9949a9b6a6"
+  },
+  "data_only_barrage_oracle_csi": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "3ddd59719298a6b1149b77b0e15556f8ebf7b8651b1ddc6116a20821f86c5ae3",
+    "jammer_channel": "40f3b7d68dfb67ada97ca223c557d3339b7601e44e5f7ab39cf3f378100f97a9",
+    "awgn": "7ccc557f1f1f633d60dc47c8f494b82aa0cb80b8f6ac0b8c78f772e1a26e8525",
+    "raw_jammer_waveform": "fd937a20fa25a5d7d095a266f75bce576c1ea97641597a1f5e57e0c62cd04c45",
+    "jammer_mask": "9a874c204ebf16f5410eb60d93558f4decae25d714d6d8649a5ea5ef5b5d4a14",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2d9e9766583934257b0fab1c0b67c30b5550c5b79f1825a0f0b60a9949a9b6a6"
+  },
+  "full_barrage_estimated_csi": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "3ddd59719298a6b1149b77b0e15556f8ebf7b8651b1ddc6116a20821f86c5ae3",
+    "jammer_channel": "40f3b7d68dfb67ada97ca223c557d3339b7601e44e5f7ab39cf3f378100f97a9",
+    "awgn": "7ccc557f1f1f633d60dc47c8f494b82aa0cb80b8f6ac0b8c78f772e1a26e8525",
+    "raw_jammer_waveform": "e586dd1229000510130698e2b11da832f0a0eb1a368553a90c4c6e89353e6295",
+    "jammer_mask": "85074aa95911014688e2f7d40b65bb6188303b65c0285aef22678b0e75a461fb",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2d9e9766583934257b0fab1c0b67c30b5550c5b79f1825a0f0b60a9949a9b6a6"
+  },
+  "full_barrage_oracle_csi": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "3ddd59719298a6b1149b77b0e15556f8ebf7b8651b1ddc6116a20821f86c5ae3",
+    "jammer_channel": "40f3b7d68dfb67ada97ca223c557d3339b7601e44e5f7ab39cf3f378100f97a9",
+    "awgn": "7ccc557f1f1f633d60dc47c8f494b82aa0cb80b8f6ac0b8c78f772e1a26e8525",
+    "raw_jammer_waveform": "e586dd1229000510130698e2b11da832f0a0eb1a368553a90c4c6e89353e6295",
+    "jammer_mask": "85074aa95911014688e2f7d40b65bb6188303b65c0285aef22678b0e75a461fb",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2d9e9766583934257b0fab1c0b67c30b5550c5b79f1825a0f0b60a9949a9b6a6"
+  },
+  "full_barrage_oracle_subtraction": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "3ddd59719298a6b1149b77b0e15556f8ebf7b8651b1ddc6116a20821f86c5ae3",
+    "jammer_channel": "40f3b7d68dfb67ada97ca223c557d3339b7601e44e5f7ab39cf3f378100f97a9",
+    "awgn": "7ccc557f1f1f633d60dc47c8f494b82aa0cb80b8f6ac0b8c78f772e1a26e8525",
+    "raw_jammer_waveform": "e586dd1229000510130698e2b11da832f0a0eb1a368553a90c4c6e89353e6295",
+    "jammer_mask": "85074aa95911014688e2f7d40b65bb6188303b65c0285aef22678b0e75a461fb",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2d9e9766583934257b0fab1c0b67c30b5550c5b79f1825a0f0b60a9949a9b6a6"
+  },
+  "pilot_only_jammer_estimated_csi": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "3ddd59719298a6b1149b77b0e15556f8ebf7b8651b1ddc6116a20821f86c5ae3",
+    "jammer_channel": "40f3b7d68dfb67ada97ca223c557d3339b7601e44e5f7ab39cf3f378100f97a9",
+    "awgn": "7ccc557f1f1f633d60dc47c8f494b82aa0cb80b8f6ac0b8c78f772e1a26e8525",
+    "raw_jammer_waveform": "2ef8a858980226be9975faae2b0348bf862b1c1794b364edbc74d518f8104394",
+    "jammer_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2d9e9766583934257b0fab1c0b67c30b5550c5b79f1825a0f0b60a9949a9b6a6"
+  }
+}

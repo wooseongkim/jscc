@@ -1,0 +1,23 @@
+{
+  "condition": "full_barrage_estimated_csi",
+  "steps": 3,
+  "best_step": 3,
+  "final_loss": 1.0144847631454468,
+  "final_window_mean_loss": 1.0144847631454468,
+  "loss_slope": 0.0,
+  "power_ratio_slope": 0.0,
+  "correlation_slope": 0.0,
+  "plateau_status": "plateaued_failure",
+  "hashes": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "f7332165f9b66b5d63a6fed487902aa3ccbaba2c5d4834b5ff69cce9bf65d0cf",
+    "jammer_channel": "aca6a9bef811c452a7c2aa911fe0bf24a04442c431ed5104eebebec10db323be",
+    "awgn": "52d46ff81c30af13e91d7a35e9263f82525b7e24a7f5ae6f858c5514f963169b",
+    "raw_jammer_waveform": "5218d44b4d93a64f8094fce0daf693f3859866f9a2c57e2879ccaafca26d884a",
+    "jammer_mask": "85074aa95911014688e2f7d40b65bb6188303b65c0285aef22678b0e75a461fb",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_data_symbols_at_initialization": "2f4ce9133e8c0624ba6a8b5ef49ec6bf1cf51d956337c353567e0788cefb6b7b"
+  },
+  "diagnostic_only_oracle_jammer_subtraction": false
+}
