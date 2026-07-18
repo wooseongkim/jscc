@@ -41,6 +41,40 @@ def insert_pilots(
     return transmitted, pilots
 
 
+def insert_data_and_pilots(
+    data_symbols: Tensor,
+    pilot_mask: Tensor,
+    pilot_value: complex = 1.0 + 0.0j,
+) -> tuple[Tensor, Tensor]:
+    """Pack flat data only into non-pilot grid locations and fill reserved pilots."""
+    if not torch.is_complex(data_symbols) or data_symbols.ndim != 2:
+        raise ValueError("data_symbols must be complex [B,M_data]")
+    if pilot_mask.ndim != 3 or pilot_mask.shape[0] != data_symbols.shape[0]:
+        raise ValueError("pilot_mask must have shape [B,K,N]")
+    mask = pilot_mask.to(device=data_symbols.device, dtype=torch.bool)
+    data_counts = (~mask).flatten(1).sum(dim=1)
+    if torch.any(data_counts != data_symbols.shape[1]):
+        raise ValueError("data symbol count must equal non-pilot resource count")
+    grid = torch.empty(mask.shape, device=data_symbols.device, dtype=data_symbols.dtype)
+    for index in range(data_symbols.shape[0]):
+        grid[index][~mask[index]] = data_symbols[index]
+    pilots = torch.zeros_like(grid)
+    pilots[mask] = torch.as_tensor(pilot_value, dtype=grid.dtype, device=grid.device)
+    grid[mask] = pilots[mask]
+    return grid, pilots
+
+
+def extract_data_resources(resources: Tensor, pilot_mask: Tensor) -> Tensor:
+    """Recover flat data from non-pilot grid locations in stable row-major order."""
+    if not torch.is_complex(resources) or resources.ndim != 3:
+        raise ValueError("resources must be complex [B,K,N]")
+    mask = torch.broadcast_to(pilot_mask.to(resources.device, torch.bool), resources.shape)
+    counts = (~mask).flatten(1).sum(dim=1)
+    if torch.any(counts != counts[0]):
+        raise ValueError("every sample must have the same non-pilot resource count")
+    return torch.stack([resources[index][~mask[index]] for index in range(resources.shape[0])])
+
+
 def estimate_flat_ls(received: Tensor, pilots: Tensor, pilot_mask: Tensor, eps: float = 1e-12) -> Tensor:
     """Estimate one block-fading coefficient per example from known pilots."""
     if received.ndim != 2 or received.shape != pilots.shape:
@@ -382,6 +416,8 @@ __all__ = [
     "estimate_ofdm_block_ls",
     "estimate_ofdm_ls",
     "insert_pilots",
+    "insert_data_and_pilots",
+    "extract_data_resources",
     "interpolate_pilot_estimates",
     "make_pilot_mask",
     "pilot_evm",

@@ -15,6 +15,7 @@ from speech_jscc.checkpoint import (
     normalization_config,
     validate_checkpoint_metadata,
 )
+from speech_jscc.training.stage1 import validate_stage1_checkpoint_resources
 from speech_jscc.config import load_config, resolve_device
 from speech_jscc.data import CachedCodecDataset, codec_cache_namespace, resolve_waveform_splits
 from speech_jscc.experiment import build_components
@@ -65,8 +66,10 @@ def _load_checkpoint(
         model.metric_interpretation = "smoke_test_path_check"
         return None
     state = torch.load(checkpoint, map_location=device, weights_only=True)
-    model.load_state_dict(state["model"])
     metadata = state.get("metadata", {})
+    if (metadata.get("training_stage") or {}).get("name") == "stage1_fixed_tx":
+        validate_stage1_checkpoint_resources(state, model, config)
+    model.load_state_dict(state["model"], strict=True)
     if metadata:
         if codec is None:
             raise ValueError("codec is required to validate checkpoint metadata")
@@ -167,6 +170,10 @@ def evaluate_paired_condition(
     if layer_weights.shape != (layers,) or torch.any(layer_weights < 0) or layer_weights.sum() <= 0:
         raise ValueError("eval.layer_weights must contain L nonnegative values with positive sum")
     metadata = getattr(model, "checkpoint_metadata", {})
+    is_stage1_fixed_tx = (
+        metadata.get("training_stage", {}).get("label")
+        == "fixed_tx_channel_aware_rx_jammer_agnostic"
+    )
     normalization = metadata.get(
         "normalization", normalization_config(config, section="eval")
     )
@@ -196,8 +203,8 @@ def evaluate_paired_condition(
     if codec_name(config) == "speechtokenizer" and validation_dataset is None:
         metric_interpretation = "smoke_test_path_check"
 
-    allocation_modes = eval_config.get("allocation_modes", ["uniform"])
-    requested_refiner_modes = eval_config.get("refiner_modes", ["no_refiner"])
+    allocation_modes = ["uniform"] if is_stage1_fixed_tx else eval_config.get("allocation_modes", ["uniform"])
+    requested_refiner_modes = ["no_refiner"] if is_stage1_fixed_tx else eval_config.get("refiner_modes", ["no_refiner"])
     refiner_modes = [
         mode
         for mode in requested_refiner_modes
@@ -271,16 +278,25 @@ def evaluate_paired_condition(
                 waveform=waveform,
                 representation=representation,
             )
-            feedback = estimate_transmitter_feedback(
-                paired_batch,
-                transmitter_csi=eval_config.get("transmitter_csi", True),
-                fading=fading,
-                channel_estimator=channel_estimator,
-                estimator_num_taps=estimator_num_taps,
-                estimator_ridge_lambda=estimator_ridge_lambda,
-            )
-            state = feedback["state"]
-            reliability = feedback["reliability"]
+            if is_stage1_fixed_tx:
+                state = torch.zeros(
+                    batch_size,
+                    config["model"]["channel_state_dim"],
+                    device=device,
+                    dtype=paired_batch.representation.dtype,
+                )
+                reliability = torch.ones_like(paired_batch.noise.real)
+            else:
+                feedback = estimate_transmitter_feedback(
+                    paired_batch,
+                    transmitter_csi=eval_config.get("transmitter_csi", True),
+                    fading=fading,
+                    channel_estimator=channel_estimator,
+                    estimator_num_taps=estimator_num_taps,
+                    estimator_ridge_lambda=estimator_ridge_lambda,
+                )
+                state = feedback["state"]
+                reliability = feedback["reliability"]
             for mode in modes:
                 gates = _gates_for_mode(
                     mode,
@@ -304,6 +320,8 @@ def evaluate_paired_condition(
                         allocation_mode=allocation_mode,
                         importance_order=eval_config.get("layer_importance_order"),
                         resource_reliability=reliability,
+                        layer_power_allocation=torch.ones(layers, device=device),
+                        receiver_state_mode="observable_v1" if is_stage1_fixed_tx else "legacy",
                     )
                     estimated_mask = estimate_unreliable_mask(
                         reliability, eval_config.get("unreliable_fraction", 0.25)
@@ -618,6 +636,14 @@ def main() -> None:
         )
     model.eval()
     modes = available_adaptation_modes(config["eval"]["adaptation_modes"], learned_gate)
+    if (
+        getattr(model, "checkpoint_metadata", {})
+        .get("training_stage", {})
+        .get("label")
+        == "fixed_tx_channel_aware_rx_jammer_agnostic"
+    ):
+        modes = ["uniform"]
+        print("stage1_fixed_tx_evaluation=true receiver_state_mode=observable_v1")
 
     rows = []
     condition_index = 0

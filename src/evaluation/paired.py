@@ -12,6 +12,8 @@ from channels.pilot import (
     csi_nmse,
     equalize_with_csi,
     estimate_channel_ls,
+    extract_data_resources,
+    insert_data_and_pilots,
     insert_pilots,
     make_pilot_mask,
     pilot_evm,
@@ -25,6 +27,7 @@ from models.channel_state import (
     nominal_channel_state,
     rule_based_jammer_posterior,
 )
+from models.observable_channel_state import build_observable_receiver_state_v1
 from models.resource_allocator import allocate_resources, deallocate_resources
 from speech_jscc.data import synthetic_waveforms
 
@@ -115,15 +118,19 @@ def generate_paired_evaluation_batch(
     snr_values = torch.full((batch_size,), float(snr_db), device=device)
     jsr_values = torch.full((batch_size,), float(jsr_db), device=device)
 
-    jammer, jammer_mask = make_jammer(
-        reference,
-        jsr_values,
-        jammer_type,
-        jammed_fraction,
-        pilot_mask=pilot_mask if jammer_type == "pilot" else None,
-        pilot_spacing=pilot_spacing,
-        generator=generator,
-    )
+    if jammer_type == "none":
+        jammer = torch.zeros_like(reference)
+        jammer_mask = torch.zeros_like(reference, dtype=torch.bool)
+    else:
+        jammer, jammer_mask = make_jammer(
+            reference,
+            jsr_values,
+            jammer_type,
+            jammed_fraction,
+            pilot_mask=pilot_mask if jammer_type == "pilot" else None,
+            pilot_spacing=pilot_spacing,
+            generator=generator,
+        )
     noise_power = target_power / (10.0 ** (float(snr_db) / 10.0))
     noise = _complex_normal(resource_shape, device, reference.dtype, generator) * math.sqrt(
         noise_power
@@ -319,18 +326,32 @@ def run_mode_on_paired_batch(
     allocation_mode: str = "uniform",
     importance_order: tuple[int, ...] | list[int] | None = None,
     resource_reliability: Tensor | None = None,
+    layer_power_allocation: Tensor | None = None,
+    receiver_state_mode: str = "legacy",
+    decode_waveform: bool = True,
 ) -> dict[str, Tensor]:
     """Evaluate one mode without sampling any new waveform/channel randomness."""
     if equalizer not in {"estimated", "oracle"}:
         raise ValueError("equalizer must be 'estimated' or 'oracle'")
+    if receiver_state_mode not in {"legacy", "neutral", "observable_v1"}:
+        raise ValueError("receiver_state_mode must be legacy, neutral, or observable_v1")
     data_symbols, encoder_aux = model.encoder(
         batch.representation,
         channel_state,
         layer_gates=layer_gates,
+        layer_power_allocation=layer_power_allocation,
         return_aux=True,
     )
+    grid_resources = batch.pilot_mask[0].numel()
+    pilot_resources = int(batch.pilot_mask[0].sum())
+    data_resources = grid_resources - pilot_resources
+    pilot_reserved = data_symbols[0].numel() == data_resources
     if resource_reliability is None:
         resource_reliability = torch.ones_like(data_symbols.real)
+    elif pilot_reserved and resource_reliability.shape != data_symbols.shape:
+        resource_reliability = extract_data_resources(
+            resource_reliability.to(torch.complex64), batch.pilot_mask
+        ).real
     allocation_generator = torch.Generator(device=data_symbols.device).manual_seed(
         batch.seed + 7_919
     )
@@ -340,10 +361,13 @@ def run_mode_on_paired_batch(
         model.encoder.layer_channel_uses,
         mode=allocation_mode,
         importance_order=importance_order,
-        pilot_mask=batch.pilot_mask,
+        pilot_mask=None if pilot_reserved else batch.pilot_mask,
         generator=allocation_generator,
     )
-    transmitted, pilots = insert_pilots(allocation.symbols, batch.pilot_mask)
+    if pilot_reserved:
+        transmitted, pilots = insert_data_and_pilots(allocation.symbols, batch.pilot_mask)
+    else:
+        transmitted, pilots = insert_pilots(allocation.symbols, batch.pilot_mask)
     channel = rayleigh_channel(
         transmitted,
         batch.jammer,
@@ -370,10 +394,25 @@ def run_mode_on_paired_batch(
         channel["noise"],
         equalizer_channel,
     )
-    received_resources = remove_pilot_resources(equalized, batch.pilot_mask)
+    received_resources = (
+        extract_data_resources(equalized, batch.pilot_mask)
+        if pilot_reserved
+        else remove_pilot_resources(equalized, batch.pilot_mask)
+    )
     decoder_input = deallocate_resources(received_resources, allocation.resource_to_source)
     receiver_state = channel_state
-    if model.decoder.channel_state_dim == CHANNEL_STATE_DIM:
+    if receiver_state_mode == "neutral":
+        receiver_state = torch.zeros(
+            channel_state.shape[0],
+            model.decoder.channel_state_dim,
+            device=channel_state.device,
+            dtype=channel_state.dtype,
+        )
+    elif receiver_state_mode == "observable_v1":
+        receiver_state = build_observable_receiver_state_v1(
+            channel["received"], pilots, batch.pilot_mask, estimated_channel
+        ).detach()
+    elif model.decoder.channel_state_dim == CHANNEL_STATE_DIM:
         receiver_state = _state_from_channel(
             batch,
             transmitted,
@@ -382,7 +421,7 @@ def run_mode_on_paired_batch(
             equalizer_channel,
         )
     reconstruction = model.decoder(decoder_input, receiver_state)
-    decoded_waveform = codec.decode_representation(reconstruction)
+    decoded_waveform = codec.decode_representation(reconstruction) if decode_waveform else None
     return {
         **channel,
         "transmitted": transmitted,
@@ -395,6 +434,13 @@ def run_mode_on_paired_batch(
         "equalized_estimated": equalized,
         "post_equalization_sinr": post_equalization_sinr,
         "decoder_input": decoder_input,
+        "resource_mapping_version": "pilot_reserved_v1" if pilot_reserved else "legacy_zero_fill_v0",
+        "grid_total_resources": grid_resources,
+        "pilot_resources": pilot_resources,
+        "data_channel_uses": int(data_symbols[0].numel()),
+        "pilot_overwrite_count": 0 if pilot_reserved else pilot_resources,
+        "encoder_data_power": data_symbols.abs().square().mean(),
+        "transmitted_grid_power": transmitted.abs().square().mean(),
         "allocation_mode": allocation_mode,
         "resource_reliability": resource_reliability,
         "resource_to_source": allocation.resource_to_source,
