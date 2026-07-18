@@ -15,7 +15,7 @@ The work uses the current local Stage-1 and channel-estimator implementation as 
 - The frozen SpeechTokenizer provides latent targets and waveform decoding but is not optimized.
 - The existing best and last checkpoints and the 1,000-row JSONL log are present under `runs/stage1_uniform_1000/`.
 - Existing validation uses seven deterministic scenarios and deterministic representation batches constructed once before training.
-- Pilot insertion replaces selected allocated data symbols. Pilot removal currently zeros those positions while retaining grid shape; O2 versus O3 will determine whether this expected overhead is the first failing path stage.
+- Pilot insertion replaces selected allocated encoder symbols. This is not presumed to be expected overhead: if the encoder emits all 2,048 symbols without reserving pilot positions and pilot insertion then deletes a subset, it is classified as a resource-mapping defect. The diagnostic measures the total pilot count, actual non-pilot data-resource count, and number of encoder symbols overwritten by pilots, and tests these quantities explicitly. No architecture or channel-use budget change is allowed before this defect is confirmed by a reproducible failing regression test.
 
 ## Exact Loss Contract
 
@@ -53,7 +53,7 @@ The library will call the existing model, channel, allocator, pilot, estimator, 
 `diagnose_stage1_learning.py` will:
 
 1. resolve and validate the supplied Stage-1 config;
-2. reproduce the same fixed validation batches and scenarios as training;
+2. reproduce validation batches and scenarios from the training configuration and verify their provenance as far as recorded artifacts permit;
 3. load the requested checkpoint and also inspect sibling best/last checkpoints when present;
 4. evaluate trained, zero, per-batch-mean, optional cached global-mean, and fresh random-model predictors;
 5. save per-sample, per-scenario, per-layer, and aggregate latent metrics;
@@ -61,7 +61,7 @@ The library will call the existing model, channel, allocator, pilot, estimator, 
 7. decode and compare a bounded number of waveform examples;
 8. write JSON, CSV, Markdown, plots, and audio under the supplied output directory.
 
-The CLI will use deterministic seeds, validate checkpoint/config compatibility, and fail explicitly on shape mismatches or nonfinite required results.
+The CLI will use deterministic seeds, validate checkpoint/config compatibility, and fail explicitly on shape mismatches or nonfinite required results. It may call validation data *exactly identical* to the original run only if sample IDs and order, latent-cache hash, channel/noise/jammer seeds, and pilot-mask hash can all be verified against recorded artifacts. If any provenance field is absent, reports must say “validation deterministically regenerated from the same configuration” and must not claim exact batch identity.
 
 ### Overfit ladder CLI
 
@@ -76,7 +76,17 @@ The CLI will use deterministic seeds, validate checkpoint/config compatibility, 
 - O6: small fixed latent set with changing clean multipath/AWGN draws;
 - O7: current full random Stage-1 distribution.
 
-Each experiment starts from a fresh seeded model. O0 runs at most 500 steps; O1–O7 run at most 1,000 steps. The CLI records initial, best, final, and zero losses; relative improvement; step to best; power ratio; cosine; correlation; and encoder/decoder gradient norms. It stops after the first scientifically meaningful failure unless an explicit diagnostic option requests later stages. O7 is never entered before O0–O6 pass.
+Each experiment starts from a fresh seeded model. O0 runs at most 500 steps; O1–O7 run at most 1,000 steps. The CLI records initial, best, final, and zero losses; relative improvement; step to best; power ratio; cosine; correlation; and encoder/decoder gradient norms.
+
+The default CPU-bounded execution starts at O0 and runs stages strictly in order. It stops at the first failed stage and writes the available report. A later stage runs only after every preceding stage passes. `--continue_after_failure` is the sole opt-in that permits running after failure. O7 is never entered before O0–O6 have been evaluated.
+
+The default learnability thresholds are:
+
+- O0–O2: at least 80% relative improvement over the zero predictor **or** final normalized loss below 0.2;
+- O3–O5: at least 50% relative improvement over the zero predictor **or** final normalized loss below 0.5;
+- O6–O7: at least 5% relative improvement over the zero predictor **and** positive latent correlation.
+
+No stage passes from loss alone. In addition to the stage-specific loss condition, every stage requires reconstruction-to-target power ratio of at least `0.01`, cosine similarity greater than `0`, and Pearson correlation greater than `0`. The report records their values and the explicit joint decision. These permissive alignment guards reject zero/anti-aligned collapse; they and the loss cutoffs are diagnostic thresholds for data-path learnability, not scientific performance thresholds.
 
 ## Dataflow and Gradient Instrumentation
 
@@ -113,7 +123,7 @@ Waveform findings remain secondary to latent evidence. The report will not claim
 
 ## Capacity and Receiver-State Audits
 
-The capacity audit reports latent real dimensions, complex and equivalent-real channel dimensions, nominal and post-pilot compression ratios, hidden sizes, branch allocations, pilot overhead, and trainable parameter counts split by encoder and decoder.
+The capacity audit reports latent real dimensions, complex and equivalent-real channel dimensions, nominal and post-pilot compression ratios, hidden sizes, branch allocations, pilot overhead, and trainable parameter counts split by encoder and decoder. The resource audit separately records grid resources, pilot resources, non-pilot data resources, encoder outputs, and encoder outputs overwritten by pilot replacement. A mismatch between usable data resources and emitted data symbols is reported as a resource-mapping defect rather than ordinary pilot overhead.
 
 The receiver-state audit reports mean, standard deviation, extrema, clamp fractions, and finite fraction per observable-v1 feature for clean 5 dB, clean 15 dB, barrage, narrowband, burst, and pilot scenarios. Nearly constant or clamp-dominated features are marked uninformative but are not treated alone as a root cause.
 
@@ -132,7 +142,7 @@ Create the four requested test files:
 
 Tests use reduced mock shapes and fixed seeds. Each new behavior is introduced through a failing test, then the smallest implementation is added. Long real-codec training is excluded from unit tests. Required integration tests verify both checkpoint files load, all diagnostic metrics remain finite, fixed/random channel policies behave as claimed, and existing Stage-1/channel tests remain green.
 
-If investigation confirms a production bug, a minimal failing regression test will precede the smallest targeted fix. The affected overfit stage and all downstream required tests will then be rerun. No unrelated refactor or model enlargement is permitted.
+If investigation confirms a production bug, a reproducible failing regression test will precede the smallest targeted fix. The affected overfit stage and all downstream required tests will then be rerun. No unrelated refactor or model enlargement is permitted. In particular, allocation, pilot mapping, architecture, and channel-use budgets remain unchanged until a failing test identifies the exact defect.
 
 ## Artifacts and Reporting
 
@@ -158,9 +168,9 @@ The Markdown report includes a concise decision tree, the first failing overfit 
 - Existing run files are read-only inputs; diagnostic outputs are isolated beneath `diagnostics/`.
 - Checkpoint, config, tensor-shape, and model-state incompatibilities fail with actionable messages.
 - Unsupported optional waveform metrics are recorded as unavailable rather than causing false failure.
-- O0–O7 use bounded steps and deterministic checkpoints; no 20,000-step or weighted run is invoked.
+- O0–O7 use bounded steps and deterministic checkpoints; default execution is sequential, starts with O0–O2, and stops at the first failure unless `--continue_after_failure` is supplied. No 20,000-step or weighted run is invoked.
 - CPU/GPU selection follows the resolved config. The report records the actual device and runtime.
-- A stage is declared failed only from its recorded metrics and thresholds, not solely because its loss decreased.
+- A stage is declared passed or failed from the explicit joint loss, power-ratio, cosine, and correlation criteria, not solely because its loss decreased.
 
 ## Acceptance Decision Logic
 
