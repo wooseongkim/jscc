@@ -1,0 +1,79 @@
+# Waveform Length Baseline Protocol Comparison
+
+Recommended main protocol: `metric_align=peak_xcorr`, `snr_scale_match=true`, `metric_zero_mean=true`.
+Report mean and median together and always include SI-SDR <= -10 dB outlier count.
+
+| waveform_samples | setting | metric | mean | median | std | p10 | p90 | min | max | n | SI-SDR<=-10 |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 16000 | A: align=none, scale_match=false | waveform_snr_db | 4.51595 | 4.41833 | 1.65894 | 2.72635 | 6.64827 | -1.87314 | 8.07396 | 100 | 1 |
+| 16000 | A: align=none, scale_match=false | si_sdr_db | 2.8812 | 2.94298 | 2.87264 | 0.600764 | 5.83764 | -15.7038 | 7.747 | 100 | 1 |
+| 16000 | A: align=none, scale_match=false | stft_l1 | 0.0586061 | 0.0540586 | 0.0267748 | 0.0327295 | 0.087549 | 0.00390507 | 0.184763 | 100 | 1 |
+| 16000 | A: align=none, scale_match=false | best_lag_samples | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100 | 1 |
+| 16000 | A: align=none, scale_match=false | input_rms | 0.0484235 | 0.0474403 | 0.0197035 | 0.0268392 | 0.0717383 | 0.00233991 | 0.122482 | 100 | 1 |
+| 16000 | A: align=none, scale_match=false | output_rms | 0.046992 | 0.0453637 | 0.0188895 | 0.0250798 | 0.0701972 | 0.00220764 | 0.119234 | 100 | 1 |
+| 16000 | B: align=none, scale_match=true | waveform_snr_db | 4.88333 | 4.72646 | 1.50482 | 3.3216 | 6.84393 | 0.115174 | 8.42138 | 100 | 1 |
+| 16000 | B: align=none, scale_match=true | si_sdr_db | 2.8812 | 2.94298 | 2.87264 | 0.600764 | 5.83764 | -15.7038 | 7.747 | 100 | 1 |
+| 16000 | B: align=none, scale_match=true | stft_l1 | 0.0586061 | 0.0540586 | 0.0267748 | 0.0327295 | 0.087549 | 0.00390507 | 0.184763 | 100 | 1 |
+| 16000 | B: align=none, scale_match=true | best_lag_samples | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100 | 1 |
+| 16000 | B: align=none, scale_match=true | input_rms | 0.0484235 | 0.0474403 | 0.0197035 | 0.0268392 | 0.0717383 | 0.00233991 | 0.122482 | 100 | 1 |
+| 16000 | B: align=none, scale_match=true | output_rms | 0.046992 | 0.0453637 | 0.0188895 | 0.0250798 | 0.0701972 | 0.00220764 | 0.119234 | 100 | 1 |
+| 16000 | C: align=peak_xcorr, scale_match=false | waveform_snr_db | 4.98354 | 4.93972 | 1.62665 | 3.13415 | 6.90198 | -1.27775 | 8.97997 | 100 | 1 |
+| 16000 | C: align=peak_xcorr, scale_match=false | si_sdr_db | 3.5668 | 3.5491 | 2.53229 | 1.2526 | 6.26783 | -11.2098 | 8.51667 | 100 | 1 |
+| 16000 | C: align=peak_xcorr, scale_match=false | stft_l1 | 0.0583944 | 0.0542556 | 0.0266396 | 0.0327295 | 0.0874616 | 0.00387945 | 0.182775 | 100 | 1 |
+| 16000 | C: align=peak_xcorr, scale_match=false | best_lag_samples | 0.24 | 1 | 3.20037 | -1 | 2 | -28 | 10 | 100 | 1 |
+| 16000 | C: align=peak_xcorr, scale_match=false | input_rms | 0.0484235 | 0.0474403 | 0.0197035 | 0.0268392 | 0.0717383 | 0.00233991 | 0.122482 | 100 | 1 |
+| 16000 | C: align=peak_xcorr, scale_match=false | output_rms | 0.046992 | 0.0453637 | 0.0188895 | 0.0250798 | 0.0701972 | 0.00220764 | 0.119234 | 100 | 1 |
+| 16000 | D: align=peak_xcorr, scale_match=true | waveform_snr_db | 5.30472 | 5.1378 | 1.51271 | 3.6817 | 7.18713 | 0.316732 | 9.08836 | 100 | 1 |
+| 16000 | D: align=peak_xcorr, scale_match=true | si_sdr_db | 3.5668 | 3.5491 | 2.53229 | 1.2526 | 6.26783 | -11.2098 | 8.51667 | 100 | 1 |
+| 16000 | D: align=peak_xcorr, scale_match=true | stft_l1 | 0.0583944 | 0.0542556 | 0.0266396 | 0.0327295 | 0.0874616 | 0.00387945 | 0.182775 | 100 | 1 |
+| 16000 | D: align=peak_xcorr, scale_match=true | best_lag_samples | 0.24 | 1 | 3.20037 | -1 | 2 | -28 | 10 | 100 | 1 |
+| 16000 | D: align=peak_xcorr, scale_match=true | input_rms | 0.0484235 | 0.0474403 | 0.0197035 | 0.0268392 | 0.0717383 | 0.00233991 | 0.122482 | 100 | 1 |
+| 16000 | D: align=peak_xcorr, scale_match=true | output_rms | 0.046992 | 0.0453637 | 0.0188895 | 0.0250798 | 0.0701972 | 0.00220764 | 0.119234 | 100 | 1 |
+| 32000 | A: align=none, scale_match=false | waveform_snr_db | 4.56938 | 4.6661 | 1.42994 | 2.68429 | 6.27752 | 0.339169 | 7.50812 | 100 | 0 |
+| 32000 | A: align=none, scale_match=false | si_sdr_db | 3.18468 | 3.28664 | 2.04333 | 0.638045 | 5.59719 | -3.56552 | 6.98798 | 100 | 0 |
+| 32000 | A: align=none, scale_match=false | stft_l1 | 0.0573736 | 0.0514967 | 0.0212108 | 0.0325579 | 0.0834304 | 0.0152169 | 0.123225 | 100 | 0 |
+| 32000 | A: align=none, scale_match=false | best_lag_samples | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100 | 0 |
+| 32000 | A: align=none, scale_match=false | input_rms | 0.0486254 | 0.0451123 | 0.0161014 | 0.0315783 | 0.0660127 | 0.019738 | 0.104193 | 100 | 0 |
+| 32000 | A: align=none, scale_match=false | output_rms | 0.0483392 | 0.0450176 | 0.0156276 | 0.0308182 | 0.0658417 | 0.0198263 | 0.10747 | 100 | 0 |
+| 32000 | B: align=none, scale_match=true | waveform_snr_db | 4.99446 | 4.95736 | 1.30575 | 3.34107 | 6.65427 | 1.58345 | 7.7799 | 100 | 0 |
+| 32000 | B: align=none, scale_match=true | si_sdr_db | 3.18468 | 3.28664 | 2.04333 | 0.638045 | 5.59719 | -3.56552 | 6.98798 | 100 | 0 |
+| 32000 | B: align=none, scale_match=true | stft_l1 | 0.0573736 | 0.0514967 | 0.0212108 | 0.0325579 | 0.0834304 | 0.0152169 | 0.123225 | 100 | 0 |
+| 32000 | B: align=none, scale_match=true | best_lag_samples | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100 | 0 |
+| 32000 | B: align=none, scale_match=true | input_rms | 0.0486254 | 0.0451123 | 0.0161014 | 0.0315783 | 0.0660127 | 0.019738 | 0.104193 | 100 | 0 |
+| 32000 | B: align=none, scale_match=true | output_rms | 0.0483392 | 0.0450176 | 0.0156276 | 0.0308182 | 0.0658417 | 0.0198263 | 0.10747 | 100 | 0 |
+| 32000 | C: align=peak_xcorr, scale_match=false | waveform_snr_db | 4.87983 | 4.96649 | 1.28506 | 3.22419 | 6.46718 | 1.97727 | 8.04531 | 100 | 0 |
+| 32000 | C: align=peak_xcorr, scale_match=false | si_sdr_db | 3.63291 | 3.72536 | 1.73814 | 1.18953 | 5.71703 | -0.827686 | 7.5992 | 100 | 0 |
+| 32000 | C: align=peak_xcorr, scale_match=false | stft_l1 | 0.0572535 | 0.0513879 | 0.0212192 | 0.0318753 | 0.0833601 | 0.0151697 | 0.123225 | 100 | 0 |
+| 32000 | C: align=peak_xcorr, scale_match=false | best_lag_samples | 0.32 | 0 | 1.08517 | -1 | 1 | -3 | 5 | 100 | 0 |
+| 32000 | C: align=peak_xcorr, scale_match=false | input_rms | 0.0486254 | 0.0451123 | 0.0161014 | 0.0315783 | 0.0660127 | 0.019738 | 0.104193 | 100 | 0 |
+| 32000 | C: align=peak_xcorr, scale_match=false | output_rms | 0.0483392 | 0.0450176 | 0.0156276 | 0.0308182 | 0.0658417 | 0.0198263 | 0.10747 | 100 | 0 |
+| 32000 | D: align=peak_xcorr, scale_match=true | waveform_snr_db | 5.26917 | 5.26077 | 1.19747 | 3.64527 | 6.74856 | 2.61615 | 8.29498 | 100 | 0 |
+| 32000 | D: align=peak_xcorr, scale_match=true | si_sdr_db | 3.63291 | 3.72536 | 1.73814 | 1.18953 | 5.71703 | -0.827686 | 7.5992 | 100 | 0 |
+| 32000 | D: align=peak_xcorr, scale_match=true | stft_l1 | 0.0572535 | 0.0513879 | 0.0212192 | 0.0318753 | 0.0833601 | 0.0151697 | 0.123225 | 100 | 0 |
+| 32000 | D: align=peak_xcorr, scale_match=true | best_lag_samples | 0.32 | 0 | 1.08517 | -1 | 1 | -3 | 5 | 100 | 0 |
+| 32000 | D: align=peak_xcorr, scale_match=true | input_rms | 0.0486254 | 0.0451123 | 0.0161014 | 0.0315783 | 0.0660127 | 0.019738 | 0.104193 | 100 | 0 |
+| 32000 | D: align=peak_xcorr, scale_match=true | output_rms | 0.0483392 | 0.0450176 | 0.0156276 | 0.0308182 | 0.0658417 | 0.0198263 | 0.10747 | 100 | 0 |
+| 48000 | A: align=none, scale_match=false | waveform_snr_db | 4.555 | 4.40608 | 1.15544 | 3.36839 | 6.14388 | 1.16211 | 7.27802 | 100 | 0 |
+| 48000 | A: align=none, scale_match=false | si_sdr_db | 3.21408 | 3.21541 | 1.66826 | 1.44114 | 5.26084 | -2.43295 | 6.81092 | 100 | 0 |
+| 48000 | A: align=none, scale_match=false | stft_l1 | 0.0543092 | 0.0503808 | 0.0186862 | 0.034318 | 0.0762197 | 0.019274 | 0.144088 | 100 | 0 |
+| 48000 | A: align=none, scale_match=false | best_lag_samples | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100 | 0 |
+| 48000 | A: align=none, scale_match=false | input_rms | 0.0480088 | 0.0457852 | 0.0150101 | 0.0349675 | 0.0632239 | 0.0186744 | 0.130166 | 100 | 0 |
+| 48000 | A: align=none, scale_match=false | output_rms | 0.0477899 | 0.0455713 | 0.0144873 | 0.0351704 | 0.0635993 | 0.0172054 | 0.126818 | 100 | 0 |
+| 48000 | B: align=none, scale_match=true | waveform_snr_db | 4.9781 | 4.90903 | 1.10206 | 3.79044 | 6.39298 | 1.96202 | 7.63294 | 100 | 0 |
+| 48000 | B: align=none, scale_match=true | si_sdr_db | 3.21408 | 3.21541 | 1.66826 | 1.44114 | 5.26084 | -2.43295 | 6.81092 | 100 | 0 |
+| 48000 | B: align=none, scale_match=true | stft_l1 | 0.0543092 | 0.0503808 | 0.0186862 | 0.034318 | 0.0762197 | 0.019274 | 0.144088 | 100 | 0 |
+| 48000 | B: align=none, scale_match=true | best_lag_samples | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100 | 0 |
+| 48000 | B: align=none, scale_match=true | input_rms | 0.0480088 | 0.0457852 | 0.0150101 | 0.0349675 | 0.0632239 | 0.0186744 | 0.130166 | 100 | 0 |
+| 48000 | B: align=none, scale_match=true | output_rms | 0.0477899 | 0.0455713 | 0.0144873 | 0.0351704 | 0.0635993 | 0.0172054 | 0.126818 | 100 | 0 |
+| 48000 | C: align=peak_xcorr, scale_match=false | waveform_snr_db | 4.79199 | 4.84793 | 1.08745 | 3.41192 | 6.17699 | 2.04152 | 7.53873 | 100 | 0 |
+| 48000 | C: align=peak_xcorr, scale_match=false | si_sdr_db | 3.54288 | 3.63231 | 1.53856 | 1.50566 | 5.45166 | -0.601317 | 7.11135 | 100 | 0 |
+| 48000 | C: align=peak_xcorr, scale_match=false | stft_l1 | 0.0542678 | 0.0503808 | 0.0186914 | 0.0343298 | 0.0762197 | 0.0193234 | 0.144088 | 100 | 0 |
+| 48000 | C: align=peak_xcorr, scale_match=false | best_lag_samples | 0.3 | 0 | 0.888819 | -1 | 1 | -3 | 3 | 100 | 0 |
+| 48000 | C: align=peak_xcorr, scale_match=false | input_rms | 0.0480088 | 0.0457852 | 0.0150101 | 0.0349675 | 0.0632239 | 0.0186744 | 0.130166 | 100 | 0 |
+| 48000 | C: align=peak_xcorr, scale_match=false | output_rms | 0.0477899 | 0.0455713 | 0.0144873 | 0.0351704 | 0.0635993 | 0.0172054 | 0.126818 | 100 | 0 |
+| 48000 | D: align=peak_xcorr, scale_match=true | waveform_snr_db | 5.19098 | 5.19564 | 1.06116 | 3.82807 | 6.54061 | 2.72007 | 7.88301 | 100 | 0 |
+| 48000 | D: align=peak_xcorr, scale_match=true | si_sdr_db | 3.54288 | 3.63231 | 1.53856 | 1.50566 | 5.45166 | -0.601317 | 7.11135 | 100 | 0 |
+| 48000 | D: align=peak_xcorr, scale_match=true | stft_l1 | 0.0542678 | 0.0503808 | 0.0186914 | 0.0343298 | 0.0762197 | 0.0193234 | 0.144088 | 100 | 0 |
+| 48000 | D: align=peak_xcorr, scale_match=true | best_lag_samples | 0.3 | 0 | 0.888819 | -1 | 1 | -3 | 3 | 100 | 0 |
+| 48000 | D: align=peak_xcorr, scale_match=true | input_rms | 0.0480088 | 0.0457852 | 0.0150101 | 0.0349675 | 0.0632239 | 0.0186744 | 0.130166 | 100 | 0 |
+| 48000 | D: align=peak_xcorr, scale_match=true | output_rms | 0.0477899 | 0.0455713 | 0.0144873 | 0.0351704 | 0.0635993 | 0.0172054 | 0.126818 | 100 | 0 |

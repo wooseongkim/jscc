@@ -1,0 +1,6 @@
+layer_importance:
+  path: runs/layer_ablation/smoke_test_2_1s/layer_importance.yaml
+  strict_metadata: true
+  apply_to_loss_weights: true
+  apply_to_resource_order: true
+  apply_to_base_layers: true

@@ -1,0 +1,39 @@
+{
+  "assume_ideal_cp": true,
+  "block_fading_over_time": true,
+  "csi_nmse": 0.4048345685005188,
+  "empirical_average_h_power": 0.9339122772216797,
+  "empirical_average_tap_powers": [
+    0.3303009271621704,
+    0.22247102856636047,
+    0.14269326627254486,
+    0.10211137682199478,
+    0.0751371830701828,
+    0.061198536306619644
+  ],
+  "fading_model": "multipath_block",
+  "grid_shape": [
+    64,
+    32,
+    16
+  ],
+  "jammer_mask_ratio": 0.25,
+  "measured_pre_channel_jsr_db": -3.2357483803480136e-08,
+  "num_taps": 6,
+  "pdp": [
+    0.3400007486343384,
+    0.2380005270242691,
+    0.16660036146640778,
+    0.1166202574968338,
+    0.08163417130708694,
+    0.0571439228951931
+  ],
+  "pilot_evm": 0.7705010771751404,
+  "post_channel_jsr_db": -1.1932251453399658,
+  "post_equalization_effective_sinr_db": -0.7182254791259766,
+  "requested_jsr_db": 0.0,
+  "requested_snr_db": 10.0,
+  "scenario": "narrowband_jammer",
+  "signal_jammer_channel_independence_mean_abs_diff": 0.46938762068748474,
+  "time_constancy_max_error": 0.0
+}

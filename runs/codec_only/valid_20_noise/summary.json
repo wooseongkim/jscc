@@ -1,0 +1,93 @@
+{
+  "clean_codec_metrics_mean": {
+    "si_sdr_db": 3.851892790198326,
+    "stft_l1": 0.10778316035866738,
+    "waveform_l1": 0.02678225846029818,
+    "waveform_mse": 0.0023097663855878637,
+    "waveform_snr_db": 5.228678214550018
+  },
+  "clean_codec_metrics_std": {
+    "si_sdr_db": 2.306282966167021,
+    "stft_l1": 0.0382235945653233,
+    "waveform_l1": 0.010986720904500868,
+    "waveform_mse": 0.001726690299007806,
+    "waveform_snr_db": 1.832689809727171
+  },
+  "codec_type": "speechtokenizer",
+  "jscc_used": false,
+  "latent_noise_sweep": {
+    "0": {
+      "mean_delta_si_sdr_db_vs_clean": -0.9620612993836403,
+      "mean_delta_stft_l1_vs_clean": 0.007304001413285732,
+      "mean_delta_waveform_mse_vs_clean": 0.0003592691733501852,
+      "mean_delta_waveform_snr_db_vs_clean": -0.7245813608169556,
+      "mean_si_sdr_db": 2.889831490814686,
+      "mean_stft_l1": 0.1150871617719531,
+      "mean_waveform_snr_db": 4.504096853733063
+    },
+    "10": {
+      "mean_delta_si_sdr_db_vs_clean": -0.06440934240818023,
+      "mean_delta_stft_l1_vs_clean": 0.00047380197793245316,
+      "mean_delta_waveform_mse_vs_clean": 1.510192669229582e-05,
+      "mean_delta_waveform_snr_db_vs_clean": -0.05441882610321045,
+      "mean_si_sdr_db": 3.787483447790146,
+      "mean_stft_l1": 0.10825696233659983,
+      "mean_waveform_snr_db": 5.174259388446808
+    },
+    "20": {
+      "mean_delta_si_sdr_db_vs_clean": 0.014496809244155884,
+      "mean_delta_stft_l1_vs_clean": 8.619055151939392e-05,
+      "mean_delta_waveform_mse_vs_clean": -8.894945494830608e-06,
+      "mean_delta_waveform_snr_db_vs_clean": 0.010234498977661132,
+      "mean_si_sdr_db": 3.866389599442482,
+      "mean_stft_l1": 0.10786935091018676,
+      "mean_waveform_snr_db": 5.23891271352768
+    },
+    "30": {
+      "mean_delta_si_sdr_db_vs_clean": -0.0008312344551086425,
+      "mean_delta_stft_l1_vs_clean": 2.129003405570984e-05,
+      "mean_delta_waveform_mse_vs_clean": -3.4700060496106745e-07,
+      "mean_delta_waveform_snr_db_vs_clean": -7.581710815429688e-05,
+      "mean_si_sdr_db": 3.8510615557432173,
+      "mean_stft_l1": 0.10780445039272309,
+      "mean_waveform_snr_db": 5.228602397441864
+    },
+    "5": {
+      "mean_delta_si_sdr_db_vs_clean": -0.24003822952508927,
+      "mean_delta_stft_l1_vs_clean": 0.002782898209989071,
+      "mean_delta_waveform_mse_vs_clean": 8.672065305290744e-05,
+      "mean_delta_waveform_snr_db_vs_clean": -0.20072882175445556,
+      "mean_si_sdr_db": 3.611854560673237,
+      "mean_stft_l1": 0.11056605856865645,
+      "mean_waveform_snr_db": 5.027949392795563
+    }
+  },
+  "latent_noise_sweep_used": true,
+  "manifest": "manifests/mini_librispeech/valid.jsonl",
+  "mean_per_layer_energy": [
+    12.471030712127686,
+    2.3194423854351043,
+    1.4701753735542298,
+    1.1253543853759767,
+    0.8804731130599975,
+    0.7371024012565612,
+    0.6388751149177552,
+    0.5360215410590172
+  ],
+  "mode": "codec_only_with_latent_noise",
+  "num_items_evaluated": 20,
+  "representation_shape": [
+    8,
+    50,
+    1024
+  ],
+  "runtime": {
+    "mean_decode_time_sec": 0.028994015307398514,
+    "mean_encode_time_sec": 0.04562004115432501,
+    "mean_real_time_factor": 0.07461468831170351
+  },
+  "sample_rate": 16000,
+  "split": "valid",
+  "waveform_samples": 16000,
+  "wireless_channel_used": false
+}

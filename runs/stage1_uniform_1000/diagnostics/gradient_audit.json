@@ -1,0 +1,86 @@
+{
+  "loss": 1.0354582071304321,
+  "groups": {
+    "encoder_branch_0": {
+      "gradient_norm": 1.403822422027588,
+      "maximum_absolute_gradient": 0.025506045669317245,
+      "finite": true,
+      "update_norm": 0.1284707635641098
+    },
+    "encoder_branch_1": {
+      "gradient_norm": 2.3516316413879395,
+      "maximum_absolute_gradient": 0.03433803468942642,
+      "finite": true,
+      "update_norm": 0.12856823205947876
+    },
+    "encoder_branch_2": {
+      "gradient_norm": 2.9778571128845215,
+      "maximum_absolute_gradient": 0.04105812683701515,
+      "finite": true,
+      "update_norm": 0.12851929664611816
+    },
+    "encoder_branch_3": {
+      "gradient_norm": 1.4622998237609863,
+      "maximum_absolute_gradient": 0.019123399630188942,
+      "finite": true,
+      "update_norm": 0.12856674194335938
+    },
+    "encoder_branch_4": {
+      "gradient_norm": 1.655126690864563,
+      "maximum_absolute_gradient": 0.020343314856290817,
+      "finite": true,
+      "update_norm": 0.1284089982509613
+    },
+    "encoder_branch_5": {
+      "gradient_norm": 1.3668146133422852,
+      "maximum_absolute_gradient": 0.013690432533621788,
+      "finite": true,
+      "update_norm": 0.1284123957157135
+    },
+    "encoder_branch_6": {
+      "gradient_norm": 1.4877105951309204,
+      "maximum_absolute_gradient": 0.020875371992588043,
+      "finite": true,
+      "update_norm": 0.12836158275604248
+    },
+    "encoder_branch_7": {
+      "gradient_norm": 1.3366966247558594,
+      "maximum_absolute_gradient": 0.013108192943036556,
+      "finite": true,
+      "update_norm": 0.12855811417102814
+    },
+    "decoder": {
+      "gradient_norm": 1.9528204202651978,
+      "maximum_absolute_gradient": 0.21938978135585785,
+      "finite": true,
+      "update_norm": 0.34713757038116455
+    }
+  },
+  "intermediates": {
+    "data_symbols": {
+      "has_gradient": true,
+      "gradient_norm": 0.017278239130973816
+    },
+    "transmitted": {
+      "has_gradient": true,
+      "gradient_norm": 0.07628753036260605
+    },
+    "received": {
+      "has_gradient": true,
+      "gradient_norm": 0.15204071998596191
+    },
+    "equalized_estimated": {
+      "has_gradient": true,
+      "gradient_norm": 0.016600877046585083
+    },
+    "decoder_input": {
+      "has_gradient": true,
+      "gradient_norm": 0.016600877046585083
+    },
+    "reconstruction": {
+      "has_gradient": true,
+      "gradient_norm": 0.00320385186932981
+    }
+  },
+  "codec_has_gradient": false
+}

@@ -1,0 +1,440 @@
+{
+  "alignment": {
+    "max_lag_samples": 1000,
+    "metric_align": "peak_xcorr",
+    "metric_zero_mean": true,
+    "snr_scale_match": true
+  },
+  "alignment_off_vs_on_metric_gap": {
+    "si_sdr_db": {
+      "max": 5.428433299064636,
+      "mean": 0.6856014708336443,
+      "median": 0.364021897315979,
+      "min": 0.0,
+      "p10": 0.0,
+      "p90": 1.5890935897827159,
+      "std": 1.0292826680220268
+    },
+    "stft_l1": {
+      "max": 0.0006621554493904114,
+      "mean": -0.00021174289751797913,
+      "median": 0.0,
+      "min": -0.0031174682080745697,
+      "p10": -0.0008658330887556076,
+      "p90": 0.000243983790278435,
+      "std": 0.0006657721923231301
+    },
+    "waveform_l1": {
+      "max": 0.0003078244626522064,
+      "mean": -0.00040036067832261324,
+      "median": -0.0002253199927508831,
+      "min": -0.003375774249434471,
+      "p10": -0.0008313121274113655,
+      "p90": 3.487698268145447e-06,
+      "std": 0.0006778441811922168
+    },
+    "waveform_mse": {
+      "max": 0.0,
+      "mean": -9.279009178726483e-05,
+      "median": -2.973897790070623e-05,
+      "min": -0.0009180717170238495,
+      "p10": -0.0001936711312737316,
+      "p90": 0.0,
+      "std": 0.00017618107591502465
+    },
+    "waveform_snr_db": {
+      "max": 3.1793622970581055,
+      "mean": 0.42138077385723594,
+      "median": 0.22080981731414795,
+      "min": 0.0,
+      "p10": 0.0,
+      "p90": 1.0292366504669193,
+      "std": 0.6114044117020271
+    }
+  },
+  "clean_codec_metrics_distribution": {
+    "si_sdr_db": {
+      "max": 8.516672134399414,
+      "mean": 3.566804756820202,
+      "median": 3.5491026639938354,
+      "min": -11.209833145141602,
+      "p10": 1.252599334716797,
+      "p90": 6.267826557159425,
+      "std": 2.5322905129794417
+    },
+    "stft_l1": {
+      "max": 0.18277521431446075,
+      "mean": 0.05839438972994685,
+      "median": 0.05425562337040901,
+      "min": 0.0038794493302702904,
+      "p10": 0.03272946588695049,
+      "p90": 0.08746158629655838,
+      "std": 0.02663955030280155
+    },
+    "waveform_l1": {
+      "max": 0.043766964226961136,
+      "mean": 0.015288393248338252,
+      "median": 0.014804729260504246,
+      "min": 0.001064099371433258,
+      "p10": 0.007864667056128382,
+      "p90": 0.02433792669326067,
+      "std": 0.006993145253535829
+    },
+    "waveform_mse": {
+      "max": 0.006863727234303951,
+      "mean": 0.0008867361799343598,
+      "median": 0.0006760420801583678,
+      "min": 2.167563479815726e-06,
+      "p10": 0.00026585679152049126,
+      "p90": 0.0017411569366231566,
+      "std": 0.0008637143078485029
+    },
+    "waveform_snr_db": {
+      "max": 9.088359832763672,
+      "mean": 5.3047156876325605,
+      "median": 5.137799501419067,
+      "min": 0.31673234701156616,
+      "p10": 3.681697678565979,
+      "p90": 7.187134408950806,
+      "std": 1.512711130452476
+    }
+  },
+  "clean_codec_metrics_mean": {
+    "si_sdr_db": 3.566804756820202,
+    "stft_l1": 0.05839438972994685,
+    "waveform_l1": 0.015288393248338252,
+    "waveform_mse": 0.0008867361799343598,
+    "waveform_snr_db": 5.3047156876325605
+  },
+  "clean_codec_metrics_std": {
+    "si_sdr_db": 2.5322905129794417,
+    "stft_l1": 0.02663955030280155,
+    "waveform_l1": 0.006993145253535829,
+    "waveform_mse": 0.0008637143078485029,
+    "waveform_snr_db": 1.512711130452476
+  },
+  "codec_type": "speechtokenizer",
+  "continuous_sum_metrics_distribution": {
+    "si_sdr_db": {
+      "max": 8.516672134399414,
+      "mean": 3.566804756820202,
+      "median": 3.5491026639938354,
+      "min": -11.209833145141602,
+      "p10": 1.252599334716797,
+      "p90": 6.267826557159425,
+      "std": 2.5322905129794417
+    },
+    "stft_l1": {
+      "max": 0.18277521431446075,
+      "mean": 0.05839438972994685,
+      "median": 0.05425562337040901,
+      "min": 0.0038794493302702904,
+      "p10": 0.03272946588695049,
+      "p90": 0.08746158629655838,
+      "std": 0.02663955030280155
+    },
+    "waveform_l1": {
+      "max": 0.043766964226961136,
+      "mean": 0.015288393248338252,
+      "median": 0.014804729260504246,
+      "min": 0.001064099371433258,
+      "p10": 0.007864667056128382,
+      "p90": 0.02433792669326067,
+      "std": 0.006993145253535829
+    },
+    "waveform_mse": {
+      "max": 0.006863727234303951,
+      "mean": 0.0008867361799343598,
+      "median": 0.0006760420801583678,
+      "min": 2.167563479815726e-06,
+      "p10": 0.00026585679152049126,
+      "p90": 0.0017411569366231566,
+      "std": 0.0008637143078485029
+    },
+    "waveform_snr_db": {
+      "max": 9.088359832763672,
+      "mean": 5.3047156876325605,
+      "median": 5.137799501419067,
+      "min": 0.31673234701156616,
+      "p10": 3.681697678565979,
+      "p90": 7.187134408950806,
+      "std": 1.512711130452476
+    }
+  },
+  "continuous_sum_metrics_mean": {
+    "si_sdr_db": 3.566804756820202,
+    "stft_l1": 0.05839438972994685,
+    "waveform_l1": 0.015288393248338252,
+    "waveform_mse": 0.0008867361799343598,
+    "waveform_snr_db": 5.3047156876325605
+  },
+  "decode_comparison_rows": 100,
+  "decode_mode": "both",
+  "jscc_used": false,
+  "latent_noise_sweep": {
+    "0": {
+      "mean_delta_si_sdr_db_vs_clean": -1.1771518977731465,
+      "mean_delta_stft_l1_vs_clean": 0.006023115203715861,
+      "mean_delta_waveform_mse_vs_clean": 0.00021280606193158747,
+      "mean_delta_waveform_snr_db_vs_clean": -0.7775182157754899,
+      "mean_si_sdr_db": 2.389652859047055,
+      "mean_stft_l1": 0.06441750493366272,
+      "mean_waveform_snr_db": 4.527197471857071
+    },
+    "10": {
+      "mean_delta_si_sdr_db_vs_clean": -0.12030407324433327,
+      "mean_delta_stft_l1_vs_clean": 0.0006125688157044351,
+      "mean_delta_waveform_mse_vs_clean": 1.8957059833155654e-05,
+      "mean_delta_waveform_snr_db_vs_clean": -0.08583110570907593,
+      "mean_si_sdr_db": 3.4465006835758687,
+      "mean_stft_l1": 0.059006958545651286,
+      "mean_waveform_snr_db": 5.218884581923485
+    },
+    "20": {
+      "mean_delta_si_sdr_db_vs_clean": -0.007917191833257675,
+      "mean_delta_stft_l1_vs_clean": 0.00010116522898897528,
+      "mean_delta_waveform_mse_vs_clean": 3.5321715517966367e-06,
+      "mean_delta_waveform_snr_db_vs_clean": -0.0056773370504379275,
+      "mean_si_sdr_db": 3.5588875649869443,
+      "mean_stft_l1": 0.058495554958935825,
+      "mean_waveform_snr_db": 5.299038350582123
+    },
+    "30": {
+      "mean_delta_si_sdr_db_vs_clean": -0.005515052378177643,
+      "mean_delta_stft_l1_vs_clean": 1.4051576144993305e-05,
+      "mean_delta_waveform_mse_vs_clean": 9.255802115148981e-07,
+      "mean_delta_waveform_snr_db_vs_clean": -0.004373283386230469,
+      "mean_si_sdr_db": 3.561289704442024,
+      "mean_stft_l1": 0.058408441306091845,
+      "mean_waveform_snr_db": 5.30034240424633
+    },
+    "5": {
+      "mean_delta_si_sdr_db_vs_clean": -0.4200645211338997,
+      "mean_delta_stft_l1_vs_clean": 0.0020343991369009017,
+      "mean_delta_waveform_mse_vs_clean": 6.269853842013617e-05,
+      "mean_delta_waveform_snr_db_vs_clean": -0.28615875393152235,
+      "mean_si_sdr_db": 3.1467402356863023,
+      "mean_stft_l1": 0.06042878886684775,
+      "mean_waveform_snr_db": 5.0185569337010385
+    }
+  },
+  "latent_noise_sweep_used": true,
+  "manifest": "manifests/mini_librispeech/test.jsonl",
+  "mean_per_layer_energy": [
+    12.469777421951294,
+    2.2222035908699036,
+    1.4747791785001754,
+    1.0899338859319687,
+    0.8549855303764343,
+    0.7173266273736953,
+    0.6049509197473526,
+    0.526217301785946
+  ],
+  "mode": "codec_only_with_latent_noise",
+  "num_items_evaluated": 100,
+  "official_metrics_distribution": {
+    "si_sdr_db": {
+      "max": 8.51667308807373,
+      "mean": 3.5668047082424166,
+      "median": 3.5491029024124146,
+      "min": -11.209833145141602,
+      "p10": 1.252599334716797,
+      "p90": 6.2678264617919925,
+      "std": 2.5322905367423947
+    },
+    "stft_l1": {
+      "max": 0.18277521431446075,
+      "mean": 0.058394390316680075,
+      "median": 0.05425562523305416,
+      "min": 0.0038794493302702904,
+      "p10": 0.03272946588695049,
+      "p90": 0.08746158629655838,
+      "std": 0.026639550364809056
+    },
+    "waveform_l1": {
+      "max": 0.043766964226961136,
+      "mean": 0.015288393285591156,
+      "median": 0.014804729260504246,
+      "min": 0.001064099371433258,
+      "p10": 0.007864667056128382,
+      "p90": 0.02433792669326067,
+      "std": 0.0069931452309563505
+    },
+    "waveform_mse": {
+      "max": 0.006863727234303951,
+      "mean": 0.0008867361813895513,
+      "median": 0.0006760420510545373,
+      "min": 2.167563479815726e-06,
+      "p10": 0.00026585679152049126,
+      "p90": 0.0017411569366231566,
+      "std": 0.0008637143128927997
+    },
+    "waveform_snr_db": {
+      "max": 9.088359832763672,
+      "mean": 5.304715742468834,
+      "median": 5.1377997398376465,
+      "min": 0.31673234701156616,
+      "p10": 3.681697678565979,
+      "p90": 7.187134885787964,
+      "std": 1.5127112028038219
+    }
+  },
+  "official_metrics_mean": {
+    "si_sdr_db": 3.5668047082424166,
+    "stft_l1": 0.058394390316680075,
+    "waveform_l1": 0.015288393285591156,
+    "waveform_mse": 0.0008867361813895513,
+    "waveform_snr_db": 5.304715742468834
+  },
+  "official_vs_continuous_sum_metric_gap": {
+    "si_sdr_db": {
+      "max": 1.5497207641601562e-06,
+      "mean": -4.8577785491943356e-08,
+      "median": 0.0,
+      "min": -1.9371509552001953e-06,
+      "p10": -4.76837158203125e-07,
+      "p90": 2.622604370117208e-07,
+      "std": 5.033268162974912e-07
+    },
+    "stft_l1": {
+      "max": 1.4901161193847656e-08,
+      "mean": 5.867332220077515e-10,
+      "median": 0.0,
+      "min": -1.4901161193847656e-08,
+      "p10": -9.313225746154752e-11,
+      "p90": 3.725290298461914e-09,
+      "std": 3.961472284592935e-09
+    },
+    "waveform_l1": {
+      "max": 1.862645149230957e-09,
+      "mean": 3.725290298461914e-11,
+      "median": 0.0,
+      "min": -1.862645149230957e-09,
+      "p10": 0.0,
+      "p90": 0.0,
+      "std": 3.9336666617436087e-10
+    },
+    "waveform_mse": {
+      "max": 2.3283064365386963e-10,
+      "mean": 1.4551915228366853e-12,
+      "median": 0.0,
+      "min": -2.3283064365386963e-10,
+      "p10": -3.0559021979570384e-11,
+      "p90": 3.201421350240732e-11,
+      "std": 5.4077548487292495e-11
+    },
+    "waveform_snr_db": {
+      "max": 9.5367431640625e-07,
+      "mean": 5.483627319335938e-08,
+      "median": 0.0,
+      "min": -9.5367431640625e-07,
+      "p10": 0.0,
+      "p90": 4.76837158203125e-07,
+      "std": 3.0130486929785317e-07
+    }
+  },
+  "representation_shape": [
+    8,
+    50,
+    1024
+  ],
+  "runtime": {
+    "mean_decode_time_sec": 0.01994319151621312,
+    "mean_encode_time_sec": 0.02887791908928193,
+    "mean_real_time_factor": 0.09675017161294817
+  },
+  "sample_rate": 16000,
+  "si_sdr_outliers_below_minus_10db": [
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1188/133604/1188-133604-0012.flac",
+      "si_sdr_db": -11.209833145141602,
+      "used_decode_mode": "both",
+      "utt_id": "1188-133604-0012"
+    }
+  ],
+  "split": "test",
+  "waveform_samples": 16000,
+  "wireless_channel_used": false,
+  "worst_samples": [
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1188/133604/1188-133604-0012.flac",
+      "clean_si_sdr": -11.209833145141602,
+      "clean_stft_l1": 0.011411426588892937,
+      "clean_waveform_snr": 0.31673234701156616,
+      "used_decode_mode": "both",
+      "utt_id": "1188-133604-0012"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1089/134691/1089-134691-0022.flac",
+      "clean_si_sdr": -1.090266227722168,
+      "clean_stft_l1": 0.08273672312498093,
+      "clean_waveform_snr": 2.4992973804473877,
+      "used_decode_mode": "both",
+      "utt_id": "1089-134691-0022"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1089/134686/1089-134686-0022.flac",
+      "clean_si_sdr": -1.0184059143066406,
+      "clean_stft_l1": 0.04622622951865196,
+      "clean_waveform_snr": 2.5309789180755615,
+      "used_decode_mode": "both",
+      "utt_id": "1089-134686-0022"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1089/134691/1089-134691-0005.flac",
+      "clean_si_sdr": -0.9520813822746277,
+      "clean_stft_l1": 0.048018332570791245,
+      "clean_waveform_snr": 2.5603222846984863,
+      "used_decode_mode": "both",
+      "utt_id": "1089-134691-0005"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1089/134691/1089-134691-0002.flac",
+      "clean_si_sdr": -0.3086632192134857,
+      "clean_stft_l1": 0.06606151163578033,
+      "clean_waveform_snr": 2.858720064163208,
+      "used_decode_mode": "both",
+      "utt_id": "1089-134691-0002"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1089/134691/1089-134691-0017.flac",
+      "clean_si_sdr": 0.3205094337463379,
+      "clean_stft_l1": 0.08741055428981781,
+      "clean_waveform_snr": 3.1735196113586426,
+      "used_decode_mode": "both",
+      "utt_id": "1089-134691-0017"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1089/134686/1089-134686-0018.flac",
+      "clean_si_sdr": 0.6118763089179993,
+      "clean_stft_l1": 0.039292287081480026,
+      "clean_waveform_snr": 3.3270130157470703,
+      "used_decode_mode": "both",
+      "utt_id": "1089-134686-0018"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1089/134686/1089-134686-0001.flac",
+      "clean_si_sdr": 0.911914050579071,
+      "clean_stft_l1": 0.03860721364617348,
+      "clean_waveform_snr": 3.4901933670043945,
+      "used_decode_mode": "both",
+      "utt_id": "1089-134686-0001"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1188/133604/1188-133604-0026.flac",
+      "clean_si_sdr": 0.981781005859375,
+      "clean_stft_l1": 0.054348915815353394,
+      "clean_waveform_snr": 3.5288631916046143,
+      "used_decode_mode": "both",
+      "utt_id": "1188-133604-0026"
+    },
+    {
+      "audio_path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/test-clean/1188/133604/1188-133604-0005.flac",
+      "clean_si_sdr": 1.0704503059387207,
+      "clean_stft_l1": 0.03697223961353302,
+      "clean_waveform_snr": 3.578336715698242,
+      "used_decode_mode": "both",
+      "utt_id": "1188-133604-0005"
+    }
+  ]
+}

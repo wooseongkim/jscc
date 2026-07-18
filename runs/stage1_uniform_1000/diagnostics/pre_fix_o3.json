@@ -1,0 +1,14 @@
+{
+  "stage": "O3",
+  "initial_loss": 1.0426478385925293,
+  "best_loss": 0.30268049240112305,
+  "final_loss": 0.30268049240112305,
+  "zero_predictor_loss": 1.0,
+  "relative_improvement_over_zero": 0.697319507598877,
+  "steps_to_best": 500,
+  "power_ratio": 0.588452834635973,
+  "cosine_similarity": 0.8505240753293037,
+  "pearson_correlation": 0.8505168855190277,
+  "passed": true,
+  "failure_reasons": []
+}
