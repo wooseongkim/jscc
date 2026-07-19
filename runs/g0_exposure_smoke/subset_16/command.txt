@@ -1,0 +1,1 @@
+diagnose_g0_exposure_normalized.py --config configs/train_stage1_fixed_tx_uniform.yaml --subset-size 16 --batch-size 4 --max-epochs 2 --seed 23 --output-dir runs/g0_exposure_smoke/subset_16 --device cpu --overwrite

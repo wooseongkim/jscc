@@ -1,0 +1,1 @@
+diagnose_stage1_content_generalization.py --config configs/train_stage1_fixed_tx_uniform.yaml --stage g0_direct --subset-size 256 --steps 1000 --seed 23 --output-dir runs/stage1_content_generalization/g0_direct/subset_256 --device cuda --checkpoint-every 250 --validation-every 100 --allow-long-run

@@ -1,0 +1,1 @@
+diagnose_stage1_content_generalization.py --config configs/train_stage1_fixed_tx_uniform.yaml --stage g3_random_clean --subset-size 16 --steps 1 --seed 23 --output-dir runs/stage1_content_generalization_smoke/g3_random_clean/subset_16 --device cpu --checkpoint-every 1 --validation-every 1

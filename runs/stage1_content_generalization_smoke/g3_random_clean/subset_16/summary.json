@@ -1,0 +1,1176 @@
+{
+  "provenance": {
+    "diagnostic_type": "stage1_content_generalization",
+    "diagnostic_engine_version": "stage1_content_generalization_v1",
+    "stage_definition_version": "g0_g3_v1",
+    "stage_name": "g3_random_clean",
+    "subset_size": "16",
+    "seed_derivation_version": "sha256_domain_v1",
+    "train_utterance_ids": [
+      "data/mini_librispeech/LibriSpeech/train-clean-5/19/198/19-198-0025.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/4680/16042/4680-16042-0021.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/1898/145715/1898-145715-0023.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/7367/86737/7367-86737-0107.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/669/129074/669-129074-0004.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/1970/28415/1970-28415-0010.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/332/128985/332-128985-0020.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/5789/70653/5789-70653-0006.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/6848/252323/6848-252323-0028.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/3242/8112/3242-8112-0019.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/3526/176653/3526-176653-0048.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/32/21631/32-21631-0016.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/2136/5147/2136-5147-0013.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/8629/261139/8629-261139-0049.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/4640/19188/4640-19188-0020.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/460/172359/460-172359-0020.flac"
+    ],
+    "validation_suite_hash": "d84a97c5908c8e878fcfbe5f9cd6f45397018a8d57f9274120e6967e970bdc71",
+    "train_manifest_hash": "de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40",
+    "validation_manifest_hash": "f8f473d5b80f943d73585682fb5770d7ae9047edebe9f6ccec80cf910cb04e68",
+    "latent_cache_hash": "20888141b19d26555726d3500b07e6beaf101ed95abfe5294a01db24bc1315be",
+    "preprocessing": {
+      "sample_rate": 16000,
+      "waveform_samples": 16000,
+      "codec_type": "speechtokenizer",
+      "representation_shape": [
+        8,
+        50,
+        1024
+      ]
+    },
+    "model_initialization_hash": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "fixed_channel_hash": null,
+    "fixed_noise_hash": null,
+    "stage_local_steps": 1,
+    "cumulative_optimizer_steps": 1,
+    "git_commit": "eec8b1fc33ed9f80682714daebe662cf15e738c3",
+    "working_tree_dirty": true,
+    "initialization_mode": "fresh_initialization_control"
+  },
+  "steps": 1,
+  "best_step": 1,
+  "final_train": {
+    "step": 1,
+    "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/19/198/19-198-0025.flac",
+    "loss": 1.057520866394043,
+    "aggregate": {
+      "target_power": 1.9731786996126175,
+      "reconstruction_power": 0.04211388435214758,
+      "power_ratio": 0.058511813811492175,
+      "raw_mse": 2.015574261546135,
+      "normalized_mse": 1.0575209110975266,
+      "zero_normalized_mse": 1.0,
+      "cosine_similarity": 0.0012238911840540823,
+      "pearson_correlation": 0.0012264284487173427,
+      "relative_improvement_over_zero": -0.05752091109752655,
+      "finite": true
+    },
+    "per_layer": [
+      {
+        "layer": 0,
+        "target_power": 10.596789360046387,
+        "reconstruction_power": 0.04185273125767708,
+        "power_ratio": 0.003949567209929228,
+        "raw_mse": 10.645234107971191,
+        "normalized_mse": 1.0045716762542725,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -0.00494878925383091,
+        "pearson_correlation": -0.004948578309267759,
+        "relative_improvement_over_zero": -0.004571676254272461,
+        "finite": true
+      },
+      {
+        "layer": 1,
+        "target_power": 1.5070208311080933,
+        "reconstruction_power": 0.042581990361213684,
+        "power_ratio": 0.02825574018061161,
+        "raw_mse": 1.5492898225784302,
+        "normalized_mse": 1.028048038482666,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": 0.000618030084297061,
+        "pearson_correlation": 0.0006434338865801692,
+        "relative_improvement_over_zero": -0.028048038482666016,
+        "finite": true
+      },
+      {
+        "layer": 2,
+        "target_power": 0.8994033336639404,
+        "reconstruction_power": 0.04171814024448395,
+        "power_ratio": 0.04638424143195152,
+        "raw_mse": 0.9410713911056519,
+        "normalized_mse": 1.0463285446166992,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": 0.0001291171065531671,
+        "pearson_correlation": 9.29928501136601e-05,
+        "relative_improvement_over_zero": -0.04632854461669922,
+        "finite": true
+      },
+      {
+        "layer": 3,
+        "target_power": 0.7135197520256042,
+        "reconstruction_power": 0.042168401181697845,
+        "power_ratio": 0.05909913778305054,
+        "raw_mse": 0.7556014060974121,
+        "normalized_mse": 1.0589776039123535,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": 0.00024994651903398335,
+        "pearson_correlation": 0.0002762814692687243,
+        "relative_improvement_over_zero": -0.058977603912353516,
+        "finite": true
+      },
+      {
+        "layer": 4,
+        "target_power": 0.5632998943328857,
+        "reconstruction_power": 0.042345333844423294,
+        "power_ratio": 0.07517369091510773,
+        "raw_mse": 0.6064785122871399,
+        "normalized_mse": 1.076653003692627,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -0.0026978023815900087,
+        "pearson_correlation": -0.002694364171475172,
+        "relative_improvement_over_zero": -0.07665300369262695,
+        "finite": true
+      },
+      {
+        "layer": 5,
+        "target_power": 0.5891203880310059,
+        "reconstruction_power": 0.042256105691194534,
+        "power_ratio": 0.071727454662323,
+        "raw_mse": 0.6302250027656555,
+        "normalized_mse": 1.0697728395462036,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": 0.003648966085165739,
+        "pearson_correlation": 0.003620148403570056,
+        "relative_improvement_over_zero": -0.06977283954620361,
+        "finite": true
+      },
+      {
+        "layer": 6,
+        "target_power": 0.47181984782218933,
+        "reconstruction_power": 0.041875049471855164,
+        "power_ratio": 0.08875220268964767,
+        "raw_mse": 0.5110552310943604,
+        "normalized_mse": 1.0831575393676758,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": 0.009389589540660381,
+        "pearson_correlation": 0.009386316873133183,
+        "relative_improvement_over_zero": -0.08315753936767578,
+        "finite": true
+      },
+      {
+        "layer": 7,
+        "target_power": 0.44445618987083435,
+        "reconstruction_power": 0.042113322764635086,
+        "power_ratio": 0.0947524756193161,
+        "raw_mse": 0.4856386184692383,
+        "normalized_mse": 1.0926580429077148,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": 0.0034020717721432447,
+        "pearson_correlation": 0.0034351965878158808,
+        "relative_improvement_over_zero": -0.09265804290771484,
+        "finite": true
+      }
+    ],
+    "layer0_summary": {
+      "layer": 0,
+      "target_power": 10.596789360046387,
+      "reconstruction_power": 0.04185273125767708,
+      "power_ratio": 0.003949567209929228,
+      "raw_mse": 10.645234107971191,
+      "normalized_mse": 1.0045716762542725,
+      "zero_normalized_mse": 1.0,
+      "cosine_similarity": -0.00494878925383091,
+      "pearson_correlation": -0.004948578309267759,
+      "relative_improvement_over_zero": -0.004571676254272461,
+      "finite": true
+    },
+    "channel_hash": "8ce69208094997b213607065bf7c2f0845c7cab0a2037474f1fdbe46d84697f9",
+    "noise_hash": "7217ea3932b351c43dccfebefb9f4124e1f71ce9eecff1e116acb108da034a5a",
+    "validation": {
+      "seen_utterance_unseen_channel": {
+        "group": "seen_utterance_unseen_channel",
+        "aggregate": {
+          "target_power": 2.4060746408067644,
+          "reconstruction_power": 0.09038991105626337,
+          "power_ratio": 0.09771490813000128,
+          "raw_mse": 2.4966351510956883,
+          "normalized_mse": 1.0971268229186535,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -4.9662320634524804e-05,
+          "pearson_correlation": -5.06023466186889e-05,
+          "relative_improvement_over_zero": -0.09712682291865349,
+          "finite": true
+        },
+        "per_layer": [
+          {
+            "layer": 0,
+            "target_power": 12.305654764175415,
+            "reconstruction_power": 0.09049261407926679,
+            "power_ratio": 0.007419480476528406,
+            "raw_mse": 12.400854229927063,
+            "normalized_mse": 1.0078043341636658,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.002709531494474504,
+            "pearson_correlation": -0.0026743445996544324,
+            "relative_improvement_over_zero": -0.0078043341636657715,
+            "finite": true
+          },
+          {
+            "layer": 1,
+            "target_power": 2.0435864478349686,
+            "reconstruction_power": 0.09068930428475142,
+            "power_ratio": 0.04353121877647936,
+            "raw_mse": 2.1343405693769455,
+            "normalized_mse": 1.0434828847646713,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.0007563159051642288,
+            "pearson_correlation": -0.0007513527307310142,
+            "relative_improvement_over_zero": -0.043482884764671326,
+            "finite": true
+          },
+          {
+            "layer": 2,
+            "target_power": 1.3726951032876968,
+            "reconstruction_power": 0.09060306428000331,
+            "power_ratio": 0.06431922456249595,
+            "raw_mse": 1.4626637622714043,
+            "normalized_mse": 1.0637618154287338,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.0005249640817055479,
+            "pearson_correlation": 0.0005335094028851017,
+            "relative_improvement_over_zero": -0.06376181542873383,
+            "finite": true
+          },
+          {
+            "layer": 3,
+            "target_power": 0.984229288995266,
+            "reconstruction_power": 0.09037169069051743,
+            "power_ratio": 0.087928302353248,
+            "raw_mse": 1.0749066397547722,
+            "normalized_mse": 1.0881474912166595,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.00019036415324080735,
+            "pearson_correlation": -0.0001949449215317145,
+            "relative_improvement_over_zero": -0.08814749121665955,
+            "finite": true
+          },
+          {
+            "layer": 4,
+            "target_power": 0.7940265461802483,
+            "reconstruction_power": 0.09009137540124357,
+            "power_ratio": 0.11221146583557129,
+            "raw_mse": 0.8833010718226433,
+            "normalized_mse": 1.1112360060214996,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.0008017531727091409,
+            "pearson_correlation": 0.0007821666622476187,
+            "relative_improvement_over_zero": -0.11123600602149963,
+            "finite": true
+          },
+          {
+            "layer": 5,
+            "target_power": 0.683145921677351,
+            "reconstruction_power": 0.0900043286383152,
+            "power_ratio": 0.1298057367093861,
+            "raw_mse": 0.7720176205039024,
+            "normalized_mse": 1.1279689520597458,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.0011860320664709434,
+            "pearson_correlation": 0.0011800733773270622,
+            "relative_improvement_over_zero": -0.1279689520597458,
+            "finite": true
+          },
+          {
+            "layer": 6,
+            "target_power": 0.5701578035950661,
+            "reconstruction_power": 0.09021121053956449,
+            "power_ratio": 0.15549387643113732,
+            "raw_mse": 0.6594189144670963,
+            "normalized_mse": 1.153888687491417,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.002044830886006821,
+            "pearson_correlation": 0.0020229519650456496,
+            "relative_improvement_over_zero": -0.15388868749141693,
+            "finite": true
+          },
+          {
+            "layer": 7,
+            "target_power": 0.4951012507081032,
+            "reconstruction_power": 0.09065570053644478,
+            "power_ratio": 0.18100995989516377,
+            "raw_mse": 0.5855784006416798,
+            "normalized_mse": 1.180724412202835,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.0012986672190891113,
+            "pearson_correlation": -0.0013028779285377823,
+            "relative_improvement_over_zero": -0.18072441220283508,
+            "finite": true
+          }
+        ],
+        "layer0_summary": {
+          "layer": 0,
+          "target_power": 12.305654764175415,
+          "reconstruction_power": 0.09049261407926679,
+          "power_ratio": 0.007419480476528406,
+          "raw_mse": 12.400854229927063,
+          "normalized_mse": 1.0078043341636658,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.002709531494474504,
+          "pearson_correlation": -0.0026743445996544324,
+          "relative_improvement_over_zero": -0.0078043341636657715,
+          "finite": true
+        },
+        "gate": {
+          "passed": false,
+          "reasons": [
+            "zero_baseline_improvement_below_5_percent",
+            "nonpositive_cosine",
+            "nonpositive_correlation"
+          ]
+        }
+      },
+      "same_speaker_unseen_utterance_unseen_channel": {
+        "group": "same_speaker_unseen_utterance_unseen_channel",
+        "aggregate": {
+          "target_power": 2.4557884209789336,
+          "reconstruction_power": 0.03359423467190936,
+          "power_ratio": 0.03697212586121168,
+          "raw_mse": 2.4899801490828395,
+          "normalized_mse": 1.0369262658059597,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.00028612795915705647,
+          "pearson_correlation": -0.0002741495984537323,
+          "relative_improvement_over_zero": -0.0369262658059597,
+          "finite": true
+        },
+        "per_layer": [
+          {
+            "layer": 0,
+            "target_power": 12.534753203392029,
+            "reconstruction_power": 0.03353688609786332,
+            "power_ratio": 0.0026756644947454333,
+            "raw_mse": 12.573763489723206,
+            "normalized_mse": 1.0031039714813232,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.004033770230307709,
+            "pearson_correlation": -0.004012578370748088,
+            "relative_improvement_over_zero": -0.003103971481323242,
+            "finite": true
+          },
+          {
+            "layer": 1,
+            "target_power": 2.183712914586067,
+            "reconstruction_power": 0.03378844144754112,
+            "power_ratio": 0.01609284384176135,
+            "raw_mse": 2.2176535725593567,
+            "normalized_mse": 1.0160421431064606,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.0002008615483646281,
+            "pearson_correlation": -0.00020169727940810844,
+            "relative_improvement_over_zero": -0.01604214310646057,
+            "finite": true
+          },
+          {
+            "layer": 2,
+            "target_power": 1.3321862071752548,
+            "reconstruction_power": 0.03346738126128912,
+            "power_ratio": 0.025509458733722568,
+            "raw_mse": 1.365458682179451,
+            "normalized_mse": 1.025358885526657,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.00017220398876816034,
+            "pearson_correlation": 0.0001806870277505368,
+            "relative_improvement_over_zero": -0.025358885526657104,
+            "finite": true
+          },
+          {
+            "layer": 3,
+            "target_power": 1.0292354822158813,
+            "reconstruction_power": 0.033590619219467044,
+            "power_ratio": 0.033409222261980176,
+            "raw_mse": 1.0628603473305702,
+            "normalized_mse": 1.033415138721466,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.00018304733384866267,
+            "pearson_correlation": 0.00019033142598345876,
+            "relative_improvement_over_zero": -0.033415138721466064,
+            "finite": true
+          },
+          {
+            "layer": 4,
+            "target_power": 0.8094110637903214,
+            "reconstruction_power": 0.03363434155471623,
+            "power_ratio": 0.042004923801869154,
+            "raw_mse": 0.8423172384500504,
+            "normalized_mse": 1.0411541908979416,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.001905916628857085,
+            "pearson_correlation": 0.0019087754899373977,
+            "relative_improvement_over_zero": -0.04115419089794159,
+            "finite": true
+          },
+          {
+            "layer": 5,
+            "target_power": 0.67690759152174,
+            "reconstruction_power": 0.033541484735906124,
+            "power_ratio": 0.05019972426816821,
+            "raw_mse": 0.7102488204836845,
+            "normalized_mse": 1.0498648434877396,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.0007411440165014938,
+            "pearson_correlation": 0.0007499889616155997,
+            "relative_improvement_over_zero": -0.04986484348773956,
+            "finite": true
+          },
+          {
+            "layer": 6,
+            "target_power": 0.5762948170304298,
+            "reconstruction_power": 0.033609958831220865,
+            "power_ratio": 0.058647014666348696,
+            "raw_mse": 0.6101840436458588,
+            "normalized_mse": 1.0592001974582672,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.0011423459873185493,
+            "pearson_correlation": -0.0011075535294367,
+            "relative_improvement_over_zero": -0.05920019745826721,
+            "finite": true
+          },
+          {
+            "layer": 7,
+            "target_power": 0.5038060881197453,
+            "reconstruction_power": 0.03358476422727108,
+            "power_ratio": 0.06723815482109785,
+            "raw_mse": 0.5373549982905388,
+            "normalized_mse": 1.0672707557678223,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 8.564212475903332e-05,
+            "pearson_correlation": 9.884948667604476e-05,
+            "relative_improvement_over_zero": -0.06727075576782227,
+            "finite": true
+          }
+        ],
+        "layer0_summary": {
+          "layer": 0,
+          "target_power": 12.534753203392029,
+          "reconstruction_power": 0.03353688609786332,
+          "power_ratio": 0.0026756644947454333,
+          "raw_mse": 12.573763489723206,
+          "normalized_mse": 1.0031039714813232,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.004033770230307709,
+          "pearson_correlation": -0.004012578370748088,
+          "relative_improvement_over_zero": -0.003103971481323242,
+          "finite": true
+        },
+        "gate": {
+          "passed": false,
+          "reasons": [
+            "zero_baseline_improvement_below_5_percent",
+            "nonpositive_cosine",
+            "nonpositive_correlation"
+          ]
+        }
+      },
+      "unseen_speaker_unseen_utterance_unseen_channel": {
+        "group": "unseen_speaker_unseen_utterance_unseen_channel",
+        "aggregate": {
+          "target_power": 2.5189265375956893,
+          "reconstruction_power": 0.07073661536560394,
+          "power_ratio": 0.06926291741910973,
+          "raw_mse": 2.5898272646591067,
+          "normalized_mse": 1.069509720429778,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0004769159691022651,
+          "pearson_correlation": -0.0004737665958600701,
+          "relative_improvement_over_zero": -0.0695097204297781,
+          "finite": true
+        },
+        "per_layer": [
+          {
+            "layer": 0,
+            "target_power": 12.392269611358643,
+            "reconstruction_power": 0.07090873667038977,
+            "power_ratio": 0.005733964295359328,
+            "raw_mse": 12.463979840278625,
+            "normalized_mse": 1.0058039873838425,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.0006490183877758682,
+            "pearson_correlation": -0.0006208687846083194,
+            "relative_improvement_over_zero": -0.005803987383842468,
+            "finite": true
+          },
+          {
+            "layer": 1,
+            "target_power": 2.259521245956421,
+            "reconstruction_power": 0.07063709595240653,
+            "power_ratio": 0.030962437042035162,
+            "raw_mse": 2.3293778896331787,
+            "normalized_mse": 1.0306601375341415,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.0008748027466936037,
+            "pearson_correlation": 0.0008672098047100008,
+            "relative_improvement_over_zero": -0.03066013753414154,
+            "finite": true
+          },
+          {
+            "layer": 2,
+            "target_power": 1.5196428000926971,
+            "reconstruction_power": 0.07055276841856539,
+            "power_ratio": 0.04612179135438055,
+            "raw_mse": 1.590503215789795,
+            "normalized_mse": 1.046325609087944,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 2.995069371536374e-05,
+            "pearson_correlation": 3.6903584259562194e-05,
+            "relative_improvement_over_zero": -0.04632560908794403,
+            "finite": true
+          },
+          {
+            "layer": 3,
+            "target_power": 1.155679352581501,
+            "reconstruction_power": 0.07095431303605437,
+            "power_ratio": 0.06010597897693515,
+            "raw_mse": 1.226484164595604,
+            "normalized_mse": 1.0600296705961227,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.00021998972806613892,
+            "pearson_correlation": -0.00023566184972878546,
+            "relative_improvement_over_zero": -0.06002967059612274,
+            "finite": true
+          },
+          {
+            "layer": 4,
+            "target_power": 0.8809954896569252,
+            "reconstruction_power": 0.07076875562779605,
+            "power_ratio": 0.079525115666911,
+            "raw_mse": 0.951195627450943,
+            "normalized_mse": 1.0788626670837402,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": 0.0008376963560294826,
+            "pearson_correlation": 0.0008380337640119251,
+            "relative_improvement_over_zero": -0.07886266708374023,
+            "finite": true
+          },
+          {
+            "layer": 5,
+            "target_power": 0.7577286064624786,
+            "reconstruction_power": 0.0706657636910677,
+            "power_ratio": 0.09350391174666584,
+            "raw_mse": 0.8289472237229347,
+            "normalized_mse": 1.0942958891391754,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.001538577227620408,
+            "pearson_correlation": -0.0015492126403842121,
+            "relative_improvement_over_zero": -0.09429588913917542,
+            "finite": true
+          },
+          {
+            "layer": 6,
+            "target_power": 0.6378127038478851,
+            "reconstruction_power": 0.07075837161391973,
+            "power_ratio": 0.1101606790907681,
+            "raw_mse": 0.7090340256690979,
+            "normalized_mse": 1.110921949148178,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.0017438229988329113,
+            "pearson_correlation": -0.0017359561898047104,
+            "relative_improvement_over_zero": -0.1109219491481781,
+            "finite": true
+          },
+          {
+            "layer": 7,
+            "target_power": 0.5477624908089638,
+            "reconstruction_power": 0.07064711791463196,
+            "power_ratio": 0.12798946117982268,
+            "raw_mse": 0.6190961301326752,
+            "normalized_mse": 1.1291778534650803,
+            "zero_normalized_mse": 1.0,
+            "cosine_similarity": -0.0014063692069612443,
+            "pearson_correlation": -0.0013905804553360213,
+            "relative_improvement_over_zero": -0.12917785346508026,
+            "finite": true
+          }
+        ],
+        "layer0_summary": {
+          "layer": 0,
+          "target_power": 12.392269611358643,
+          "reconstruction_power": 0.07090873667038977,
+          "power_ratio": 0.005733964295359328,
+          "raw_mse": 12.463979840278625,
+          "normalized_mse": 1.0058039873838425,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0006490183877758682,
+          "pearson_correlation": -0.0006208687846083194,
+          "relative_improvement_over_zero": -0.005803987383842468,
+          "finite": true
+        },
+        "gate": {
+          "passed": false,
+          "reasons": [
+            "zero_baseline_improvement_below_5_percent",
+            "nonpositive_cosine",
+            "nonpositive_correlation"
+          ]
+        }
+      }
+    }
+  },
+  "validation": {
+    "seen_utterance_unseen_channel": {
+      "group": "seen_utterance_unseen_channel",
+      "aggregate": {
+        "target_power": 2.4060746408067644,
+        "reconstruction_power": 0.09038991105626337,
+        "power_ratio": 0.09771490813000128,
+        "raw_mse": 2.4966351510956883,
+        "normalized_mse": 1.0971268229186535,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -4.9662320634524804e-05,
+        "pearson_correlation": -5.06023466186889e-05,
+        "relative_improvement_over_zero": -0.09712682291865349,
+        "finite": true
+      },
+      "per_layer": [
+        {
+          "layer": 0,
+          "target_power": 12.305654764175415,
+          "reconstruction_power": 0.09049261407926679,
+          "power_ratio": 0.007419480476528406,
+          "raw_mse": 12.400854229927063,
+          "normalized_mse": 1.0078043341636658,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.002709531494474504,
+          "pearson_correlation": -0.0026743445996544324,
+          "relative_improvement_over_zero": -0.0078043341636657715,
+          "finite": true
+        },
+        {
+          "layer": 1,
+          "target_power": 2.0435864478349686,
+          "reconstruction_power": 0.09068930428475142,
+          "power_ratio": 0.04353121877647936,
+          "raw_mse": 2.1343405693769455,
+          "normalized_mse": 1.0434828847646713,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0007563159051642288,
+          "pearson_correlation": -0.0007513527307310142,
+          "relative_improvement_over_zero": -0.043482884764671326,
+          "finite": true
+        },
+        {
+          "layer": 2,
+          "target_power": 1.3726951032876968,
+          "reconstruction_power": 0.09060306428000331,
+          "power_ratio": 0.06431922456249595,
+          "raw_mse": 1.4626637622714043,
+          "normalized_mse": 1.0637618154287338,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.0005249640817055479,
+          "pearson_correlation": 0.0005335094028851017,
+          "relative_improvement_over_zero": -0.06376181542873383,
+          "finite": true
+        },
+        {
+          "layer": 3,
+          "target_power": 0.984229288995266,
+          "reconstruction_power": 0.09037169069051743,
+          "power_ratio": 0.087928302353248,
+          "raw_mse": 1.0749066397547722,
+          "normalized_mse": 1.0881474912166595,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.00019036415324080735,
+          "pearson_correlation": -0.0001949449215317145,
+          "relative_improvement_over_zero": -0.08814749121665955,
+          "finite": true
+        },
+        {
+          "layer": 4,
+          "target_power": 0.7940265461802483,
+          "reconstruction_power": 0.09009137540124357,
+          "power_ratio": 0.11221146583557129,
+          "raw_mse": 0.8833010718226433,
+          "normalized_mse": 1.1112360060214996,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.0008017531727091409,
+          "pearson_correlation": 0.0007821666622476187,
+          "relative_improvement_over_zero": -0.11123600602149963,
+          "finite": true
+        },
+        {
+          "layer": 5,
+          "target_power": 0.683145921677351,
+          "reconstruction_power": 0.0900043286383152,
+          "power_ratio": 0.1298057367093861,
+          "raw_mse": 0.7720176205039024,
+          "normalized_mse": 1.1279689520597458,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.0011860320664709434,
+          "pearson_correlation": 0.0011800733773270622,
+          "relative_improvement_over_zero": -0.1279689520597458,
+          "finite": true
+        },
+        {
+          "layer": 6,
+          "target_power": 0.5701578035950661,
+          "reconstruction_power": 0.09021121053956449,
+          "power_ratio": 0.15549387643113732,
+          "raw_mse": 0.6594189144670963,
+          "normalized_mse": 1.153888687491417,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.002044830886006821,
+          "pearson_correlation": 0.0020229519650456496,
+          "relative_improvement_over_zero": -0.15388868749141693,
+          "finite": true
+        },
+        {
+          "layer": 7,
+          "target_power": 0.4951012507081032,
+          "reconstruction_power": 0.09065570053644478,
+          "power_ratio": 0.18100995989516377,
+          "raw_mse": 0.5855784006416798,
+          "normalized_mse": 1.180724412202835,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0012986672190891113,
+          "pearson_correlation": -0.0013028779285377823,
+          "relative_improvement_over_zero": -0.18072441220283508,
+          "finite": true
+        }
+      ],
+      "layer0_summary": {
+        "layer": 0,
+        "target_power": 12.305654764175415,
+        "reconstruction_power": 0.09049261407926679,
+        "power_ratio": 0.007419480476528406,
+        "raw_mse": 12.400854229927063,
+        "normalized_mse": 1.0078043341636658,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -0.002709531494474504,
+        "pearson_correlation": -0.0026743445996544324,
+        "relative_improvement_over_zero": -0.0078043341636657715,
+        "finite": true
+      },
+      "gate": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent",
+          "nonpositive_cosine",
+          "nonpositive_correlation"
+        ]
+      }
+    },
+    "same_speaker_unseen_utterance_unseen_channel": {
+      "group": "same_speaker_unseen_utterance_unseen_channel",
+      "aggregate": {
+        "target_power": 2.4557884209789336,
+        "reconstruction_power": 0.03359423467190936,
+        "power_ratio": 0.03697212586121168,
+        "raw_mse": 2.4899801490828395,
+        "normalized_mse": 1.0369262658059597,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -0.00028612795915705647,
+        "pearson_correlation": -0.0002741495984537323,
+        "relative_improvement_over_zero": -0.0369262658059597,
+        "finite": true
+      },
+      "per_layer": [
+        {
+          "layer": 0,
+          "target_power": 12.534753203392029,
+          "reconstruction_power": 0.03353688609786332,
+          "power_ratio": 0.0026756644947454333,
+          "raw_mse": 12.573763489723206,
+          "normalized_mse": 1.0031039714813232,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.004033770230307709,
+          "pearson_correlation": -0.004012578370748088,
+          "relative_improvement_over_zero": -0.003103971481323242,
+          "finite": true
+        },
+        {
+          "layer": 1,
+          "target_power": 2.183712914586067,
+          "reconstruction_power": 0.03378844144754112,
+          "power_ratio": 0.01609284384176135,
+          "raw_mse": 2.2176535725593567,
+          "normalized_mse": 1.0160421431064606,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0002008615483646281,
+          "pearson_correlation": -0.00020169727940810844,
+          "relative_improvement_over_zero": -0.01604214310646057,
+          "finite": true
+        },
+        {
+          "layer": 2,
+          "target_power": 1.3321862071752548,
+          "reconstruction_power": 0.03346738126128912,
+          "power_ratio": 0.025509458733722568,
+          "raw_mse": 1.365458682179451,
+          "normalized_mse": 1.025358885526657,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.00017220398876816034,
+          "pearson_correlation": 0.0001806870277505368,
+          "relative_improvement_over_zero": -0.025358885526657104,
+          "finite": true
+        },
+        {
+          "layer": 3,
+          "target_power": 1.0292354822158813,
+          "reconstruction_power": 0.033590619219467044,
+          "power_ratio": 0.033409222261980176,
+          "raw_mse": 1.0628603473305702,
+          "normalized_mse": 1.033415138721466,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.00018304733384866267,
+          "pearson_correlation": 0.00019033142598345876,
+          "relative_improvement_over_zero": -0.033415138721466064,
+          "finite": true
+        },
+        {
+          "layer": 4,
+          "target_power": 0.8094110637903214,
+          "reconstruction_power": 0.03363434155471623,
+          "power_ratio": 0.042004923801869154,
+          "raw_mse": 0.8423172384500504,
+          "normalized_mse": 1.0411541908979416,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.001905916628857085,
+          "pearson_correlation": 0.0019087754899373977,
+          "relative_improvement_over_zero": -0.04115419089794159,
+          "finite": true
+        },
+        {
+          "layer": 5,
+          "target_power": 0.67690759152174,
+          "reconstruction_power": 0.033541484735906124,
+          "power_ratio": 0.05019972426816821,
+          "raw_mse": 0.7102488204836845,
+          "normalized_mse": 1.0498648434877396,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.0007411440165014938,
+          "pearson_correlation": 0.0007499889616155997,
+          "relative_improvement_over_zero": -0.04986484348773956,
+          "finite": true
+        },
+        {
+          "layer": 6,
+          "target_power": 0.5762948170304298,
+          "reconstruction_power": 0.033609958831220865,
+          "power_ratio": 0.058647014666348696,
+          "raw_mse": 0.6101840436458588,
+          "normalized_mse": 1.0592001974582672,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0011423459873185493,
+          "pearson_correlation": -0.0011075535294367,
+          "relative_improvement_over_zero": -0.05920019745826721,
+          "finite": true
+        },
+        {
+          "layer": 7,
+          "target_power": 0.5038060881197453,
+          "reconstruction_power": 0.03358476422727108,
+          "power_ratio": 0.06723815482109785,
+          "raw_mse": 0.5373549982905388,
+          "normalized_mse": 1.0672707557678223,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 8.564212475903332e-05,
+          "pearson_correlation": 9.884948667604476e-05,
+          "relative_improvement_over_zero": -0.06727075576782227,
+          "finite": true
+        }
+      ],
+      "layer0_summary": {
+        "layer": 0,
+        "target_power": 12.534753203392029,
+        "reconstruction_power": 0.03353688609786332,
+        "power_ratio": 0.0026756644947454333,
+        "raw_mse": 12.573763489723206,
+        "normalized_mse": 1.0031039714813232,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -0.004033770230307709,
+        "pearson_correlation": -0.004012578370748088,
+        "relative_improvement_over_zero": -0.003103971481323242,
+        "finite": true
+      },
+      "gate": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent",
+          "nonpositive_cosine",
+          "nonpositive_correlation"
+        ]
+      }
+    },
+    "unseen_speaker_unseen_utterance_unseen_channel": {
+      "group": "unseen_speaker_unseen_utterance_unseen_channel",
+      "aggregate": {
+        "target_power": 2.5189265375956893,
+        "reconstruction_power": 0.07073661536560394,
+        "power_ratio": 0.06926291741910973,
+        "raw_mse": 2.5898272646591067,
+        "normalized_mse": 1.069509720429778,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -0.0004769159691022651,
+        "pearson_correlation": -0.0004737665958600701,
+        "relative_improvement_over_zero": -0.0695097204297781,
+        "finite": true
+      },
+      "per_layer": [
+        {
+          "layer": 0,
+          "target_power": 12.392269611358643,
+          "reconstruction_power": 0.07090873667038977,
+          "power_ratio": 0.005733964295359328,
+          "raw_mse": 12.463979840278625,
+          "normalized_mse": 1.0058039873838425,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0006490183877758682,
+          "pearson_correlation": -0.0006208687846083194,
+          "relative_improvement_over_zero": -0.005803987383842468,
+          "finite": true
+        },
+        {
+          "layer": 1,
+          "target_power": 2.259521245956421,
+          "reconstruction_power": 0.07063709595240653,
+          "power_ratio": 0.030962437042035162,
+          "raw_mse": 2.3293778896331787,
+          "normalized_mse": 1.0306601375341415,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.0008748027466936037,
+          "pearson_correlation": 0.0008672098047100008,
+          "relative_improvement_over_zero": -0.03066013753414154,
+          "finite": true
+        },
+        {
+          "layer": 2,
+          "target_power": 1.5196428000926971,
+          "reconstruction_power": 0.07055276841856539,
+          "power_ratio": 0.04612179135438055,
+          "raw_mse": 1.590503215789795,
+          "normalized_mse": 1.046325609087944,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 2.995069371536374e-05,
+          "pearson_correlation": 3.6903584259562194e-05,
+          "relative_improvement_over_zero": -0.04632560908794403,
+          "finite": true
+        },
+        {
+          "layer": 3,
+          "target_power": 1.155679352581501,
+          "reconstruction_power": 0.07095431303605437,
+          "power_ratio": 0.06010597897693515,
+          "raw_mse": 1.226484164595604,
+          "normalized_mse": 1.0600296705961227,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.00021998972806613892,
+          "pearson_correlation": -0.00023566184972878546,
+          "relative_improvement_over_zero": -0.06002967059612274,
+          "finite": true
+        },
+        {
+          "layer": 4,
+          "target_power": 0.8809954896569252,
+          "reconstruction_power": 0.07076875562779605,
+          "power_ratio": 0.079525115666911,
+          "raw_mse": 0.951195627450943,
+          "normalized_mse": 1.0788626670837402,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": 0.0008376963560294826,
+          "pearson_correlation": 0.0008380337640119251,
+          "relative_improvement_over_zero": -0.07886266708374023,
+          "finite": true
+        },
+        {
+          "layer": 5,
+          "target_power": 0.7577286064624786,
+          "reconstruction_power": 0.0706657636910677,
+          "power_ratio": 0.09350391174666584,
+          "raw_mse": 0.8289472237229347,
+          "normalized_mse": 1.0942958891391754,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.001538577227620408,
+          "pearson_correlation": -0.0015492126403842121,
+          "relative_improvement_over_zero": -0.09429588913917542,
+          "finite": true
+        },
+        {
+          "layer": 6,
+          "target_power": 0.6378127038478851,
+          "reconstruction_power": 0.07075837161391973,
+          "power_ratio": 0.1101606790907681,
+          "raw_mse": 0.7090340256690979,
+          "normalized_mse": 1.110921949148178,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0017438229988329113,
+          "pearson_correlation": -0.0017359561898047104,
+          "relative_improvement_over_zero": -0.1109219491481781,
+          "finite": true
+        },
+        {
+          "layer": 7,
+          "target_power": 0.5477624908089638,
+          "reconstruction_power": 0.07064711791463196,
+          "power_ratio": 0.12798946117982268,
+          "raw_mse": 0.6190961301326752,
+          "normalized_mse": 1.1291778534650803,
+          "zero_normalized_mse": 1.0,
+          "cosine_similarity": -0.0014063692069612443,
+          "pearson_correlation": -0.0013905804553360213,
+          "relative_improvement_over_zero": -0.12917785346508026,
+          "finite": true
+        }
+      ],
+      "layer0_summary": {
+        "layer": 0,
+        "target_power": 12.392269611358643,
+        "reconstruction_power": 0.07090873667038977,
+        "power_ratio": 0.005733964295359328,
+        "raw_mse": 12.463979840278625,
+        "normalized_mse": 1.0058039873838425,
+        "zero_normalized_mse": 1.0,
+        "cosine_similarity": -0.0006490183877758682,
+        "pearson_correlation": -0.0006208687846083194,
+        "relative_improvement_over_zero": -0.005803987383842468,
+        "finite": true
+      },
+      "gate": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent",
+          "nonpositive_cosine",
+          "nonpositive_correlation"
+        ]
+      }
+    }
+  },
+  "gate": {
+    "passed": false,
+    "reasons": [
+      "nonpositive_correlation",
+      "nonpositive_cosine",
+      "zero_baseline_improvement_below_5_percent"
+    ],
+    "group_gates": {
+      "seen_utterance_unseen_channel": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent",
+          "nonpositive_cosine",
+          "nonpositive_correlation"
+        ]
+      },
+      "same_speaker_unseen_utterance_unseen_channel": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent",
+          "nonpositive_cosine",
+          "nonpositive_correlation"
+        ]
+      },
+      "unseen_speaker_unseen_utterance_unseen_channel": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent",
+          "nonpositive_cosine",
+          "nonpositive_correlation"
+        ]
+      }
+    }
+  },
+  "channel_hash_diversity": 1,
+  "noise_hash_diversity": 1,
+  "fraction_finite_batches": 1.0,
+  "final_window_loss_slope": 0.0,
+  "dataset_statistics": {
+    "train": {
+      "utterance_count": 16,
+      "speaker_count": 16,
+      "unknown_speaker_count": 0,
+      "latent_power": 2.485952138900757,
+      "latent_mean": 0.005913753528147936,
+      "latent_std": 1.5766791105270386,
+      "utterance_duration_mean_seconds": 1.0,
+      "utterance_duration_min_seconds": 1.0,
+      "utterance_duration_max_seconds": 1.0,
+      "preprocessing": {
+        "sample_rate": 16000,
+        "waveform_samples": 16000,
+        "codec_type": "speechtokenizer",
+        "representation_shape": [
+          8,
+          50,
+          1024
+        ]
+      },
+      "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+    },
+    "validation": {
+      "seen_utterance_unseen_channel": {
+        "utterance_count": 8,
+        "speaker_count": 8,
+        "unknown_speaker_count": 0,
+        "latent_power": 2.4060747623443604,
+        "latent_mean": 0.00466347299516201,
+        "latent_std": 1.5511456727981567,
+        "utterance_duration_mean_seconds": 1.0,
+        "utterance_duration_min_seconds": 1.0,
+        "utterance_duration_max_seconds": 1.0,
+        "preprocessing": {
+          "sample_rate": 16000,
+          "waveform_samples": 16000,
+          "codec_type": "speechtokenizer",
+          "representation_shape": [
+            8,
+            50,
+            1024
+          ]
+        },
+        "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+      },
+      "same_speaker_unseen_utterance_unseen_channel": {
+        "utterance_count": 8,
+        "speaker_count": 8,
+        "unknown_speaker_count": 0,
+        "latent_power": 2.4557886123657227,
+        "latent_mean": 0.002825972391292453,
+        "latent_std": 1.567093014717102,
+        "utterance_duration_mean_seconds": 1.0,
+        "utterance_duration_min_seconds": 1.0,
+        "utterance_duration_max_seconds": 1.0,
+        "preprocessing": {
+          "sample_rate": 16000,
+          "waveform_samples": 16000,
+          "codec_type": "speechtokenizer",
+          "representation_shape": [
+            8,
+            50,
+            1024
+          ]
+        },
+        "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+      },
+      "unseen_speaker_unseen_utterance_unseen_channel": {
+        "utterance_count": 8,
+        "speaker_count": 8,
+        "unknown_speaker_count": 0,
+        "latent_power": 2.5189263820648193,
+        "latent_mean": 0.008202232420444489,
+        "latent_std": 1.5870914459228516,
+        "utterance_duration_mean_seconds": 1.0,
+        "utterance_duration_min_seconds": 1.0,
+        "utterance_duration_max_seconds": 1.0,
+        "preprocessing": {
+          "sample_rate": 16000,
+          "waveform_samples": 16000,
+          "codec_type": "speechtokenizer",
+          "representation_shape": [
+            8,
+            50,
+            1024
+          ]
+        },
+        "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+      }
+    }
+  }
+}

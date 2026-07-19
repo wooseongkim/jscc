@@ -1,0 +1,28 @@
+{
+  "original_o5": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "5d82e9ecc77dfed3d17ef4b880fa5119e3fef43258d217bc8b341f83a91fb116",
+    "legitimate_channel": "b6f683a7a9056cea724cc37eddb6dd957d0b6e40fda05f37b195b0a4d9801428",
+    "jammer_channel": "266c444ea8b4a1b669744b0b7db13ba8ccb7755325e91d6624d32c7fe7d9850c",
+    "awgn": "2ce6a7dfbb777b1336ea124814d754659f7ffe934ab2e68e92825931c31225b7",
+    "jammer_waveform": "a16a730937be103b865f5059e062433a721152ec14ed92e5ad893e9cfd642ac2",
+    "jammer_mask": "85074aa95911014688e2f7d40b65bb6188303b65c0285aef22678b0e75a461fb",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_initial_data_symbols": "dafb06051b1c916179c69ed2bc4a200b21634a659ced165a920b22b2914b44c3",
+    "receiver_state": "1a1435a93a4d5d5e05d9de7415a103c22365f06e6e78d7b7ec4d8a1abb2399ef",
+    "decoder_input": "1b69fe5863873827f950fd9f2e11d3c986c4b0497643eafeeb97d8ff69b12870"
+  },
+  "new_c1": {
+    "latent_target": "87c6ce8a131b6b07a305f0868efb3dd13e6c13a9c17c2bda510f853503210b5a",
+    "initial_model_parameters": "c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1",
+    "legitimate_channel": "f7332165f9b66b5d63a6fed487902aa3ccbaba2c5d4834b5ff69cce9bf65d0cf",
+    "jammer_channel": "aca6a9bef811c452a7c2aa911fe0bf24a04442c431ed5104eebebec10db323be",
+    "awgn": "52d46ff81c30af13e91d7a35e9263f82525b7e24a7f5ae6f858c5514f963169b",
+    "jammer_waveform": "5218d44b4d93a64f8094fce0daf693f3859866f9a2c57e2879ccaafca26d884a",
+    "jammer_mask": "85074aa95911014688e2f7d40b65bb6188303b65c0285aef22678b0e75a461fb",
+    "pilot_mask": "c0f2ae3ed9dee87238b6f3473667d9afc4409daf923c396aa5bbd67d323acc24",
+    "transmitted_initial_data_symbols": "2f4ce9133e8c0624ba6a8b5ef49ec6bf1cf51d956337c353567e0788cefb6b7b",
+    "receiver_state": "ea8118a4752666a2966be3d3f8c137c729624f9f61c5efc92f9dca8a197df385",
+    "decoder_input": "a569e7426da4628b6272d0085730b8cd9659b8eaeabfac028d5d2b47833da55f"
+  }
+}

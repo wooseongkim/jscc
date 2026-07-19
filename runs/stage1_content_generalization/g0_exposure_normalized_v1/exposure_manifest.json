@@ -1,0 +1,16 @@
+{
+  "engine_version": "g0_exposure_normalized_v1",
+  "subsets_completed": [
+    "16",
+    "64",
+    "256",
+    "full"
+  ],
+  "classification": "mixed cause",
+  "evidence": [
+    "insufficient optimization budget",
+    "layer-1-to-7 collapse",
+    "utterance generalization failure"
+  ],
+  "g1_g3_o6_j_blocked": true
+}

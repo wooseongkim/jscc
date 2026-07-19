@@ -1,0 +1,1 @@
+diagnose_g0_exposure_normalized.py --config configs/train_stage1_fixed_tx_uniform.yaml --subset-size 256 --batch-size 4 --max-epochs 64 --seed 23 --output-dir runs/stage1_content_generalization/g0_exposure_normalized_v1/subset_256 --device cuda --allow-long-run

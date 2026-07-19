@@ -1,0 +1,722 @@
+{
+  "provenance": {
+    "diagnostic_engine_version": "stage1_random_distribution_v1",
+    "stage_name": "j1_weak_barrage",
+    "stage_definition_version": "stage1_curriculum_v1",
+    "resolved_stage_distribution": {
+      "clean_probability": 0.2,
+      "jammer_probabilities": {
+        "barrage": 1.0
+      },
+      "snr_db_range": [
+        5.0,
+        15.0
+      ],
+      "jsr_db_range": [
+        -15.0,
+        -10.0
+      ],
+      "jammed_fraction": 1.0
+    },
+    "seed_derivation_version": "sha256_domain_v1",
+    "train_utterance_ids": [
+      "data/mini_librispeech/LibriSpeech/train-clean-5/118/47824/118-47824-0023.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/163/122947/163-122947-0090.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/19/198/19-198-0005.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/1970/28415/1970-28415-0036.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/2416/152139/2416-152139-0034.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/3242/8112/3242-8112-0019.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/3242/8112/3242-8112-0021.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/332/128985/332-128985-0024.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/3526/176653/3526-176653-0026.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/3947/13262/3947-13262-0008.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/4640/19188/4640-19188-0035.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/6848/252323/6848-252323-0008.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/6848/252323/6848-252323-0012.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/7367/86737/7367-86737-0063.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/7367/86737/7367-86737-0105.flac",
+      "data/mini_librispeech/LibriSpeech/train-clean-5/8629/261139/8629-261139-0035.flac"
+    ],
+    "validation_utterance_ids": [
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/1272/135031/1272-135031-0003.flac",
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0020.flac",
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/161169/2803-161169-0010.flac",
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0061.flac",
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/5694/64038/5694-64038-0020.flac",
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0069.flac",
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0073.flac",
+      "data/mini_librispeech/LibriSpeech/dev-clean-2/84/121550/84-121550-0025.flac"
+    ],
+    "manifest_hashes": {
+      "train": "de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40",
+      "validation": "f8f473d5b80f943d73585682fb5770d7ae9047edebe9f6ccec80cf910cb04e68"
+    },
+    "latent_cache_hash": "fb8a82f777721c490763d900061a6dbce807c6804f7af2f95fe6fd37b6f9b05b",
+    "validation_suite_hash": "efe48aebf9b3b9777e0816f74e36882fcc5d7244b52adac9decd6960a494a567",
+    "initialization_mode": "curriculum_resume",
+    "parent_stage": "o6_random_clean",
+    "parent_checkpoint": "/home/mike/jscc/runs/stage1_random_distribution/o6_random_clean/diagnostic_last.pt",
+    "parent_checkpoint_hash": "95eeefa021654959ffc64669f93c80d284375009a4cc8c9032f48c788b41318e",
+    "cumulative_optimizer_steps": 4000,
+    "stage_local_steps": 1000,
+    "curriculum_history": [
+      "o6_random_clean",
+      "j1_weak_barrage"
+    ],
+    "git_commit": "42fddff3e056d7c7851df809b8a8d39d90abf2dc",
+    "working_tree_dirty": true
+  },
+  "steps": 1000,
+  "best_step": 919,
+  "train_final": {
+    "step": 1000,
+    "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/163/122947/163-122947-0090.flac",
+    "snr_db": 10.834493022612133,
+    "jsr_db": 0.0,
+    "jammer_type": "none",
+    "clean": true,
+    "loss": 0.9397966265678406,
+    "zero_predictor_loss": 1.0,
+    "relative_improvement_over_zero": 0.060203373432159424,
+    "power_ratio": 0.032019283855333924,
+    "cosine_similarity": 0.2638083007186651,
+    "pearson_correlation": 0.2637773025780916,
+    "finite": true,
+    "per_layer_normalized_mse": [
+      10.232048034667969,
+      2.3313586711883545,
+      1.4336248636245728,
+      1.117810845375061,
+      0.9888797402381897,
+      0.6981080174446106,
+      0.6334471702575684,
+      0.5192577838897705
+    ],
+    "per_layer_power_ratio": [
+      0.021607650443911552,
+      0.0202502328902483,
+      0.028803670778870583,
+      0.03188662603497505,
+      0.032175950706005096,
+      0.03846226632595062,
+      0.03860485926270485,
+      0.04436301440000534
+    ],
+    "csi_nmse": 0.0025939878541976213,
+    "pilot_evm": 0.23417024314403534,
+    "data_evm": 0.1310315728187561,
+    "post_equalization_sinr_db": 8.915111541748047,
+    "encoder_gradient_norm": 0.023317765444517136,
+    "decoder_gradient_norm": 0.25061172246932983,
+    "channel_hash": "557fa1d2998702ab074a952149eff79413ed9d72552f2a378faee9511af7b92e",
+    "noise_hash": "9529bfb3760373c1aa12f837cf3a01788c402c8fdf7e707e171a6e75b04fe2e7",
+    "validation": {
+      "V1": {
+        "loss": 0.919909905642271,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": 0.08009009435772896,
+        "power_ratio": 0.03872784337363555,
+        "cosine_similarity": 0.3087257848237641,
+        "pearson_correlation": 0.30872286355588585,
+        "csi_nmse": 0.006889540403790306,
+        "pilot_evm": 0.34980708826333284,
+        "data_evm": 1.0532626528292894,
+        "post_equalization_sinr_db": 3.0668177530169487,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.8775128349661827,
+          0.9404015056788921,
+          0.9305359087884426,
+          0.9254135899245739,
+          0.9217596985399723,
+          0.9243772178888321,
+          0.9197515100240707,
+          0.9195268861949444
+        ],
+        "per_layer_power_ratio": [
+          0.020747956848936155,
+          0.02424960903590545,
+          0.033494544913992286,
+          0.0399421660695225,
+          0.044698492740280926,
+          0.04473709047306329,
+          0.05018058617133647,
+          0.05177230073604733
+        ]
+      },
+      "V2": {
+        "loss": 1.0138699859380722,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": -0.013869985938072205,
+        "power_ratio": 0.025599181637517177,
+        "cosine_similarity": 0.05137839321088222,
+        "pearson_correlation": 0.05133488796067809,
+        "csi_nmse": 0.006026048242347315,
+        "pilot_evm": 0.3435819782316685,
+        "data_evm": 1.2715667989104986,
+        "post_equalization_sinr_db": 1.8584808632731438,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.928806759417057,
+          1.0156987309455872,
+          1.021008163690567,
+          1.0248569399118423,
+          1.025234431028366,
+          1.0291895866394043,
+          1.031471163034439,
+          1.0346941500902176
+        ],
+        "per_layer_power_ratio": [
+          0.012242478900589049,
+          0.01577871502377093,
+          0.021953203016892076,
+          0.026119215646758676,
+          0.029270690865814686,
+          0.03069937275722623,
+          0.03262167237699032,
+          0.03610810451209545
+        ],
+        "channel_hash_diversity": 1000,
+        "noise_hash_diversity": 1000,
+        "previous_stage_relative_degradation": -0.000223481428339179
+      },
+      "V3_5dB": {
+        "loss": 1.0158322006464005,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": -0.01583220064640045,
+        "power_ratio": 0.02777458928176202,
+        "cosine_similarity": 0.05048670410178602,
+        "pearson_correlation": 0.05044492839056147,
+        "csi_nmse": 0.020150886033661664,
+        "pilot_evm": 0.6107651591300964,
+        "data_evm": 2.0956164821982384,
+        "post_equalization_sinr_db": -2.1548505425453186,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.928804025053978,
+          1.0166856944561005,
+          1.022707611322403,
+          1.0269531905651093,
+          1.0277653485536575,
+          1.0313862562179565,
+          1.0343307852745056,
+          1.0380246341228485
+        ],
+        "per_layer_power_ratio": [
+          0.013019290519878268,
+          0.0171675740275532,
+          0.023845123359933496,
+          0.028329404536634684,
+          0.031866763485595584,
+          0.0331513206474483,
+          0.035374068189412355,
+          0.03944316948764026
+        ]
+      },
+      "V3_10dB": {
+        "loss": 1.024987980723381,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": -0.024987980723381042,
+        "power_ratio": 0.035647252210765146,
+        "cosine_similarity": 0.04251179070888611,
+        "pearson_correlation": 0.04247830932126817,
+        "csi_nmse": 0.005451099888887256,
+        "pilot_evm": 0.3309371583163738,
+        "data_evm": 2.628327550366521,
+        "post_equalization_sinr_db": 0.09093300253152847,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.9365661889314651,
+          1.019449695944786,
+          1.0270175784826279,
+          1.0351921916007996,
+          1.036924809217453,
+          1.0432774126529694,
+          1.0482670813798904,
+          1.0532091706991196
+        ],
+        "per_layer_power_ratio": [
+          0.01360904797911644,
+          0.02031139039900154,
+          0.029065486742183566,
+          0.03569476888515055,
+          0.04055112390778959,
+          0.04432948771864176,
+          0.048019233625382185,
+          0.05359747842885554
+        ]
+      },
+      "V3_15dB": {
+        "loss": 1.016046017408371,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": -0.01604601740837097,
+        "power_ratio": 0.029120753504685126,
+        "cosine_similarity": 0.05201082875760221,
+        "pearson_correlation": 0.05196674429402037,
+        "csi_nmse": 0.002147450635675341,
+        "pilot_evm": 0.1871412079781294,
+        "data_evm": 0.41213048342615366,
+        "post_equalization_sinr_db": 8.164533287286758,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.9230674728751183,
+          1.017911046743393,
+          1.023911714553833,
+          1.02842777967453,
+          1.0288997739553452,
+          1.0324604958295822,
+          1.035078451037407,
+          1.0386113077402115
+        ],
+        "per_layer_power_ratio": [
+          0.014752195333130658,
+          0.018367889802902937,
+          0.025516552617773414,
+          0.03007630934007466,
+          0.03338754363358021,
+          0.03440387989394367,
+          0.036231794161722064,
+          0.040229863254353404
+        ]
+      },
+      "barrage_jsr-10": {
+        "loss": 1.0159721076488495,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": -0.015972107648849487,
+        "power_ratio": 0.029033781116595492,
+        "cosine_similarity": 0.05206745920668254,
+        "pearson_correlation": 0.05202453980155042,
+        "csi_nmse": 0.011989626800641418,
+        "pilot_evm": 0.4397413693368435,
+        "data_evm": 0.7434304133057594,
+        "post_equalization_sinr_db": 2.2073471769690514,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.923072375357151,
+          1.017931655049324,
+          1.0240189731121063,
+          1.0284134298563004,
+          1.0286546051502228,
+          1.0322767347097397,
+          1.0351461917161942,
+          1.0382627695798874
+        ],
+        "per_layer_power_ratio": [
+          0.014815096161328256,
+          0.018425158341415226,
+          0.025493341614492238,
+          0.029914289829321206,
+          0.033208226319402456,
+          0.034190642181783915,
+          0.03621978941373527,
+          0.04000370507128537
+        ]
+      },
+      "barrage_jsr-5": {
+        "loss": 1.0241651684045792,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": -0.024165168404579163,
+        "power_ratio": 0.03494904350372963,
+        "cosine_similarity": 0.04746388155308523,
+        "pearson_correlation": 0.04742518913644744,
+        "csi_nmse": 0.02426853182259947,
+        "pilot_evm": 0.7557361237704754,
+        "data_evm": 4.7304903492331505,
+        "post_equalization_sinr_db": -4.958357959985733,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.9382971525192261,
+          1.0178572237491608,
+          1.0260282754898071,
+          1.0313941091299057,
+          1.0354584157466888,
+          1.0440048426389694,
+          1.048216074705124,
+          1.0520653575658798
+        ],
+        "per_layer_power_ratio": [
+          0.011384325160179287,
+          0.01866150979185477,
+          0.02672860457096249,
+          0.03374556847847998,
+          0.03957774583250284,
+          0.045500906417146325,
+          0.0493351889308542,
+          0.05465849884785712
+        ]
+      },
+      "barrage_jsr0": {
+        "loss": 1.0212218761444092,
+        "zero_predictor_loss": 1.0,
+        "relative_improvement_over_zero": -0.02122187614440918,
+        "power_ratio": 0.03135839670721907,
+        "cosine_similarity": 0.04181702085588768,
+        "pearson_correlation": 0.041787404501064884,
+        "csi_nmse": 0.07550581998657435,
+        "pilot_evm": 1.0662634372711182,
+        "data_evm": 5.118466138839722,
+        "post_equalization_sinr_db": -5.469349384307861,
+        "finite": true,
+        "per_layer_normalized_mse": [
+          0.9419983848929405,
+          1.0174036473035812,
+          1.0230705589056015,
+          1.0306621342897415,
+          1.0323989391326904,
+          1.0367292314767838,
+          1.0421522706747055,
+          1.0453600585460663
+        ],
+        "per_layer_power_ratio": [
+          0.011997675755992532,
+          0.01801329164300114,
+          0.02573281852528453,
+          0.03130776295438409,
+          0.03582976316101849,
+          0.038543799659237266,
+          0.04198811389505863,
+          0.0474539480637759
+        ]
+      }
+    }
+  },
+  "validation": {
+    "V1": {
+      "loss": 0.919909905642271,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": 0.08009009435772896,
+      "power_ratio": 0.03872784337363555,
+      "cosine_similarity": 0.3087257848237641,
+      "pearson_correlation": 0.30872286355588585,
+      "csi_nmse": 0.006889540403790306,
+      "pilot_evm": 0.34980708826333284,
+      "data_evm": 1.0532626528292894,
+      "post_equalization_sinr_db": 3.0668177530169487,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.8775128349661827,
+        0.9404015056788921,
+        0.9305359087884426,
+        0.9254135899245739,
+        0.9217596985399723,
+        0.9243772178888321,
+        0.9197515100240707,
+        0.9195268861949444
+      ],
+      "per_layer_power_ratio": [
+        0.020747956848936155,
+        0.02424960903590545,
+        0.033494544913992286,
+        0.0399421660695225,
+        0.044698492740280926,
+        0.04473709047306329,
+        0.05018058617133647,
+        0.05177230073604733
+      ]
+    },
+    "V2": {
+      "loss": 1.0138699859380722,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": -0.013869985938072205,
+      "power_ratio": 0.025599181637517177,
+      "cosine_similarity": 0.05137839321088222,
+      "pearson_correlation": 0.05133488796067809,
+      "csi_nmse": 0.006026048242347315,
+      "pilot_evm": 0.3435819782316685,
+      "data_evm": 1.2715667989104986,
+      "post_equalization_sinr_db": 1.8584808632731438,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.928806759417057,
+        1.0156987309455872,
+        1.021008163690567,
+        1.0248569399118423,
+        1.025234431028366,
+        1.0291895866394043,
+        1.031471163034439,
+        1.0346941500902176
+      ],
+      "per_layer_power_ratio": [
+        0.012242478900589049,
+        0.01577871502377093,
+        0.021953203016892076,
+        0.026119215646758676,
+        0.029270690865814686,
+        0.03069937275722623,
+        0.03262167237699032,
+        0.03610810451209545
+      ],
+      "channel_hash_diversity": 1000,
+      "noise_hash_diversity": 1000,
+      "previous_stage_relative_degradation": -0.000223481428339179
+    },
+    "V3_5dB": {
+      "loss": 1.0158322006464005,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": -0.01583220064640045,
+      "power_ratio": 0.02777458928176202,
+      "cosine_similarity": 0.05048670410178602,
+      "pearson_correlation": 0.05044492839056147,
+      "csi_nmse": 0.020150886033661664,
+      "pilot_evm": 0.6107651591300964,
+      "data_evm": 2.0956164821982384,
+      "post_equalization_sinr_db": -2.1548505425453186,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.928804025053978,
+        1.0166856944561005,
+        1.022707611322403,
+        1.0269531905651093,
+        1.0277653485536575,
+        1.0313862562179565,
+        1.0343307852745056,
+        1.0380246341228485
+      ],
+      "per_layer_power_ratio": [
+        0.013019290519878268,
+        0.0171675740275532,
+        0.023845123359933496,
+        0.028329404536634684,
+        0.031866763485595584,
+        0.0331513206474483,
+        0.035374068189412355,
+        0.03944316948764026
+      ]
+    },
+    "V3_10dB": {
+      "loss": 1.024987980723381,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": -0.024987980723381042,
+      "power_ratio": 0.035647252210765146,
+      "cosine_similarity": 0.04251179070888611,
+      "pearson_correlation": 0.04247830932126817,
+      "csi_nmse": 0.005451099888887256,
+      "pilot_evm": 0.3309371583163738,
+      "data_evm": 2.628327550366521,
+      "post_equalization_sinr_db": 0.09093300253152847,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.9365661889314651,
+        1.019449695944786,
+        1.0270175784826279,
+        1.0351921916007996,
+        1.036924809217453,
+        1.0432774126529694,
+        1.0482670813798904,
+        1.0532091706991196
+      ],
+      "per_layer_power_ratio": [
+        0.01360904797911644,
+        0.02031139039900154,
+        0.029065486742183566,
+        0.03569476888515055,
+        0.04055112390778959,
+        0.04432948771864176,
+        0.048019233625382185,
+        0.05359747842885554
+      ]
+    },
+    "V3_15dB": {
+      "loss": 1.016046017408371,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": -0.01604601740837097,
+      "power_ratio": 0.029120753504685126,
+      "cosine_similarity": 0.05201082875760221,
+      "pearson_correlation": 0.05196674429402037,
+      "csi_nmse": 0.002147450635675341,
+      "pilot_evm": 0.1871412079781294,
+      "data_evm": 0.41213048342615366,
+      "post_equalization_sinr_db": 8.164533287286758,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.9230674728751183,
+        1.017911046743393,
+        1.023911714553833,
+        1.02842777967453,
+        1.0288997739553452,
+        1.0324604958295822,
+        1.035078451037407,
+        1.0386113077402115
+      ],
+      "per_layer_power_ratio": [
+        0.014752195333130658,
+        0.018367889802902937,
+        0.025516552617773414,
+        0.03007630934007466,
+        0.03338754363358021,
+        0.03440387989394367,
+        0.036231794161722064,
+        0.040229863254353404
+      ]
+    },
+    "barrage_jsr-10": {
+      "loss": 1.0159721076488495,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": -0.015972107648849487,
+      "power_ratio": 0.029033781116595492,
+      "cosine_similarity": 0.05206745920668254,
+      "pearson_correlation": 0.05202453980155042,
+      "csi_nmse": 0.011989626800641418,
+      "pilot_evm": 0.4397413693368435,
+      "data_evm": 0.7434304133057594,
+      "post_equalization_sinr_db": 2.2073471769690514,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.923072375357151,
+        1.017931655049324,
+        1.0240189731121063,
+        1.0284134298563004,
+        1.0286546051502228,
+        1.0322767347097397,
+        1.0351461917161942,
+        1.0382627695798874
+      ],
+      "per_layer_power_ratio": [
+        0.014815096161328256,
+        0.018425158341415226,
+        0.025493341614492238,
+        0.029914289829321206,
+        0.033208226319402456,
+        0.034190642181783915,
+        0.03621978941373527,
+        0.04000370507128537
+      ]
+    },
+    "barrage_jsr-5": {
+      "loss": 1.0241651684045792,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": -0.024165168404579163,
+      "power_ratio": 0.03494904350372963,
+      "cosine_similarity": 0.04746388155308523,
+      "pearson_correlation": 0.04742518913644744,
+      "csi_nmse": 0.02426853182259947,
+      "pilot_evm": 0.7557361237704754,
+      "data_evm": 4.7304903492331505,
+      "post_equalization_sinr_db": -4.958357959985733,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.9382971525192261,
+        1.0178572237491608,
+        1.0260282754898071,
+        1.0313941091299057,
+        1.0354584157466888,
+        1.0440048426389694,
+        1.048216074705124,
+        1.0520653575658798
+      ],
+      "per_layer_power_ratio": [
+        0.011384325160179287,
+        0.01866150979185477,
+        0.02672860457096249,
+        0.03374556847847998,
+        0.03957774583250284,
+        0.045500906417146325,
+        0.0493351889308542,
+        0.05465849884785712
+      ]
+    },
+    "barrage_jsr0": {
+      "loss": 1.0212218761444092,
+      "zero_predictor_loss": 1.0,
+      "relative_improvement_over_zero": -0.02122187614440918,
+      "power_ratio": 0.03135839670721907,
+      "cosine_similarity": 0.04181702085588768,
+      "pearson_correlation": 0.041787404501064884,
+      "csi_nmse": 0.07550581998657435,
+      "pilot_evm": 1.0662634372711182,
+      "data_evm": 5.118466138839722,
+      "post_equalization_sinr_db": -5.469349384307861,
+      "finite": true,
+      "per_layer_normalized_mse": [
+        0.9419983848929405,
+        1.0174036473035812,
+        1.0230705589056015,
+        1.0306621342897415,
+        1.0323989391326904,
+        1.0367292314767838,
+        1.0421522706747055,
+        1.0453600585460663
+      ],
+      "per_layer_power_ratio": [
+        0.011997675755992532,
+        0.01801329164300114,
+        0.02573281852528453,
+        0.03130776295438409,
+        0.03582976316101849,
+        0.038543799659237266,
+        0.04198811389505863,
+        0.0474539480637759
+      ]
+    }
+  },
+  "gate": {
+    "passed": false,
+    "reasons": [
+      "zero_baseline_improvement_below_5_percent"
+    ],
+    "scenario_gates": {
+      "V1": {
+        "passed": true,
+        "reasons": []
+      },
+      "V2": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent"
+        ]
+      },
+      "V3_5dB": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent"
+        ]
+      },
+      "V3_10dB": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent"
+        ]
+      },
+      "V3_15dB": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent"
+        ]
+      },
+      "barrage_jsr-10": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent"
+        ]
+      },
+      "barrage_jsr-5": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent"
+        ]
+      },
+      "barrage_jsr0": {
+        "passed": false,
+        "reasons": [
+          "zero_baseline_improvement_below_5_percent"
+        ]
+      }
+    }
+  },
+  "path_learnability_pass": false,
+  "distribution_readiness": {
+    "passed": false,
+    "v2_reported_separately": true,
+    "snr_slices_stable": true,
+    "v2_materially_worse_than_v1": false
+  },
+  "channel_hash_diversity": 1000,
+  "noise_hash_diversity": 1000,
+  "fraction_finite_batches": 1.0,
+  "final_window_loss_slope": -7.705346079551476e-05,
+  "catastrophic_forgetting": {
+    "previous_stage_validation_loss_before": 1.0140966176986694,
+    "previous_stage_validation_loss_after": 1.0138699859380722,
+    "relative_degradation": -0.000223481428339179
+  }
+}

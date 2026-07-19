@@ -1,0 +1,136 @@
+channel:
+  assume_ideal_cp: true
+  block_fading_over_time: true
+  channel_estimator: dft_tap_ls
+  clean_probability: 0.2
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-06
+  fading: multipath_block
+  jammed_fraction: 0.25
+  jammer_probabilities:
+    barrage: 0.4
+    burst: 0.25
+    narrowband: 0.25
+    pilot: 0.1
+  jsr_db_range:
+  - -10.0
+  - 8.0
+  num_taps: 6
+  pdp: exponential
+  pdp_decay: 0.7
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  snr_db_range:
+  - -2.0
+  - 15.0
+codec:
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  freeze: true
+  n_q: 8
+  sample_rate: 16000
+  type: speechtokenizer
+  waveform_samples: 16000
+content_generalization:
+  cumulative_optimizer_steps: 1
+  diagnostic_engine_version: stage1_content_generalization_v1
+  diagnostic_type: stage1_content_generalization
+  fixed_channel_hash: e41b52d3f3d0c4470a3bd936b0fbf62430be1886cf7c1f79f9cbd6298c0f753b
+  fixed_noise_hash: 594511deebf1be94593f8ccfa5fd61813e3d7df96cb54277361ac0581b79d4a7
+  git_commit: eec8b1fc33ed9f80682714daebe662cf15e738c3
+  initialization_mode: fresh_initialization_control
+  latent_cache_hash: 20888141b19d26555726d3500b07e6beaf101ed95abfe5294a01db24bc1315be
+  model_initialization_hash: c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1
+  preprocessing:
+    codec_type: speechtokenizer
+    representation_shape:
+    - 8
+    - 50
+    - 1024
+    sample_rate: 16000
+    waveform_samples: 16000
+  seed_derivation_version: sha256_domain_v1
+  stage_definition_version: g0_g3_v1
+  stage_local_steps: 1
+  stage_name: g2_fixed_clean
+  subset_size: '16'
+  train_manifest_hash: de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40
+  train_utterance_ids:
+  - data/mini_librispeech/LibriSpeech/train-clean-5/19/198/19-198-0025.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/4680/16042/4680-16042-0021.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/1898/145715/1898-145715-0023.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/7367/86737/7367-86737-0107.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/669/129074/669-129074-0004.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/1970/28415/1970-28415-0010.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/332/128985/332-128985-0020.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/5789/70653/5789-70653-0006.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/6848/252323/6848-252323-0028.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/3242/8112/3242-8112-0019.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/3526/176653/3526-176653-0048.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/32/21631/32-21631-0016.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/2136/5147/2136-5147-0013.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/8629/261139/8629-261139-0049.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/4640/19188/4640-19188-0020.flac
+  - data/mini_librispeech/LibriSpeech/train-clean-5/460/172359/460-172359-0020.flac
+  validation_manifest_hash: f8f473d5b80f943d73585682fb5770d7ae9047edebe9f6ccec80cf910cb04e68
+  validation_suite_hash: d84a97c5908c8e878fcfbe5f9cd6f45397018a8d57f9274120e6967e970bdc71
+  working_tree_dirty: true
+data:
+  latent_cache_dir: artifacts/latent_cache/stage1_fixed_tx_speechtokenizer_1s
+  test_manifest: manifests/mini_librispeech/test.jsonl
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+device: cpu
+model:
+  channel_state_dim: 8
+  channel_uses: 1920
+  frames: 50
+  grid_shape:
+  - 64
+  - 32
+  hidden_dim: 32
+  latent_dim: 1024
+  layers: 8
+  target_power: 1.0
+seed: 23
+train:
+  allocation_mode: uniform
+  batch_size: 4
+  best_checkpoint_metric: val_weighted_latent_loss
+  checkpoint_best: artifacts/checkpoints/stage1_fixed_tx_uniform_best.pt
+  checkpoint_every: 1000
+  checkpoint_last: artifacts/checkpoints/stage1_fixed_tx_uniform_last.pt
+  early_stopping_patience: 10
+  equalizer: estimated
+  gate_mode: all_ones
+  gradient_clip_norm: 5.0
+  latent_normalization:
+    epsilon: 1.0e-06
+    mode: per_layer_power
+  layer_weights:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  learning_rate: 0.0001
+  log_every: 50
+  metrics_jsonl: artifacts/logs/stage1_fixed_tx_uniform_metrics.jsonl
+  optimizer: adam
+  power_mode: uniform
+  receiver_state_mode: observable_v1
+  reconstruction_dir: artifacts/reconstructions/stage1_fixed_tx_uniform
+  reconstruction_every: 1000
+  reconstruction_examples: 2
+  steps: 20000
+  training_stage: stage1_fixed_tx
+  transmitter_state_mode: neutral
+  use_jammer_estimator: false
+  use_learned_gate: false
+  use_refiner: false
+  val_batch_size: 4
+  validate_every: 500
+  weight_decay: 0.0

@@ -1,0 +1,341 @@
+{
+  "scenarios": [
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/118/47824/118-47824-0023.flac",
+      "snr_db": 10.0,
+      "channel_seed": 148806399,
+      "noise_seed": 1874437532
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/163/122947/163-122947-0090.flac",
+      "snr_db": 10.0,
+      "channel_seed": 15060464,
+      "noise_seed": 103370088
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/19/198/19-198-0005.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1378422945,
+      "noise_seed": 1865520202
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/1970/28415/1970-28415-0036.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1781311632,
+      "noise_seed": 1441043116
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/2416/152139/2416-152139-0034.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1432903915,
+      "noise_seed": 980400198
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/3242/8112/3242-8112-0019.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1344945748,
+      "noise_seed": 1759312927
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/3242/8112/3242-8112-0021.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1675590971,
+      "noise_seed": 651425453
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/332/128985/332-128985-0024.flac",
+      "snr_db": 10.0,
+      "channel_seed": 432331088,
+      "noise_seed": 860967760
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/3526/176653/3526-176653-0026.flac",
+      "snr_db": 10.0,
+      "channel_seed": 719786841,
+      "noise_seed": 1426120097
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/3947/13262/3947-13262-0008.flac",
+      "snr_db": 10.0,
+      "channel_seed": 207791273,
+      "noise_seed": 1522193785
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/4640/19188/4640-19188-0035.flac",
+      "snr_db": 10.0,
+      "channel_seed": 275760835,
+      "noise_seed": 435462832
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/6848/252323/6848-252323-0008.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1095261119,
+      "noise_seed": 1696685203
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/6848/252323/6848-252323-0012.flac",
+      "snr_db": 10.0,
+      "channel_seed": 723759302,
+      "noise_seed": 599873173
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/7367/86737/7367-86737-0063.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1868236089,
+      "noise_seed": 1062726482
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/7367/86737/7367-86737-0105.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1537050919,
+      "noise_seed": 555989647
+    },
+    {
+      "suite": "V1",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/train-clean-5/8629/261139/8629-261139-0035.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1291199042,
+      "noise_seed": 415389428
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1272/135031/1272-135031-0003.flac",
+      "snr_db": 10.0,
+      "channel_seed": 118302627,
+      "noise_seed": 1313040390
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0020.flac",
+      "snr_db": 10.0,
+      "channel_seed": 15036546,
+      "noise_seed": 499822163
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/161169/2803-161169-0010.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1578046348,
+      "noise_seed": 2093324994
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0061.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1442838108,
+      "noise_seed": 2006084903
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5694/64038/5694-64038-0020.flac",
+      "snr_db": 10.0,
+      "channel_seed": 202709112,
+      "noise_seed": 1406046708
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0069.flac",
+      "snr_db": 10.0,
+      "channel_seed": 803549996,
+      "noise_seed": 1905482340
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0073.flac",
+      "snr_db": 10.0,
+      "channel_seed": 455871979,
+      "noise_seed": 1566110193
+    },
+    {
+      "suite": "V2",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/84/121550/84-121550-0025.flac",
+      "snr_db": 10.0,
+      "channel_seed": 679262835,
+      "noise_seed": 782936066
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1272/135031/1272-135031-0003.flac",
+      "snr_db": 5.0,
+      "channel_seed": 1920997637,
+      "noise_seed": 1206181630
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0020.flac",
+      "snr_db": 5.0,
+      "channel_seed": 1356466008,
+      "noise_seed": 1517768931
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/161169/2803-161169-0010.flac",
+      "snr_db": 5.0,
+      "channel_seed": 407630729,
+      "noise_seed": 243824816
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0061.flac",
+      "snr_db": 5.0,
+      "channel_seed": 1346392622,
+      "noise_seed": 926709574
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5694/64038/5694-64038-0020.flac",
+      "snr_db": 5.0,
+      "channel_seed": 1130222949,
+      "noise_seed": 1116392060
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0069.flac",
+      "snr_db": 5.0,
+      "channel_seed": 1216772497,
+      "noise_seed": 1891660940
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0073.flac",
+      "snr_db": 5.0,
+      "channel_seed": 675865245,
+      "noise_seed": 567996315
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/84/121550/84-121550-0025.flac",
+      "snr_db": 5.0,
+      "channel_seed": 1832409370,
+      "noise_seed": 1705426950
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1272/135031/1272-135031-0003.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1586634136,
+      "noise_seed": 1395432870
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0020.flac",
+      "snr_db": 10.0,
+      "channel_seed": 838468952,
+      "noise_seed": 1446212490
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/161169/2803-161169-0010.flac",
+      "snr_db": 10.0,
+      "channel_seed": 2084133363,
+      "noise_seed": 1645197311
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0061.flac",
+      "snr_db": 10.0,
+      "channel_seed": 190521039,
+      "noise_seed": 1868689576
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5694/64038/5694-64038-0020.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1927724353,
+      "noise_seed": 1972925043
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0069.flac",
+      "snr_db": 10.0,
+      "channel_seed": 131758747,
+      "noise_seed": 251016864
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0073.flac",
+      "snr_db": 10.0,
+      "channel_seed": 885540799,
+      "noise_seed": 1523645684
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/84/121550/84-121550-0025.flac",
+      "snr_db": 10.0,
+      "channel_seed": 1779129283,
+      "noise_seed": 1980841571
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1272/135031/1272-135031-0003.flac",
+      "snr_db": 15.0,
+      "channel_seed": 1946010231,
+      "noise_seed": 68613111
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0020.flac",
+      "snr_db": 15.0,
+      "channel_seed": 1665616142,
+      "noise_seed": 1616753166
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/161169/2803-161169-0010.flac",
+      "snr_db": 15.0,
+      "channel_seed": 1665357931,
+      "noise_seed": 699990424
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0061.flac",
+      "snr_db": 15.0,
+      "channel_seed": 1896213969,
+      "noise_seed": 476219781
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5694/64038/5694-64038-0020.flac",
+      "snr_db": 15.0,
+      "channel_seed": 1039203906,
+      "noise_seed": 765445131
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0069.flac",
+      "snr_db": 15.0,
+      "channel_seed": 1145651243,
+      "noise_seed": 1260150358
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0073.flac",
+      "snr_db": 15.0,
+      "channel_seed": 718114828,
+      "noise_seed": 974135499
+    },
+    {
+      "suite": "V3",
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/84/121550/84-121550-0025.flac",
+      "snr_db": 15.0,
+      "channel_seed": 483650520,
+      "noise_seed": 1287230817
+    }
+  ],
+  "validation_suite_hash": "314528bf9daec2f649a86faebf2b3138f77da886c2b1c750a2df4161d61d1b3c"
+}

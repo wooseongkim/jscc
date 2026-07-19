@@ -1,0 +1,1 @@
+diagnose_stage1_random_distribution.py --config configs/train_stage1_fixed_tx_uniform.yaml --stage o6_random_clean --steps 1 --seed 23 --output-dir runs/o6_random_clean_smoke_20260719 --device cpu --checkpoint-every 1 --validation-every 1 --log-every 1 --initialization-mode fresh_initialization_control --overwrite

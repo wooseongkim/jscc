@@ -1,0 +1,7 @@
+{
+  "o6_status": "FAIL",
+  "j1_status": "exploratory_failed_parent",
+  "j1_may_parent_j2": false,
+  "first_failing_stage": "g0_direct",
+  "smallest_passing_subset": {}
+}

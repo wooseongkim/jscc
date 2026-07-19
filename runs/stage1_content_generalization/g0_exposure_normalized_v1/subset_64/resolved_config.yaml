@@ -1,0 +1,122 @@
+channel:
+  assume_ideal_cp: true
+  block_fading_over_time: true
+  channel_estimator: dft_tap_ls
+  clean_probability: 0.2
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-06
+  fading: multipath_block
+  jammed_fraction: 0.25
+  jammer_probabilities:
+    barrage: 0.4
+    burst: 0.25
+    narrowband: 0.25
+    pilot: 0.1
+  jsr_db_range:
+  - -10.0
+  - 8.0
+  num_taps: 6
+  pdp: exponential
+  pdp_decay: 0.7
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  snr_db_range:
+  - -2.0
+  - 15.0
+codec:
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  freeze: true
+  n_q: 8
+  sample_rate: 16000
+  type: speechtokenizer
+  waveform_samples: 16000
+data:
+  latent_cache_dir: artifacts/latent_cache/stage1_fixed_tx_speechtokenizer_1s
+  test_manifest: manifests/mini_librispeech/test.jsonl
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+device: cuda
+g0_exposure:
+  baseline_hashes:
+    global_mean: dd2a0f0833d0e5a3fb685fd3384a79cd0b42375965d04da2baee2d7bc35fa1c4
+    layerwise_mean: 2c77ece4a302b9b3f01ce01b63aed4c46bf771a19b1cd4b0107d114a05411fb6
+    zero: 569e980eb86beff889c1ecc96a212cd85cfc2ab708a26692f45d4c0a2b8ed973
+  batch_size: 4
+  checkpoint_epochs:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16
+  - 32
+  - 64
+  diagnostic_engine_version: g0_exposure_normalized_v1
+  diagnostic_type: g0_exposure_normalized
+  git_commit: 583bec0bb332abac670a9e72944f4e8e29b839d3
+  latent_cache_hash: de8278a597a31742853cfbd882c062aeb40b474f3a90e3b2845441e5aef0b834
+  learning_rate: 0.0001
+  max_epochs: 64
+  model_initialization_hash: c71e2b7e4403a5f16597c3dde1d8d3c65156fd788b17f990ea2bd3aedcdd81c1
+  normalization: &id001
+    epsilon: 1.0e-06
+    mode: per_layer_power
+  seed: 23
+  subset_size: '64'
+  target_optimizer_steps: 1024
+  train_manifest_hash: de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40
+  train_subset_size: 64
+  validation_manifest_hash: f8f473d5b80f943d73585682fb5770d7ae9047edebe9f6ccec80cf910cb04e68
+  validation_suite_hash: d84a97c5908c8e878fcfbe5f9cd6f45397018a8d57f9274120e6967e970bdc71
+  working_tree_dirty: true
+model:
+  channel_state_dim: 8
+  channel_uses: 1920
+  frames: 50
+  grid_shape:
+  - 64
+  - 32
+  hidden_dim: 32
+  latent_dim: 1024
+  layers: 8
+  target_power: 1.0
+seed: 23
+train:
+  allocation_mode: uniform
+  batch_size: 4
+  best_checkpoint_metric: val_weighted_latent_loss
+  checkpoint_best: artifacts/checkpoints/stage1_fixed_tx_uniform_best.pt
+  checkpoint_every: 1000
+  checkpoint_last: artifacts/checkpoints/stage1_fixed_tx_uniform_last.pt
+  early_stopping_patience: 10
+  equalizer: estimated
+  gate_mode: all_ones
+  gradient_clip_norm: 5.0
+  latent_normalization: *id001
+  layer_weights:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  learning_rate: 0.0001
+  log_every: 50
+  metrics_jsonl: artifacts/logs/stage1_fixed_tx_uniform_metrics.jsonl
+  optimizer: adam
+  power_mode: uniform
+  receiver_state_mode: observable_v1
+  reconstruction_dir: artifacts/reconstructions/stage1_fixed_tx_uniform
+  reconstruction_every: 1000
+  reconstruction_examples: 2
+  steps: 20000
+  training_stage: stage1_fixed_tx
+  transmitter_state_mode: neutral
+  use_jammer_estimator: false
+  use_learned_gate: false
+  use_refiner: false
+  val_batch_size: 4
+  validate_every: 500
+  weight_decay: 0.0
