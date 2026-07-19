@@ -1,0 +1,28 @@
+{
+  "grid_total_resources": 2048,
+  "pilot_resources": 128,
+  "data_resources": 1920,
+  "encoder_symbols": 1920,
+  "extracted_symbols": 1920,
+  "per_layer_symbols": [
+    240,
+    240,
+    240,
+    240,
+    240,
+    240,
+    240,
+    240
+  ],
+  "overwrite_count": 0,
+  "masks_disjoint": true,
+  "masks_exhaustive": true,
+  "encoder_to_allocated_max_abs_error": 0.0,
+  "packed_data_max_abs_error": 0.0,
+  "decoder_input_max_abs_error": 0.0,
+  "reconstruction_max_abs_error": 0.0,
+  "aggregate_loss_difference": 0.0,
+  "direct_loss": 0.4454025328159332,
+  "mapped_loss": 0.4454025328159332,
+  "passed": true
+}

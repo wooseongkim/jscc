@@ -1,0 +1,170 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+/home/mike/jscc/diagnose_stage1_content_generalization.py:215: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  record["channel_metrics"]={"requested_snr_db":float(batch.snr_db.mean()),"measured_snr_db":float(10*torch.log10(result["transmitted"].abs().square().mean()/batch.noise.abs().square().mean().clamp_min(1e-12))),
+{"loss": 1.1131205558776855, "step": 1, "validation": {"same_speaker_unseen_utterance_unseen_channel": 1.084383312612772, "seen_utterance_unseen_channel": 1.086968306452036, "unseen_speaker_snr_10db": 1.0769133195281029, "unseen_speaker_snr_15db": 1.076641071587801, "unseen_speaker_snr_5db": 1.0760024031624198, "unseen_speaker_unseen_utterance_unseen_channel": 1.0756624089553952}}
+{"loss": 1.0010206699371338, "step": 25, "validation": {}}
+{"loss": 0.9836098551750183, "step": 50, "validation": {}}
+{"loss": 0.9751192331314087, "step": 75, "validation": {}}
+{"loss": 0.9713701009750366, "step": 100, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.9718960970640182, "seen_utterance_unseen_channel": 0.9712391998618841, "unseen_speaker_snr_10db": 0.9735021702945232, "unseen_speaker_snr_15db": 0.9735005479305983, "unseen_speaker_snr_5db": 0.9740941831842065, "unseen_speaker_unseen_utterance_unseen_channel": 0.9718304444104433}}
+{"loss": 0.9728981256484985, "step": 125, "validation": {}}
+{"loss": 0.9729512929916382, "step": 150, "validation": {}}
+{"loss": 0.9705103635787964, "step": 175, "validation": {}}
+{"loss": 0.9660856127738953, "step": 200, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.9647328415885568, "seen_utterance_unseen_channel": 0.9644116433337331, "unseen_speaker_snr_10db": 0.9676524279639125, "unseen_speaker_snr_15db": 0.9675425477325916, "unseen_speaker_snr_5db": 0.9678116198629141, "unseen_speaker_unseen_utterance_unseen_channel": 0.9665686236694455}}
+{"loss": 0.9607741236686707, "step": 225, "validation": {}}
+{"loss": 0.9594516158103943, "step": 250, "validation": {}}
+{"loss": 0.9497672915458679, "step": 275, "validation": {}}
+{"loss": 0.9477171897888184, "step": 300, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.943560840561986, "seen_utterance_unseen_channel": 0.9431082215160131, "unseen_speaker_snr_10db": 0.9494629688560963, "unseen_speaker_snr_15db": 0.9490314116701484, "unseen_speaker_snr_5db": 0.9517327919602394, "unseen_speaker_unseen_utterance_unseen_channel": 0.9492036076262593}}
+{"loss": 0.942521333694458, "step": 325, "validation": {}}
+{"loss": 0.9500313997268677, "step": 350, "validation": {}}
+{"loss": 0.9267777800559998, "step": 375, "validation": {}}
+{"loss": 0.9298844337463379, "step": 400, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.9142009383067489, "seen_utterance_unseen_channel": 0.914701322093606, "unseen_speaker_snr_10db": 0.9241013433784246, "unseen_speaker_snr_15db": 0.9221718898043036, "unseen_speaker_snr_5db": 0.9309894805774093, "unseen_speaker_unseen_utterance_unseen_channel": 0.925495395436883}}
+{"loss": 0.9104224443435669, "step": 425, "validation": {}}
+{"loss": 0.9059265851974487, "step": 450, "validation": {}}
+{"loss": 0.9026733636856079, "step": 475, "validation": {}}
+{"loss": 0.8775889277458191, "step": 500, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.8819468254223466, "seen_utterance_unseen_channel": 0.8857962996698916, "unseen_speaker_snr_10db": 0.8954010494053364, "unseen_speaker_snr_15db": 0.8915503164753318, "unseen_speaker_snr_5db": 0.9065545555204153, "unseen_speaker_unseen_utterance_unseen_channel": 0.8986613778397441}}
+{"loss": 0.8781710863113403, "step": 525, "validation": {}}
+{"loss": 0.8807604908943176, "step": 550, "validation": {}}
+{"loss": 0.8807237148284912, "step": 575, "validation": {}}
+{"loss": 0.8307052850723267, "step": 600, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.856947218067944, "seen_utterance_unseen_channel": 0.8576446496881545, "unseen_speaker_snr_10db": 0.8715103948488832, "unseen_speaker_snr_15db": 0.8654436133801937, "unseen_speaker_snr_5db": 0.8874789569526911, "unseen_speaker_unseen_utterance_unseen_channel": 0.8765632230788469}}
+{"loss": 0.8560518026351929, "step": 625, "validation": {}}
+{"loss": 0.8848151564598083, "step": 650, "validation": {}}
+{"loss": 0.8422497510910034, "step": 675, "validation": {}}
+{"loss": 0.8573272228240967, "step": 700, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.8381841760128736, "seen_utterance_unseen_channel": 0.8395211780443788, "unseen_speaker_snr_10db": 0.8521773312240839, "unseen_speaker_snr_15db": 0.844029825180769, "unseen_speaker_snr_5db": 0.8726125815883279, "unseen_speaker_unseen_utterance_unseen_channel": 0.8591484790667892}}
+{"loss": 0.8520716428756714, "step": 725, "validation": {}}
+{"loss": 0.8291590213775635, "step": 750, "validation": {}}
+{"loss": 0.8523551225662231, "step": 775, "validation": {}}
+{"loss": 0.8324462175369263, "step": 800, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.8234472963958979, "seen_utterance_unseen_channel": 0.8248601607047021, "unseen_speaker_snr_10db": 0.8381609078496695, "unseen_speaker_snr_15db": 0.8287268858402967, "unseen_speaker_snr_5db": 0.8628705581650138, "unseen_speaker_unseen_utterance_unseen_channel": 0.8466568784788251}}
+{"loss": 0.8314987421035767, "step": 825, "validation": {}}
+{"loss": 0.8121198415756226, "step": 850, "validation": {}}
+{"loss": 0.8744395971298218, "step": 875, "validation": {}}
+{"loss": 0.8123001456260681, "step": 900, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.8147195409983397, "seen_utterance_unseen_channel": 0.8163721673190594, "unseen_speaker_snr_10db": 0.8289513709023595, "unseen_speaker_snr_15db": 0.8185787601396441, "unseen_speaker_snr_5db": 0.8562771799042821, "unseen_speaker_unseen_utterance_unseen_channel": 0.8378174062818289}}
+{"loss": 0.822200357913971, "step": 925, "validation": {}}
+{"loss": 0.841214656829834, "step": 950, "validation": {}}
+{"loss": 0.7936837673187256, "step": 975, "validation": {}}
+{"loss": 0.8011307120323181, "step": 1000, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.8083352390676737, "seen_utterance_unseen_channel": 0.8092405670322478, "unseen_speaker_snr_10db": 0.8225729940459132, "unseen_speaker_snr_15db": 0.8115253737196326, "unseen_speaker_snr_5db": 0.8509284108877182, "unseen_speaker_unseen_utterance_unseen_channel": 0.8318157820031047}}
+{"loss": 0.8245673179626465, "step": 1025, "validation": {}}
+{"loss": 0.8035539388656616, "step": 1050, "validation": {}}
+{"loss": 0.7922257781028748, "step": 1075, "validation": {}}
+{"loss": 0.8245000243186951, "step": 1100, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.8034287309274077, "seen_utterance_unseen_channel": 0.8034560009837151, "unseen_speaker_snr_10db": 0.8170427829027176, "unseen_speaker_snr_15db": 0.8059942340478301, "unseen_speaker_snr_5db": 0.8474170351400971, "unseen_speaker_unseen_utterance_unseen_channel": 0.8267864361405373}}
+{"loss": 0.8012323379516602, "step": 1125, "validation": {}}
+{"loss": 0.8564597368240356, "step": 1150, "validation": {}}
+{"loss": 0.819617748260498, "step": 1175, "validation": {}}
+{"loss": 0.7951734066009521, "step": 1200, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7976341196335852, "seen_utterance_unseen_channel": 0.7995110098272562, "unseen_speaker_snr_10db": 0.8136977283284068, "unseen_speaker_snr_15db": 0.8023487105965614, "unseen_speaker_snr_5db": 0.8446320779621601, "unseen_speaker_unseen_utterance_unseen_channel": 0.8236138755455613}}
+{"loss": 0.7983919382095337, "step": 1225, "validation": {}}
+{"loss": 0.8322728872299194, "step": 1250, "validation": {}}
+{"loss": 0.8214272856712341, "step": 1275, "validation": {}}
+{"loss": 0.7799144983291626, "step": 1300, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7935718507505953, "seen_utterance_unseen_channel": 0.7951217335648835, "unseen_speaker_snr_10db": 0.8089247103780508, "unseen_speaker_snr_15db": 0.797458449844271, "unseen_speaker_snr_5db": 0.8418854484334588, "unseen_speaker_unseen_utterance_unseen_channel": 0.8193021453917027}}
+{"loss": 0.8018679022789001, "step": 1325, "validation": {}}
+{"loss": 0.7984070181846619, "step": 1350, "validation": {}}
+{"loss": 0.7900440692901611, "step": 1375, "validation": {}}
+{"loss": 0.7751964926719666, "step": 1400, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7896111877635121, "seen_utterance_unseen_channel": 0.7918016980402172, "unseen_speaker_snr_10db": 0.8062592656351626, "unseen_speaker_snr_15db": 0.7945784605108202, "unseen_speaker_snr_5db": 0.8397997105494142, "unseen_speaker_unseen_utterance_unseen_channel": 0.8165884520858526}}
+{"loss": 0.8053789734840393, "step": 1425, "validation": {}}
+{"loss": 0.8131571412086487, "step": 1450, "validation": {}}
+{"loss": 0.8324989080429077, "step": 1475, "validation": {}}
+{"loss": 0.8048738837242126, "step": 1500, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7861806666478515, "seen_utterance_unseen_channel": 0.7887457427568734, "unseen_speaker_snr_10db": 0.8039942998439074, "unseen_speaker_snr_15db": 0.7917683329433203, "unseen_speaker_snr_5db": 0.8380262516438961, "unseen_speaker_unseen_utterance_unseen_channel": 0.8141162963584065}}
+{"loss": 0.7965426445007324, "step": 1525, "validation": {}}
+{"loss": 0.8128757476806641, "step": 1550, "validation": {}}
+{"loss": 0.805945634841919, "step": 1575, "validation": {}}
+{"loss": 0.8198666572570801, "step": 1600, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7949657081626356, "seen_utterance_unseen_channel": 0.7906707264482975, "unseen_speaker_snr_10db": 0.8059373288415372, "unseen_speaker_snr_15db": 0.7942694444209337, "unseen_speaker_snr_5db": 0.8466483494266868, "unseen_speaker_unseen_utterance_unseen_channel": 0.817323830910027}}
+{"loss": 0.7801346778869629, "step": 1625, "validation": {}}
+{"loss": 0.7738891839981079, "step": 1650, "validation": {}}
+{"loss": 0.7877489328384399, "step": 1675, "validation": {}}
+{"loss": 0.7593780755996704, "step": 1700, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7848356463946402, "seen_utterance_unseen_channel": 0.7836586739867926, "unseen_speaker_snr_10db": 0.8006172967143357, "unseen_speaker_snr_15db": 0.7885525901801884, "unseen_speaker_snr_5db": 0.8367425189353526, "unseen_speaker_unseen_utterance_unseen_channel": 0.8113604369573295}}
+{"loss": 0.7748043537139893, "step": 1725, "validation": {}}
+{"loss": 0.7777413725852966, "step": 1750, "validation": {}}
+{"loss": 0.7984247207641602, "step": 1775, "validation": {}}
+{"loss": 0.8218315839767456, "step": 1800, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7810415755957365, "seen_utterance_unseen_channel": 0.7819426981732249, "unseen_speaker_snr_10db": 0.7987818121910095, "unseen_speaker_snr_15db": 0.7865376914851367, "unseen_speaker_snr_5db": 0.833860017824918, "unseen_speaker_unseen_utterance_unseen_channel": 0.809209480881691}}
+{"loss": 0.8146215677261353, "step": 1825, "validation": {}}
+{"loss": 0.7882190942764282, "step": 1850, "validation": {}}
+{"loss": 0.8061860799789429, "step": 1875, "validation": {}}
+{"loss": 0.8325743675231934, "step": 1900, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7794206193648279, "seen_utterance_unseen_channel": 0.7791798762045801, "unseen_speaker_snr_10db": 0.7961620045825839, "unseen_speaker_snr_15db": 0.7837542374618351, "unseen_speaker_snr_5db": 0.8323170151561499, "unseen_speaker_unseen_utterance_unseen_channel": 0.8069372186437249}}
+{"loss": 0.818155825138092, "step": 1925, "validation": {}}
+{"loss": 0.787238359451294, "step": 1950, "validation": {}}
+{"loss": 0.8155182600021362, "step": 1975, "validation": {}}
+{"loss": 0.7794824242591858, "step": 2000, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7770180124789476, "seen_utterance_unseen_channel": 0.7774012074805796, "unseen_speaker_snr_10db": 0.7952187461778522, "unseen_speaker_snr_15db": 0.7824195940047503, "unseen_speaker_snr_5db": 0.8315384765155613, "unseen_speaker_unseen_utterance_unseen_channel": 0.8059033867903054}}
+{"loss": 0.8199259638786316, "step": 2025, "validation": {}}
+{"loss": 0.7997744083404541, "step": 2050, "validation": {}}
+{"loss": 0.7637357115745544, "step": 2075, "validation": {}}
+{"loss": 0.7875939011573792, "step": 2100, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7751749502494931, "seen_utterance_unseen_channel": 0.7761130961589515, "unseen_speaker_snr_10db": 0.7941018613055348, "unseen_speaker_snr_15db": 0.7811259822919965, "unseen_speaker_snr_5db": 0.8303100233897567, "unseen_speaker_unseen_utterance_unseen_channel": 0.804563466925174}}
+{"loss": 0.8192083835601807, "step": 2125, "validation": {}}
+{"loss": 0.7947961091995239, "step": 2150, "validation": {}}
+{"loss": 0.7811431884765625, "step": 2175, "validation": {}}
+{"loss": 0.774626612663269, "step": 2200, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7742400839924812, "seen_utterance_unseen_channel": 0.7739922110922635, "unseen_speaker_snr_10db": 0.7934789396822453, "unseen_speaker_snr_15db": 0.7808334468863904, "unseen_speaker_snr_5db": 0.8296480351127684, "unseen_speaker_unseen_utterance_unseen_channel": 0.8038945044390857}}
+{"loss": 0.7597039341926575, "step": 2225, "validation": {}}
+{"loss": 0.7770481109619141, "step": 2250, "validation": {}}
+{"loss": 0.764269232749939, "step": 2275, "validation": {}}
+{"loss": 0.8004774451255798, "step": 2300, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7721126056276262, "seen_utterance_unseen_channel": 0.7712508616968989, "unseen_speaker_snr_10db": 0.7912265937775373, "unseen_speaker_snr_15db": 0.7786872126162052, "unseen_speaker_snr_5db": 0.8290762319229543, "unseen_speaker_unseen_utterance_unseen_channel": 0.802027840167284}}
+{"loss": 0.7802985310554504, "step": 2325, "validation": {}}
+{"loss": 0.8135383725166321, "step": 2350, "validation": {}}
+{"loss": 0.8070700168609619, "step": 2375, "validation": {}}
+{"loss": 0.8329678773880005, "step": 2400, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7708835694938898, "seen_utterance_unseen_channel": 0.7695768922567368, "unseen_speaker_snr_10db": 0.790068524889648, "unseen_speaker_snr_15db": 0.7771667223423719, "unseen_speaker_snr_5db": 0.827821112703532, "unseen_speaker_unseen_utterance_unseen_channel": 0.800916550680995}}
+{"loss": 0.788455605506897, "step": 2425, "validation": {}}
+{"loss": 0.7715606093406677, "step": 2450, "validation": {}}
+{"loss": 0.7286583185195923, "step": 2475, "validation": {}}
+{"loss": 0.7967981696128845, "step": 2500, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7692548022605479, "seen_utterance_unseen_channel": 0.7679897542111576, "unseen_speaker_snr_10db": 0.7888207472860813, "unseen_speaker_snr_15db": 0.7759657641872764, "unseen_speaker_snr_5db": 0.8264814298599958, "unseen_speaker_unseen_utterance_unseen_channel": 0.7999750636518002}}
+{"loss": 0.843360960483551, "step": 2525, "validation": {}}
+{"loss": 0.7819404006004333, "step": 2550, "validation": {}}
+{"loss": 0.7645459771156311, "step": 2575, "validation": {}}
+{"loss": 0.7770339846611023, "step": 2600, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7685728310607374, "seen_utterance_unseen_channel": 0.7682373877614737, "unseen_speaker_snr_10db": 0.787742851767689, "unseen_speaker_snr_15db": 0.7750682649202645, "unseen_speaker_snr_5db": 0.8259504125453532, "unseen_speaker_unseen_utterance_unseen_channel": 0.7986734583973885}}
+{"loss": 0.7819056510925293, "step": 2625, "validation": {}}
+{"loss": 0.7676374912261963, "step": 2650, "validation": {}}
+{"loss": 0.8212234973907471, "step": 2675, "validation": {}}
+{"loss": 0.7982699871063232, "step": 2700, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7677404088899493, "seen_utterance_unseen_channel": 0.7664000289514661, "unseen_speaker_snr_10db": 0.7878282708115876, "unseen_speaker_snr_15db": 0.7743782759644091, "unseen_speaker_snr_5db": 0.8260055147111416, "unseen_speaker_unseen_utterance_unseen_channel": 0.7988325105980039}}
+{"loss": 0.7891527414321899, "step": 2725, "validation": {}}
+{"loss": 0.8079414367675781, "step": 2750, "validation": {}}
+{"loss": 0.7357268333435059, "step": 2775, "validation": {}}
+{"loss": 0.7591311931610107, "step": 2800, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7671789885498583, "seen_utterance_unseen_channel": 0.7641337886452675, "unseen_speaker_snr_10db": 0.7859567324630916, "unseen_speaker_snr_15db": 0.7729705339297652, "unseen_speaker_snr_5db": 0.8253952683880925, "unseen_speaker_unseen_utterance_unseen_channel": 0.7973747211508453}}
+{"loss": 0.7276129126548767, "step": 2825, "validation": {}}
+{"loss": 0.7966066598892212, "step": 2850, "validation": {}}
+{"loss": 0.7749185562133789, "step": 2875, "validation": {}}
+{"loss": 0.7106596231460571, "step": 2900, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7646769676357508, "seen_utterance_unseen_channel": 0.7623160760849714, "unseen_speaker_snr_10db": 0.7848682971671224, "unseen_speaker_snr_15db": 0.77191843977198, "unseen_speaker_snr_5db": 0.8230245797894895, "unseen_speaker_unseen_utterance_unseen_channel": 0.7959565250203013}}
+{"loss": 0.7717676758766174, "step": 2925, "validation": {}}
+{"loss": 0.7368429899215698, "step": 2950, "validation": {}}
+{"loss": 0.7823542356491089, "step": 2975, "validation": {}}
+{"loss": 0.7869728803634644, "step": 3000, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7636889973655343, "seen_utterance_unseen_channel": 0.7607859186828136, "unseen_speaker_snr_10db": 0.7839312953874469, "unseen_speaker_snr_15db": 0.7711950712837279, "unseen_speaker_snr_5db": 0.8229175410233438, "unseen_speaker_unseen_utterance_unseen_channel": 0.7951727323234081}}
+{"loss": 0.787641167640686, "step": 3025, "validation": {}}
+{"loss": 0.7715860605239868, "step": 3050, "validation": {}}
+{"loss": 0.7443387508392334, "step": 3075, "validation": {}}
+{"loss": 0.7944885492324829, "step": 3100, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7627297700382769, "seen_utterance_unseen_channel": 0.7591917393729091, "unseen_speaker_snr_10db": 0.782678940333426, "unseen_speaker_snr_15db": 0.7692334651947021, "unseen_speaker_snr_5db": 0.8222800511866808, "unseen_speaker_unseen_utterance_unseen_channel": 0.7937477841041982}}
+{"loss": 0.7650532126426697, "step": 3125, "validation": {}}
+{"loss": 0.7840964794158936, "step": 3150, "validation": {}}
+{"loss": 0.7855186462402344, "step": 3175, "validation": {}}
+{"loss": 0.7852012515068054, "step": 3200, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7618190795183182, "seen_utterance_unseen_channel": 0.7576251146383584, "unseen_speaker_snr_10db": 0.7812643805518746, "unseen_speaker_snr_15db": 0.7676231740042567, "unseen_speaker_snr_5db": 0.820981327444315, "unseen_speaker_unseen_utterance_unseen_channel": 0.7928046002052724}}
+{"loss": 0.7705177664756775, "step": 3225, "validation": {}}
+{"loss": 0.7848893404006958, "step": 3250, "validation": {}}
+{"loss": 0.7964370846748352, "step": 3275, "validation": {}}
+{"loss": 0.7671534419059753, "step": 3300, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7604420608840883, "seen_utterance_unseen_channel": 0.7567075788974762, "unseen_speaker_snr_10db": 0.7807829855009913, "unseen_speaker_snr_15db": 0.7669734773226082, "unseen_speaker_snr_5db": 0.8205738752149045, "unseen_speaker_unseen_utterance_unseen_channel": 0.7922935211099684}}
+{"loss": 0.7743427753448486, "step": 3325, "validation": {}}
+{"loss": 0.77857506275177, "step": 3350, "validation": {}}
+{"loss": 0.8126822710037231, "step": 3375, "validation": {}}
+{"loss": 0.7566949129104614, "step": 3400, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7589104468934238, "seen_utterance_unseen_channel": 0.754079616162926, "unseen_speaker_snr_10db": 0.7794624380767345, "unseen_speaker_snr_15db": 0.7656763456761837, "unseen_speaker_snr_5db": 0.8189747221767902, "unseen_speaker_unseen_utterance_unseen_channel": 0.7902177660726011}}
+{"loss": 0.7653359174728394, "step": 3425, "validation": {}}
+{"loss": 0.7741534113883972, "step": 3450, "validation": {}}
+{"loss": 0.7419323325157166, "step": 3475, "validation": {}}
+{"loss": 0.8182612061500549, "step": 3500, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7587646124884486, "seen_utterance_unseen_channel": 0.752955689560622, "unseen_speaker_snr_10db": 0.7787973200902343, "unseen_speaker_snr_15db": 0.7651739069260657, "unseen_speaker_snr_5db": 0.8179221032187343, "unseen_speaker_unseen_utterance_unseen_channel": 0.7898787981830537}}
+{"loss": 0.7683135867118835, "step": 3525, "validation": {}}
+{"loss": 0.7457752227783203, "step": 3550, "validation": {}}
+{"loss": 0.7562562227249146, "step": 3575, "validation": {}}
+{"loss": 0.7654963731765747, "step": 3600, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7573199034668505, "seen_utterance_unseen_channel": 0.751340520568192, "unseen_speaker_snr_10db": 0.7773354412056506, "unseen_speaker_snr_15db": 0.7638617507182062, "unseen_speaker_snr_5db": 0.8176292306743562, "unseen_speaker_unseen_utterance_unseen_channel": 0.7889487659558654}}
+{"loss": 0.7906085252761841, "step": 3625, "validation": {}}
+{"loss": 0.8290884494781494, "step": 3650, "validation": {}}
+{"loss": 0.770932137966156, "step": 3675, "validation": {}}
+{"loss": 0.7735646963119507, "step": 3700, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7560150856152177, "seen_utterance_unseen_channel": 0.7489721048623323, "unseen_speaker_snr_10db": 0.7759774955920875, "unseen_speaker_snr_15db": 0.7621435387991369, "unseen_speaker_snr_5db": 0.8172727525234222, "unseen_speaker_unseen_utterance_unseen_channel": 0.7873391155153513}}
+{"loss": 0.737352728843689, "step": 3725, "validation": {}}
+{"loss": 0.7699345350265503, "step": 3750, "validation": {}}
+{"loss": 0.7792459726333618, "step": 3775, "validation": {}}
+{"loss": 0.7255170941352844, "step": 3800, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7548208120279014, "seen_utterance_unseen_channel": 0.7480271114036441, "unseen_speaker_snr_10db": 0.7754768813028932, "unseen_speaker_snr_15db": 0.7614093162119389, "unseen_speaker_snr_5db": 0.8163908803835511, "unseen_speaker_unseen_utterance_unseen_channel": 0.7866495884954929}}
+{"loss": 0.7299907207489014, "step": 3825, "validation": {}}
+{"loss": 0.7501376867294312, "step": 3850, "validation": {}}
+{"loss": 0.7892888784408569, "step": 3875, "validation": {}}
+{"loss": 0.7656458616256714, "step": 3900, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7528488375246525, "seen_utterance_unseen_channel": 0.7458170254249126, "unseen_speaker_snr_10db": 0.7744542974978685, "unseen_speaker_snr_15db": 0.7603073762729764, "unseen_speaker_snr_5db": 0.815815522801131, "unseen_speaker_unseen_utterance_unseen_channel": 0.7856334415264428}}
+{"loss": 0.7981834411621094, "step": 3925, "validation": {}}
+{"loss": 0.7607405185699463, "step": 3950, "validation": {}}
+{"loss": 0.7361260056495667, "step": 3975, "validation": {}}
+{"loss": 0.7238583564758301, "step": 4000, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7524609733372927, "seen_utterance_unseen_channel": 0.7448305245488882, "unseen_speaker_snr_10db": 0.7734905313700438, "unseen_speaker_snr_15db": 0.759435020852834, "unseen_speaker_snr_5db": 0.8142519062384963, "unseen_speaker_unseen_utterance_unseen_channel": 0.7848191349767148}}
+{"loss": 0.7424222230911255, "step": 4025, "validation": {}}
+{"loss": 0.7814991474151611, "step": 4050, "validation": {}}
+{"loss": 0.7845055460929871, "step": 4075, "validation": {}}
+{"loss": 0.7389715313911438, "step": 4096, "validation": {"same_speaker_unseen_utterance_unseen_channel": 0.7515365513972938, "seen_utterance_unseen_channel": 0.7429326185956597, "unseen_speaker_snr_10db": 0.772188441362232, "unseen_speaker_snr_15db": 0.7586021730676293, "unseen_speaker_snr_5db": 0.8135737888514996, "unseen_speaker_unseen_utterance_unseen_channel": 0.7840787745080888}}

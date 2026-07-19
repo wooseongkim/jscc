@@ -1,0 +1,34 @@
+[
+  {
+    "stage": "g0_direct",
+    "status": "passed",
+    "same_speaker_loss": 0.4727996119763702,
+    "unseen_speaker_loss": 0.5084771665278822,
+    "layer0_loss": 0.13387940637767315,
+    "enhancement_loss": 0.5619911322636264
+  },
+  {
+    "stage": "g1_mapping_train",
+    "status": "passed",
+    "same_speaker_loss": 0.6846748308744282,
+    "unseen_speaker_loss": 0.7156589510850608,
+    "layer0_loss": 0.29981373623013496,
+    "enhancement_loss": 0.7750654103500503
+  },
+  {
+    "stage": "g2_fixed_clean",
+    "status": "passed",
+    "same_speaker_loss": 0.7113103384617716,
+    "unseen_speaker_loss": 0.7410798883065581,
+    "layer0_loss": 0.3420461639761925,
+    "enhancement_loss": 0.7980847060680389
+  },
+  {
+    "stage": "g3_random_clean",
+    "status": "passed",
+    "same_speaker_loss": 0.7515365513972938,
+    "unseen_speaker_loss": 0.7840787745080888,
+    "layer0_loss": 0.39262833818793297,
+    "enhancement_loss": 0.8400002654109683
+  }
+]

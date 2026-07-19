@@ -1,0 +1,10 @@
+{
+  "version": "conv_conformer_integration_v1",
+  "architecture": "conv_conformer_v1",
+  "stages": [
+    "g0_direct",
+    "g1_mapping_train",
+    "g2_fixed_clean",
+    "g3_random_clean"
+  ]
+}

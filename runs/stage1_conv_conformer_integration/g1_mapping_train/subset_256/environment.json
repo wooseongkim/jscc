@@ -1,0 +1,7 @@
+{
+  "python": "3.11.11 (main, Feb 10 2025, 00:00:00) [GCC 11.5.0 20240719 (Red Hat 11.5.0-5)]",
+  "torch": "2.11.0+cu126",
+  "platform": "Linux-5.14.0-570.19.1.el9_6.x86_64-x86_64-with-glibc2.34",
+  "git_commit": "aa94943e423c4d7faa44e9a6df4355ca27afce9c",
+  "working_tree_dirty": true
+}
