@@ -1,0 +1,18 @@
+[
+  {
+    "condition": "full_barrage_estimated_csi",
+    "base_steps": 500,
+    "extended_steps": 1000,
+    "base_final_loss": 0.2487829029560089,
+    "extended_final_loss": 0.024842672049999237,
+    "relative_loss_reduction": 0.9001431699894906,
+    "base_power_ratio": 0.6729470696300268,
+    "extended_power_ratio": 0.965443342924118,
+    "base_correlation": 0.8787360265851021,
+    "extended_correlation": 0.9890845343470573,
+    "base_best_step": 500,
+    "extended_best_step": 1000,
+    "final_window_slope": -0.0012896754186261783,
+    "extension_interpretation": "optimization_duration_limited"
+  }
+]

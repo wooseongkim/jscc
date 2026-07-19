@@ -1,0 +1,2 @@
+condition,base_steps,extended_steps,base_final_loss,extended_final_loss,relative_loss_reduction,base_power_ratio,extended_power_ratio,base_correlation,extended_correlation,base_best_step,extended_best_step,final_window_slope,extension_interpretation
+full_barrage_estimated_csi,500,1000,0.2487829029560089,0.024842672049999237,0.9001431699894906,0.6729470696300268,0.965443342924118,0.8787360265851021,0.9890845343470573,500,1000,-0.0012896754186261783,optimization_duration_limited
