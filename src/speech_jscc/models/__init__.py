@@ -1,4 +1,5 @@
 from speech_jscc.models.decoder import JSCCDecoder
+from speech_jscc.models.conv_conformer import ConformerBlock, ConvConformerJSCC
 from speech_jscc.models.encoder import JSCCEncoder, deterministic_layer_gates, normalize_complex_power
 from speech_jscc.models.system import SpeechJSCC
 from speech_jscc.models.soft_codebook import (
@@ -28,6 +29,8 @@ __all__ = [
     "CodecRepresentationLoss",
     "JSCCEncoder",
     "JSCCDecoder",
+    "ConformerBlock",
+    "ConvConformerJSCC",
     "LearnedLayerGate",
     "LatentRefiner",
     "SoftCodebook",

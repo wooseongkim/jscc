@@ -16,10 +16,11 @@ class SpeechJSCC(nn.Module):
                                    hidden_dim, target_power)
         self.decoder = JSCCDecoder(representation_shape, channel_uses, channel_state_dim,
                                    hidden_dim)
+        self.architecture = "flat_mlp"
+        self.architecture_version = "flat_mlp_v1"
 
     def encode(self, representation: Tensor, channel_state: Tensor) -> Tensor:
         return self.encoder(representation, channel_state)
 
     def decode(self, received: Tensor, channel_state: Tensor) -> Tensor:
         return self.decoder(received, channel_state)
-

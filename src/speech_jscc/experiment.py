@@ -8,7 +8,7 @@ from evaluation.paired import (
     run_mode_on_paired_batch,
 )
 from speech_jscc.codecs import MockContinuousCodec, SpeechTokenizerWrapper
-from speech_jscc.models import SpeechJSCC
+from speech_jscc.models import ConvConformerJSCC, SpeechJSCC
 
 
 def build_components(config: dict, device: torch.device):
@@ -35,13 +35,19 @@ def build_components(config: dict, device: torch.device):
         raise ValueError(f"unsupported codec type: {codec_type}")
     shape = codec.representation_shape
     model_cfg["layers"], model_cfg["frames"], model_cfg["latent_dim"] = shape
-    model = SpeechJSCC(
-        shape,
-        model_cfg["channel_uses"],
-        model_cfg["channel_state_dim"],
-        model_cfg["hidden_dim"],
-        model_cfg["target_power"],
-    ).to(device)
+    architecture = model_cfg.get("architecture", "flat_mlp")
+    if architecture in {"flat_mlp", "normalized_flat_mlp"}:
+        model = SpeechJSCC(shape, model_cfg["channel_uses"], model_cfg["channel_state_dim"],
+                           model_cfg["hidden_dim"], model_cfg["target_power"])
+    elif architecture == "conv_conformer_v1":
+        keys = ("d_model", "encoder_conformer_blocks", "decoder_conformer_blocks", "num_attention_heads",
+                "ffn_expansion", "convolution_kernel_size", "dropout", "layer_mixer_blocks",
+                "symbol_frames", "complex_channels_per_symbol_frame")
+        model = ConvConformerJSCC(shape, model_cfg["channel_uses"], model_cfg["channel_state_dim"],
+                                  model_cfg["target_power"], **{key:model_cfg[key] for key in keys if key in model_cfg})
+    else:
+        raise ValueError(f"unsupported model architecture: {architecture}")
+    model = model.to(device)
     return codec, model
 
 
