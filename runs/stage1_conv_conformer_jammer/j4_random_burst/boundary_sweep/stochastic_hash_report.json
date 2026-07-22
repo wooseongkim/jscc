@@ -1,0 +1,7 @@
+{
+  "mask_hash": 71,
+  "legitimate_channel_hash": 432,
+  "jammer_channel_hash": 432,
+  "jammer_waveform_hash": 1296,
+  "awgn_hash": 432
+}

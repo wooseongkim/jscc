@@ -1,0 +1,45 @@
+{
+  "schema_version": "j3_accepted_provenance_v2",
+  "classification": "ACCEPTED_PASS",
+  "summary_path": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j3_random_narrowband/training/j2_transfer/summary.corrected.json",
+  "summary_sha256": "95485984d60f5487c5465ca901bf32fd7f75a29020174cb19f8da47a35aaeb24",
+  "original_summary_path": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j3_random_narrowband/training/j2_transfer/summary.original.json",
+  "original_summary_sha256": "29b5e71974cf427d709032e4492f6b3f5daca2940fc27f027d4ea9f4f5ccb21d",
+  "checkpoint_path": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j3_random_narrowband/training/j2_transfer/diagnostic_last.pt",
+  "checkpoint_sha256": "bf4207182eb5a08f616c3ae3f2b520ab8f3b57341948f8d04152fd08f185d9bf",
+  "provenance_correction_path": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j3_random_narrowband/training/j2_transfer/provenance_correction.json",
+  "provenance_corrected": true,
+  "initialization_mode": "j2_transfer",
+  "initialization_source_stage": "j2_strong_barrage_boundary",
+  "initial_weights_loaded": true,
+  "parent_checkpoint_path": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j2_strong_barrage_boundary/training/j1_transfer/diagnostic_last.pt",
+  "parent_checkpoint_sha256": "adddc47e3d67404880bf30600fa829180bf442e4a3a6059c7256da94b4d8ab17",
+  "parent_summary_path": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j2_strong_barrage_boundary/training/j1_transfer/summary.json",
+  "parent_summary_sha256": "97afddc48b0d0d987989147b75a49077f83ea30e66e1c4887881a9091ba1c292",
+  "model_weights_loaded_successfully": true,
+  "loaded_architecture_version": "conv_conformer_v1",
+  "loaded_preprocessing": {
+    "sample_rate": 16000,
+    "waveform_samples": 16000,
+    "codec_type": "speechtokenizer",
+    "representation_shape": [
+      8,
+      50,
+      1024
+    ]
+  },
+  "loaded_codec_metadata": {
+    "sample_rate": 16000,
+    "waveform_samples": 16000,
+    "codec_type": "speechtokenizer",
+    "representation_shape": [
+      8,
+      50,
+      1024
+    ]
+  },
+  "git_commit": "af467d5f2fe887a17cb528ff216d9d4209dd6410",
+  "configuration_sha256": "838fa08fa5cab5844e9cdc336ef98631a4c9bf69453038d7757d673beb15721c",
+  "j3_checkpoint_sha256": "bf4207182eb5a08f616c3ae3f2b520ab8f3b57341948f8d04152fd08f185d9bf",
+  "provenance_schema_version": "j3_accepted_provenance_v2"
+}

@@ -1,0 +1,27 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+/home/mike/jscc/src/speech_jscc/diagnostics/conv_conformer_integration.py:75: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  def db(ratio):return float((10*torch.log10(ratio.clamp_min(epsilon))).mean())
+{"loss": 0.8082756996154785, "step": 1, "validation": {"j2_strongest_selected_condition": 0.8528930814936757, "same_speaker_unseen_utterance_unseen_channel": 0.8002004339359701, "seen_utterance_unseen_channel": 0.8018882886972278, "unseen_speaker_unseen_utterance_unseen_channel": 0.8317347755655646}}
+{"loss": 0.6925408840179443, "step": 25, "validation": {}}
+{"loss": 0.8546773195266724, "step": 50, "validation": {}}
+{"loss": 0.7312353253364563, "step": 75, "validation": {}}
+{"loss": 0.7683526277542114, "step": 100, "validation": {"j2_strongest_selected_condition": 0.8518005907535553, "same_speaker_unseen_utterance_unseen_channel": 0.802788311149925, "seen_utterance_unseen_channel": 0.8022806481458247, "unseen_speaker_unseen_utterance_unseen_channel": 0.8344241152517498}}
+{"loss": 0.8347757458686829, "step": 125, "validation": {}}
+{"loss": 0.8029205799102783, "step": 150, "validation": {}}
+{"loss": 0.7880455255508423, "step": 175, "validation": {}}
+{"loss": 0.7874658703804016, "step": 200, "validation": {"j2_strongest_selected_condition": 0.8504328955896199, "same_speaker_unseen_utterance_unseen_channel": 0.8008764889091253, "seen_utterance_unseen_channel": 0.7995694414712489, "unseen_speaker_unseen_utterance_unseen_channel": 0.8308017272502184}}
+{"loss": 0.8027574419975281, "step": 225, "validation": {}}
+{"loss": 0.7925970554351807, "step": 250, "validation": {}}
+{"loss": 0.8297346830368042, "step": 275, "validation": {}}
+{"loss": 0.8195397257804871, "step": 300, "validation": {"j2_strongest_selected_condition": 0.8509061206132174, "same_speaker_unseen_utterance_unseen_channel": 0.8015883415937424, "seen_utterance_unseen_channel": 0.8014155044220388, "unseen_speaker_unseen_utterance_unseen_channel": 0.8301982376724482}}
+{"loss": 0.8020148277282715, "step": 325, "validation": {}}
+{"loss": 0.7741970419883728, "step": 350, "validation": {}}
+{"loss": 0.8856645822525024, "step": 375, "validation": {}}
+{"loss": 0.7492327690124512, "step": 400, "validation": {"j2_strongest_selected_condition": 0.8504516510292888, "same_speaker_unseen_utterance_unseen_channel": 0.8017201363109052, "seen_utterance_unseen_channel": 0.8016960797831416, "unseen_speaker_unseen_utterance_unseen_channel": 0.830105397850275}}
+{"loss": 0.8292154669761658, "step": 425, "validation": {}}
+{"loss": 0.7711484432220459, "step": 450, "validation": {}}
+{"loss": 0.7434494495391846, "step": 475, "validation": {}}
+{"loss": 0.8043656349182129, "step": 500, "validation": {"j2_strongest_selected_condition": 0.8505581393837929, "same_speaker_unseen_utterance_unseen_channel": 0.8006596113555133, "seen_utterance_unseen_channel": 0.8003170450683683, "unseen_speaker_unseen_utterance_unseen_channel": 0.8308475851081312}}
+{"loss": 0.8044335842132568, "step": 512, "validation": {"j2_strongest_selected_condition": 0.8499051439575851, "same_speaker_unseen_utterance_unseen_channel": 0.7988273268565536, "seen_utterance_unseen_channel": 0.7998802117072046, "unseen_speaker_unseen_utterance_unseen_channel": 0.8307421882636845}}

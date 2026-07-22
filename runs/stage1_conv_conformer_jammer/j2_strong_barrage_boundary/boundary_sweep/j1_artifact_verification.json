@@ -1,0 +1,15 @@
+{
+  "summary_path": "runs/stage1_conv_conformer_jammer/j1_weak_random_barrage/subset_256/summary.json",
+  "checkpoint_path": "runs/stage1_conv_conformer_jammer/j1_weak_random_barrage/subset_256/diagnostic_last.pt",
+  "summary_sha256": "8a434382879bd36b70ca6d5cbc62fd5c476f7d6f5921a0f377941719b7861e07",
+  "checkpoint_sha256": "c686fad0bd22edc84c6f18bac71ae4d37a5a2f8f4edc039465bd733a8ba26522",
+  "stage_name": "j1_weak_random_barrage",
+  "architecture": "conv_conformer_v1",
+  "architecture_version": "conv_conformer_v1",
+  "subset_size": "256",
+  "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4",
+  "latent_cache_hash": "de8278a597a31742853cfbd882c062aeb40b474f3a90e3b2845441e5aef0b834",
+  "train_manifest_hash": "de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40",
+  "validation_suite_hash": "4ec0cfc55eba12a8444295523e13fef12dcc4e9aa6bd159ed4a127c50dd41151",
+  "git_commit": "af467d5f2fe887a17cb528ff216d9d4209dd6410"
+}

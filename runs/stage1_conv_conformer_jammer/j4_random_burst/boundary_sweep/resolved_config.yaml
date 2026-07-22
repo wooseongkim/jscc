@@ -1,0 +1,109 @@
+channel:
+  assume_ideal_cp: true
+  block_fading_over_time: true
+  channel_estimator: dft_tap_ls
+  clean_probability: 0.0
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-06
+  fading: multipath_block
+  jammed_fraction: 0.25
+  jammer_probabilities:
+    burst: 1.0
+  jsr_db_range:
+  - -10.0
+  - 0.0
+  num_taps: 6
+  pdp: exponential
+  pdp_decay: 0.7
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  snr_db_range:
+  - 5.0
+  - 15.0
+codec:
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  freeze: true
+  n_q: 8
+  sample_rate: 16000
+  type: speechtokenizer
+  waveform_samples: 16000
+data:
+  latent_cache_dir: artifacts/latent_cache/stage1_fixed_tx_speechtokenizer_1s
+  test_manifest: manifests/mini_librispeech/test.jsonl
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+device: cuda
+j4:
+  boundary_sweep:
+    burst_fractions:
+    - 0.125
+    - 0.25
+    - 0.5
+    realizations_per_group_point: 16
+    requested_global_jsr_db:
+    - -10
+    - -5
+    - 0
+    snr_db:
+    - 5
+    - 10
+    - 15
+  provisional_thresholds:
+    aggregate_correlation: 0.3
+    aggregate_improvement: 0.1
+    aggregate_power_ratio: 0.12
+    enhancement_correlation: 0.25
+    enhancement_improvement: 0.075
+    enhancement_power_ratio: 0.08
+    layer7_improvement: 0.03
+    layer7_negative_rate_max: 0.1
+    layer7_p10_min: 0.0
+    layer7_power_ratio: 0.04
+    layers6_to_7_improvement: 0.05
+    worst_aggregate_improvement: 0.075
+    worst_enhancement_improvement: 0.05
+    worst_layer7_improvement: 0.02
+  stage_definition_version: j4_random_burst_v1
+  wrap_around: false
+model:
+  architecture: conv_conformer_v1
+  architecture_version: conv_conformer_v1
+  channel_state_dim: 8
+  channel_uses: 1920
+  complex_channels_per_symbol_frame: 8
+  convolution_kernel_size: 15
+  d_model: 256
+  decoder_conformer_blocks: 4
+  dropout: 0.1
+  encoder_conformer_blocks: 4
+  ffn_expansion: 4
+  frames: 50
+  grid_shape:
+  - 64
+  - 32
+  hidden_dim: 32
+  latent_dim: 1024
+  layer_mixer_blocks: 1
+  layers: 8
+  num_attention_heads: 4
+  symbol_frames: 30
+  target_power: 1.0
+seed: 23
+train:
+  gradient_clip_norm: 5.0
+  latent_normalization:
+    epsilon: 1.0e-06
+    mode: per_layer_power
+  layer_weights:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  learning_rate: 0.0001
+  optimizer: adam
+  weight_decay: 0.0

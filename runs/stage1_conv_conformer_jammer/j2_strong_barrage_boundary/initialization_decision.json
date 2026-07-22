@@ -1,0 +1,30 @@
+{
+  "selected_initialization": "j1_transfer",
+  "fresh": {
+    "unseen_loss": 0.9726881422102451,
+    "layers1_to_7_improvement": 0.0004240359578813825,
+    "layers6_to_7_improvement": -0.00010352954268455505,
+    "layer7_improvement": 8.380413055419922e-05,
+    "gradient_finite_ratio": 1.0,
+    "output_power_ratio": 0.029558636793808546,
+    "post_eq_sinr_conditioned_loss": 0.9695540135726333,
+    "convergence_slope": -0.0003427453339099884
+  },
+  "j1_transfer": {
+    "unseen_loss": 0.8307421882636845,
+    "layers1_to_7_improvement": 0.11805480825049537,
+    "layers6_to_7_improvement": 0.08135541528463364,
+    "layer7_improvement": 0.07085414230823517,
+    "gradient_finite_ratio": 1.0,
+    "output_power_ratio": 0.18259674770524725,
+    "post_eq_sinr_conditioned_loss": 0.8499051439575851,
+    "convergence_slope": -0.00010539684444665909
+  },
+  "decision_rule": "lower unseen loss plus enhancement/deep-layer improvement and output-power evidence",
+  "score": {
+    "fresh": -0.9693279679851132,
+    "j1_transfer": -0.5422181476497956
+  },
+  "fresh_summary": "runs/stage1_conv_conformer_jammer/j2_strong_barrage_boundary/initialization_compare/fresh/summary.json",
+  "transfer_summary": "runs/stage1_conv_conformer_jammer/j2_strong_barrage_boundary/initialization_compare/j1_transfer/summary.json"
+}

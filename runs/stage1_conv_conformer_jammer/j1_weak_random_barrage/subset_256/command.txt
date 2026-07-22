@@ -1,0 +1,1 @@
+diagnose_stage1_content_generalization.py --config configs/conv_conformer_integration_v1.yaml --stage j1_weak_random_barrage --subset-size 256 --max-epochs 64 --batch-size 4 --num-workers 0 --seed 23 --output-dir runs/stage1_conv_conformer_jammer/j1_weak_random_barrage/subset_256 --device cuda --checkpoint-every 250 --validation-every 100 --allow-long-run

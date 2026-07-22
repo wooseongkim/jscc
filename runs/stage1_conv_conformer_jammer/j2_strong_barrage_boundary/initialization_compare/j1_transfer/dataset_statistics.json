@@ -1,0 +1,92 @@
+{
+  "train": {
+    "utterance_count": 256,
+    "speaker_count": 28,
+    "unknown_speaker_count": 0,
+    "latent_power": 2.5002927780151367,
+    "latent_mean": 0.005538193043321371,
+    "latent_std": 1.5812216997146606,
+    "utterance_duration_mean_seconds": 1.0,
+    "utterance_duration_min_seconds": 1.0,
+    "utterance_duration_max_seconds": 1.0,
+    "preprocessing": {
+      "sample_rate": 16000,
+      "waveform_samples": 16000,
+      "codec_type": "speechtokenizer",
+      "representation_shape": [
+        8,
+        50,
+        1024
+      ]
+    },
+    "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+  },
+  "validation": {
+    "seen_utterance_unseen_channel": {
+      "utterance_count": 8,
+      "speaker_count": 8,
+      "unknown_speaker_count": 0,
+      "latent_power": 2.4060747623443604,
+      "latent_mean": 0.00466347299516201,
+      "latent_std": 1.5511456727981567,
+      "utterance_duration_mean_seconds": 1.0,
+      "utterance_duration_min_seconds": 1.0,
+      "utterance_duration_max_seconds": 1.0,
+      "preprocessing": {
+        "sample_rate": 16000,
+        "waveform_samples": 16000,
+        "codec_type": "speechtokenizer",
+        "representation_shape": [
+          8,
+          50,
+          1024
+        ]
+      },
+      "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+    },
+    "same_speaker_unseen_utterance_unseen_channel": {
+      "utterance_count": 8,
+      "speaker_count": 8,
+      "unknown_speaker_count": 0,
+      "latent_power": 2.4557886123657227,
+      "latent_mean": 0.002825972391292453,
+      "latent_std": 1.567093014717102,
+      "utterance_duration_mean_seconds": 1.0,
+      "utterance_duration_min_seconds": 1.0,
+      "utterance_duration_max_seconds": 1.0,
+      "preprocessing": {
+        "sample_rate": 16000,
+        "waveform_samples": 16000,
+        "codec_type": "speechtokenizer",
+        "representation_shape": [
+          8,
+          50,
+          1024
+        ]
+      },
+      "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+    },
+    "unseen_speaker_unseen_utterance_unseen_channel": {
+      "utterance_count": 8,
+      "speaker_count": 8,
+      "unknown_speaker_count": 0,
+      "latent_power": 2.5189263820648193,
+      "latent_mean": 0.008202232420444489,
+      "latent_std": 1.5870914459228516,
+      "utterance_duration_mean_seconds": 1.0,
+      "utterance_duration_min_seconds": 1.0,
+      "utterance_duration_max_seconds": 1.0,
+      "preprocessing": {
+        "sample_rate": 16000,
+        "waveform_samples": 16000,
+        "codec_type": "speechtokenizer",
+        "representation_shape": [
+          8,
+          50,
+          1024
+        ]
+      },
+      "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4"
+    }
+  }
+}

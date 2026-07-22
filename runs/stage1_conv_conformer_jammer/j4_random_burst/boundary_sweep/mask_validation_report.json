@@ -1,0 +1,7 @@
+{
+  "all_contiguous": true,
+  "all_full_band": true,
+  "no_wraparound": true,
+  "maximum_leakage": 0.0,
+  "unique_mask_hashes": 71
+}
