@@ -1,0 +1,9 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+/home/mike/jscc/src/speech_jscc/diagnostics/j5_pilot.py:35: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  return {'requested_pilot_jsr_db':float(requested_pilot_jsr_db),'realized_received_pilot_jsr_db':float(10*torch.log10(torch.stack(local)).mean()),
+{
+  "classification": "PASS",
+  "output_dir": "runs/stage1_conv_conformer_jammer/j5_pilot_targeted/training/j4_transfer"
+}

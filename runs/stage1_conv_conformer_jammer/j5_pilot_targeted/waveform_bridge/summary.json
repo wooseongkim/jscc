@@ -1,0 +1,465 @@
+{
+  "version": "j5_waveform_bridge_v1",
+  "condition": {
+    "snr_db": 5.0,
+    "pilot_jsr_db": 10.0,
+    "coverage": 0.5
+  },
+  "rows": [
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61946/6241-61946-0000.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": -0.48742616176605225,
+      "stft_l1": 0.21416065096855164,
+      "si_sdr_db": -49.449459075927734,
+      "si_sdr_db_per_example": [
+        -49.449459075927734
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61946/6241-61946-0000.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": -0.8280394077301025,
+      "stft_l1": 0.19961483776569366,
+      "si_sdr_db": -41.966209411621094,
+      "si_sdr_db_per_example": [
+        -41.966209411621094
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61946/6241-61946-0000.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": -0.8025121092796326,
+      "stft_l1": 0.20626036822795868,
+      "si_sdr_db": -43.359989166259766,
+      "si_sdr_db_per_example": [
+        -43.359989166259766
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61946/6241-61946-0000.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 1.1392863988876343,
+      "stft_l1": 0.10655593127012253,
+      "si_sdr_db": -3.0554184913635254,
+      "si_sdr_db_per_example": [
+        -3.0554184913635254
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5895/34629/5895-34629-0033.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": -0.3622986376285553,
+      "stft_l1": 0.17675837874412537,
+      "si_sdr_db": -13.19235610961914,
+      "si_sdr_db_per_example": [
+        -13.19235610961914
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5895/34629/5895-34629-0033.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": -0.46991658210754395,
+      "stft_l1": 0.17272211611270905,
+      "si_sdr_db": -14.071052551269531,
+      "si_sdr_db_per_example": [
+        -14.071052551269531
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5895/34629/5895-34629-0033.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": -0.8694170713424683,
+      "stft_l1": 0.17510828375816345,
+      "si_sdr_db": -23.330486297607422,
+      "si_sdr_db_per_example": [
+        -23.330486297607422
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/5895/34629/5895-34629-0033.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 0.5467562079429626,
+      "stft_l1": 0.10481204092502594,
+      "si_sdr_db": -4.198409557342529,
+      "si_sdr_db_per_example": [
+        -4.198409557342529
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/7850/281318/7850-281318-0012.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": -0.272787481546402,
+      "stft_l1": 0.09260322153568268,
+      "si_sdr_db": -15.771148681640625,
+      "si_sdr_db_per_example": [
+        -15.771148681640625
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/7850/281318/7850-281318-0012.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": 0.15995152294635773,
+      "stft_l1": 0.08806581795215607,
+      "si_sdr_db": -10.526223182678223,
+      "si_sdr_db_per_example": [
+        -10.526223182678223
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/7850/281318/7850-281318-0012.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": -0.03261526674032211,
+      "stft_l1": 0.08969901502132416,
+      "si_sdr_db": -11.927423477172852,
+      "si_sdr_db_per_example": [
+        -11.927423477172852
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/7850/281318/7850-281318-0012.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 2.6639418601989746,
+      "stft_l1": 0.06342890858650208,
+      "si_sdr_db": 0.0058685243129730225,
+      "si_sdr_db_per_example": [
+        0.0058685243129730225
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3576/138058/3576-138058-0013.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": 0.22904323041439056,
+      "stft_l1": 0.21732117235660553,
+      "si_sdr_db": -12.661666870117188,
+      "si_sdr_db_per_example": [
+        -12.661666870117188
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3576/138058/3576-138058-0013.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": 0.20999260246753693,
+      "stft_l1": 0.2142881602048874,
+      "si_sdr_db": -12.98526382446289,
+      "si_sdr_db_per_example": [
+        -12.98526382446289
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3576/138058/3576-138058-0013.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": 0.16056373715400696,
+      "stft_l1": 0.21590714156627655,
+      "si_sdr_db": -13.978517532348633,
+      "si_sdr_db_per_example": [
+        -13.978517532348633
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/3576/138058/3576-138058-0013.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 6.048221588134766,
+      "stft_l1": 0.10629785805940628,
+      "si_sdr_db": 4.855175971984863,
+      "si_sdr_db_per_example": [
+        4.855175971984863
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0008.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": 0.06477870047092438,
+      "stft_l1": 0.21430820226669312,
+      "si_sdr_db": -18.15697479248047,
+      "si_sdr_db_per_example": [
+        -18.15697479248047
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0008.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": -0.18552488088607788,
+      "stft_l1": 0.2020414173603058,
+      "si_sdr_db": -21.713685989379883,
+      "si_sdr_db_per_example": [
+        -21.713685989379883
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0008.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": -0.13281282782554626,
+      "stft_l1": 0.20067183673381805,
+      "si_sdr_db": -18.98443603515625,
+      "si_sdr_db_per_example": [
+        -18.98443603515625
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0008.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 5.848336696624756,
+      "stft_l1": 0.07495765388011932,
+      "si_sdr_db": 4.784826755523682,
+      "si_sdr_db_per_example": [
+        4.784826755523682
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170142/1462-170142-0023.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": 0.5014938116073608,
+      "stft_l1": 0.1798790693283081,
+      "si_sdr_db": -8.865938186645508,
+      "si_sdr_db_per_example": [
+        -8.865938186645508
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170142/1462-170142-0023.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": 0.8025377988815308,
+      "stft_l1": 0.16217266023159027,
+      "si_sdr_db": -6.764082908630371,
+      "si_sdr_db_per_example": [
+        -6.764082908630371
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170142/1462-170142-0023.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": 0.842773973941803,
+      "stft_l1": 0.16068419814109802,
+      "si_sdr_db": -6.503519535064697,
+      "si_sdr_db_per_example": [
+        -6.503519535064697
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170142/1462-170142-0023.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 7.1729888916015625,
+      "stft_l1": 0.0633934810757637,
+      "si_sdr_db": 6.331147193908691,
+      "si_sdr_db_per_example": [
+        6.331147193908691
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/154320/2803-154320-0007.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": 0.3058016300201416,
+      "stft_l1": 0.13742105662822723,
+      "si_sdr_db": -10.776386260986328,
+      "si_sdr_db_per_example": [
+        -10.776386260986328
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/154320/2803-154320-0007.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": 0.17611490190029144,
+      "stft_l1": 0.13841623067855835,
+      "si_sdr_db": -11.263065338134766,
+      "si_sdr_db_per_example": [
+        -11.263065338134766
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/154320/2803-154320-0007.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": 0.1473279893398285,
+      "stft_l1": 0.1386766880750656,
+      "si_sdr_db": -11.84598445892334,
+      "si_sdr_db_per_example": [
+        -11.84598445892334
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/154320/2803-154320-0007.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 8.152566909790039,
+      "stft_l1": 0.056031566113233566,
+      "si_sdr_db": 7.450991153717041,
+      "si_sdr_db_per_example": [
+        7.450991153717041
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0003.flac",
+      "mode": "j5_estimated",
+      "waveform_snr_db": -0.5712378621101379,
+      "stft_l1": 0.19830816984176636,
+      "si_sdr_db": -21.4730167388916,
+      "si_sdr_db_per_example": [
+        -21.4730167388916
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0003.flac",
+      "mode": "j5_oracle",
+      "waveform_snr_db": -0.4213550090789795,
+      "stft_l1": 0.19851240515708923,
+      "si_sdr_db": -18.501447677612305,
+      "si_sdr_db_per_example": [
+        -18.501447677612305
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0003.flac",
+      "mode": "no_jammer",
+      "waveform_snr_db": -0.5146691799163818,
+      "stft_l1": 0.19822852313518524,
+      "si_sdr_db": -20.27266502380371,
+      "si_sdr_db_per_example": [
+        -20.27266502380371
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    },
+    {
+      "utterance_id": "data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0003.flac",
+      "mode": "clean_codec",
+      "waveform_snr_db": 2.3019094467163086,
+      "stft_l1": 0.11124909669160843,
+      "si_sdr_db": 0.24714899063110352,
+      "si_sdr_db_per_example": [
+        0.24714899063110352
+      ],
+      "stoi": null,
+      "stoi_per_example": null,
+      "stoi_available": false,
+      "stoi_error": "pystoi is not installed"
+    }
+  ],
+  "optional_metric_status": {
+    "stoi_available": false,
+    "pesq_available": false,
+    "visqol_available": false,
+    "speaker_embedding_available": false
+  },
+  "installation": "pip install pystoi pesq; install ViSQOL separately"
+}

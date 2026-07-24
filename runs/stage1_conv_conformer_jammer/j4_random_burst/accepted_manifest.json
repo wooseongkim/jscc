@@ -1,0 +1,36 @@
+{
+  "schema_version": "j4_accepted_v1",
+  "accepted_status": "ACCEPTED_PASS",
+  "j4_checkpoint_path": "runs/stage1_conv_conformer_jammer/j4_random_burst/training/j3_transfer/diagnostic_last.pt",
+  "j4_checkpoint_sha256": "6b97ee39a77fdeb98fcfdfd957e68ff2195b8f30a3c29202a86d92b4471db13a",
+  "original_j4_summary_path": "runs/stage1_conv_conformer_jammer/j4_random_burst/training/j3_transfer/summary.json",
+  "original_j4_summary_sha256": "561323d2930c8c8897ae34fd31f35bed6a84af098fba51a2e0af019b8ae06a80",
+  "corrected_supplement_path": "runs/stage1_conv_conformer_jammer/j4_random_burst/tail_diagnostic/corrected_strongest_condition_supplement.json",
+  "corrected_supplement_sha256": "6d2aa259a98d70b7fef4d3f2f017c544684d9da070f4799073f58c9c13fb6e1b",
+  "tail_diagnostic_summary_path": "runs/stage1_conv_conformer_jammer/j4_random_burst/tail_diagnostic/summary.json",
+  "tail_diagnostic_summary_sha256": "8e276e0c916c48e2dfc0bf56e19c04445dd462f6f312918b3eb9513b5dce9d44",
+  "parent_j3_checkpoint_path": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j3_random_narrowband/training/j2_transfer/diagnostic_last.pt",
+  "parent_j3_checkpoint_sha256": "bf4207182eb5a08f616c3ae3f2b520ab8f3b57341948f8d04152fd08f185d9bf",
+  "architecture_version": "conv_conformer_v1",
+  "codec_metadata": {
+    "sample_rate": 16000,
+    "waveform_samples": 16000,
+    "codec_type": "speechtokenizer",
+    "representation_shape": [
+      8,
+      50,
+      1024
+    ]
+  },
+  "latent_shape": [
+    8,
+    50,
+    1024
+  ],
+  "preprocessing_hash": "54d8c4fb28593dd5dcc32c324f6dea743bc740d79f909deb0b39675371bd9ba4",
+  "dataset_manifest_hash": "de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40",
+  "git_commit": "eb9de523590454a919ffeb0aece94efa516607da",
+  "acceptance_timestamp": "2026-07-22T09:14:36.153014+00:00",
+  "acceptance_reason": "Corrected SNR 5 dB, pilot+data burst global JSR 0 dB, fraction 0.125 evaluation over 64 unseen utterances/128 realizations: Layer-7 p10 +1.56%, negative rate 2.34%; all corrected J4 gates pass.",
+  "original_summary_preserved": true
+}

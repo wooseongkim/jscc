@@ -1,0 +1,8 @@
+{
+  "official": {
+    "si_sdr_db": 2.261974892579019,
+    "waveform_snr_db": 4.378439074149355,
+    "stft_l1": 0.07928889917093329,
+    "multi_resolution_stft_distance": 0.08354711689753458
+  }
+}

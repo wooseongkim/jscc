@@ -1,0 +1,84 @@
+{
+  "experiment": "cf1",
+  "steps": 20000,
+  "initialization": {
+    "mode": "experiment_a",
+    "checkpoint": "runs/channel_free_feasibility/experiment_a_latent_only/best_latent.pt",
+    "sha256": "a77f813d0818e8c832a72070e8098f12a5299a3e6c1ba603451c9a65c1ce77c3"
+  },
+  "model": {
+    "architecture": "conv_conformer_v1",
+    "architecture_version": "conv_conformer_v1",
+    "layers": 8,
+    "frames": 50,
+    "latent_dim": 1024,
+    "channel_uses": 1920,
+    "channel_state_dim": 8,
+    "target_power": 1.0,
+    "d_model": 256,
+    "encoder_conformer_blocks": 4,
+    "decoder_conformer_blocks": 4,
+    "num_attention_heads": 4,
+    "ffn_expansion": 4,
+    "convolution_kernel_size": 15,
+    "dropout": 0.1,
+    "layer_mixer_blocks": 1,
+    "symbol_frames": 30,
+    "complex_channels_per_symbol_frame": 8,
+    "temporal_symbol_layout": "dense_interpolate"
+  },
+  "parameter_count": {
+    "git_commit": "eb9de523590454a919ffeb0aece94efa516607da",
+    "working_tree_dirty": true,
+    "torch_version": "2.11.0+cu126",
+    "device": "cuda",
+    "python": "3.11.11 (main, Feb 10 2025, 00:00:00) [GCC 11.5.0 20240719 (Red Hat 11.5.0-5)]",
+    "codec_trainable_parameters": 0,
+    "encoder_parameters": 7234688,
+    "decoder_parameters": 9045504
+  },
+  "checkpoint_selection": {
+    "per_layer_nmse": {
+      "step": 20000,
+      "value": 0.6642868518829346,
+      "path": "runs/channel_free_revalidation/cf1_30frames_1920_a_warmstart_control/best_per_layer_nmse.pt"
+    },
+    "summed_latent_nmse": {
+      "step": 20000,
+      "value": 0.2654052674770355,
+      "path": "runs/channel_free_revalidation/cf1_30frames_1920_a_warmstart_control/best_summed_latent_nmse.pt"
+    },
+    "waveform_si_sdr": {
+      "step": 19500,
+      "value": -5.05072887102142,
+      "path": "runs/channel_free_revalidation/cf1_30frames_1920_a_warmstart_control/best_waveform_si_sdr.pt"
+    }
+  },
+  "final_validation": {
+    "per_layer_nmse": [
+      0.1738787591457367,
+      0.5431407690048218,
+      0.6914203763008118,
+      0.7568951845169067,
+      0.7792770266532898,
+      0.7938635349273682,
+      0.7927168607711792,
+      0.7831021547317505
+    ],
+    "aggregate_layer_nmse": 0.6642868518829346,
+    "summed_latent_nmse": 0.2654052674770355,
+    "summed_latent_snr_db": 5.7609052658081055,
+    "summed_latent_correlation": 0.8576523661613464,
+    "summed_latent_power_ratio": 0.7912794351577759,
+    "clean_si_sdr_db": 2.2619882519356906,
+    "si_sdr_db": -5.051887835841626,
+    "delta_si_sdr_db": -7.313876087777317,
+    "clean_waveform_snr_db": 4.378468594281003,
+    "waveform_snr_db": 1.2520230862428434,
+    "delta_waveform_snr_db": -3.1264455080381595,
+    "stft_ratio": 1.4330967139162272,
+    "classification": "CHANNEL_FREE_CONV_CONFORMER_NOT_YET_FEASIBLE"
+  },
+  "temporal_symbol_pattern": null,
+  "feasibility_claim_allowed": false
+}

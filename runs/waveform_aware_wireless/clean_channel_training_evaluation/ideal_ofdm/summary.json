@@ -1,0 +1,47 @@
+{
+  "direct_cf2": {
+    "clean_si_sdr_db": 2.2619882519356906,
+    "si_sdr_db": 1.782820053442265,
+    "delta_si_sdr_db": -0.47916819849342573,
+    "clean_waveform_snr_db": 4.378468594281003,
+    "waveform_snr_db": 3.982214838033542,
+    "delta_waveform_snr_db": -0.39625375624746084,
+    "clean_stft_l1": 0.07928910391638055,
+    "stft_l1": 0.08583590693888254,
+    "stft_ratio": 1.0878578694887602,
+    "aggregate_layer_nmse": 0.22268318431451917,
+    "summed_latent_nmse": 0.13790794892702252,
+    "summed_latent_snr_db": 8.731102783232927,
+    "summed_latent_correlation": 0.928698874078691,
+    "summed_latent_power_ratio": 0.9164916975423694
+  },
+  "ideal_ofdm": {
+    "clean_si_sdr_db": 2.2619882519356906,
+    "si_sdr_db": 1.782820053442265,
+    "delta_si_sdr_db": -0.47916819849342573,
+    "clean_waveform_snr_db": 4.378468594281003,
+    "waveform_snr_db": 3.982214838033542,
+    "delta_waveform_snr_db": -0.39625375624746084,
+    "clean_stft_l1": 0.07928910391638055,
+    "stft_l1": 0.08583590693888254,
+    "stft_ratio": 1.0878578694887602,
+    "aggregate_layer_nmse": 0.22268318431451917,
+    "summed_latent_nmse": 0.13790794892702252,
+    "summed_latent_snr_db": 8.731102783232927,
+    "summed_latent_correlation": 0.928698874078691,
+    "summed_latent_power_ratio": 0.9164916975423694
+  },
+  "equivalence_gate": {
+    "passed": true,
+    "checks": {
+      "si_sdr": true,
+      "waveform_snr": true,
+      "stft": true,
+      "summed_latent": true
+    },
+    "si_sdr_difference_db": 0.0,
+    "waveform_snr_difference_db": 0.0,
+    "stft_ratio_to_direct": 1.0,
+    "summed_latent_nmse_increase": 0.0
+  }
+}

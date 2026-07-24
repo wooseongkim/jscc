@@ -1,0 +1,9 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{"epoch": 1, "step": 16, "train_loss": 1.0053343772888184, "selection_loss": 1.0004401374608278}
+{"epoch": 2, "step": 32, "train_loss": 0.9935598969459534, "selection_loss": 0.9899984886869788}
+{"epoch": 4, "step": 64, "train_loss": 0.9774672389030457, "selection_loss": 0.9747756882570684}
+{"epoch": 8, "step": 128, "train_loss": 0.9667962789535522, "selection_loss": 0.9680102965794504}
+{"epoch": 16, "step": 256, "train_loss": 0.9250271320343018, "selection_loss": 0.9232918368652463}
+{"epoch": 32, "step": 512, "train_loss": 0.7868611216545105, "selection_loss": 0.8107982336077839}
+{"epoch": 64, "step": 1024, "train_loss": 0.751494288444519, "selection_loss": 0.7694918147753924}

@@ -1,0 +1,349 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "samples": 64,
+  "comparison": {
+    "cf1": {
+      "per_layer_nmse": [
+        0.18880575895309448,
+        0.5597178936004639,
+        0.6896033883094788,
+        0.7441332340240479,
+        0.7637689709663391,
+        0.7856016159057617,
+        0.781780481338501,
+        0.7828459739685059
+      ],
+      "aggregate_layer_nmse": 0.6620321869850159,
+      "summed_latent_nmse": 0.2629397511482239,
+      "summed_latent_snr_db": 5.8014373779296875,
+      "summed_latent_correlation": 0.8593785762786865,
+      "summed_latent_power_ratio": 0.80689537525177,
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": -5.462453132378869,
+      "delta_si_sdr_db": -7.724441384314559,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 0.9787993678764906,
+      "delta_waveform_snr_db": -3.3996692264045123,
+      "stft_ratio": 1.4641333600532105,
+      "classification": "CHANNEL_FREE_CONV_CONFORMER_NOT_YET_FEASIBLE",
+      "matched_gaussian": {
+        "aggregate_layer_nmse_matched": {
+          "per_layer_nmse": [
+            0.1888056844472885,
+            0.5597178936004639,
+            0.6896035671234131,
+            0.7441333532333374,
+            0.7637689709663391,
+            0.7856013774871826,
+            0.781780481338501,
+            0.7828460931777954
+          ],
+          "summed": {
+            "nmse": 0.35847795009613037,
+            "snr_db": 4.4553751945495605,
+            "correlation": 0.8579095005989075,
+            "power_ratio": 1.3580820560455322
+          }
+        },
+        "summed_latent_nmse_matched": {
+          "per_layer_nmse": [
+            0.05511428043246269,
+            0.3051186800003052,
+            0.48415952920913696,
+            0.6204760670661926,
+            0.8111844062805176,
+            0.9687837958335876,
+            1.1460380554199219,
+            1.3284856081008911
+          ],
+          "summed": {
+            "nmse": 0.2629397511482239,
+            "snr_db": 5.8014373779296875,
+            "correlation": 0.8897958397865295,
+            "power_ratio": 1.2626969814300537
+          }
+        }
+      },
+      "model_parameter_count": 16280192,
+      "optimizer_steps": 18500,
+      "symbol_frames": 30,
+      "channel_uses": 1920
+    },
+    "cf2": {
+      "per_layer_nmse": [
+        0.12522876262664795,
+        0.18862825632095337,
+        0.2155667543411255,
+        0.23025169968605042,
+        0.18937571346759796,
+        0.21409766376018524,
+        0.20141324400901794,
+        0.18672367930412292
+      ],
+      "aggregate_layer_nmse": 0.19391073286533356,
+      "summed_latent_nmse": 0.11787107586860657,
+      "summed_latent_snr_db": 9.285927772521973,
+      "summed_latent_correlation": 0.9393073320388794,
+      "summed_latent_power_ratio": 0.908288300037384,
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": 1.8425165521912277,
+      "delta_si_sdr_db": -0.41947169974446297,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 4.0515024005726445,
+      "delta_waveform_snr_db": -0.32696619370835833,
+      "stft_ratio": 1.0490705511461034,
+      "classification": "CHANNEL_FREE_FEASIBLE",
+      "matched_gaussian": {
+        "aggregate_layer_nmse_matched": {
+          "per_layer_nmse": [
+            0.12522873282432556,
+            0.18862824141979218,
+            0.2155667543411255,
+            0.23025164008140564,
+            0.1893756240606308,
+            0.21409764885902405,
+            0.20141324400901794,
+            0.18672369420528412
+          ],
+          "summed": {
+            "nmse": 0.1471281796693802,
+            "snr_db": 8.323040962219238,
+            "correlation": 0.9336502552032471,
+            "power_ratio": 1.146939754486084
+          }
+        },
+        "summed_latent_nmse_matched": {
+          "per_layer_nmse": [
+            0.024706723168492317,
+            0.13677909970283508,
+            0.21703985333442688,
+            0.2781481146812439,
+            0.3636391758918762,
+            0.43428802490234375,
+            0.5137479901313782,
+            0.5955358147621155
+          ],
+          "summed": {
+            "nmse": 0.11787109822034836,
+            "snr_db": 9.285926818847656,
+            "correlation": 0.9457943439483643,
+            "power_ratio": 1.1177085638046265
+          }
+        }
+      },
+      "model_parameter_count": 16266320,
+      "optimizer_steps": 19500,
+      "symbol_frames": 50,
+      "channel_uses": 1920
+    },
+    "cf3": {
+      "per_layer_nmse": [
+        0.12386641651391983,
+        0.1941511482000351,
+        0.22352083027362823,
+        0.22757183015346527,
+        0.19924287497997284,
+        0.22995135188102722,
+        0.20916590094566345,
+        0.20241372287273407
+      ],
+      "aggregate_layer_nmse": 0.20123551785945892,
+      "summed_latent_nmse": 0.11607955396175385,
+      "summed_latent_snr_db": 9.352442741394043,
+      "summed_latent_correlation": 0.9401841759681702,
+      "summed_latent_power_ratio": 0.896545946598053,
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": 1.9388858913152944,
+      "delta_si_sdr_db": -0.3231023606203962,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 4.170391660649329,
+      "delta_waveform_snr_db": -0.20807693363167346,
+      "stft_ratio": 1.0311976707981012,
+      "classification": "CHANNEL_FREE_FEASIBLE",
+      "matched_gaussian": {
+        "aggregate_layer_nmse_matched": {
+          "per_layer_nmse": [
+            0.12386638671159744,
+            0.19415108859539032,
+            0.22352084517478943,
+            0.22757180035114288,
+            0.19924278557300568,
+            0.22995132207870483,
+            0.20916584134101868,
+            0.20241372287273407
+          ],
+          "summed": {
+            "nmse": 0.1488589644432068,
+            "snr_db": 8.272250175476074,
+            "correlation": 0.932946503162384,
+            "power_ratio": 1.1486691236495972
+          }
+        },
+        "summed_latent_nmse_matched": {
+          "per_layer_nmse": [
+            0.02433120831847191,
+            0.134700208902359,
+            0.21374107897281647,
+            0.27392053604125977,
+            0.3581122159957886,
+            0.4276873469352722,
+            0.5059395432472229,
+            0.5864843130111694
+          ],
+          "summed": {
+            "nmse": 0.11607957631349564,
+            "snr_db": 9.352441787719727,
+            "correlation": 0.9465532898902893,
+            "power_ratio": 1.1159183979034424
+          }
+        }
+      },
+      "model_parameter_count": 16280192,
+      "optimizer_steps": 13500,
+      "symbol_frames": 50,
+      "channel_uses": 3200
+    },
+    "cf4": {
+      "per_layer_nmse": [
+        0.07196619361639023,
+        0.09278637170791626,
+        0.10711845010519028,
+        0.12620775401592255,
+        0.08616103231906891,
+        0.09323019534349442,
+        0.08541488647460938,
+        0.07612994313240051
+      ],
+      "aggregate_layer_nmse": 0.09237685799598694,
+      "summed_latent_nmse": 0.06761044263839722,
+      "summed_latent_snr_db": 11.699862480163574,
+      "summed_latent_correlation": 0.9656499624252319,
+      "summed_latent_power_ratio": 0.9520131945610046,
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": 2.1855070528108627,
+      "delta_si_sdr_db": -0.07648119912482798,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 4.137174617033452,
+      "delta_waveform_snr_db": -0.24129397724755108,
+      "stft_ratio": 1.030983679030748,
+      "classification": "CHANNEL_FREE_FEASIBLE",
+      "matched_gaussian": {
+        "aggregate_layer_nmse_matched": {
+          "per_layer_nmse": [
+            0.07196618616580963,
+            0.09278638660907745,
+            0.10711845755577087,
+            0.12620778381824493,
+            0.08616100996732712,
+            0.09323016554117203,
+            0.08541488647460938,
+            0.07612994313240051
+          ],
+          "summed": {
+            "nmse": 0.07783524692058563,
+            "snr_db": 11.088237762451172,
+            "correlation": 0.9632060527801514,
+            "power_ratio": 1.077702522277832
+          }
+        },
+        "summed_latent_nmse_matched": {
+          "per_layer_nmse": [
+            0.014171691611409187,
+            0.07845602184534073,
+            0.1244933232665062,
+            0.15954481065273285,
+            0.20858217775821686,
+            0.24910613894462585,
+            0.2946840524673462,
+            0.3415972590446472
+          ],
+          "summed": {
+            "nmse": 0.06761045008897781,
+            "snr_db": 11.699862480163574,
+            "correlation": 0.9678090810775757,
+            "power_ratio": 1.0674874782562256
+          }
+        }
+      },
+      "model_parameter_count": 48372096,
+      "optimizer_steps": 12500,
+      "symbol_frames": 50,
+      "channel_uses": 3200
+    },
+    "cf5": {
+      "per_layer_nmse": [
+        0.03990981727838516,
+        0.038831692188978195,
+        0.04568670317530632,
+        0.06893787533044815,
+        0.03242325782775879,
+        0.03452816978096962,
+        0.03310740739107132,
+        0.02737409994006157
+      ],
+      "aggregate_layer_nmse": 0.04009987413883209,
+      "summed_latent_nmse": 0.03650914505124092,
+      "summed_latent_snr_db": 14.375983238220215,
+      "summed_latent_correlation": 0.9816026091575623,
+      "summed_latent_power_ratio": 0.9786233901977539,
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": 2.3672563014551997,
+      "delta_si_sdr_db": 0.10526804951950908,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 4.363219512626529,
+      "delta_waveform_snr_db": -0.01524908165447414,
+      "stft_ratio": 1.0120177056169395,
+      "classification": "CHANNEL_FREE_FEASIBLE",
+      "matched_gaussian": {
+        "aggregate_layer_nmse_matched": {
+          "per_layer_nmse": [
+            0.039909813553094864,
+            0.038831692188978195,
+            0.04568669945001602,
+            0.06893786042928696,
+            0.032423246651887894,
+            0.034528158605098724,
+            0.03310739994049072,
+            0.02737409435212612
+          ],
+          "summed": {
+            "nmse": 0.038834989070892334,
+            "snr_db": 14.107769966125488,
+            "correlation": 0.9811258912086487,
+            "power_ratio": 1.038752794265747
+          }
+        },
+        "summed_latent_nmse_matched": {
+          "per_layer_nmse": [
+            0.007652611471712589,
+            0.04236568883061409,
+            0.06722548604011536,
+            0.08615303039550781,
+            0.1126328706741333,
+            0.13451550900936127,
+            0.15912726521492004,
+            0.18446005880832672
+          ],
+          "summed": {
+            "nmse": 0.03650915250182152,
+            "snr_db": 14.375983238220215,
+            "correlation": 0.9822261929512024,
+            "power_ratio": 1.0364187955856323
+          }
+        }
+      },
+      "model_parameter_count": 48372096,
+      "optimizer_steps": 25500,
+      "symbol_frames": 50,
+      "channel_uses": 3200
+    }
+  },
+  "feasible_configurations": [
+    "cf2",
+    "cf3",
+    "cf4",
+    "cf5"
+  ],
+  "classification": "CHANNEL_FREE_FEASIBLE"
+}

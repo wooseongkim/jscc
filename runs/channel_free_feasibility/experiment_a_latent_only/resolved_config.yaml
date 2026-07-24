@@ -1,0 +1,64 @@
+codec:
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  freeze: true
+  n_q: 8
+  sample_rate: 16000
+  type: speechtokenizer
+  waveform_samples: 16000
+data:
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+device: cuda
+feasibility:
+  fft_sizes:
+  - 256
+  - 512
+  - 1024
+  lambda_sisdr: 0.1
+  lambda_stft: 1.0
+  lambda_sum: 1.0
+  subset_size: 256
+  validation_utterances: 64
+  version: channel_free_feasibility_v1
+model:
+  architecture: conv_conformer_v1
+  architecture_version: conv_conformer_v1
+  channel_state_dim: 8
+  channel_uses: 1920
+  complex_channels_per_symbol_frame: 8
+  convolution_kernel_size: 15
+  d_model: 256
+  decoder_conformer_blocks: 4
+  dropout: 0.1
+  encoder_conformer_blocks: 4
+  ffn_expansion: 4
+  frames: 50
+  grid_shape:
+  - 64
+  - 32
+  hidden_dim: 32
+  latent_dim: 1024
+  layer_mixer_blocks: 1
+  layers: 8
+  num_attention_heads: 4
+  symbol_frames: 30
+  target_power: 1.0
+seed: 23
+train:
+  gradient_clip_norm: 5.0
+  latent_normalization:
+    epsilon: 1.0e-06
+    mode: per_layer_power
+  layer_weights:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  learning_rate: 0.0001
+  optimizer: adam
+  weight_decay: 0.0

@@ -1,0 +1,1 @@
+python evaluate_fdd_temporal_csi.py --config configs/fdd_temporal_csi.yaml --checkpoint runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt --output-root runs/mmse_csi_interleaving --device cuda --utterances 64 --realizations 2 --allow-long-run 

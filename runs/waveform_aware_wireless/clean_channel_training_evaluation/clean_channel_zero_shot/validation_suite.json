@@ -1,0 +1,3138 @@
+[
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 0,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 0,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1459305633
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 0,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 427239399
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 0,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 438089033
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 0,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1345168288
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 0,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 2011280598
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 0,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 725129817
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 1,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 1,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1175773957
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 1,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1600289155
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 1,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 859670143
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 1,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2082024609
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 1,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1376258077
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 1,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1017658904
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 2,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 2,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 923228414
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 2,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 386964345
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 2,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 978376743
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 2,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1962478688
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 2,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 210753516
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 2,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1127763817
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 3,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 3,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1324209783
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 3,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 2040878008
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 3,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1309102961
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 3,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1596819979
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 3,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 685114408
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 3,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 665823192
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 4,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 4,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2131600906
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 4,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1686582527
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 4,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 511912837
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 4,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 864296854
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 4,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 785884368
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 4,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1412582281
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 5,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 5,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1191433791
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 5,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 2096153721
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 5,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 638636628
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 5,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 108358660
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 5,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 961417135
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 5,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 571149981
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 6,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 6,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2090046622
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 6,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 442454235
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 6,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 2140596569
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 6,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 835721180
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 6,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 103969271
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 6,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1056308337
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 7,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 7,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 576664336
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 7,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 589808846
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 7,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1946218906
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 7,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2127956645
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 7,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1125023348
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 7,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 2096564392
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 8,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 8,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1952141133
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 8,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 607240976
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 8,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1560703187
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 8,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 105414340
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 8,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 2130510519
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 8,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1978065727
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 9,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 9,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1728459509
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 9,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1821844891
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 9,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 547500724
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 9,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 445950362
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 9,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1931473783
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 9,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1700559512
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 10,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 10,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1335477443
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 10,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 719694776
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 10,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 404777550
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 10,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 422854481
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 10,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1092983193
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 10,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1018964148
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 11,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 11,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 737476543
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 11,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1852940121
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 11,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 4586677
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 11,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1512647212
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 11,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 747812205
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 11,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1950944721
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 12,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 12,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 297292209
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 12,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 891674824
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 12,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1562975307
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 12,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 944862715
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 12,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 655506719
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 12,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1972356700
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 13,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 13,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 931447254
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 13,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1909129671
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 13,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 226977770
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 13,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 103195136
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 13,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1300596906
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 13,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 374543945
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 14,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 14,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 597948618
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 14,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1878646952
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 14,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 2124853461
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 14,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1388524157
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 14,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 184712211
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 14,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1182058319
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 15,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 15,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2070467641
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 15,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1983353915
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 15,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 2118324619
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 15,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 343408999
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 15,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1693743034
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 15,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1885121471
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 16,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 16,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1396701657
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 16,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1606970555
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 16,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1541042304
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 16,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2146741841
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 16,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1933585454
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 16,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1294136580
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 17,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 17,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2049904952
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 17,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1402845830
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 17,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 865362949
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 17,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1773030137
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 17,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1755547540
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 17,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 796005155
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 18,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 18,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1225679043
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 18,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1360143674
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 18,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 2019554595
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 18,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2016640804
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 18,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 565861297
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 18,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 137771596
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 19,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 19,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 737384397
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 19,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 604220952
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 19,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 2083085189
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 19,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1337265074
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 19,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 781751532
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 19,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 651421511
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 20,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 20,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1521744778
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 20,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1225279297
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 20,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 725239386
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 20,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1599233792
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 20,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1896205989
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 20,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 375900747
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 21,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 21,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 104987726
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 21,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 590841106
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 21,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 783017531
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 21,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1259215886
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 21,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1319519811
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 21,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 429850534
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 22,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 22,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2095416755
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 22,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 201350204
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 22,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 37708932
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 22,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 578787101
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 22,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 413645722
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 22,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1567304198
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 23,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 23,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1484353106
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 23,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1338735700
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 23,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1875247093
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 23,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1033919496
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 23,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1894818544
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 23,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1505679507
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 24,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 24,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 217493454
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 24,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 115421569
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 24,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1388647469
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 24,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 341958045
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 24,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1769536603
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 24,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 778100763
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 25,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 25,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 811002419
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 25,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 797905945
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 25,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1668504967
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 25,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1637393223
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 25,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1220520881
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 25,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 393761201
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 26,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 26,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 784755768
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 26,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 966782364
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 26,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1716871317
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 26,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 371742947
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 26,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 347524798
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 26,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 487309594
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 27,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 27,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1762037587
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 27,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1022661696
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 27,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1467211454
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 27,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1109998999
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 27,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1809810354
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 27,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1619192654
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 28,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 28,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 373620765
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 28,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1558433276
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 28,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1376879191
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 28,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1714691426
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 28,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 504028661
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 28,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 584880932
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 29,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 29,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1244385582
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 29,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 461345682
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 29,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 534259974
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 29,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 69013394
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 29,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1316788947
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 29,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1609835998
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 30,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 30,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2031675492
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 30,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1813618890
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 30,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1124919891
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 30,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 282512286
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 30,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 2020173542
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 30,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 631676734
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 31,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 31,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 90822090
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 31,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 231045788
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 31,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1047973801
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 31,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 503558183
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 31,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1277647834
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 31,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 506400659
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 32,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 32,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2043385058
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 32,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 683453925
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 32,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 518463562
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 32,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1989650349
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 32,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1811657433
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 32,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1010111712
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 33,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 33,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 739543964
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 33,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 9878586
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 33,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1177721341
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 33,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 63934385
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 33,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 234701733
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 33,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 436156429
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 34,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 34,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 533320750
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 34,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1966758748
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 34,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1157562008
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 34,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1709834021
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 34,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 46409178
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 34,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 991201620
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 35,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 35,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 569402608
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 35,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1899049082
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 35,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1668827216
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 35,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1197093691
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 35,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1030412608
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 35,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1555299823
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 36,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 36,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1667455175
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 36,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1309350463
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 36,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 713326451
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 36,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1042039434
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 36,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1728008091
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 36,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 248370335
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 37,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 37,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1310757184
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 37,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 927923449
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 37,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1980026021
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 37,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 635561362
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 37,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 456299815
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 37,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 426371825
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 38,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 38,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1766592139
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 38,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 585900126
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 38,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1382359612
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 38,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1529953315
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 38,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1877059797
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 38,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 156363813
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 39,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 39,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 203027144
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 39,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 8181666
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 39,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1602751676
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 39,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1042655531
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 39,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 866151773
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 39,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1790816165
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 40,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 40,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1510931733
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 40,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1492378114
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 40,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1145647276
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 40,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 779282847
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 40,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1171336839
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 40,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 819677622
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 41,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 41,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1059359717
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 41,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 417544458
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 41,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1115219796
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 41,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1993388360
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 41,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 349310891
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 41,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1877766922
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 42,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 42,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 483208317
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 42,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1431231212
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 42,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 808874135
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 42,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1413093335
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 42,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 881436073
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 42,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1804064806
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 43,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 43,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 819962762
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 43,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 2076562611
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 43,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 541369728
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 43,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 709260750
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 43,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 123465818
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 43,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 662787521
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 44,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 44,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 163373751
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 44,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1986444705
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 44,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1236571119
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 44,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 727243484
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 44,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 129277593
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 44,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 2045858540
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 45,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 45,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 407968939
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 45,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1044620741
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 45,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 832179806
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 45,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1724240439
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 45,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 605600332
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 45,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1716119757
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 46,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 46,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 483500958
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 46,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 955951722
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 46,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1677788450
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 46,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1564010331
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 46,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1196696534
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 46,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1477795750
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 47,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 47,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 586876741
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 47,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1108013855
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 47,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 757531932
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 47,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 421167533
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 47,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1487424105
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 47,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1398787281
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 48,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 48,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 507462904
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 48,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 977973163
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 48,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 153957783
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 48,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2043943389
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 48,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 512917107
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 48,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1601625504
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 49,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 49,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 57140462
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 49,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1491359755
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 49,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 788266335
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 49,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1034559845
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 49,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 297963677
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 49,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1830529170
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 50,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 50,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1031521953
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 50,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 484681002
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 50,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 103368839
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 50,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 134120853
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 50,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 2109561717
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 50,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1467669171
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 51,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 51,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 957603864
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 51,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1648721227
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 51,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1944331631
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 51,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 710122940
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 51,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1995995425
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 51,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1983432511
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 52,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 52,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 2076831849
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 52,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1489465892
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 52,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1136017861
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 52,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2135834253
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 52,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 897891092
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 52,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 2145696444
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 53,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 53,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1545691707
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 53,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 853292804
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 53,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1927324616
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 53,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2033726874
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 53,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 884764118
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 53,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1178737067
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 54,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 54,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 377766796
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 54,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1480966965
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 54,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1532651186
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 54,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 48619579
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 54,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1151624296
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 54,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 292682772
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 55,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 55,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 425877437
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 55,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 74714549
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 55,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1718734685
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 55,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1758091496
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 55,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1843204867
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 55,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1662719576
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 56,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 56,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 474705604
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 56,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1404407064
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 56,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 171792281
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 56,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 6784061
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 56,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 456192271
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 56,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1078501751
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 57,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 57,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1704860842
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 57,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 379023144
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 57,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1747969328
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 57,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1821148456
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 57,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1085390240
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 57,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1062252264
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 58,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 58,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1598711374
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 58,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 591779495
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 58,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 838070196
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 58,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1688185916
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 58,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 35556694
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 58,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 900426649
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 59,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 59,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1684586563
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 59,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1409320307
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 59,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1699990913
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 59,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 2029728512
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 59,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1652527596
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 59,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 123434944
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 60,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 60,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1795201694
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 60,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 906960933
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 60,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1436626405
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 60,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 214517244
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 60,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1403616088
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 60,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 475636049
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 61,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 61,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1821623328
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 61,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 1190861575
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 61,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1984448031
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 61,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 299548963
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 61,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 386989404
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 61,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1861428687
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 62,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 62,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 1416880027
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 62,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 622648918
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 62,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 1701373609
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 62,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 1923053032
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 62,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 114774781
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 62,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 91649889
+  },
+  {
+    "channel_policy": "fixed",
+    "utterance_index": 63,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 550922807
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 63,
+    "realization": 0,
+    "snr_db": 5.0,
+    "seed": 217988816
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 63,
+    "realization": 1,
+    "snr_db": 5.0,
+    "seed": 327699610
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 63,
+    "realization": 0,
+    "snr_db": 10.0,
+    "seed": 231546406
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 63,
+    "realization": 1,
+    "snr_db": 10.0,
+    "seed": 182797678
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 63,
+    "realization": 0,
+    "snr_db": 15.0,
+    "seed": 1765135608
+  },
+  {
+    "channel_policy": "random",
+    "utterance_index": 63,
+    "realization": 1,
+    "snr_db": 15.0,
+    "seed": 1767271937
+  }
+]

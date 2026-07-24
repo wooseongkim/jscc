@@ -1,0 +1,85 @@
+seed: 23
+device: auto
+model:
+  architecture: flat_mlp
+  layers: 8
+  frames: 50
+  latent_dim: 1024
+  channel_uses: [64, 32]
+  channel_state_dim: 8
+  hidden_dim: 32
+  target_power: 1.0
+codec:
+  type: speechtokenizer
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  freeze: true
+  sample_rate: 16000
+  waveform_samples: 16000
+  n_q: 8
+data:
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+  test_manifest: manifests/mini_librispeech/test.jsonl
+  latent_cache_dir: artifacts/latent_cache/stage1_fixed_tx_speechtokenizer_1s
+layer_importance:
+  path: runs/layer_ablation/speechtokenizer_test_1s/layer_importance.yaml
+  strict_metadata: true
+  apply_to_loss_weights: true
+  apply_to_resource_order: false
+  apply_to_base_layers: false
+  require_non_smoke: true
+channel:
+  fading: multipath_block
+  num_taps: 6
+  pdp: exponential
+  pdp_decay: 0.7
+  block_fading_over_time: true
+  assume_ideal_cp: true
+  channel_estimator: dft_tap_ls
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-6
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  snr_db_range: [-2.0, 15.0]
+  jsr_db_range: [-10.0, 8.0]
+  clean_probability: 0.20
+  jammer_probabilities:
+    barrage: 0.40
+    narrowband: 0.25
+    burst: 0.25
+    pilot: 0.10
+  jammed_fraction: 0.25
+train:
+  training_stage: stage1_fixed_tx
+  transmitter_state_mode: neutral
+  receiver_state_mode: observable_v1
+  gate_mode: all_ones
+  allocation_mode: uniform
+  power_mode: uniform
+  equalizer: estimated
+  use_learned_gate: false
+  use_refiner: false
+  use_jammer_estimator: false
+  steps: 20000
+  batch_size: 4
+  val_batch_size: 4
+  optimizer: adam
+  learning_rate: 0.0001
+  weight_decay: 0.0
+  gradient_clip_norm: 5.0
+  layer_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  latent_normalization:
+    mode: per_layer_power
+    epsilon: 1.0e-6
+  log_every: 50
+  validate_every: 500
+  checkpoint_every: 1000
+  reconstruction_every: 1000
+  best_checkpoint_metric: val_weighted_latent_loss
+  early_stopping_patience: 10
+  checkpoint_best: artifacts/checkpoints/stage1_fixed_tx_weighted_best.pt
+  checkpoint_last: artifacts/checkpoints/stage1_fixed_tx_weighted_last.pt
+  metrics_jsonl: artifacts/logs/stage1_fixed_tx_weighted_metrics.jsonl
+  reconstruction_dir: artifacts/reconstructions/stage1_fixed_tx_weighted
+  reconstruction_examples: 2

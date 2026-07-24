@@ -1,0 +1,25 @@
+{
+  "architectures": [
+    "flat_mlp",
+    "normalized_flat_mlp",
+    "conv_conformer_v1",
+    "per_layer_pca_480"
+  ],
+  "resource_mapping_version": "pilot_reserved_v1",
+  "representation_shape": [
+    8,
+    50,
+    1024
+  ],
+  "total_data_channel_uses": 1920,
+  "per_layer_channel_uses": [
+    240,
+    240,
+    240,
+    240,
+    240,
+    240,
+    240,
+    240
+  ]
+}

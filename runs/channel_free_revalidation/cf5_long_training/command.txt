@@ -1,0 +1,1 @@
+train_channel_free_conv_conformer.py --config configs/channel_free_revalidation.yaml --experiment cf4 --output-dir runs/channel_free_revalidation/cf5_long_training --device cuda --batch-size 4 --initialization fresh --allow-long-run --steps 32000 --resume runs/channel_free_revalidation/cf4_large_model/best_waveform_si_sdr.pt

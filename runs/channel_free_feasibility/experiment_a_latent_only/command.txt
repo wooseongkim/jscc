@@ -1,0 +1,1 @@
+train_channel_free_feasibility.py --config configs/channel_free_feasibility.yaml --experiment a --output-dir runs/channel_free_feasibility/experiment_a_latent_only --device cuda --steps 4096 --batch-size 4 --allow-long-run

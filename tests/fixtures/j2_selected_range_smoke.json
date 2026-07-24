@@ -1,0 +1,10 @@
+{
+  "defined": true,
+  "selected_snr_range_db": [5.0, 15.0],
+  "selected_jsr_range_db": [-10.0, -7.5],
+  "lower_boundary_evidence": "smoke fixture only",
+  "upper_boundary_evidence": {"jsr_db": -7.5},
+  "first_failing_metric": "enhancement_layers_improvement",
+  "first_failing_layer": 7,
+  "failure_appearance": "unknown_smoke_fixture"
+}

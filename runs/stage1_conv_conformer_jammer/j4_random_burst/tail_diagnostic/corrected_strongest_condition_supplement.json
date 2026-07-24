@@ -1,0 +1,13 @@
+{
+  "supplement_version": "j4_tail_failure_v1",
+  "original_summary_path": "runs/stage1_conv_conformer_jammer/j4_random_burst/training/j3_transfer/summary.json",
+  "original_summary_sha256": "561323d2930c8c8897ae34fd31f35bed6a84af098fba51a2e0af019b8ae06a80",
+  "original_preserved": true,
+  "corrected_strongest_condition": {
+    "snr_db": 5.0,
+    "jsr_db": 0.0,
+    "burst_fraction": 0.125
+  },
+  "diagnostic_summary_path": "runs/stage1_conv_conformer_jammer/j4_random_burst/tail_diagnostic/summary.json",
+  "classification": "PILOT_CSI_DOMINANT"
+}

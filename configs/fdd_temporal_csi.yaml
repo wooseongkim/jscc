@@ -1,0 +1,38 @@
+seed: 23023
+source_checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+output_root: runs/mmse_csi_interleaving
+fdd:
+  enabled: true
+  feedback_delay_slots: 1
+  feedback_quantization: none
+mobility:
+  carrier_frequency_hz: 3500000000.0
+  user_speed_mps: 3.0
+  slot_duration_s: 0.001
+  doppler_model: jakes
+channel:
+  temporal_model: gauss_markov_jakes
+  update_granularity: slot
+  block_fading_within_slot: true
+  normalize_average_tap_power: true
+  num_taps: 6
+  pdp_decay: 0.7
+  snr_db: [5.0, 10.0, 15.0]
+  estimator: dft_tap_ls
+  estimator_ridge_lambda: 1.0e-6
+  equalizer: mmse
+interleaver:
+  frequency_enabled: true
+  within_slot_time_enabled: true
+  cross_slot_time_enabled: false
+  cross_slot_depth: 2
+allocation:
+  mode: stratified_delayed_csi
+  layer_importance_order: [1, 0, 2, 5, 3, 4, 6, 7]
+  importance_source: runs/layer_ablation/smoke_test_2_1s/layer_importance.yaml
+  importance_evidence_status: smoke_derived_provisional_not_accepted
+evaluation:
+  utterances: 64
+  realizations: 2
+  include_slot0_metrics: true
+  exclude_slot0_metrics: true

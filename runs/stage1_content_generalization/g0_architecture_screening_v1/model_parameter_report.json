@@ -1,0 +1,471 @@
+[
+  {
+    "architecture": "per_layer_pca_480",
+    "subset": "subset_full",
+    "parameter_report": null
+  },
+  {
+    "architecture": "normalized_flat_mlp",
+    "subset": "subset_16",
+    "parameter_report": {
+      "encoder_trainable_parameters": 13236224,
+      "decoder_trainable_parameters": 13639968,
+      "total_trainable_parameters": 26876192,
+      "speech_tokenizer_trainable_parameters": 0,
+      "estimated_parameter_memory_bytes_fp32": 107504768,
+      "largest_parameter_tensors": [
+        {
+          "name": "decoder.network.2.weight",
+          "shape": [
+            409600,
+            32
+          ],
+          "parameters": 13107200
+        },
+        {
+          "name": "encoder.layer_encoders.0.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "encoder.layer_encoders.1.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "encoder.layer_encoders.2.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "encoder.layer_encoders.3.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "encoder.layer_encoders.4.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "encoder.layer_encoders.5.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "encoder.layer_encoders.6.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "encoder.layer_encoders.7.0.weight",
+          "shape": [
+            32,
+            51208
+          ],
+          "parameters": 1638656
+        },
+        {
+          "name": "decoder.network.2.bias",
+          "shape": [
+            409600
+          ],
+          "parameters": 409600
+        }
+      ]
+    }
+  },
+  {
+    "architecture": "conv_conformer_v1",
+    "subset": "subset_16",
+    "parameter_report": {
+      "encoder_trainable_parameters": 7234688,
+      "decoder_trainable_parameters": 9045504,
+      "total_trainable_parameters": 16280192,
+      "speech_tokenizer_trainable_parameters": 0,
+      "estimated_parameter_memory_bytes_fp32": 65120768,
+      "largest_parameter_tensors": [
+        {
+          "name": "encoder.input_projection.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.2.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        }
+      ]
+    }
+  },
+  {
+    "architecture": "conv_conformer_v1",
+    "subset": "subset_64",
+    "parameter_report": {
+      "encoder_trainable_parameters": 7234688,
+      "decoder_trainable_parameters": 9045504,
+      "total_trainable_parameters": 16280192,
+      "speech_tokenizer_trainable_parameters": 0,
+      "estimated_parameter_memory_bytes_fp32": 65120768,
+      "largest_parameter_tensors": [
+        {
+          "name": "encoder.input_projection.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.2.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        }
+      ]
+    }
+  },
+  {
+    "architecture": "conv_conformer_v1",
+    "subset": "subset_256",
+    "parameter_report": {
+      "encoder_trainable_parameters": 7234688,
+      "decoder_trainable_parameters": 9045504,
+      "total_trainable_parameters": 16280192,
+      "speech_tokenizer_trainable_parameters": 0,
+      "estimated_parameter_memory_bytes_fp32": 65120768,
+      "largest_parameter_tensors": [
+        {
+          "name": "encoder.input_projection.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.2.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        }
+      ]
+    }
+  },
+  {
+    "architecture": "conv_conformer_v1",
+    "subset": "subset_full",
+    "parameter_report": {
+      "encoder_trainable_parameters": 7234688,
+      "decoder_trainable_parameters": 9045504,
+      "total_trainable_parameters": 16280192,
+      "speech_tokenizer_trainable_parameters": 0,
+      "estimated_parameter_memory_bytes_fp32": 65120768,
+      "largest_parameter_tensors": [
+        {
+          "name": "encoder.input_projection.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.0.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff1.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.1.ff2.network.4.weight",
+          "shape": [
+            256,
+            1024
+          ],
+          "parameters": 262144
+        },
+        {
+          "name": "encoder.conformer.2.ff1.network.1.weight",
+          "shape": [
+            1024,
+            256
+          ],
+          "parameters": 262144
+        }
+      ]
+    }
+  }
+]

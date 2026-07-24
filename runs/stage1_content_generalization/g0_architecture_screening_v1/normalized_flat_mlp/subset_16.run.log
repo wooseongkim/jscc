@@ -1,0 +1,19 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{"epoch": 1, "step": 4, "train_loss": 0.9903433918952942, "selection_loss": 0.9900043518282473}
+{"epoch": 2, "step": 8, "train_loss": 0.9806089997291565, "selection_loss": 0.9878143961541355}
+{"epoch": 4, "step": 16, "train_loss": 0.9792144298553467, "selection_loss": 0.987510600592941}
+{"epoch": 8, "step": 32, "train_loss": 0.9762971997261047, "selection_loss": 0.987298060208559}
+{"epoch": 16, "step": 64, "train_loss": 0.9737762808799744, "selection_loss": 0.9870944684371352}
+{"epoch": 32, "step": 128, "train_loss": 0.9680999517440796, "selection_loss": 0.9862488843500614}
+{"epoch": 64, "step": 256, "train_loss": 0.9570305347442627, "selection_loss": 0.98466427763924}
+Traceback (most recent call last):
+  File "/home/mike/jscc/diagnose_g0_exposure_normalized.py", line 172, in <module>
+    if __name__=="__main__": main()
+                             ^^^^^^
+  File "/home/mike/jscc/diagnose_g0_exposure_normalized.py", line 162, in main
+    summary={"provenance":provenance,"history":history,"final":final,"best_validation":best,"slopes":slopes,"plateau":plateau,"gate":{"passed":gate,**gate_detail},"parameter_report":parameter_report(model,codec),
+                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mike/jscc/src/speech_jscc/diagnostics/architecture_screening.py", line 42, in parameter_report
+    raise ValueError("giant flatten-output parameter tensor detected")
+ValueError: giant flatten-output parameter tensor detected

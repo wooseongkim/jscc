@@ -1,0 +1,8 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "classification": "PILOT_CSI_DOMINANT",
+  "content_samples": 64,
+  "realization_samples": 128,
+  "output_dir": "runs/stage1_conv_conformer_jammer/j4_random_burst/tail_diagnostic"
+}

@@ -1,0 +1,128 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "experiment": "b",
+  "steps": 4096,
+  "channel_uses": 1920,
+  "latent_cache_used": false,
+  "speech_tokenizer_trainable_parameters": 0,
+  "frozen_decoder_rnn_backward_modules": 1,
+  "best_latent_checkpoint": {
+    "step": 2000,
+    "latent_loss": 1.0393902361392975,
+    "delta_si_sdr": -34.10229081660509,
+    "path": "runs/channel_free_feasibility/experiment_b_waveform_connected/best_latent.pt"
+  },
+  "best_waveform_checkpoint": {
+    "step": 1900,
+    "latent_loss": 1.0669949054718018,
+    "delta_si_sdr": -33.09420246630907,
+    "path": "runs/channel_free_feasibility/experiment_b_waveform_connected/best_waveform.pt"
+  },
+  "checkpoints_differ": true,
+  "final": {
+    "step": 4096,
+    "loss": 5.703580856323242,
+    "latent_loss": 1.112670660018921,
+    "summed_latent_loss": 0.9719489812850952,
+    "stft_loss": 0.16652336716651917,
+    "negative_si_sdr_loss": 34.52437973022461,
+    "validation": {
+      "rows": [
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2412/153948/2412-153948-0003.flac",
+          "latent_loss": 1.095139980316162,
+          "summed_latent_loss": 0.9725476503372192,
+          "clean_si_sdr": -3.1040053367614746,
+          "si_sdr": -31.71198844909668,
+          "delta_si_sdr": -28.607983112335205,
+          "waveform_snr": -0.09198018908500671,
+          "delta_waveform_snr": -1.1620593965053558,
+          "stft_ratio": 2.5967018032086404
+        },
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170145/1462-170145-0020.flac",
+          "latent_loss": 1.0882091522216797,
+          "summed_latent_loss": 0.9825537800788879,
+          "clean_si_sdr": 7.409512519836426,
+          "si_sdr": -38.377384185791016,
+          "delta_si_sdr": -45.78689670562744,
+          "waveform_snr": -0.050362639129161835,
+          "delta_waveform_snr": -8.040572218596935,
+          "stft_ratio": 3.213997421788238
+        },
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61943/6241-61943-0026.flac",
+          "latent_loss": 1.092971682548523,
+          "summed_latent_loss": 0.994866132736206,
+          "clean_si_sdr": -0.9442669153213501,
+          "si_sdr": -40.81004333496094,
+          "delta_si_sdr": -39.86577641963959,
+          "waveform_snr": -0.07199104130268097,
+          "delta_waveform_snr": -1.9892795830965042,
+          "stft_ratio": 2.252121600487655
+        },
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6295/244435/6295-244435-0025.flac",
+          "latent_loss": 1.0891741514205933,
+          "summed_latent_loss": 0.9816963076591492,
+          "clean_si_sdr": 2.5081710815429688,
+          "si_sdr": -30.46586799621582,
+          "delta_si_sdr": -32.97403907775879,
+          "waveform_snr": -0.06076408550143242,
+          "delta_waveform_snr": -4.03177047893405,
+          "stft_ratio": 2.922751806112145
+        },
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1988/147956/1988-147956-0020.flac",
+          "latent_loss": 1.0833333730697632,
+          "summed_latent_loss": 0.9695339798927307,
+          "clean_si_sdr": -1.4382336139678955,
+          "si_sdr": -39.310882568359375,
+          "delta_si_sdr": -37.87264895439148,
+          "waveform_snr": -0.12759728729724884,
+          "delta_waveform_snr": -2.1809229403734207,
+          "stft_ratio": 2.6428793504233936
+        },
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/8842/304647/8842-304647-0008.flac",
+          "latent_loss": 1.1237705945968628,
+          "summed_latent_loss": 0.9555009603500366,
+          "clean_si_sdr": 0.5820378661155701,
+          "si_sdr": -40.73955535888672,
+          "delta_si_sdr": -41.32159322500229,
+          "waveform_snr": -0.16158722341060638,
+          "delta_waveform_snr": -2.694271072745323,
+          "stft_ratio": 2.319926204429561
+        },
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3000/15664/3000-15664-0010.flac",
+          "latent_loss": 1.097954511642456,
+          "summed_latent_loss": 0.9809513092041016,
+          "clean_si_sdr": 5.88787841796875,
+          "si_sdr": -38.955177307128906,
+          "delta_si_sdr": -44.843055725097656,
+          "waveform_snr": -0.08946885168552399,
+          "delta_waveform_snr": -6.916521921753883,
+          "stft_ratio": 2.528447335974654
+        },
+        {
+          "path": "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0000.flac",
+          "latent_loss": 1.0865392684936523,
+          "summed_latent_loss": 0.9861387610435486,
+          "clean_si_sdr": 5.975652694702148,
+          "si_sdr": -25.970176696777344,
+          "delta_si_sdr": -31.945829391479492,
+          "waveform_snr": -0.03932642191648483,
+          "delta_waveform_snr": -6.982611410319805,
+          "stft_ratio": 2.6487158620553934
+        }
+      ],
+      "latent_loss": 1.0946365892887115,
+      "delta_si_sdr": -37.90222782641649,
+      "si_sdr": -35.7926344871521,
+      "delta_waveform_snr": -4.24975112779066,
+      "stft_ratio": 2.6406926730599602
+    }
+  }
+}

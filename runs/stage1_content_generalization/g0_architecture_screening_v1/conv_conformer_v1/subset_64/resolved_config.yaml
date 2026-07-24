@@ -1,0 +1,90 @@
+codec:
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  freeze: true
+  n_q: 8
+  sample_rate: 16000
+  type: speechtokenizer
+  waveform_samples: 16000
+data:
+  latent_cache_dir: artifacts/latent_cache/stage1_fixed_tx_speechtokenizer_1s
+  test_manifest: manifests/mini_librispeech/test.jsonl
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+device: cuda
+g0_exposure:
+  architecture_version: conv_conformer_v1
+  baseline_hashes:
+    global_mean: dd2a0f0833d0e5a3fb685fd3384a79cd0b42375965d04da2baee2d7bc35fa1c4
+    layerwise_mean: 2c77ece4a302b9b3f01ce01b63aed4c46bf771a19b1cd4b0107d114a05411fb6
+    zero: 569e980eb86beff889c1ecc96a212cd85cfc2ab708a26692f45d4c0a2b8ed973
+  batch_size: 4
+  checkpoint_epochs:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16
+  - 32
+  - 64
+  diagnostic_engine_version: g0_exposure_normalized_v1
+  diagnostic_type: g0_exposure_normalized
+  git_commit: aa94943e423c4d7faa44e9a6df4355ca27afce9c
+  latent_cache_hash: de8278a597a31742853cfbd882c062aeb40b474f3a90e3b2845441e5aef0b834
+  learning_rate: 0.0001
+  max_epochs: 64
+  model_architecture: conv_conformer_v1
+  model_initialization_hash: 6d65319a2ebeac3875b4807cecc70d4d5d493f4d101a5476fb12cc10631e863e
+  normalization: &id001
+    epsilon: 1.0e-06
+    mode: per_layer_power
+  preprocessing_normalization:
+    mode: none
+    normalization_stats_hash: none
+  seed: 23
+  subset_size: '64'
+  target_optimizer_steps: 1024
+  train_manifest_hash: de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40
+  train_subset_size: 64
+  validation_manifest_hash: f8f473d5b80f943d73585682fb5770d7ae9047edebe9f6ccec80cf910cb04e68
+  validation_suite_hash: d84a97c5908c8e878fcfbe5f9cd6f45397018a8d57f9274120e6967e970bdc71
+  working_tree_dirty: true
+model:
+  architecture: conv_conformer_v1
+  architecture_version: conv_conformer_v1
+  channel_state_dim: 8
+  channel_uses: 1920
+  complex_channels_per_symbol_frame: 8
+  convolution_kernel_size: 15
+  d_model: 256
+  decoder_conformer_blocks: 4
+  dropout: 0.1
+  encoder_conformer_blocks: 4
+  ffn_expansion: 4
+  frames: 50
+  grid_shape:
+  - 64
+  - 32
+  hidden_dim: 32
+  latent_dim: 1024
+  layer_mixer_blocks: 1
+  layers: 8
+  num_attention_heads: 4
+  symbol_frames: 30
+  target_power: 1.0
+seed: 23
+train:
+  gradient_clip_norm: 5.0
+  latent_normalization: *id001
+  layer_weights:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  learning_rate: 0.0001
+  optimizer: adam
+  weight_decay: 0.0

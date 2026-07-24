@@ -1,0 +1,10 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "official": {
+    "si_sdr_db": 2.261974892579019,
+    "waveform_snr_db": 4.378439074149355,
+    "stft_l1": 0.07928889917093329,
+    "multi_resolution_stft_distance": 0.08354711689753458
+  }
+}

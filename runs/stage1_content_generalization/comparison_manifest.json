@@ -1,0 +1,8 @@
+{
+  "primary_loss": "uniform_stage1_layer_normalized_mse",
+  "validation_groups": [
+    "seen_utterance_unseen_channel",
+    "same_speaker_unseen_utterance_unseen_channel",
+    "unseen_speaker_unseen_utterance_unseen_channel"
+  ]
+}

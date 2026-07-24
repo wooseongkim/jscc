@@ -1,0 +1,30 @@
+seed: 23
+device: auto
+
+codec:
+  type: speechtokenizer
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  freeze: true
+  sample_rate: 16000
+  waveform_samples: 32000
+  n_q: 8
+
+eval:
+  manifest: manifests/mini_librispeech/test.jsonl
+  split: test
+  max_items: 100
+  batch_size: 4
+  decode_mode: continuous_sum
+  compare_official: true
+  metric_align: peak_xcorr
+  max_lag_samples: 1000
+  snr_scale_match: true
+  metric_zero_mean: true
+  report_distribution: true
+  save_worst_k: 10
+  outlier_threshold_si_sdr_db: -10.0
+  protocol_comparison: true
+  waveform_samples: [16000, 32000, 48000]
+  latent_noise_snr_db: [30, 20, 10, 5, 0]
+  latent_noise_is_wireless_snr: false

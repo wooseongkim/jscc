@@ -1,0 +1,37 @@
+seed: 23
+device: auto
+codec:
+  type: speechtokenizer
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  freeze: true
+  sample_rate: 16000
+  waveform_samples: 16000
+  n_q: 8
+model:
+  layers: 8
+  frames: 50
+  latent_dim: 1024
+eval:
+  enable_stoi: false
+  metric_align: peak_xcorr
+  max_lag_samples: 1000
+  snr_scale_match: true
+  metric_zero_mean: true
+layer_importance:
+  estimator: combined
+  source_protocols:
+    leave_one_out: 0.7
+    prefix_marginal: 0.3
+  metric_weights:
+    si_sdr: 1.0
+    waveform_snr: 0.5
+    stft_l1: 0.5
+    stoi: 1.0
+    speaker_similarity: 0.5
+    wer: 1.0
+  normalization: max
+  output_weight_normalization: mean_one
+  minimum_weight: 0.05
+  base_layer_cumulative_threshold: 0.70
+  enforce_prefix_base_layers: true

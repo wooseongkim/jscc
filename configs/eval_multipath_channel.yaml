@@ -1,0 +1,23 @@
+seed: 123
+device: auto
+channel:
+  fading: multipath_block
+  num_taps: 6
+  pdp: exponential
+  pdp_decay: 0.7
+  block_fading_over_time: true
+  assume_ideal_cp: true
+  channel_estimator: dft_tap_ls
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-6
+  grid_shape: [32, 16]
+  snr_db: 30.0
+  jsr_db: 0.0
+  jammer_type: none
+  jammed_fraction: 0.25
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  target_power: 1.0
+diagnostics:
+  batch_size: 64
+  output_dir: runs/channel_diagnostics/multipath_block

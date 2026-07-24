@@ -1,0 +1,14 @@
+{
+  "diagnostic_type": "offline_linear_reference",
+  "method": "randomized_low_rank_svd",
+  "requested_components": 480,
+  "fitted_components": 480,
+  "fitted_sample_count": 1491,
+  "training_mean_hash": "eec092bd7f32b1dfdedc56b6ee6ebe2e6ab80c5381ef412dd0f5d8bde54443dd",
+  "pca_component_hash": "6205d14969c5e3a4afda54dcbfb5618a403da3fdf96bfeefedcf1a7ca89e6b35",
+  "model_architecture": "per_layer_pca_480",
+  "subset_size": "full",
+  "train_manifest_hash": "de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40",
+  "latent_cache_hash": "de8278a597a31742853cfbd882c062aeb40b474f3a90e3b2845441e5aef0b834",
+  "validation_suite_hash": "d84a97c5908c8e878fcfbe5f9cd6f45397018a8d57f9274120e6967e970bdc71"
+}

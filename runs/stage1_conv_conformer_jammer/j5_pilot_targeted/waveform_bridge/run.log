@@ -1,0 +1,12 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "output_dir": "runs/stage1_conv_conformer_jammer/j5_pilot_targeted/waveform_bridge",
+  "rows": 32,
+  "optional_metric_status": {
+    "stoi_available": false,
+    "pesq_available": false,
+    "visqol_available": false,
+    "speaker_embedding_available": false
+  }
+}

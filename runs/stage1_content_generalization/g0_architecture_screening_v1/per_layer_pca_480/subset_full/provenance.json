@@ -1,0 +1,8 @@
+{
+  "model_architecture": "per_layer_pca_480",
+  "diagnostic_type": "offline_linear_reference",
+  "subset_size": "full",
+  "train_manifest_hash": "de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40",
+  "latent_cache_hash": "de8278a597a31742853cfbd882c062aeb40b474f3a90e3b2845441e5aef0b834",
+  "validation_suite_hash": "d84a97c5908c8e878fcfbe5f9cd6f45397018a8d57f9274120e6967e970bdc71"
+}

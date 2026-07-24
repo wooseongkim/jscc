@@ -1,0 +1,1 @@
+train_channel_free_conv_conformer.py --config configs/channel_free_revalidation.yaml --experiment cf1 --initialization experiment_a --output-dir runs/channel_free_revalidation/cf1_30frames_1920_a_warmstart_control --device cuda --allow-long-run

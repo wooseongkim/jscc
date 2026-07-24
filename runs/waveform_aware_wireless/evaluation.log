@@ -1,0 +1,186 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "source_checkpoint": "runs/channel_free_revalidation/cf2_50frames_1920/best_waveform_si_sdr.pt",
+  "preflight": {
+    "representation_shape": [
+      8,
+      50,
+      1024
+    ],
+    "valid_symbols_per_layer": 240,
+    "valid_symbols_total": 1920,
+    "four_symbol_frames": [
+      2,
+      7,
+      12,
+      17,
+      22,
+      27,
+      32,
+      37,
+      42,
+      47
+    ],
+    "mask_matches_cf2": true,
+    "uses_temporal_interpolation": false,
+    "pilot_resources": 128,
+    "data_resources": 1920,
+    "pilot_data_disjoint": true,
+    "pilot_data_exhaustive": true,
+    "passed": true,
+    "ragged_tensor": {
+      "fixed_width_shape": [
+        1,
+        8,
+        50,
+        5
+      ],
+      "valid_symbols_per_layer": 240,
+      "masked_slot_max_abs": 0.0,
+      "valid_symbol_power": 0.9999999403953552,
+      "passed": true
+    },
+    "mapping_round_trip_max_abs_error": 0.0
+  },
+  "ideal_ofdm": {
+    "passed": true,
+    "checks": {
+      "si_sdr": true,
+      "waveform_snr": true,
+      "stft": true,
+      "summed_latent": true
+    },
+    "si_sdr_difference_db": 0.0,
+    "waveform_snr_difference_db": 0.0,
+    "stft_ratio_to_direct": 1.0,
+    "summed_latent_nmse_increase": 0.0
+  },
+  "clean_channel_zero_shot": {
+    "validation_suite_hash": "f42ce9450196dfd72cf4f48fed954a614791ab81c3a31606d5114153ffc3e3e6",
+    "utterances": 64,
+    "realizations_per_utterance": 2,
+    "fixed": {
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": -2.419894367514644,
+      "delta_si_sdr_db": -4.6818826194503345,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 1.941498322848929,
+      "delta_waveform_snr_db": -2.436970271432074,
+      "clean_stft_l1": 0.07928910391638055,
+      "stft_l1": 0.12072038109181449,
+      "stft_ratio": 1.5306507897942112,
+      "aggregate_layer_nmse": 0.6345247849822044,
+      "summed_latent_nmse": 0.5100355339236557,
+      "summed_latent_snr_db": 2.939816227182746,
+      "summed_latent_correlation": 0.7161813033744693,
+      "summed_latent_power_ratio": 0.7550271865911782,
+      "gate": {
+        "passed": false,
+        "checks": {
+          "delta_si_sdr_pass": false,
+          "delta_waveform_snr_pass": false,
+          "stft_ratio_pass": false
+        },
+        "thresholds": {
+          "delta_si_sdr_min_db": -1.0,
+          "delta_waveform_snr_min_db": -1.0,
+          "stft_ratio_max": 1.2
+        }
+      }
+    },
+    "random": {
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": -4.971337222638492,
+      "delta_si_sdr_db": -7.233325474574182,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 1.4694177340898023,
+      "delta_waveform_snr_db": -2.9090508601912006,
+      "clean_stft_l1": 0.07928910391638055,
+      "stft_l1": 0.12523539894027635,
+      "stft_ratio": 1.6049481087463138,
+      "aggregate_layer_nmse": 0.7092479525599629,
+      "summed_latent_nmse": 0.4268422922468744,
+      "summed_latent_snr_db": 4.3051612742250045,
+      "summed_latent_correlation": 0.7629913880179325,
+      "summed_latent_power_ratio": 0.8111149795198193,
+      "gate": {
+        "passed": false,
+        "checks": {
+          "delta_si_sdr_pass": false,
+          "delta_waveform_snr_pass": false,
+          "stft_ratio_pass": false
+        },
+        "thresholds": {
+          "delta_si_sdr_min_db": -1.0,
+          "delta_waveform_snr_min_db": -1.0,
+          "stft_ratio_max": 1.2
+        }
+      }
+    },
+    "random_by_snr": {
+      "5.0": {
+        "clean_si_sdr_db": 2.2619882519356906,
+        "si_sdr_db": -10.871526698811067,
+        "delta_si_sdr_db": -13.133514950746758,
+        "clean_waveform_snr_db": 4.378468594281003,
+        "waveform_snr_db": 0.013923581969720544,
+        "delta_waveform_snr_db": -4.364545012311282,
+        "clean_stft_l1": 0.07928910391638055,
+        "stft_l1": 0.1573950033634901,
+        "stft_ratio": 2.051430527050841,
+        "aggregate_layer_nmse": 1.0129375592805445,
+        "summed_latent_nmse": 0.657574541401118,
+        "summed_latent_snr_db": 2.0457180508892634,
+        "summed_latent_correlation": 0.6256224238313735,
+        "summed_latent_power_ratio": 0.7542181934695691,
+        "csi_nmse": 0.01955821455339901,
+        "pilot_evm": 0.6131902828346938,
+        "post_equalization_sinr_db": -1.96156679908745
+      },
+      "10.0": {
+        "clean_si_sdr_db": 2.2619882519356906,
+        "si_sdr_db": -3.4193363248050446,
+        "delta_si_sdr_db": -5.681324576740735,
+        "clean_waveform_snr_db": 4.378468594281003,
+        "waveform_snr_db": 1.608317732643627,
+        "delta_waveform_snr_db": -2.770150861637376,
+        "clean_stft_l1": 0.07928910391638055,
+        "stft_l1": 0.12007220597297419,
+        "stft_ratio": 1.5158860619526762,
+        "aggregate_layer_nmse": 0.6713934415020049,
+        "summed_latent_nmse": 0.38502485991921276,
+        "summed_latent_snr_db": 4.4063669631723315,
+        "summed_latent_correlation": 0.7896933653391898,
+        "summed_latent_power_ratio": 0.8170967493206263,
+        "csi_nmse": 0.00590482715597318,
+        "pilot_evm": 0.33724018034990877,
+        "post_equalization_sinr_db": 3.3476878579240292
+      },
+      "15.0": {
+        "clean_si_sdr_db": 2.2619882519356906,
+        "si_sdr_db": -0.6231486442993628,
+        "delta_si_sdr_db": -2.8851368962350534,
+        "clean_waveform_snr_db": 4.378468594281003,
+        "waveform_snr_db": 2.786011887656059,
+        "delta_waveform_snr_db": -1.5924567066249438,
+        "clean_stft_l1": 0.07928910391638055,
+        "stft_l1": 0.09823898748436477,
+        "stft_ratio": 1.247527737235416,
+        "aggregate_layer_nmse": 0.4434128568973392,
+        "summed_latent_nmse": 0.23792747542029247,
+        "summed_latent_snr_db": 6.4633988086134195,
+        "summed_latent_correlation": 0.8736583748832345,
+        "summed_latent_power_ratio": 0.8620299957692623,
+        "csi_nmse": 0.0018618052731653734,
+        "pilot_evm": 0.18559127434855327,
+        "post_equalization_sinr_db": 8.078832970466465
+      }
+    },
+    "fine_tuning_required": true,
+    "jammer_experiments_unblocked": false
+  },
+  "fine_tuning_required": true,
+  "selected_checkpoint": "runs/channel_free_revalidation/cf2_50frames_1920/best_waveform_si_sdr.pt",
+  "jammer_experiments_unblocked": false
+}

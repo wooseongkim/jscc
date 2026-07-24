@@ -1,0 +1,1 @@
+python diagnose_g0_architecture_screening.py --config configs/g0_conv_conformer_v1.yaml --architecture conv_conformer_v1 --subset-size 16 --batch-size 4 --max-epochs 64 --device cuda --num-workers 0 --output-dir runs/stage1_content_generalization/g0_architecture_screening_v1/conv_conformer_v1/subset_16 --allow-long-run 

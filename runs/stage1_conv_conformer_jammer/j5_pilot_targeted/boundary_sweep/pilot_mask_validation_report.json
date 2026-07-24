@@ -1,0 +1,9 @@
+{
+  "all_masks_subset_of_pilots": true,
+  "coverage_values": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "maximum_data_leakage_power": 0.0
+}

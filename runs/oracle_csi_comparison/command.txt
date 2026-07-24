@@ -1,0 +1,1 @@
+compare_oracle_csi.py --checkpoint runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt --output-dir runs/oracle_csi_comparison --device cpu --utterances 64 --realizations 2 --allow-long-run

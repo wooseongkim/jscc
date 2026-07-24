@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export MPLCONFIGDIR="${TMPDIR:-/tmp}/jscc-matplotlib";mkdir -p "$MPLCONFIGDIR"
+device=cuda;steps=4096;batch=4;overwrite=0;dry=0;resume="";root=runs/stage1_conv_conformer_jammer/j4_random_burst;dist="$root/selected_training_distribution.json";out="$root/training/j3_transfer"
+while (($#));do case "$1" in --device)device="$2";shift 2;;--steps)steps="$2";shift 2;;--batch-size)batch="$2";shift 2;;--resume)resume="$2";shift 2;;--overwrite)overwrite=1;shift;;--dry-run)dry=1;shift;;*)echo "unknown argument: $1" >&2;exit 2;;esac;done
+cmd=(python train_j4_conv_conformer.py --config configs/conv_conformer_j4_random_burst.yaml --stage j4_random_burst --subset-size 256 --steps "$steps" --batch-size "$batch" --seed 23 --output-dir "$out" --device "$device" --selected-distribution "$dist" --j3-manifest runs/stage1_conv_conformer_jammer/j3_random_narrowband/training/j2_transfer/accepted_manifest.json --parent-checkpoint runs/stage1_conv_conformer_jammer/j3_random_narrowband/training/j2_transfer/diagnostic_last.pt --checkpoint-every 500 --validation-every 100 --allow-long-run);[[ -n "$resume" ]]&&cmd+=(--resume "$resume");((overwrite))&&cmd+=(--overwrite)
+if ((dry));then printf '%q ' "${cmd[@]}";echo;exit 0;fi
+[[ -f "$dist" ]]||{ echo "selected distribution required" >&2;exit 1;};[[ ! -e "$out"||$overwrite -eq 1||-n "$resume" ]]||{ echo "refusing existing output directory: $out" >&2;exit 1;};mkdir -p "$(dirname "$out")";log="${out}.run.log";"${cmd[@]}" 2>&1|tee "$log";mv "$log" "$out/run.log"

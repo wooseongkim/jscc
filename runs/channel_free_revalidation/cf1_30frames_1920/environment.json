@@ -1,0 +1,10 @@
+{
+  "git_commit": "eb9de523590454a919ffeb0aece94efa516607da",
+  "working_tree_dirty": true,
+  "torch_version": "2.11.0+cu126",
+  "device": "cuda",
+  "python": "3.11.11 (main, Feb 10 2025, 00:00:00) [GCC 11.5.0 20240719 (Red Hat 11.5.0-5)]",
+  "codec_trainable_parameters": 0,
+  "encoder_parameters": 7234688,
+  "decoder_parameters": 9045504
+}

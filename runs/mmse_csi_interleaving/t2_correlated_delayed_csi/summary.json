@@ -1,0 +1,30 @@
+{
+  "including_slot0": {
+    "post_mmse_sinr_db": 7.417331673825781,
+    "aggregate_layer_nmse": 0.45051761347955716,
+    "summed_latent_nmse": 0.24246961124784625,
+    "summed_latent_snr_db": 6.539088910445571,
+    "si_sdr_db": -1.5934057156846393,
+    "delta_si_sdr_db": -3.85539396762033,
+    "waveform_snr_db": 2.775375431355011,
+    "delta_waveform_snr_db": -1.6030931629259915,
+    "stft_ratio": 1.3484816242074442,
+    "csi_nmse": 0.011128566919789288,
+    "pilot_evm": 0.39967819411928457,
+    "allocation_reliability_metric": 4.498721172412236
+  },
+  "excluding_slot0": {
+    "post_mmse_sinr_db": 7.426744698532044,
+    "aggregate_layer_nmse": 0.45020490139722824,
+    "summed_latent_nmse": 0.2425477038576174,
+    "summed_latent_snr_db": 6.539623431427769,
+    "si_sdr_db": -1.532225977994068,
+    "delta_si_sdr_db": -3.793408193945806,
+    "waveform_snr_db": 2.7789801899540834,
+    "delta_waveform_snr_db": -1.601727497611175,
+    "stft_ratio": 1.349664556005403,
+    "csi_nmse": 0.011033016173333784,
+    "pilot_evm": 0.399664868674581,
+    "allocation_reliability_metric": 4.501220860809245
+  }
+}

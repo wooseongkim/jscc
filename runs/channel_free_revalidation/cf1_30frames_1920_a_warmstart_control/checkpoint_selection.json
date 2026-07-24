@@ -1,0 +1,17 @@
+{
+  "per_layer_nmse": {
+    "step": 20000,
+    "value": 0.6642868518829346,
+    "path": "runs/channel_free_revalidation/cf1_30frames_1920_a_warmstart_control/best_per_layer_nmse.pt"
+  },
+  "summed_latent_nmse": {
+    "step": 20000,
+    "value": 0.2654052674770355,
+    "path": "runs/channel_free_revalidation/cf1_30frames_1920_a_warmstart_control/best_summed_latent_nmse.pt"
+  },
+  "waveform_si_sdr": {
+    "step": 19500,
+    "value": -5.05072887102142,
+    "path": "runs/channel_free_revalidation/cf1_30frames_1920_a_warmstart_control/best_waveform_si_sdr.pt"
+  }
+}

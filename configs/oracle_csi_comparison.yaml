@@ -1,0 +1,17 @@
+seed: 23
+checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+output_root: runs/oracle_csi_comparison
+utterances: 64
+realizations_per_utterance: 2
+snr_db: [5.0, 10.0, 15.0]
+bootstrap_samples: 1000
+channel:
+  fading: multipath_block
+  num_taps: 6
+  pdp_decay: 0.7
+  channel_estimator: dft_tap_ls
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-6
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  zf_epsilon: 1.0e-6

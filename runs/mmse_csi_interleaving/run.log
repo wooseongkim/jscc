@@ -1,0 +1,221 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "checkpoint": "runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt",
+  "mobility": {
+    "carrier_frequency_hz": 3500000000.0,
+    "user_speed_mps": 3.0,
+    "slot_duration_s": 0.001,
+    "doppler_model": "jakes",
+    "doppler_frequency_hz": 35.0,
+    "configured_rho_slot": 0.9879462291836983,
+    "feedback_delay_slots": 1,
+    "feedback_delay_seconds": 0.001
+  },
+  "layer_importance": {
+    "order": [
+      1,
+      0,
+      2,
+      5,
+      3,
+      4,
+      6,
+      7
+    ],
+    "source": "runs/layer_ablation/smoke_test_2_1s/layer_importance.yaml",
+    "status": "smoke_derived_provisional_not_accepted"
+  },
+  "slot0_policy": "uniform_bootstrap",
+  "modes": {
+    "T0": {
+      "including_slot0": {
+        "post_mmse_sinr_db": 7.272243178139131,
+        "aggregate_layer_nmse": 0.4383123899266745,
+        "summed_latent_nmse": 0.22878671458844715,
+        "summed_latent_snr_db": 6.673197141538064,
+        "si_sdr_db": -1.9277084235509392,
+        "delta_si_sdr_db": -4.18969667548663,
+        "waveform_snr_db": 2.608608714520718,
+        "delta_waveform_snr_db": -1.7698598797602851,
+        "stft_ratio": 1.33815502258615,
+        "csi_nmse": 0.008925876193832968,
+        "pilot_evm": 0.37516634416533634,
+        "allocation_reliability_metric": 4.398668817399691
+      },
+      "excluding_slot0": {
+        "post_mmse_sinr_db": 7.267944068505019,
+        "aggregate_layer_nmse": 0.4388070428576419,
+        "summed_latent_nmse": 0.22903984881661557,
+        "summed_latent_snr_db": 6.671152822555057,
+        "si_sdr_db": -1.9532491281411792,
+        "delta_si_sdr_db": -4.214431344092917,
+        "waveform_snr_db": 2.5987049359015173,
+        "delta_waveform_snr_db": -1.7820027516637411,
+        "stft_ratio": 1.3402399127181288,
+        "csi_nmse": 0.00891362206423538,
+        "pilot_evm": 0.3757317362441903,
+        "allocation_reliability_metric": 4.39697021640167
+      }
+    },
+    "T1": {
+      "including_slot0": {
+        "post_mmse_sinr_db": 7.417804413785537,
+        "aggregate_layer_nmse": 0.44808738709737855,
+        "summed_latent_nmse": 0.23824996474043778,
+        "summed_latent_snr_db": 6.610426055267453,
+        "si_sdr_db": -2.3005108272773214,
+        "delta_si_sdr_db": -4.562499079213012,
+        "waveform_snr_db": 2.5785244326513443,
+        "delta_waveform_snr_db": -1.7999441616296583,
+        "stft_ratio": 1.376362839515518,
+        "csi_nmse": 0.011128566919789288,
+        "pilot_evm": 0.39967819411928457,
+        "allocation_reliability_metric": 4.170748696972926
+      },
+      "excluding_slot0": {
+        "post_mmse_sinr_db": 7.427224942300685,
+        "aggregate_layer_nmse": 0.4477360999931103,
+        "summed_latent_nmse": 0.23826107883421832,
+        "summed_latent_snr_db": 6.612092911881745,
+        "si_sdr_db": -2.2505549802469513,
+        "delta_si_sdr_db": -4.511737196198689,
+        "waveform_snr_db": 2.5790045722233743,
+        "delta_waveform_snr_db": -1.8017031153418843,
+        "stft_ratio": 1.3779883302866203,
+        "csi_nmse": 0.011033016173333784,
+        "pilot_evm": 0.399664868674581,
+        "allocation_reliability_metric": 4.168042473061375
+      }
+    },
+    "T2": {
+      "including_slot0": {
+        "post_mmse_sinr_db": 7.417331673825781,
+        "aggregate_layer_nmse": 0.45051761347955716,
+        "summed_latent_nmse": 0.24246961124784625,
+        "summed_latent_snr_db": 6.539088910445571,
+        "si_sdr_db": -1.5934057156846393,
+        "delta_si_sdr_db": -3.85539396762033,
+        "waveform_snr_db": 2.775375431355011,
+        "delta_waveform_snr_db": -1.6030931629259915,
+        "stft_ratio": 1.3484816242074442,
+        "csi_nmse": 0.011128566919789288,
+        "pilot_evm": 0.39967819411928457,
+        "allocation_reliability_metric": 4.498721172412236
+      },
+      "excluding_slot0": {
+        "post_mmse_sinr_db": 7.426744698532044,
+        "aggregate_layer_nmse": 0.45020490139722824,
+        "summed_latent_nmse": 0.2425477038576174,
+        "summed_latent_snr_db": 6.539623431427769,
+        "si_sdr_db": -1.532225977994068,
+        "delta_si_sdr_db": -3.793408193945806,
+        "waveform_snr_db": 2.7789801899540834,
+        "delta_waveform_snr_db": -1.601727497611175,
+        "stft_ratio": 1.349664556005403,
+        "csi_nmse": 0.011033016173333784,
+        "pilot_evm": 0.399664868674581,
+        "allocation_reliability_metric": 4.501220860809245
+      }
+    },
+    "T3": {
+      "including_slot0": {
+        "post_mmse_sinr_db": 7.420902186383803,
+        "aggregate_layer_nmse": 0.44900297292042524,
+        "summed_latent_nmse": 0.242760020114171,
+        "summed_latent_snr_db": 6.534348435079058,
+        "si_sdr_db": -1.556336435644577,
+        "delta_si_sdr_db": -3.8183246875802674,
+        "waveform_snr_db": 2.777275358135133,
+        "delta_waveform_snr_db": -1.60119323614587,
+        "stft_ratio": 1.3487876187034027,
+        "csi_nmse": 0.011128566919789288,
+        "pilot_evm": 0.39967819411928457,
+        "allocation_reliability_metric": 4.509497224974136
+      },
+      "excluding_slot0": {
+        "post_mmse_sinr_db": 7.430371885892575,
+        "aggregate_layer_nmse": 0.44866621892445935,
+        "summed_latent_nmse": 0.242842722388487,
+        "summed_latent_snr_db": 6.534807710420518,
+        "si_sdr_db": -1.4945682966835285,
+        "delta_si_sdr_db": -3.755750512635266,
+        "waveform_snr_db": 2.780910274302143,
+        "delta_waveform_snr_db": -1.5997974132631152,
+        "stft_ratio": 1.3499754075568522,
+        "csi_nmse": 0.011033016173333784,
+        "pilot_evm": 0.399664868674581,
+        "allocation_reliability_metric": 4.512167961824508
+      }
+    }
+  },
+  "temporal_validation": {
+    "configured_rho": 0.9879462291836983,
+    "measured_rho": 0.9850567281246185,
+    "delayed_current_pearson": 0.9563114196703887,
+    "delayed_current_spearman": 0.9408035599633959,
+    "top_10_overlap": 0.805183531746032,
+    "top_25_overlap": 0.876488095238095,
+    "top_50_overlap": 0.9047123015873014
+  },
+  "paired_comparison": {
+    "deployable_delayed_csi_gain": {
+      "5.0": {
+        "post_mmse_sinr_db": -0.004800507000514376,
+        "aggregate_layer_nmse": -0.013640623007501906,
+        "summed_latent_nmse": 0.007578607352953126,
+        "si_sdr_db": 1.8568149476592977,
+        "waveform_snr_db": 0.5243390707746295,
+        "stft_ratio": -0.1011599708058355,
+        "allocation_reliability_metric": 0.28228346033701834
+      },
+      "10.0": {
+        "post_mmse_sinr_db": 0.020048273934257566,
+        "aggregate_layer_nmse": 0.011967121135620817,
+        "summed_latent_nmse": 0.003673208611352091,
+        "si_sdr_db": 0.2011101088294434,
+        "waveform_snr_db": 0.07693729951741224,
+        "stft_ratio": 0.008305223014418273,
+        "allocation_reliability_metric": 0.3841265335915578
+      },
+      "15.0": {
+        "post_mmse_sinr_db": -0.016688498239668448,
+        "aggregate_layer_nmse": 0.009079906084234757,
+        "summed_latent_nmse": 0.0016080591058920402,
+        "si_sdr_db": 0.09706195026990905,
+        "waveform_snr_db": -0.0013495170999138217,
+        "stft_ratio": 0.007883424947763507,
+        "allocation_reliability_metric": 0.33312516931503566
+      }
+    },
+    "stale_csi_penalty": {
+      "5.0": {
+        "post_mmse_sinr_db": 0.01297355644286613,
+        "aggregate_layer_nmse": -0.0060570907025110365,
+        "summed_latent_nmse": -0.00032763466948554365,
+        "si_sdr_db": 0.13614508057279195,
+        "waveform_snr_db": -0.0011850071346592994,
+        "stft_ratio": -0.00038906849966968693,
+        "allocation_reliability_metric": 0.012037982070256525
+      },
+      "10.0": {
+        "post_mmse_sinr_db": -0.01550668004959288,
+        "aggregate_layer_nmse": 0.0008246397215222467,
+        "summed_latent_nmse": 0.0011167600750923157,
+        "si_sdr_db": 0.053889635654668956,
+        "waveform_snr_db": 0.03146595759169424,
+        "stft_ratio": 0.0017628045288378136,
+        "allocation_reliability_metric": 0.010625676503257075
+      },
+      "15.0": {
+        "post_mmse_sinr_db": 0.01341468568832127,
+        "aggregate_layer_nmse": 0.0006164035626819997,
+        "summed_latent_nmse": 9.593018700204681e-05,
+        "si_sdr_db": -0.07706167229584282,
+        "waveform_snr_db": -0.024490697412855145,
+        "stft_ratio": -0.000441181374817079,
+        "allocation_reliability_metric": 0.010177644472273428
+      }
+    }
+  }
+}

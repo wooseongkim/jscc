@@ -1,0 +1,1586 @@
+{
+  "accepted_j3:barrage_equal_active": {
+    "realization": {
+      "negative": {
+        "count": 42,
+        "total": 128,
+        "rate": 0.328125,
+        "confidence_interval_95": [
+          0.25282984471663306,
+          0.41343598400238546
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 95,
+        "total": 128,
+        "rate": 0.7421875,
+        "confidence_interval_95": [
+          0.6601308077044309,
+          0.8101309791005885
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 112,
+        "total": 128,
+        "rate": 0.875,
+        "confidence_interval_95": [
+          0.8065737291824854,
+          0.9215735536123834
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 35,
+        "total": 64,
+        "rate": 0.546875,
+        "confidence_interval_95": [
+          0.4257359722005412,
+          0.6627055221938833
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 59,
+        "total": 64,
+        "rate": 0.921875,
+        "confidence_interval_95": [
+          0.8298046264583709,
+          0.9661688230914496
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 62,
+        "total": 64,
+        "rate": 0.96875,
+        "confidence_interval_95": [
+          0.8930270822904169,
+          0.9913878616538281
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:barrage_equal_global": {
+    "realization": {
+      "negative": {
+        "count": 9,
+        "total": 128,
+        "rate": 0.0703125,
+        "confidence_interval_95": [
+          0.03742976830393997,
+          0.12823480349360633
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 37,
+        "total": 128,
+        "rate": 0.2890625,
+        "confidence_interval_95": [
+          0.21758399767802578,
+          0.3728331557498606
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 68,
+        "total": 128,
+        "rate": 0.53125,
+        "confidence_interval_95": [
+          0.44515370795994524,
+          0.6155252322729605
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 9,
+        "total": 64,
+        "rate": 0.140625,
+        "confidence_interval_95": [
+          0.0757857255603086,
+          0.24616281741577023
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 32,
+        "total": 64,
+        "rate": 0.5,
+        "confidence_interval_95": [
+          0.3810209474394701,
+          0.6189790525605299
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 48,
+        "total": 64,
+        "rate": 0.75,
+        "confidence_interval_95": [
+          0.631837235413303,
+          0.8398507346902941
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:data_only": {
+    "realization": {
+      "negative": {
+        "count": 14,
+        "total": 128,
+        "rate": 0.109375,
+        "confidence_interval_95": [
+          0.06627879570700111,
+          0.17523445138167731
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 43,
+        "total": 128,
+        "rate": 0.3359375,
+        "confidence_interval_95": [
+          0.2599537727882833,
+          0.4214817909889617
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 76,
+        "total": 128,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.5071398426419342,
+          0.6748969780567828
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 13,
+        "total": 64,
+        "rate": 0.203125,
+        "confidence_interval_95": [
+          0.12273417819183653,
+          0.3171363573101416
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 38,
+        "total": 64,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.4714520812860451,
+          0.7054309075028039
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 52,
+        "total": 64,
+        "rate": 0.8125,
+        "confidence_interval_95": [
+          0.7002563943589847,
+          0.8893535682705119
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:estimated_clip_10": {
+    "realization": {
+      "negative": {
+        "count": 25,
+        "total": 128,
+        "rate": 0.1953125,
+        "confidence_interval_95": [
+          0.1359396128283779,
+          0.2724407199007913
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 76,
+        "total": 128,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.5071398426419342,
+          0.6748969780567828
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 23,
+        "total": 64,
+        "rate": 0.359375,
+        "confidence_interval_95": [
+          0.25288402291451745,
+          0.48179149390220904
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 39,
+        "total": 64,
+        "rate": 0.609375,
+        "confidence_interval_95": [
+          0.4869191788027247,
+          0.7194443081175993
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 51,
+        "total": 64,
+        "rate": 0.796875,
+        "confidence_interval_95": [
+          0.6828636426898583,
+          0.8772658218081634
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:estimated_clip_20": {
+    "realization": {
+      "negative": {
+        "count": 25,
+        "total": 128,
+        "rate": 0.1953125,
+        "confidence_interval_95": [
+          0.1359396128283779,
+          0.2724407199007913
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 76,
+        "total": 128,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.5071398426419342,
+          0.6748969780567828
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 23,
+        "total": 64,
+        "rate": 0.359375,
+        "confidence_interval_95": [
+          0.25288402291451745,
+          0.48179149390220904
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 39,
+        "total": 64,
+        "rate": 0.609375,
+        "confidence_interval_95": [
+          0.4869191788027247,
+          0.7194443081175993
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 51,
+        "total": 64,
+        "rate": 0.796875,
+        "confidence_interval_95": [
+          0.6828636426898583,
+          0.8772658218081634
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:estimated_clip_40": {
+    "realization": {
+      "negative": {
+        "count": 25,
+        "total": 128,
+        "rate": 0.1953125,
+        "confidence_interval_95": [
+          0.1359396128283779,
+          0.2724407199007913
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 76,
+        "total": 128,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.5071398426419342,
+          0.6748969780567828
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 23,
+        "total": 64,
+        "rate": 0.359375,
+        "confidence_interval_95": [
+          0.25288402291451745,
+          0.48179149390220904
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 39,
+        "total": 64,
+        "rate": 0.609375,
+        "confidence_interval_95": [
+          0.4869191788027247,
+          0.7194443081175993
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 51,
+        "total": 64,
+        "rate": 0.796875,
+        "confidence_interval_95": [
+          0.6828636426898583,
+          0.8772658218081634
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:estimated_normal": {
+    "realization": {
+      "negative": {
+        "count": 25,
+        "total": 128,
+        "rate": 0.1953125,
+        "confidence_interval_95": [
+          0.1359396128283779,
+          0.2724407199007913
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 76,
+        "total": 128,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.5071398426419342,
+          0.6748969780567828
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 23,
+        "total": 64,
+        "rate": 0.359375,
+        "confidence_interval_95": [
+          0.25288402291451745,
+          0.48179149390220904
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 39,
+        "total": 64,
+        "rate": 0.609375,
+        "confidence_interval_95": [
+          0.4869191788027247,
+          0.7194443081175993
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 51,
+        "total": 64,
+        "rate": 0.796875,
+        "confidence_interval_95": [
+          0.6828636426898583,
+          0.8772658218081634
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:no_jammer": {
+    "realization": {
+      "negative": {
+        "count": 0,
+        "total": 128,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.029136956273508416
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 4,
+        "total": 128,
+        "rate": 0.03125,
+        "confidence_interval_95": [
+          0.01221826524505338,
+          0.07759763126136077
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 27,
+        "total": 128,
+        "rate": 0.2109375,
+        "confidence_interval_95": [
+          0.14921308750498039,
+          0.28950671534064165
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 0,
+        "total": 64,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.05662405979280534
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 4,
+        "total": 64,
+        "rate": 0.0625,
+        "confidence_interval_95": [
+          0.024571201396618017,
+          0.14997485092208662
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 25,
+        "total": 64,
+        "rate": 0.390625,
+        "confidence_interval_95": [
+          0.2805556918824008,
+          0.5130808211972754
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:oracle_clip_10": {
+    "realization": {
+      "negative": {
+        "count": 9,
+        "total": 128,
+        "rate": 0.0703125,
+        "confidence_interval_95": [
+          0.03742976830393997,
+          0.12823480349360633
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 37,
+        "total": 128,
+        "rate": 0.2890625,
+        "confidence_interval_95": [
+          0.21758399767802578,
+          0.3728331557498606
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 71,
+        "total": 128,
+        "rate": 0.5546875,
+        "confidence_interval_95": [
+          0.4682433949005831,
+          0.637944750507002
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 9,
+        "total": 64,
+        "rate": 0.140625,
+        "confidence_interval_95": [
+          0.0757857255603086,
+          0.24616281741577023
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 49,
+        "total": 64,
+        "rate": 0.765625,
+        "confidence_interval_95": [
+          0.6486674241743136,
+          0.8525010440607586
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:oracle_clip_20": {
+    "realization": {
+      "negative": {
+        "count": 9,
+        "total": 128,
+        "rate": 0.0703125,
+        "confidence_interval_95": [
+          0.03742976830393997,
+          0.12823480349360633
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 37,
+        "total": 128,
+        "rate": 0.2890625,
+        "confidence_interval_95": [
+          0.21758399767802578,
+          0.3728331557498606
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 71,
+        "total": 128,
+        "rate": 0.5546875,
+        "confidence_interval_95": [
+          0.4682433949005831,
+          0.637944750507002
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 9,
+        "total": 64,
+        "rate": 0.140625,
+        "confidence_interval_95": [
+          0.0757857255603086,
+          0.24616281741577023
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 49,
+        "total": 64,
+        "rate": 0.765625,
+        "confidence_interval_95": [
+          0.6486674241743136,
+          0.8525010440607586
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:oracle_clip_40": {
+    "realization": {
+      "negative": {
+        "count": 9,
+        "total": 128,
+        "rate": 0.0703125,
+        "confidence_interval_95": [
+          0.03742976830393997,
+          0.12823480349360633
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 37,
+        "total": 128,
+        "rate": 0.2890625,
+        "confidence_interval_95": [
+          0.21758399767802578,
+          0.3728331557498606
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 71,
+        "total": 128,
+        "rate": 0.5546875,
+        "confidence_interval_95": [
+          0.4682433949005831,
+          0.637944750507002
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 9,
+        "total": 64,
+        "rate": 0.140625,
+        "confidence_interval_95": [
+          0.0757857255603086,
+          0.24616281741577023
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 49,
+        "total": 64,
+        "rate": 0.765625,
+        "confidence_interval_95": [
+          0.6486674241743136,
+          0.8525010440607586
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "accepted_j3:oracle_normal": {
+    "realization": {
+      "negative": {
+        "count": 9,
+        "total": 128,
+        "rate": 0.0703125,
+        "confidence_interval_95": [
+          0.03742976830393997,
+          0.12823480349360633
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 37,
+        "total": 128,
+        "rate": 0.2890625,
+        "confidence_interval_95": [
+          0.21758399767802578,
+          0.3728331557498606
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 71,
+        "total": 128,
+        "rate": 0.5546875,
+        "confidence_interval_95": [
+          0.4682433949005831,
+          0.637944750507002
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 9,
+        "total": 64,
+        "rate": 0.140625,
+        "confidence_interval_95": [
+          0.0757857255603086,
+          0.24616281741577023
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 49,
+        "total": 64,
+        "rate": 0.765625,
+        "confidence_interval_95": [
+          0.6486674241743136,
+          0.8525010440607586
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:barrage_equal_active": {
+    "realization": {
+      "negative": {
+        "count": 54,
+        "total": 128,
+        "rate": 0.421875,
+        "confidence_interval_95": [
+          0.3398211233888366,
+          0.5084815260288991
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 98,
+        "total": 128,
+        "rate": 0.765625,
+        "confidence_interval_95": [
+          0.6851645688917714,
+          0.8306064230879273
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 113,
+        "total": 128,
+        "rate": 0.8828125,
+        "confidence_interval_95": [
+          0.8156338413466524,
+          0.9276831765064426
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 42,
+        "total": 64,
+        "rate": 0.65625,
+        "confidence_interval_95": [
+          0.5340364020991819,
+          0.7607685792155665
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 60,
+        "total": 64,
+        "rate": 0.9375,
+        "confidence_interval_95": [
+          0.8500251490779133,
+          0.9754287986033819
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 62,
+        "total": 64,
+        "rate": 0.96875,
+        "confidence_interval_95": [
+          0.8930270822904169,
+          0.9913878616538281
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:barrage_equal_global": {
+    "realization": {
+      "negative": {
+        "count": 14,
+        "total": 128,
+        "rate": 0.109375,
+        "confidence_interval_95": [
+          0.06627879570700111,
+          0.17523445138167731
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 38,
+        "total": 128,
+        "rate": 0.296875,
+        "confidence_interval_95": [
+          0.22458166083566666,
+          0.3810052276504461
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 68,
+        "total": 128,
+        "rate": 0.53125,
+        "confidence_interval_95": [
+          0.44515370795994524,
+          0.6155252322729605
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 13,
+        "total": 64,
+        "rate": 0.203125,
+        "confidence_interval_95": [
+          0.12273417819183653,
+          0.3171363573101416
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 34,
+        "total": 64,
+        "rate": 0.53125,
+        "confidence_interval_95": [
+          0.41072087051471007,
+          0.6482401257482395
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 49,
+        "total": 64,
+        "rate": 0.765625,
+        "confidence_interval_95": [
+          0.6486674241743136,
+          0.8525010440607586
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:data_only": {
+    "realization": {
+      "negative": {
+        "count": 1,
+        "total": 128,
+        "rate": 0.0078125,
+        "confidence_interval_95": [
+          0.0013804318928742412,
+          0.04292625943886061
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 10,
+        "total": 128,
+        "rate": 0.078125,
+        "confidence_interval_95": [
+          0.04298737505098223,
+          0.13784693180479052
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 43,
+        "total": 128,
+        "rate": 0.3359375,
+        "confidence_interval_95": [
+          0.2599537727882833,
+          0.4214817909889617
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 1,
+        "total": 64,
+        "rate": 0.015625,
+        "confidence_interval_95": [
+          0.002763541923337505,
+          0.08334101600094265
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 10,
+        "total": 64,
+        "rate": 0.15625,
+        "confidence_interval_95": [
+          0.08714842338206585,
+          0.2642806177254878
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 36,
+        "total": 64,
+        "rate": 0.5625,
+        "confidence_interval_95": [
+          0.4408620895699301,
+          0.6770599029559693
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:estimated_clip_10": {
+    "realization": {
+      "negative": {
+        "count": 3,
+        "total": 128,
+        "rate": 0.0234375,
+        "confidence_interval_95": [
+          0.008002416396755481,
+          0.06664374505143222
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 20,
+        "total": 128,
+        "rate": 0.15625,
+        "confidence_interval_95": [
+          0.10348354800906658,
+          0.22904810942897047
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 3,
+        "total": 64,
+        "rate": 0.046875,
+        "confidence_interval_95": [
+          0.016069016786292974,
+          0.12899653740093686
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 18,
+        "total": 64,
+        "rate": 0.28125,
+        "confidence_interval_95": [
+          0.18593372333727837,
+          0.40133930282207403
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 38,
+        "total": 64,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.4714520812860451,
+          0.7054309075028039
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:estimated_clip_20": {
+    "realization": {
+      "negative": {
+        "count": 3,
+        "total": 128,
+        "rate": 0.0234375,
+        "confidence_interval_95": [
+          0.008002416396755481,
+          0.06664374505143222
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 20,
+        "total": 128,
+        "rate": 0.15625,
+        "confidence_interval_95": [
+          0.10348354800906658,
+          0.22904810942897047
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 3,
+        "total": 64,
+        "rate": 0.046875,
+        "confidence_interval_95": [
+          0.016069016786292974,
+          0.12899653740093686
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 18,
+        "total": 64,
+        "rate": 0.28125,
+        "confidence_interval_95": [
+          0.18593372333727837,
+          0.40133930282207403
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 38,
+        "total": 64,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.4714520812860451,
+          0.7054309075028039
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:estimated_clip_40": {
+    "realization": {
+      "negative": {
+        "count": 3,
+        "total": 128,
+        "rate": 0.0234375,
+        "confidence_interval_95": [
+          0.008002416396755481,
+          0.06664374505143222
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 20,
+        "total": 128,
+        "rate": 0.15625,
+        "confidence_interval_95": [
+          0.10348354800906658,
+          0.22904810942897047
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 3,
+        "total": 64,
+        "rate": 0.046875,
+        "confidence_interval_95": [
+          0.016069016786292974,
+          0.12899653740093686
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 18,
+        "total": 64,
+        "rate": 0.28125,
+        "confidence_interval_95": [
+          0.18593372333727837,
+          0.40133930282207403
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 38,
+        "total": 64,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.4714520812860451,
+          0.7054309075028039
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:estimated_normal": {
+    "realization": {
+      "negative": {
+        "count": 3,
+        "total": 128,
+        "rate": 0.0234375,
+        "confidence_interval_95": [
+          0.008002416396755481,
+          0.06664374505143222
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 20,
+        "total": 128,
+        "rate": 0.15625,
+        "confidence_interval_95": [
+          0.10348354800906658,
+          0.22904810942897047
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 47,
+        "total": 128,
+        "rate": 0.3671875,
+        "confidence_interval_95": [
+          0.2886845465087532,
+          0.4534299575013975
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 3,
+        "total": 64,
+        "rate": 0.046875,
+        "confidence_interval_95": [
+          0.016069016786292974,
+          0.12899653740093686
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 18,
+        "total": 64,
+        "rate": 0.28125,
+        "confidence_interval_95": [
+          0.18593372333727837,
+          0.40133930282207403
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 38,
+        "total": 64,
+        "rate": 0.59375,
+        "confidence_interval_95": [
+          0.4714520812860451,
+          0.7054309075028039
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:no_jammer": {
+    "realization": {
+      "negative": {
+        "count": 1,
+        "total": 128,
+        "rate": 0.0078125,
+        "confidence_interval_95": [
+          0.0013804318928742412,
+          0.04292625943886061
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 5,
+        "total": 128,
+        "rate": 0.0390625,
+        "confidence_interval_95": [
+          0.016798610797803704,
+          0.08818702076683686
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 28,
+        "total": 128,
+        "rate": 0.21875,
+        "confidence_interval_95": [
+          0.15590524094938307,
+          0.29798429695446543
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 1,
+        "total": 64,
+        "rate": 0.015625,
+        "confidence_interval_95": [
+          0.002763541923337505,
+          0.08334101600094265
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 5,
+        "total": 64,
+        "rate": 0.078125,
+        "confidence_interval_95": [
+          0.03383117690855046,
+          0.17019537354162906
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 26,
+        "total": 64,
+        "rate": 0.40625,
+        "confidence_interval_95": [
+          0.2945690924971961,
+          0.5285479187139549
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:oracle_clip_10": {
+    "realization": {
+      "negative": {
+        "count": 0,
+        "total": 128,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.029136956273508416
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 7,
+        "total": 128,
+        "rate": 0.0546875,
+        "confidence_interval_95": [
+          0.026740201381346355,
+          0.10858490029974707
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 40,
+        "total": 128,
+        "rate": 0.3125,
+        "confidence_interval_95": [
+          0.23865530278536204,
+          0.39727105581720357
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 0,
+        "total": 64,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.05662405979280534
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 6,
+        "total": 64,
+        "rate": 0.09375,
+        "confidence_interval_95": [
+          0.04367825258519838,
+          0.18982879599645597
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:oracle_clip_20": {
+    "realization": {
+      "negative": {
+        "count": 0,
+        "total": 128,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.029136956273508416
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 7,
+        "total": 128,
+        "rate": 0.0546875,
+        "confidence_interval_95": [
+          0.026740201381346355,
+          0.10858490029974707
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 40,
+        "total": 128,
+        "rate": 0.3125,
+        "confidence_interval_95": [
+          0.23865530278536204,
+          0.39727105581720357
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 0,
+        "total": 64,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.05662405979280534
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 6,
+        "total": 64,
+        "rate": 0.09375,
+        "confidence_interval_95": [
+          0.04367825258519838,
+          0.18982879599645597
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:oracle_clip_40": {
+    "realization": {
+      "negative": {
+        "count": 0,
+        "total": 128,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.029136956273508416
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 7,
+        "total": 128,
+        "rate": 0.0546875,
+        "confidence_interval_95": [
+          0.026740201381346355,
+          0.10858490029974707
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 40,
+        "total": 128,
+        "rate": 0.3125,
+        "confidence_interval_95": [
+          0.23865530278536204,
+          0.39727105581720357
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 0,
+        "total": 64,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.05662405979280534
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 6,
+        "total": 64,
+        "rate": 0.09375,
+        "confidence_interval_95": [
+          0.04367825258519838,
+          0.18982879599645597
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  },
+  "j4_final:oracle_normal": {
+    "realization": {
+      "negative": {
+        "count": 0,
+        "total": 128,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.029136956273508416
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 7,
+        "total": 128,
+        "rate": 0.0546875,
+        "confidence_interval_95": [
+          0.026740201381346355,
+          0.10858490029974707
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 40,
+        "total": 128,
+        "rate": 0.3125,
+        "confidence_interval_95": [
+          0.23865530278536204,
+          0.39727105581720357
+        ],
+        "method": "Wilson score interval"
+      }
+    },
+    "utterance": {
+      "negative": {
+        "count": 0,
+        "total": 64,
+        "rate": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.05662405979280534
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_2_percent": {
+        "count": 6,
+        "total": 64,
+        "rate": 0.09375,
+        "confidence_interval_95": [
+          0.04367825258519838,
+          0.18982879599645597
+        ],
+        "method": "Wilson score interval"
+      },
+      "below_5_percent": {
+        "count": 33,
+        "total": 64,
+        "rate": 0.515625,
+        "confidence_interval_95": [
+          0.39581601478580125,
+          0.6336644833456737
+        ],
+        "method": "Wilson score interval"
+      }
+    }
+  }
+}

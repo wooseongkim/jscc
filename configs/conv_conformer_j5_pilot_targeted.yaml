@@ -1,0 +1,12 @@
+seed: 23
+device: auto
+model: {architecture: conv_conformer_v1, architecture_version: conv_conformer_v1, layers: 8, frames: 50, latent_dim: 1024, channel_uses: 1920, grid_shape: [64, 32], channel_state_dim: 8, hidden_dim: 32, target_power: 1.0, d_model: 256, encoder_conformer_blocks: 4, decoder_conformer_blocks: 4, num_attention_heads: 4, ffn_expansion: 4, convolution_kernel_size: 15, dropout: 0.1, layer_mixer_blocks: 1, symbol_frames: 30, complex_channels_per_symbol_frame: 8}
+codec: {type: speechtokenizer, config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json, checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt, freeze: true, sample_rate: 16000, waveform_samples: 16000, n_q: 8}
+data: {train_manifest: manifests/mini_librispeech/train.jsonl, valid_manifest: manifests/mini_librispeech/valid.jsonl, test_manifest: manifests/mini_librispeech/test.jsonl, latent_cache_dir: artifacts/latent_cache/stage1_fixed_tx_speechtokenizer_1s}
+channel: {fading: multipath_block, num_taps: 6, pdp: exponential, pdp_decay: 0.7, block_fading_over_time: true, assume_ideal_cp: true, channel_estimator: dft_tap_ls, estimator_num_taps: 6, estimator_ridge_lambda: 1.0e-6, pilot_spacing: 4, pilot_time_spacing: 4, snr_db_range: [5.0, 15.0], jsr_db_range: [-5.0, 10.0], clean_probability: 0.0, jammer_probabilities: {pilot: 1.0}, jammed_fraction: 1.0}
+train: {optimizer: adam, learning_rate: 0.0001, weight_decay: 0.0, gradient_clip_norm: 5.0, layer_weights: [1,1,1,1,1,1,1,1], latent_normalization: {mode: per_layer_power, epsilon: 1.0e-6}}
+j5:
+  stage_definition_version: j5_pilot_targeted_v1
+  boundary_sweep: {snr_db: [5,10,15], requested_pilot_jsr_db: [-10,-5,0,5,10], pilot_coverages: [0.25,0.50,1.00], realizations_per_group_point: 16}
+  provisional_training: {snr_db: [5,15], pilot_jsr_db: [-5,10], pilot_coverages: [0.25,0.50,1.00]}
+  thresholds: {aggregate_improvement: 0.10, aggregate_correlation: 0.30, aggregate_power_ratio: 0.12, enhancement_improvement: 0.075, enhancement_correlation: 0.25, enhancement_power_ratio: 0.08, deep_improvement: 0.05, layer7_improvement: 0.03, layer7_power_ratio: 0.04, worst_aggregate: 0.075, worst_enhancement: 0.05, worst_layer7: 0.02, tail_p10: 0.0, tail_negative_rate: 0.10}

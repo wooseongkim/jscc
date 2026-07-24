@@ -1,0 +1,86 @@
+/home/mike/jscc/.venv/lib64/python3.11/site-packages/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+{
+  "experiment": "cf1",
+  "steps": 20000,
+  "initialization": {
+    "mode": "fresh",
+    "checkpoint": null,
+    "sha256": null
+  },
+  "model": {
+    "architecture": "conv_conformer_v1",
+    "architecture_version": "conv_conformer_v1",
+    "layers": 8,
+    "frames": 50,
+    "latent_dim": 1024,
+    "channel_uses": 1920,
+    "channel_state_dim": 8,
+    "target_power": 1.0,
+    "d_model": 256,
+    "encoder_conformer_blocks": 4,
+    "decoder_conformer_blocks": 4,
+    "num_attention_heads": 4,
+    "ffn_expansion": 4,
+    "convolution_kernel_size": 15,
+    "dropout": 0.1,
+    "layer_mixer_blocks": 1,
+    "symbol_frames": 30,
+    "complex_channels_per_symbol_frame": 8,
+    "temporal_symbol_layout": "dense_interpolate"
+  },
+  "parameter_count": {
+    "git_commit": "eb9de523590454a919ffeb0aece94efa516607da",
+    "working_tree_dirty": true,
+    "torch_version": "2.11.0+cu126",
+    "device": "cuda",
+    "python": "3.11.11 (main, Feb 10 2025, 00:00:00) [GCC 11.5.0 20240719 (Red Hat 11.5.0-5)]",
+    "codec_trainable_parameters": 0,
+    "encoder_parameters": 7234688,
+    "decoder_parameters": 9045504
+  },
+  "checkpoint_selection": {
+    "per_layer_nmse": {
+      "step": 19750,
+      "value": 0.6587850451469421,
+      "path": "runs/channel_free_revalidation/cf1_30frames_1920/best_per_layer_nmse.pt"
+    },
+    "summed_latent_nmse": {
+      "step": 19750,
+      "value": 0.26108893752098083,
+      "path": "runs/channel_free_revalidation/cf1_30frames_1920/best_summed_latent_nmse.pt"
+    },
+    "waveform_si_sdr": {
+      "step": 18500,
+      "value": -5.462453132378869,
+      "path": "runs/channel_free_revalidation/cf1_30frames_1920/best_waveform_si_sdr.pt"
+    }
+  },
+  "final_validation": {
+    "per_layer_nmse": [
+      0.18597808480262756,
+      0.5537298321723938,
+      0.6874322295188904,
+      0.7429141998291016,
+      0.7633324265480042,
+      0.7824972867965698,
+      0.7796967029571533,
+      0.7786661386489868
+    ],
+    "aggregate_layer_nmse": 0.6592808365821838,
+    "summed_latent_nmse": 0.2612634003162384,
+    "summed_latent_snr_db": 5.829214572906494,
+    "summed_latent_correlation": 0.8604958057403564,
+    "summed_latent_power_ratio": 0.8143900632858276,
+    "clean_si_sdr_db": 2.2619882519356906,
+    "si_sdr_db": -5.5254867654293776,
+    "delta_si_sdr_db": -7.787475017365068,
+    "clean_waveform_snr_db": 4.378468594281003,
+    "waveform_snr_db": 0.9972217640170129,
+    "delta_waveform_snr_db": -3.38124683026399,
+    "stft_ratio": 1.4526525073542074,
+    "classification": "CHANNEL_FREE_CONV_CONFORMER_NOT_YET_FEASIBLE"
+  },
+  "temporal_symbol_pattern": null,
+  "feasibility_claim_allowed": false
+}

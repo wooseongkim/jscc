@@ -1,0 +1,148 @@
+seed: 23
+device: cuda
+model:
+  architecture: conv_conformer_v1
+  architecture_version: conv_conformer_v1
+  layers: 8
+  frames: 50
+  latent_dim: 1024
+  channel_uses: 1920
+  channel_state_dim: 8
+  target_power: 1.0
+  d_model: 256
+  encoder_conformer_blocks: 4
+  decoder_conformer_blocks: 4
+  num_attention_heads: 4
+  ffn_expansion: 4
+  convolution_kernel_size: 15
+  dropout: 0.1
+  layer_mixer_blocks: 1
+  symbol_frames: 50
+  complex_channels_per_symbol_frame: 5
+  temporal_symbol_layout: balanced_ragged
+  temporal_symbol_pattern:
+    frame_valid_symbol_counts:
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 5
+    - 5
+    four_symbol_frames:
+    - 2
+    - 7
+    - 12
+    - 17
+    - 22
+    - 27
+    - 32
+    - 37
+    - 42
+    - 47
+    valid_symbols_per_layer: 240
+    valid_symbols_total: 1920
+    max_symbols_per_frame: 5
+  grid_shape:
+  - 64
+  - 32
+codec:
+  type: speechtokenizer
+  config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  freeze: true
+  sample_rate: 16000
+  waveform_samples: 16000
+  n_q: 8
+data:
+  train_manifest: manifests/mini_librispeech/train.jsonl
+  valid_manifest: manifests/mini_librispeech/valid.jsonl
+  train_subset_size: 256
+  validation_utterances: 64
+train:
+  optimizer: adam
+  learning_rate: 0.0001
+  weight_decay: 0.0
+  batch_size: 4
+  gradient_clip_norm: 5.0
+  validation_every: 250
+  checkpoint_every: 500
+  latent_normalization:
+    mode: per_layer_power
+    epsilon: 1.0e-06
+curriculum:
+  stage1_steps: 4000
+  stage2_steps: 8000
+  stage3_steps: 8000
+  lambda_layer: 1.0
+  lambda_sum: 1.0
+  lambda_stft: 0.01
+  lambda_sisdr: 0.001
+  fft_sizes:
+  - 256
+  - 512
+  - 1024
+feasibility:
+  delta_si_sdr_min_db: -1.0
+  delta_waveform_snr_min_db: -1.0
+  stft_ratio_max: 1.2
+channel:
+  fading: multipath_block
+  num_taps: 6
+  pdp_decay: 0.7
+  block_fading_over_time: true
+  assume_ideal_cp: true
+  channel_estimator: dft_tap_ls
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-06
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  fixed_snr_db: 10.0
+  random_snr_bins_db:
+  - 5.0
+  - 10.0
+  - 15.0
+  realizations_per_utterance: 2

@@ -1,0 +1,9 @@
+{
+  "source_checkpoint": "runs/channel_free_revalidation/cf2_50frames_1920/best_waveform_si_sdr.pt",
+  "source_checkpoint_sha256": "1a4a8a5263e738729dd5fa043c3a58cda88884aed5d7812edc0492d3de90342a",
+  "steps": 20000,
+  "best_summed_latent_nmse": 0.23471096146386117,
+  "best_waveform_si_sdr_db": -1.9097483091172762,
+  "selected_checkpoint": "runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt",
+  "codec_trainable_parameters": 0
+}

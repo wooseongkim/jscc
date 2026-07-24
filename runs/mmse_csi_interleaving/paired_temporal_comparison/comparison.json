@@ -1,0 +1,60 @@
+{
+  "deployable_delayed_csi_gain": {
+    "5.0": {
+      "post_mmse_sinr_db": -0.004800507000514376,
+      "aggregate_layer_nmse": -0.013640623007501906,
+      "summed_latent_nmse": 0.007578607352953126,
+      "si_sdr_db": 1.8568149476592977,
+      "waveform_snr_db": 0.5243390707746295,
+      "stft_ratio": -0.1011599708058355,
+      "allocation_reliability_metric": 0.28228346033701834
+    },
+    "10.0": {
+      "post_mmse_sinr_db": 0.020048273934257566,
+      "aggregate_layer_nmse": 0.011967121135620817,
+      "summed_latent_nmse": 0.003673208611352091,
+      "si_sdr_db": 0.2011101088294434,
+      "waveform_snr_db": 0.07693729951741224,
+      "stft_ratio": 0.008305223014418273,
+      "allocation_reliability_metric": 0.3841265335915578
+    },
+    "15.0": {
+      "post_mmse_sinr_db": -0.016688498239668448,
+      "aggregate_layer_nmse": 0.009079906084234757,
+      "summed_latent_nmse": 0.0016080591058920402,
+      "si_sdr_db": 0.09706195026990905,
+      "waveform_snr_db": -0.0013495170999138217,
+      "stft_ratio": 0.007883424947763507,
+      "allocation_reliability_metric": 0.33312516931503566
+    }
+  },
+  "stale_csi_penalty": {
+    "5.0": {
+      "post_mmse_sinr_db": 0.01297355644286613,
+      "aggregate_layer_nmse": -0.0060570907025110365,
+      "summed_latent_nmse": -0.00032763466948554365,
+      "si_sdr_db": 0.13614508057279195,
+      "waveform_snr_db": -0.0011850071346592994,
+      "stft_ratio": -0.00038906849966968693,
+      "allocation_reliability_metric": 0.012037982070256525
+    },
+    "10.0": {
+      "post_mmse_sinr_db": -0.01550668004959288,
+      "aggregate_layer_nmse": 0.0008246397215222467,
+      "summed_latent_nmse": 0.0011167600750923157,
+      "si_sdr_db": 0.053889635654668956,
+      "waveform_snr_db": 0.03146595759169424,
+      "stft_ratio": 0.0017628045288378136,
+      "allocation_reliability_metric": 0.010625676503257075
+    },
+    "15.0": {
+      "post_mmse_sinr_db": 0.01341468568832127,
+      "aggregate_layer_nmse": 0.0006164035626819997,
+      "summed_latent_nmse": 9.593018700204681e-05,
+      "si_sdr_db": -0.07706167229584282,
+      "waveform_snr_db": -0.024490697412855145,
+      "stft_ratio": -0.000441181374817079,
+      "allocation_reliability_metric": 0.010177644472273428
+    }
+  }
+}

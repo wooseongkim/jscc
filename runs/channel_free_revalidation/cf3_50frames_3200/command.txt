@@ -1,0 +1,1 @@
+train_channel_free_conv_conformer.py --config configs/channel_free_revalidation.yaml --experiment cf3 --output-dir runs/channel_free_revalidation/cf3_50frames_3200 --device cuda --batch-size 4 --initialization fresh --allow-long-run

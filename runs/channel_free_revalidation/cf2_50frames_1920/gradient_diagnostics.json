@@ -1,0 +1,812 @@
+[
+  {
+    "step": 1,
+    "component_gradient_norms": {
+      "layer": 0.45432727085545804,
+      "sum": 0.3921991863257368,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.7257789373397827
+  },
+  {
+    "step": 250,
+    "component_gradient_norms": {
+      "layer": 0.11049041199108917,
+      "sum": 0.15967262331276474,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.19983963668346405
+  },
+  {
+    "step": 500,
+    "component_gradient_norms": {
+      "layer": 0.1431664322244529,
+      "sum": 0.21542323596524715,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.25392329692840576
+  },
+  {
+    "step": 750,
+    "component_gradient_norms": {
+      "layer": 0.1443321299792747,
+      "sum": 0.20351962124054906,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.22546882927417755
+  },
+  {
+    "step": 1000,
+    "component_gradient_norms": {
+      "layer": 0.15041956684992192,
+      "sum": 0.21849915051949834,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.24823011457920074
+  },
+  {
+    "step": 1250,
+    "component_gradient_norms": {
+      "layer": 0.17261147393160542,
+      "sum": 0.2570056861988701,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.29281702637672424
+  },
+  {
+    "step": 1500,
+    "component_gradient_norms": {
+      "layer": 0.22418133127687023,
+      "sum": 0.24956569349116733,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.25104451179504395
+  },
+  {
+    "step": 1750,
+    "component_gradient_norms": {
+      "layer": 0.20102508522660947,
+      "sum": 0.2576012757588125,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.26106059551239014
+  },
+  {
+    "step": 2000,
+    "component_gradient_norms": {
+      "layer": 0.22073974136836041,
+      "sum": 0.25751971467944296,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.32701489329338074
+  },
+  {
+    "step": 2250,
+    "component_gradient_norms": {
+      "layer": 0.19587081265614315,
+      "sum": 0.2679724606849283,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2949807047843933
+  },
+  {
+    "step": 2500,
+    "component_gradient_norms": {
+      "layer": 0.20754202328132892,
+      "sum": 0.24179489862130393,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.27668532729148865
+  },
+  {
+    "step": 2750,
+    "component_gradient_norms": {
+      "layer": 0.21110850925647787,
+      "sum": 0.2917927216996439,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.28529417514801025
+  },
+  {
+    "step": 3000,
+    "component_gradient_norms": {
+      "layer": 0.19369092125162124,
+      "sum": 0.23479808925660692,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.23167257010936737
+  },
+  {
+    "step": 3250,
+    "component_gradient_norms": {
+      "layer": 0.17508134845760423,
+      "sum": 0.2673545655292881,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.27107539772987366
+  },
+  {
+    "step": 3500,
+    "component_gradient_norms": {
+      "layer": 0.18538978351413296,
+      "sum": 0.21492462369990822,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2544117271900177
+  },
+  {
+    "step": 3750,
+    "component_gradient_norms": {
+      "layer": 0.17904783501747612,
+      "sum": 0.23626199695613728,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.24388621747493744
+  },
+  {
+    "step": 4000,
+    "component_gradient_norms": {
+      "layer": 0.1663001931398971,
+      "sum": 0.24032032987342117,
+      "stft": 0.0,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2828318774700165
+  },
+  {
+    "step": 4250,
+    "component_gradient_norms": {
+      "layer": 0.18545211580814883,
+      "sum": 0.22917866494818825,
+      "stft": 0.0033952328562066696,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2790849208831787
+  },
+  {
+    "step": 4500,
+    "component_gradient_norms": {
+      "layer": 0.15441532055366197,
+      "sum": 0.21926543273678134,
+      "stft": 0.0033618893131510436,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.24012106657028198
+  },
+  {
+    "step": 4750,
+    "component_gradient_norms": {
+      "layer": 0.15060226609182986,
+      "sum": 0.20961836435532802,
+      "stft": 0.00279574094896351,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.255169540643692
+  },
+  {
+    "step": 5000,
+    "component_gradient_norms": {
+      "layer": 0.16560200608083347,
+      "sum": 0.2101073176201755,
+      "stft": 0.002886651801885535,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2540775239467621
+  },
+  {
+    "step": 5250,
+    "component_gradient_norms": {
+      "layer": 0.16265017717991198,
+      "sum": 0.21730449461872675,
+      "stft": 0.002995219274494945,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2641948163509369
+  },
+  {
+    "step": 5500,
+    "component_gradient_norms": {
+      "layer": 0.14938864772291263,
+      "sum": 0.18587051074424393,
+      "stft": 0.0038571495372344113,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.22133976221084595
+  },
+  {
+    "step": 5750,
+    "component_gradient_norms": {
+      "layer": 0.1717408751464618,
+      "sum": 0.20945826838949985,
+      "stft": 0.002137548814715895,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2627483308315277
+  },
+  {
+    "step": 6000,
+    "component_gradient_norms": {
+      "layer": 0.19330625093277481,
+      "sum": 0.23749592614444434,
+      "stft": 0.0016449607578618865,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.30929797887802124
+  },
+  {
+    "step": 6250,
+    "component_gradient_norms": {
+      "layer": 0.16053489375829175,
+      "sum": 0.2112494211076107,
+      "stft": 0.001970540965140121,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2810615003108978
+  },
+  {
+    "step": 6500,
+    "component_gradient_norms": {
+      "layer": 0.1646674843175742,
+      "sum": 0.17639866059114018,
+      "stft": 0.0026077739842210847,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.26058730483055115
+  },
+  {
+    "step": 6750,
+    "component_gradient_norms": {
+      "layer": 0.16475481463619937,
+      "sum": 0.21027689381550385,
+      "stft": 0.0023978387920671968,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.29360657930374146
+  },
+  {
+    "step": 7000,
+    "component_gradient_norms": {
+      "layer": 0.16778221418274572,
+      "sum": 0.19491015955209037,
+      "stft": 0.0018017414276093942,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.27414292097091675
+  },
+  {
+    "step": 7250,
+    "component_gradient_norms": {
+      "layer": 0.1637765913586261,
+      "sum": 0.16877409908619,
+      "stft": 0.0021308813861481827,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.24858276546001434
+  },
+  {
+    "step": 7500,
+    "component_gradient_norms": {
+      "layer": 0.17501364105567294,
+      "sum": 0.1958040917323594,
+      "stft": 0.0021214661476361236,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2973102927207947
+  },
+  {
+    "step": 7750,
+    "component_gradient_norms": {
+      "layer": 0.1529794901778139,
+      "sum": 0.1665646450645352,
+      "stft": 0.0023052063994640757,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2482205480337143
+  },
+  {
+    "step": 8000,
+    "component_gradient_norms": {
+      "layer": 0.15303046777746146,
+      "sum": 0.16468725572709095,
+      "stft": 0.0016767716110790431,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2451542466878891
+  },
+  {
+    "step": 8250,
+    "component_gradient_norms": {
+      "layer": 0.15337973858330467,
+      "sum": 0.16071494278319326,
+      "stft": 0.003196184090122144,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.24407891929149628
+  },
+  {
+    "step": 8500,
+    "component_gradient_norms": {
+      "layer": 0.1700313916744742,
+      "sum": 0.16638004472738133,
+      "stft": 0.002120557837282915,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2684842050075531
+  },
+  {
+    "step": 8750,
+    "component_gradient_norms": {
+      "layer": 0.16515390361970542,
+      "sum": 0.1855106318362594,
+      "stft": 0.0015384048188595446,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.27981388568878174
+  },
+  {
+    "step": 9000,
+    "component_gradient_norms": {
+      "layer": 0.17818506968007278,
+      "sum": 0.19979387367794352,
+      "stft": 0.0030732363114934938,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.262362539768219
+  },
+  {
+    "step": 9250,
+    "component_gradient_norms": {
+      "layer": 0.15578568731548276,
+      "sum": 0.15006703081087153,
+      "stft": 0.0026442157521814765,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2483067363500595
+  },
+  {
+    "step": 9500,
+    "component_gradient_norms": {
+      "layer": 0.15051294281901284,
+      "sum": 0.15841793264887863,
+      "stft": 0.0019935777484991583,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2537968158721924
+  },
+  {
+    "step": 9750,
+    "component_gradient_norms": {
+      "layer": 0.15176758262183115,
+      "sum": 0.15619069404434904,
+      "stft": 0.00239613533002939,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.24989303946495056
+  },
+  {
+    "step": 10000,
+    "component_gradient_norms": {
+      "layer": 0.1402235725620072,
+      "sum": 0.14615473851198635,
+      "stft": 0.001750025631954908,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2277670055627823
+  },
+  {
+    "step": 10250,
+    "component_gradient_norms": {
+      "layer": 0.147782946781558,
+      "sum": 0.1607168319004694,
+      "stft": 0.001997982402672993,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.24966606497764587
+  },
+  {
+    "step": 10500,
+    "component_gradient_norms": {
+      "layer": 0.1526945976988114,
+      "sum": 0.15424064021910872,
+      "stft": 0.0021266892351864334,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2509705722332001
+  },
+  {
+    "step": 10750,
+    "component_gradient_norms": {
+      "layer": 0.14496859545410629,
+      "sum": 0.15902412747050948,
+      "stft": 0.002778624676531988,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2459428459405899
+  },
+  {
+    "step": 11000,
+    "component_gradient_norms": {
+      "layer": 0.15185907488401862,
+      "sum": 0.15429502196346068,
+      "stft": 0.0013235356846636734,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2371373027563095
+  },
+  {
+    "step": 11250,
+    "component_gradient_norms": {
+      "layer": 0.160283340642767,
+      "sum": 0.1652127542621774,
+      "stft": 0.0015707247604394932,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2653309404850006
+  },
+  {
+    "step": 11500,
+    "component_gradient_norms": {
+      "layer": 0.14805372091483762,
+      "sum": 0.14400547638801184,
+      "stft": 0.0020287137625880523,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.23025208711624146
+  },
+  {
+    "step": 11750,
+    "component_gradient_norms": {
+      "layer": 0.15640579443645156,
+      "sum": 0.13550149724192945,
+      "stft": 0.001771085349904163,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.2372160255908966
+  },
+  {
+    "step": 12000,
+    "component_gradient_norms": {
+      "layer": 0.13691122947297696,
+      "sum": 0.1514363715282876,
+      "stft": 0.0020716949702071674,
+      "sisdr": 0.0
+    },
+    "total_gradient_norm_before_clip": 0.23627929389476776
+  },
+  {
+    "step": 12250,
+    "component_gradient_norms": {
+      "layer": 0.1352698389026878,
+      "sum": 0.1409309952201166,
+      "stft": 0.0028372044922961547,
+      "sisdr": 0.07659452508155244
+    },
+    "total_gradient_norm_before_clip": 0.2452535629272461
+  },
+  {
+    "step": 12500,
+    "component_gradient_norms": {
+      "layer": 0.16268953242115047,
+      "sum": 0.16036910357231698,
+      "stft": 0.001879701754672351,
+      "sisdr": 0.07362643221828681
+    },
+    "total_gradient_norm_before_clip": 0.29607439041137695
+  },
+  {
+    "step": 12750,
+    "component_gradient_norms": {
+      "layer": 0.13465321731826269,
+      "sum": 0.12484531591982609,
+      "stft": 0.0018930966660464022,
+      "sisdr": 0.06146120337308384
+    },
+    "total_gradient_norm_before_clip": 0.21763728559017181
+  },
+  {
+    "step": 13000,
+    "component_gradient_norms": {
+      "layer": 0.14782365185282373,
+      "sum": 0.15869830189908424,
+      "stft": 0.0026510258305536363,
+      "sisdr": 0.15547382571690435
+    },
+    "total_gradient_norm_before_clip": 0.3059535324573517
+  },
+  {
+    "step": 13250,
+    "component_gradient_norms": {
+      "layer": 0.13346866194664747,
+      "sum": 0.1229366535434954,
+      "stft": 0.0014617186231258854,
+      "sisdr": 0.04185511706832408
+    },
+    "total_gradient_norm_before_clip": 0.21790669858455658
+  },
+  {
+    "step": 13500,
+    "component_gradient_norms": {
+      "layer": 0.15198513762693627,
+      "sum": 0.12209086817285827,
+      "stft": 0.0023807321329681174,
+      "sisdr": 0.06038293447480953
+    },
+    "total_gradient_norm_before_clip": 0.23773400485515594
+  },
+  {
+    "step": 13750,
+    "component_gradient_norms": {
+      "layer": 0.14349302277940038,
+      "sum": 0.13790598100307083,
+      "stft": 0.001298109841178386,
+      "sisdr": 0.04715353693640269
+    },
+    "total_gradient_norm_before_clip": 0.23809389770030975
+  },
+  {
+    "step": 14000,
+    "component_gradient_norms": {
+      "layer": 0.14033753099594937,
+      "sum": 0.13402119567116852,
+      "stft": 0.002229751634209792,
+      "sisdr": 0.08447495495970553
+    },
+    "total_gradient_norm_before_clip": 0.2379988729953766
+  },
+  {
+    "step": 14250,
+    "component_gradient_norms": {
+      "layer": 0.14061831749827056,
+      "sum": 0.13734301009212121,
+      "stft": 0.001565093673250616,
+      "sisdr": 0.050349137042115716
+    },
+    "total_gradient_norm_before_clip": 0.23202551901340485
+  },
+  {
+    "step": 14500,
+    "component_gradient_norms": {
+      "layer": 0.12280031888190183,
+      "sum": 0.12435128216461123,
+      "stft": 0.002388363420615269,
+      "sisdr": 0.04829294646349853
+    },
+    "total_gradient_norm_before_clip": 0.20928163826465607
+  },
+  {
+    "step": 14750,
+    "component_gradient_norms": {
+      "layer": 0.12141918475546014,
+      "sum": 0.12749414339358764,
+      "stft": 0.0017581897124315275,
+      "sisdr": 0.04120538022099237
+    },
+    "total_gradient_norm_before_clip": 0.21227939426898956
+  },
+  {
+    "step": 15000,
+    "component_gradient_norms": {
+      "layer": 0.1345169980500482,
+      "sum": 0.13522664287683098,
+      "stft": 0.001932369508057774,
+      "sisdr": 0.057468270353231286
+    },
+    "total_gradient_norm_before_clip": 0.22919127345085144
+  },
+  {
+    "step": 15250,
+    "component_gradient_norms": {
+      "layer": 0.11812182924894493,
+      "sum": 0.10534373132286257,
+      "stft": 0.0022598490651132095,
+      "sisdr": 0.06573944996706083
+    },
+    "total_gradient_norm_before_clip": 0.19446057081222534
+  },
+  {
+    "step": 15500,
+    "component_gradient_norms": {
+      "layer": 0.11954900447657513,
+      "sum": 0.11110440999137408,
+      "stft": 0.0025317270948646635,
+      "sisdr": 0.09467444510055528
+    },
+    "total_gradient_norm_before_clip": 0.21608233451843262
+  },
+  {
+    "step": 15750,
+    "component_gradient_norms": {
+      "layer": 0.12743005665485982,
+      "sum": 0.11132010213486832,
+      "stft": 0.0022736320748065093,
+      "sisdr": 0.04765821828060645
+    },
+    "total_gradient_norm_before_clip": 0.2043711394071579
+  },
+  {
+    "step": 16000,
+    "component_gradient_norms": {
+      "layer": 0.1275226436404021,
+      "sum": 0.12450496804879684,
+      "stft": 0.001777657559480289,
+      "sisdr": 0.05717564773661261
+    },
+    "total_gradient_norm_before_clip": 0.21381792426109314
+  },
+  {
+    "step": 16250,
+    "component_gradient_norms": {
+      "layer": 0.15434041797117606,
+      "sum": 0.13577213917445177,
+      "stft": 0.0013891158515629228,
+      "sisdr": 0.0702975078335097
+    },
+    "total_gradient_norm_before_clip": 0.25298741459846497
+  },
+  {
+    "step": 16500,
+    "component_gradient_norms": {
+      "layer": 0.14532573239775026,
+      "sum": 0.11530777242449362,
+      "stft": 0.0016963208967735448,
+      "sisdr": 0.08297628757753434
+    },
+    "total_gradient_norm_before_clip": 0.2319214940071106
+  },
+  {
+    "step": 16750,
+    "component_gradient_norms": {
+      "layer": 0.11742135000841211,
+      "sum": 0.1127927623267989,
+      "stft": 0.002209426914974539,
+      "sisdr": 0.05209085315817663
+    },
+    "total_gradient_norm_before_clip": 0.19290518760681152
+  },
+  {
+    "step": 17000,
+    "component_gradient_norms": {
+      "layer": 0.12643751195180614,
+      "sum": 0.1224223211386219,
+      "stft": 0.0019178908591004269,
+      "sisdr": 0.046756694432963535
+    },
+    "total_gradient_norm_before_clip": 0.20585007965564728
+  },
+  {
+    "step": 17250,
+    "component_gradient_norms": {
+      "layer": 0.12846130104155018,
+      "sum": 0.11123575176255604,
+      "stft": 0.0023767835147277933,
+      "sisdr": 0.0660853450866746
+    },
+    "total_gradient_norm_before_clip": 0.21387359499931335
+  },
+  {
+    "step": 17500,
+    "component_gradient_norms": {
+      "layer": 0.12018666545297481,
+      "sum": 0.11957759535281026,
+      "stft": 0.002320284222158749,
+      "sisdr": 0.14578230140936535
+    },
+    "total_gradient_norm_before_clip": 0.2538984715938568
+  },
+  {
+    "step": 17750,
+    "component_gradient_norms": {
+      "layer": 0.12513973204472398,
+      "sum": 0.11123770672673602,
+      "stft": 0.0016687480963562128,
+      "sisdr": 0.03401920586273905
+    },
+    "total_gradient_norm_before_clip": 0.19886353611946106
+  },
+  {
+    "step": 18000,
+    "component_gradient_norms": {
+      "layer": 0.11723123767355671,
+      "sum": 0.10841242811627701,
+      "stft": 0.0017606504867752606,
+      "sisdr": 0.051589056422768766
+    },
+    "total_gradient_norm_before_clip": 0.19176803529262543
+  },
+  {
+    "step": 18250,
+    "component_gradient_norms": {
+      "layer": 0.1284182225794151,
+      "sum": 0.1156235121296185,
+      "stft": 0.002221701146705972,
+      "sisdr": 0.04250747819543651
+    },
+    "total_gradient_norm_before_clip": 0.2112441062927246
+  },
+  {
+    "step": 18500,
+    "component_gradient_norms": {
+      "layer": 0.12321780457788191,
+      "sum": 0.11338148533058758,
+      "stft": 0.0013481696418393477,
+      "sisdr": 0.04249495363472471
+    },
+    "total_gradient_norm_before_clip": 0.1998344212770462
+  },
+  {
+    "step": 18750,
+    "component_gradient_norms": {
+      "layer": 0.11841640247389436,
+      "sum": 0.10984991628098238,
+      "stft": 0.0013782282498131617,
+      "sisdr": 0.08257424498819788
+    },
+    "total_gradient_norm_before_clip": 0.20290358364582062
+  },
+  {
+    "step": 19000,
+    "component_gradient_norms": {
+      "layer": 0.11813037171335783,
+      "sum": 0.10672976607327438,
+      "stft": 0.0016539917374639086,
+      "sisdr": 0.05841614309676638
+    },
+    "total_gradient_norm_before_clip": 0.1963643729686737
+  },
+  {
+    "step": 19250,
+    "component_gradient_norms": {
+      "layer": 0.12217325828804405,
+      "sum": 0.10304939341414006,
+      "stft": 0.001845805535710967,
+      "sisdr": 0.15230183146935355
+    },
+    "total_gradient_norm_before_clip": 0.2377607822418213
+  },
+  {
+    "step": 19500,
+    "component_gradient_norms": {
+      "layer": 0.12397080528670115,
+      "sum": 0.12471365914771053,
+      "stft": 0.0014205820065758268,
+      "sisdr": 0.057523287211714916
+    },
+    "total_gradient_norm_before_clip": 0.2090153843164444
+  },
+  {
+    "step": 19750,
+    "component_gradient_norms": {
+      "layer": 0.1089148249937746,
+      "sum": 0.09790791033168901,
+      "stft": 0.0014410368418415716,
+      "sisdr": 0.040414986206532624
+    },
+    "total_gradient_norm_before_clip": 0.17356142401695251
+  },
+  {
+    "step": 20000,
+    "component_gradient_norms": {
+      "layer": 0.13177307890937492,
+      "sum": 0.12347365344831579,
+      "stft": 0.0016202648080740646,
+      "sisdr": 0.03828589815024801
+    },
+    "total_gradient_norm_before_clip": 0.21373753249645233
+  }
+]

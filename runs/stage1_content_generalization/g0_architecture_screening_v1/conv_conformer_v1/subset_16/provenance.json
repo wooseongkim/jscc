@@ -1,0 +1,42 @@
+{
+  "diagnostic_type": "g0_exposure_normalized",
+  "diagnostic_engine_version": "g0_exposure_normalized_v1",
+  "subset_size": "16",
+  "train_subset_size": 16,
+  "batch_size": 4,
+  "max_epochs": 64,
+  "target_optimizer_steps": 256,
+  "checkpoint_epochs": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "seed": 23,
+  "model_initialization_hash": "6d65319a2ebeac3875b4807cecc70d4d5d493f4d101a5476fb12cc10631e863e",
+  "validation_suite_hash": "d84a97c5908c8e878fcfbe5f9cd6f45397018a8d57f9274120e6967e970bdc71",
+  "train_manifest_hash": "de5c7c1057cd3d0c962f06953d13b0745010743ffe5aa4415b6f17b607b2ed40",
+  "validation_manifest_hash": "f8f473d5b80f943d73585682fb5770d7ae9047edebe9f6ccec80cf910cb04e68",
+  "latent_cache_hash": "de8278a597a31742853cfbd882c062aeb40b474f3a90e3b2845441e5aef0b834",
+  "baseline_hashes": {
+    "zero": "569e980eb86beff889c1ecc96a212cd85cfc2ab708a26692f45d4c0a2b8ed973",
+    "global_mean": "9ad845d3d5a145b0af0549b12750d3e40707f32c6fe5b15f0eec88a0a4c22ebf",
+    "layerwise_mean": "e83e4d2b2a8b3b234eccaee5c790a8181d42d6124408ae50390b9329c52955e5"
+  },
+  "learning_rate": 0.0001,
+  "normalization": {
+    "mode": "per_layer_power",
+    "epsilon": 1e-06
+  },
+  "preprocessing_normalization": {
+    "mode": "none",
+    "normalization_stats_hash": "none"
+  },
+  "model_architecture": "conv_conformer_v1",
+  "architecture_version": "conv_conformer_v1",
+  "git_commit": "aa94943e423c4d7faa44e9a6df4355ca27afce9c",
+  "working_tree_dirty": true
+}

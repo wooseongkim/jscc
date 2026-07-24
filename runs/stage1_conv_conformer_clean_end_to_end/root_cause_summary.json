@@ -1,0 +1,46 @@
+{
+  "samples": 16,
+  "utterance_ids": [
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61946/6241-61946-0000.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/5895/34629/5895-34629-0033.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/7850/281318/7850-281318-0012.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/3576/138058/3576-138058-0013.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/251/118436/251-118436-0008.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170142/1462-170142-0023.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/2803/154320/2803-154320-0007.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0003.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/1272/141231/1272-141231-0010.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170145/1462-170145-0019.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/2035/152373/2035-152373-0008.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/7850/286674/7850-286674-0005.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/6319/57405/6319-57405-0005.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/1988/24833/1988-24833-0016.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/2035/152373/2035-152373-0012.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/1993/147964/1993-147964-0002.flac"
+  ],
+  "codec_identity_pass": false,
+  "identity_classification": "LATENT_CACHE_MISMATCH",
+  "cache_mismatch_utterances": [
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/2035/152373/2035-152373-0008.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/7850/286674/7850-286674-0005.flac",
+    "data/mini_librispeech/LibriSpeech/dev-clean-2/2035/152373/2035-152373-0012.flac"
+  ],
+  "resource_identity_pass": true,
+  "later_training_blocked": true,
+  "neutral_state": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -3.0,
+    0.0
+  ],
+  "mean_clean_codec_si_sdr": 2.861742939945543,
+  "mean_direct_si_sdr": -10.148287788033485,
+  "mean_ideal_ofdm_si_sdr": -10.148287788033485,
+  "mean_direct_latent_loss": 0.6662473874166608,
+  "mean_ideal_ofdm_latent_loss": 0.6662473874166608,
+  "classification": "LATENT_CACHE_MISMATCH"
+}

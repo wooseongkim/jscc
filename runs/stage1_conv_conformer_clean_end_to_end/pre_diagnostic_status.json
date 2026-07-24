@@ -1,0 +1,42 @@
+{
+  "schema_version": "clean_end_to_end_pre_diagnostic_v1",
+  "provisional_latent_result": true,
+  "end_to_end_speech_quality_validated": false,
+  "final_j5_classification_deferred": true,
+  "accepted_j4_checkpoint": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j4_random_burst/training/j3_transfer/diagnostic_last.pt",
+  "accepted_j4_checkpoint_sha256": "6b97ee39a77fdeb98fcfdfd957e68ff2195b8f30a3c29202a86d92b4471db13a",
+  "j5_final_checkpoint": "/home/mike/jscc/runs/stage1_conv_conformer_jammer/j5_pilot_targeted/training/j4_transfer/diagnostic_last.pt",
+  "j5_final_checkpoint_sha256": "e54fe504a60001901d8c720682810a4eb961be6801b6cf49b289404122bc9d4a",
+  "git_commit": "eb9de523590454a919ffeb0aece94efa516607da",
+  "codec_metadata": {
+    "type": "speechtokenizer",
+    "config_path": "artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json",
+    "checkpoint_path": "artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt",
+    "freeze": true,
+    "sample_rate": 16000,
+    "waveform_samples": 16000,
+    "n_q": 8
+  },
+  "latent_shape": [
+    8,
+    50,
+    1024
+  ],
+  "normalization_configuration": {
+    "preprocessing": "none",
+    "loss": {
+      "mode": "per_layer_power",
+      "epsilon": 1e-06
+    }
+  },
+  "ofdm_configuration": {
+    "grid": [
+      64,
+      32
+    ],
+    "pilots": 128,
+    "data_resources": 1920,
+    "resource_mapping_version": "pilot_reserved_v1"
+  },
+  "pause_reason": "No-jammer waveform SI-SDR remained approximately -18.78 dB; pilot jamming is not the primary waveform failure."
+}

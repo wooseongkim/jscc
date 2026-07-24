@@ -1,0 +1,1 @@
+python diagnose_g0_architecture_screening.py --config configs/train_stage1_fixed_tx_uniform.yaml --architecture per_layer_pca_480 --subset-size full --batch-size 4 --max-epochs 64 --device cuda --num-workers 0 --output-dir runs/stage1_content_generalization/g0_architecture_screening_v1/per_layer_pca_480/subset_full --allow-long-run 

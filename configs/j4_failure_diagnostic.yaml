@@ -1,0 +1,14 @@
+diagnostic:
+  version: j4_tail_failure_v1
+  seed: 23
+  unseen_utterances: 64
+  realizations_per_utterance: 2
+  condition: {snr_db: 5.0, requested_global_jsr_db: 0.0, burst_fraction: 0.125}
+  equalizer_gain_caps: [10.0, 20.0, 40.0]
+  confidence_interval: {method: wilson, confidence: 0.95}
+  substantial_reduction:
+    relative_negative_rate_reduction: 0.50
+    absolute_layer7_p10_improvement: 0.02
+  checkpoint_comparison: [accepted_j3, j4_final, j4_best_if_available]
+  preserve_original_summary: true
+  overwrite_original_summary: false

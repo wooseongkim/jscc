@@ -1,0 +1,1 @@
+eval_channel_free_conv_conformer.py --config configs/channel_free_revalidation.yaml --mode baseline --baseline-kind continuous_sum --output-dir runs/channel_free_revalidation/baseline_continuous_sum --device cuda --samples 64 --allow-long-run

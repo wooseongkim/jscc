@@ -1,0 +1,17 @@
+{
+  "per_layer_nmse": {
+    "step": 20000,
+    "value": 0.05376682057976723,
+    "path": "runs/channel_free_revalidation/cf4_large_model/best_per_layer_nmse.pt"
+  },
+  "summed_latent_nmse": {
+    "step": 20000,
+    "value": 0.04530663043260574,
+    "path": "runs/channel_free_revalidation/cf4_large_model/best_summed_latent_nmse.pt"
+  },
+  "waveform_si_sdr": {
+    "step": 12500,
+    "value": 2.1855070528108627,
+    "path": "runs/channel_free_revalidation/cf4_large_model/best_waveform_si_sdr.pt"
+  }
+}

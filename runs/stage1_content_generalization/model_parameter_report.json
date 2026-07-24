@@ -1,0 +1,42 @@
+[
+  {
+    "architecture": "g0_direct",
+    "subset": "subset_16",
+    "parameter_report": null
+  },
+  {
+    "architecture": "g0_direct",
+    "subset": "subset_64",
+    "parameter_report": null
+  },
+  {
+    "architecture": "g0_direct",
+    "subset": "subset_256",
+    "parameter_report": null
+  },
+  {
+    "architecture": "g0_direct",
+    "subset": "subset_full",
+    "parameter_report": null
+  },
+  {
+    "architecture": "g0_exposure_normalized_v1",
+    "subset": "subset_16",
+    "parameter_report": null
+  },
+  {
+    "architecture": "g0_exposure_normalized_v1",
+    "subset": "subset_64",
+    "parameter_report": null
+  },
+  {
+    "architecture": "g0_exposure_normalized_v1",
+    "subset": "subset_256",
+    "parameter_report": null
+  },
+  {
+    "architecture": "g0_exposure_normalized_v1",
+    "subset": "subset_full",
+    "parameter_report": null
+  }
+]

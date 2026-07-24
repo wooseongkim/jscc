@@ -1,0 +1,2375 @@
+{
+  "ordered_ids": [
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2412/153948/2412-153948-0003.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170145/1462-170145-0020.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61943/6241-61943-0026.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6295/244435/6295-244435-0025.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1988/147956/1988-147956-0020.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/8842/304647/8842-304647-0008.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3000/15664/3000-15664-0010.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0000.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1272/141231/1272-141231-0020.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2803/154320/2803-154320-0007.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6319/57405/6319-57405-0006.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0005.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2035/147961/2035-147961-0013.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/5895/34622/5895-34622-0011.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2428/83699/2428-83699-0037.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/5694/64038/5694-64038-0021.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1993/147964/1993-147964-0007.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3536/23268/3536-23268-0023.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0016.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/7976/110523/7976-110523-0004.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/251/136532/251-136532-0006.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/174/168635/174-168635-0009.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/5338/284437/5338-284437-0031.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/84/121550/84-121550-0016.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3576/138058/3576-138058-0013.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/7850/286674/7850-286674-0007.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2412/153948/2412-153948-0010.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170142/1462-170142-0019.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61943/6241-61943-0002.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6295/244435/6295-244435-0008.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1988/24833/1988-24833-0025.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/8842/304647/8842-304647-0011.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3000/15664/3000-15664-0039.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0006.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1272/135031/1272-135031-0024.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2803/161169/2803-161169-0002.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6319/57405/6319-57405-0010.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0000.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2035/147961/2035-147961-0017.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/5895/34622/5895-34622-0020.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2428/83699/2428-83699-0009.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/5694/64038/5694-64038-0018.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1993/147964/1993-147964-0005.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3536/23268/3536-23268-0016.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/777/126732/777-126732-0034.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/7976/110523/7976-110523-0013.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/251/136532/251-136532-0018.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/174/168635/174-168635-0011.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/5338/284437/5338-284437-0013.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/84/121550/84-121550-0014.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3576/138058/3576-138058-0024.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/7850/286674/7850-286674-0011.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2412/153948/2412-153948-0013.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1462/170142/1462-170142-0018.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6241/61946/6241-61946-0018.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6295/244435/6295-244435-0005.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1988/24833/1988-24833-0016.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/8842/304647/8842-304647-0004.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3000/15664/3000-15664-0031.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/3752/4944/3752-4944-0041.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/1272/141231/1272-141231-0028.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/2803/154320/2803-154320-0003.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/6319/57405/6319-57405-0004.flac",
+    "/home/mike/jscc/data/mini_librispeech/LibriSpeech/dev-clean-2/8297/275156/8297-275156-0012.flac"
+  ],
+  "scenarios": [
+    {
+      "utterance_index": 0,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1883077054
+    },
+    {
+      "utterance_index": 0,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 2034036466
+    },
+    {
+      "utterance_index": 0,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1529617810
+    },
+    {
+      "utterance_index": 0,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1223476395
+    },
+    {
+      "utterance_index": 0,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 119278063
+    },
+    {
+      "utterance_index": 0,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1239132876
+    },
+    {
+      "utterance_index": 1,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 648303661
+    },
+    {
+      "utterance_index": 1,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1926181049
+    },
+    {
+      "utterance_index": 1,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 662369188
+    },
+    {
+      "utterance_index": 1,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1955694594
+    },
+    {
+      "utterance_index": 1,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1586824632
+    },
+    {
+      "utterance_index": 1,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2146022410
+    },
+    {
+      "utterance_index": 2,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 107248747
+    },
+    {
+      "utterance_index": 2,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1709877104
+    },
+    {
+      "utterance_index": 2,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1140003226
+    },
+    {
+      "utterance_index": 2,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1937241648
+    },
+    {
+      "utterance_index": 2,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1787126898
+    },
+    {
+      "utterance_index": 2,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1318727881
+    },
+    {
+      "utterance_index": 3,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 759071241
+    },
+    {
+      "utterance_index": 3,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1261048740
+    },
+    {
+      "utterance_index": 3,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 859736221
+    },
+    {
+      "utterance_index": 3,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1284789631
+    },
+    {
+      "utterance_index": 3,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1658989088
+    },
+    {
+      "utterance_index": 3,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 518426701
+    },
+    {
+      "utterance_index": 4,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 319163468
+    },
+    {
+      "utterance_index": 4,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1795406855
+    },
+    {
+      "utterance_index": 4,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1941551923
+    },
+    {
+      "utterance_index": 4,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 196504469
+    },
+    {
+      "utterance_index": 4,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1920967661
+    },
+    {
+      "utterance_index": 4,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2074055610
+    },
+    {
+      "utterance_index": 5,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1901432613
+    },
+    {
+      "utterance_index": 5,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1163871950
+    },
+    {
+      "utterance_index": 5,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 194291202
+    },
+    {
+      "utterance_index": 5,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1227841211
+    },
+    {
+      "utterance_index": 5,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 278645936
+    },
+    {
+      "utterance_index": 5,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 645405293
+    },
+    {
+      "utterance_index": 6,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 50115836
+    },
+    {
+      "utterance_index": 6,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 901008826
+    },
+    {
+      "utterance_index": 6,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1112259838
+    },
+    {
+      "utterance_index": 6,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 448425469
+    },
+    {
+      "utterance_index": 6,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 592713861
+    },
+    {
+      "utterance_index": 6,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2003883273
+    },
+    {
+      "utterance_index": 7,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1108524408
+    },
+    {
+      "utterance_index": 7,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1036712517
+    },
+    {
+      "utterance_index": 7,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 434587013
+    },
+    {
+      "utterance_index": 7,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1897327912
+    },
+    {
+      "utterance_index": 7,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1843695061
+    },
+    {
+      "utterance_index": 7,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 886783404
+    },
+    {
+      "utterance_index": 8,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 791777980
+    },
+    {
+      "utterance_index": 8,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1829244020
+    },
+    {
+      "utterance_index": 8,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 178085440
+    },
+    {
+      "utterance_index": 8,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1942469192
+    },
+    {
+      "utterance_index": 8,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1292461410
+    },
+    {
+      "utterance_index": 8,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2078488396
+    },
+    {
+      "utterance_index": 9,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1937310806
+    },
+    {
+      "utterance_index": 9,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1119389516
+    },
+    {
+      "utterance_index": 9,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1696415063
+    },
+    {
+      "utterance_index": 9,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 263988235
+    },
+    {
+      "utterance_index": 9,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1088861234
+    },
+    {
+      "utterance_index": 9,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 272514080
+    },
+    {
+      "utterance_index": 10,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1374337458
+    },
+    {
+      "utterance_index": 10,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 187503513
+    },
+    {
+      "utterance_index": 10,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1447535257
+    },
+    {
+      "utterance_index": 10,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 71957131
+    },
+    {
+      "utterance_index": 10,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1873712450
+    },
+    {
+      "utterance_index": 10,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 190929621
+    },
+    {
+      "utterance_index": 11,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1067037567
+    },
+    {
+      "utterance_index": 11,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1830795468
+    },
+    {
+      "utterance_index": 11,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1723896051
+    },
+    {
+      "utterance_index": 11,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1445756509
+    },
+    {
+      "utterance_index": 11,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 244538952
+    },
+    {
+      "utterance_index": 11,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1684216622
+    },
+    {
+      "utterance_index": 12,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 712602381
+    },
+    {
+      "utterance_index": 12,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1599993609
+    },
+    {
+      "utterance_index": 12,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1594815831
+    },
+    {
+      "utterance_index": 12,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1790674330
+    },
+    {
+      "utterance_index": 12,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 92016712
+    },
+    {
+      "utterance_index": 12,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 52251695
+    },
+    {
+      "utterance_index": 13,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 530641873
+    },
+    {
+      "utterance_index": 13,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1842856379
+    },
+    {
+      "utterance_index": 13,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1463698289
+    },
+    {
+      "utterance_index": 13,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 943326110
+    },
+    {
+      "utterance_index": 13,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1063240631
+    },
+    {
+      "utterance_index": 13,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1396027878
+    },
+    {
+      "utterance_index": 14,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1205945107
+    },
+    {
+      "utterance_index": 14,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 2137647738
+    },
+    {
+      "utterance_index": 14,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 427397995
+    },
+    {
+      "utterance_index": 14,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 239191328
+    },
+    {
+      "utterance_index": 14,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 936658655
+    },
+    {
+      "utterance_index": 14,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1273874086
+    },
+    {
+      "utterance_index": 15,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 2108875924
+    },
+    {
+      "utterance_index": 15,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 26327838
+    },
+    {
+      "utterance_index": 15,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1209193423
+    },
+    {
+      "utterance_index": 15,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1163772587
+    },
+    {
+      "utterance_index": 15,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 399973441
+    },
+    {
+      "utterance_index": 15,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1342237269
+    },
+    {
+      "utterance_index": 16,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 91602576
+    },
+    {
+      "utterance_index": 16,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1478211676
+    },
+    {
+      "utterance_index": 16,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1978696026
+    },
+    {
+      "utterance_index": 16,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 151533590
+    },
+    {
+      "utterance_index": 16,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1648413809
+    },
+    {
+      "utterance_index": 16,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 161182957
+    },
+    {
+      "utterance_index": 17,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1126147963
+    },
+    {
+      "utterance_index": 17,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1051488752
+    },
+    {
+      "utterance_index": 17,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1571291506
+    },
+    {
+      "utterance_index": 17,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1915176795
+    },
+    {
+      "utterance_index": 17,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1056080187
+    },
+    {
+      "utterance_index": 17,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1820127857
+    },
+    {
+      "utterance_index": 18,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 999385179
+    },
+    {
+      "utterance_index": 18,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1844884029
+    },
+    {
+      "utterance_index": 18,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1398890726
+    },
+    {
+      "utterance_index": 18,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 79305368
+    },
+    {
+      "utterance_index": 18,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1297751806
+    },
+    {
+      "utterance_index": 18,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1339183903
+    },
+    {
+      "utterance_index": 19,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1828024847
+    },
+    {
+      "utterance_index": 19,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 118841867
+    },
+    {
+      "utterance_index": 19,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 326741661
+    },
+    {
+      "utterance_index": 19,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 988968143
+    },
+    {
+      "utterance_index": 19,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1631451727
+    },
+    {
+      "utterance_index": 19,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1724555735
+    },
+    {
+      "utterance_index": 20,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 782021700
+    },
+    {
+      "utterance_index": 20,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1109975736
+    },
+    {
+      "utterance_index": 20,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 874611581
+    },
+    {
+      "utterance_index": 20,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 932007276
+    },
+    {
+      "utterance_index": 20,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 22640030
+    },
+    {
+      "utterance_index": 20,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 591941188
+    },
+    {
+      "utterance_index": 21,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1348364292
+    },
+    {
+      "utterance_index": 21,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1590022885
+    },
+    {
+      "utterance_index": 21,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1478492456
+    },
+    {
+      "utterance_index": 21,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1407133559
+    },
+    {
+      "utterance_index": 21,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 2105977115
+    },
+    {
+      "utterance_index": 21,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 706691904
+    },
+    {
+      "utterance_index": 22,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1911092864
+    },
+    {
+      "utterance_index": 22,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 2070221181
+    },
+    {
+      "utterance_index": 22,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1063413795
+    },
+    {
+      "utterance_index": 22,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 896878171
+    },
+    {
+      "utterance_index": 22,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1817618006
+    },
+    {
+      "utterance_index": 22,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1825094933
+    },
+    {
+      "utterance_index": 23,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1367694078
+    },
+    {
+      "utterance_index": 23,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 2046860404
+    },
+    {
+      "utterance_index": 23,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1652360820
+    },
+    {
+      "utterance_index": 23,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1830574793
+    },
+    {
+      "utterance_index": 23,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1770852096
+    },
+    {
+      "utterance_index": 23,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 439932334
+    },
+    {
+      "utterance_index": 24,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1789364539
+    },
+    {
+      "utterance_index": 24,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 78925611
+    },
+    {
+      "utterance_index": 24,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 618857423
+    },
+    {
+      "utterance_index": 24,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1043858717
+    },
+    {
+      "utterance_index": 24,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 332914218
+    },
+    {
+      "utterance_index": 24,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1401545617
+    },
+    {
+      "utterance_index": 25,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 643009255
+    },
+    {
+      "utterance_index": 25,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 582395544
+    },
+    {
+      "utterance_index": 25,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 428790265
+    },
+    {
+      "utterance_index": 25,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 646500911
+    },
+    {
+      "utterance_index": 25,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 450542848
+    },
+    {
+      "utterance_index": 25,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1693673775
+    },
+    {
+      "utterance_index": 26,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 887238724
+    },
+    {
+      "utterance_index": 26,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1181756795
+    },
+    {
+      "utterance_index": 26,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 455343448
+    },
+    {
+      "utterance_index": 26,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1357602564
+    },
+    {
+      "utterance_index": 26,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 435664986
+    },
+    {
+      "utterance_index": 26,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 126890381
+    },
+    {
+      "utterance_index": 27,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 154262774
+    },
+    {
+      "utterance_index": 27,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 373158523
+    },
+    {
+      "utterance_index": 27,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1661190148
+    },
+    {
+      "utterance_index": 27,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1906852660
+    },
+    {
+      "utterance_index": 27,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 555447351
+    },
+    {
+      "utterance_index": 27,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 430740717
+    },
+    {
+      "utterance_index": 28,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 96128788
+    },
+    {
+      "utterance_index": 28,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 793490563
+    },
+    {
+      "utterance_index": 28,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1909448305
+    },
+    {
+      "utterance_index": 28,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1335833776
+    },
+    {
+      "utterance_index": 28,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1842810973
+    },
+    {
+      "utterance_index": 28,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2009000177
+    },
+    {
+      "utterance_index": 29,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 537265914
+    },
+    {
+      "utterance_index": 29,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 333991388
+    },
+    {
+      "utterance_index": 29,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 182707245
+    },
+    {
+      "utterance_index": 29,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 779687920
+    },
+    {
+      "utterance_index": 29,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 36127433
+    },
+    {
+      "utterance_index": 29,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 272969549
+    },
+    {
+      "utterance_index": 30,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1477766820
+    },
+    {
+      "utterance_index": 30,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 237868883
+    },
+    {
+      "utterance_index": 30,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1139463679
+    },
+    {
+      "utterance_index": 30,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 768362961
+    },
+    {
+      "utterance_index": 30,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1243951130
+    },
+    {
+      "utterance_index": 30,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1272631885
+    },
+    {
+      "utterance_index": 31,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 2132646091
+    },
+    {
+      "utterance_index": 31,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1524372074
+    },
+    {
+      "utterance_index": 31,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 885442513
+    },
+    {
+      "utterance_index": 31,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1171305529
+    },
+    {
+      "utterance_index": 31,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1249847618
+    },
+    {
+      "utterance_index": 31,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2117777414
+    },
+    {
+      "utterance_index": 32,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1689649230
+    },
+    {
+      "utterance_index": 32,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 348306103
+    },
+    {
+      "utterance_index": 32,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 172178855
+    },
+    {
+      "utterance_index": 32,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 686176749
+    },
+    {
+      "utterance_index": 32,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1844025270
+    },
+    {
+      "utterance_index": 32,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2011008809
+    },
+    {
+      "utterance_index": 33,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1773156276
+    },
+    {
+      "utterance_index": 33,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1486733574
+    },
+    {
+      "utterance_index": 33,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 860855143
+    },
+    {
+      "utterance_index": 33,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 813809541
+    },
+    {
+      "utterance_index": 33,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1198889719
+    },
+    {
+      "utterance_index": 33,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 711022590
+    },
+    {
+      "utterance_index": 34,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 108894045
+    },
+    {
+      "utterance_index": 34,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 255552200
+    },
+    {
+      "utterance_index": 34,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 838493959
+    },
+    {
+      "utterance_index": 34,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 658238478
+    },
+    {
+      "utterance_index": 34,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1363280770
+    },
+    {
+      "utterance_index": 34,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1582767536
+    },
+    {
+      "utterance_index": 35,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 747761133
+    },
+    {
+      "utterance_index": 35,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 279675854
+    },
+    {
+      "utterance_index": 35,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 661466706
+    },
+    {
+      "utterance_index": 35,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1353136529
+    },
+    {
+      "utterance_index": 35,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 812264784
+    },
+    {
+      "utterance_index": 35,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 825608709
+    },
+    {
+      "utterance_index": 36,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1043105862
+    },
+    {
+      "utterance_index": 36,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1455220450
+    },
+    {
+      "utterance_index": 36,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1675988695
+    },
+    {
+      "utterance_index": 36,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 793746637
+    },
+    {
+      "utterance_index": 36,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 52033575
+    },
+    {
+      "utterance_index": 36,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1217178520
+    },
+    {
+      "utterance_index": 37,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 182555667
+    },
+    {
+      "utterance_index": 37,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 292121346
+    },
+    {
+      "utterance_index": 37,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 827448212
+    },
+    {
+      "utterance_index": 37,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1269560144
+    },
+    {
+      "utterance_index": 37,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 332838074
+    },
+    {
+      "utterance_index": 37,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1269077637
+    },
+    {
+      "utterance_index": 38,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1882943622
+    },
+    {
+      "utterance_index": 38,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 443997594
+    },
+    {
+      "utterance_index": 38,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1950237379
+    },
+    {
+      "utterance_index": 38,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1489136375
+    },
+    {
+      "utterance_index": 38,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 2067530414
+    },
+    {
+      "utterance_index": 38,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1880975935
+    },
+    {
+      "utterance_index": 39,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 638371828
+    },
+    {
+      "utterance_index": 39,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 56494653
+    },
+    {
+      "utterance_index": 39,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 2129827903
+    },
+    {
+      "utterance_index": 39,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1169094347
+    },
+    {
+      "utterance_index": 39,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1731945260
+    },
+    {
+      "utterance_index": 39,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1115477414
+    },
+    {
+      "utterance_index": 40,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 313020267
+    },
+    {
+      "utterance_index": 40,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1122769918
+    },
+    {
+      "utterance_index": 40,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 575352071
+    },
+    {
+      "utterance_index": 40,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1033894340
+    },
+    {
+      "utterance_index": 40,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1848191974
+    },
+    {
+      "utterance_index": 40,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 157481525
+    },
+    {
+      "utterance_index": 41,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1746104105
+    },
+    {
+      "utterance_index": 41,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1057937066
+    },
+    {
+      "utterance_index": 41,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 626964406
+    },
+    {
+      "utterance_index": 41,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 227019776
+    },
+    {
+      "utterance_index": 41,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1086126914
+    },
+    {
+      "utterance_index": 41,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 260396670
+    },
+    {
+      "utterance_index": 42,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 608868387
+    },
+    {
+      "utterance_index": 42,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 2056458401
+    },
+    {
+      "utterance_index": 42,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1563820927
+    },
+    {
+      "utterance_index": 42,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1314095735
+    },
+    {
+      "utterance_index": 42,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1550977474
+    },
+    {
+      "utterance_index": 42,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1900647631
+    },
+    {
+      "utterance_index": 43,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 58367700
+    },
+    {
+      "utterance_index": 43,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 431128998
+    },
+    {
+      "utterance_index": 43,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1982070144
+    },
+    {
+      "utterance_index": 43,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1573412406
+    },
+    {
+      "utterance_index": 43,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 140703660
+    },
+    {
+      "utterance_index": 43,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1381998473
+    },
+    {
+      "utterance_index": 44,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1147445007
+    },
+    {
+      "utterance_index": 44,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1688534696
+    },
+    {
+      "utterance_index": 44,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 668062205
+    },
+    {
+      "utterance_index": 44,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1328653313
+    },
+    {
+      "utterance_index": 44,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 414860130
+    },
+    {
+      "utterance_index": 44,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1392301189
+    },
+    {
+      "utterance_index": 45,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1660309626
+    },
+    {
+      "utterance_index": 45,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 555469065
+    },
+    {
+      "utterance_index": 45,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1538166555
+    },
+    {
+      "utterance_index": 45,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 2129583560
+    },
+    {
+      "utterance_index": 45,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1353866884
+    },
+    {
+      "utterance_index": 45,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 882662098
+    },
+    {
+      "utterance_index": 46,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 236045832
+    },
+    {
+      "utterance_index": 46,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1801156011
+    },
+    {
+      "utterance_index": 46,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1438763581
+    },
+    {
+      "utterance_index": 46,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1729767262
+    },
+    {
+      "utterance_index": 46,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 446091459
+    },
+    {
+      "utterance_index": 46,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2145359091
+    },
+    {
+      "utterance_index": 47,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1402268041
+    },
+    {
+      "utterance_index": 47,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 926232668
+    },
+    {
+      "utterance_index": 47,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 924738757
+    },
+    {
+      "utterance_index": 47,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 572701651
+    },
+    {
+      "utterance_index": 47,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1765671939
+    },
+    {
+      "utterance_index": 47,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1456397946
+    },
+    {
+      "utterance_index": 48,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 2042836074
+    },
+    {
+      "utterance_index": 48,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 79901451
+    },
+    {
+      "utterance_index": 48,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 270308420
+    },
+    {
+      "utterance_index": 48,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 317599351
+    },
+    {
+      "utterance_index": 48,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 74493984
+    },
+    {
+      "utterance_index": 48,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1798307668
+    },
+    {
+      "utterance_index": 49,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 269175358
+    },
+    {
+      "utterance_index": 49,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 897109385
+    },
+    {
+      "utterance_index": 49,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 833204758
+    },
+    {
+      "utterance_index": 49,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 569485129
+    },
+    {
+      "utterance_index": 49,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1324073083
+    },
+    {
+      "utterance_index": 49,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 338337456
+    },
+    {
+      "utterance_index": 50,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1766989809
+    },
+    {
+      "utterance_index": 50,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1893543088
+    },
+    {
+      "utterance_index": 50,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1607898997
+    },
+    {
+      "utterance_index": 50,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1511910840
+    },
+    {
+      "utterance_index": 50,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1648992855
+    },
+    {
+      "utterance_index": 50,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1072205999
+    },
+    {
+      "utterance_index": 51,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 205904343
+    },
+    {
+      "utterance_index": 51,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 58323713
+    },
+    {
+      "utterance_index": 51,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1680249022
+    },
+    {
+      "utterance_index": 51,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 249706239
+    },
+    {
+      "utterance_index": 51,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 2045421792
+    },
+    {
+      "utterance_index": 51,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1510158120
+    },
+    {
+      "utterance_index": 52,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 2047016083
+    },
+    {
+      "utterance_index": 52,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 783423358
+    },
+    {
+      "utterance_index": 52,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 2074021797
+    },
+    {
+      "utterance_index": 52,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 611601607
+    },
+    {
+      "utterance_index": 52,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 2115173086
+    },
+    {
+      "utterance_index": 52,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 158805199
+    },
+    {
+      "utterance_index": 53,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1999958182
+    },
+    {
+      "utterance_index": 53,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 765110771
+    },
+    {
+      "utterance_index": 53,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 143175235
+    },
+    {
+      "utterance_index": 53,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 218592370
+    },
+    {
+      "utterance_index": 53,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 513760924
+    },
+    {
+      "utterance_index": 53,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 978490021
+    },
+    {
+      "utterance_index": 54,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1705704987
+    },
+    {
+      "utterance_index": 54,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1300434666
+    },
+    {
+      "utterance_index": 54,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 565824829
+    },
+    {
+      "utterance_index": 54,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 28785182
+    },
+    {
+      "utterance_index": 54,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1495172310
+    },
+    {
+      "utterance_index": 54,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 750519881
+    },
+    {
+      "utterance_index": 55,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 442075638
+    },
+    {
+      "utterance_index": 55,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 461686203
+    },
+    {
+      "utterance_index": 55,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1316479894
+    },
+    {
+      "utterance_index": 55,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 2031391447
+    },
+    {
+      "utterance_index": 55,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 877479436
+    },
+    {
+      "utterance_index": 55,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1580426496
+    },
+    {
+      "utterance_index": 56,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 307331386
+    },
+    {
+      "utterance_index": 56,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1032747296
+    },
+    {
+      "utterance_index": 56,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 910969468
+    },
+    {
+      "utterance_index": 56,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1981550830
+    },
+    {
+      "utterance_index": 56,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 231904679
+    },
+    {
+      "utterance_index": 56,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1820428823
+    },
+    {
+      "utterance_index": 57,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 507198169
+    },
+    {
+      "utterance_index": 57,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1386011514
+    },
+    {
+      "utterance_index": 57,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1588854261
+    },
+    {
+      "utterance_index": 57,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1345819944
+    },
+    {
+      "utterance_index": 57,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1607020664
+    },
+    {
+      "utterance_index": 57,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1565843726
+    },
+    {
+      "utterance_index": 58,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 663399457
+    },
+    {
+      "utterance_index": 58,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 802882865
+    },
+    {
+      "utterance_index": 58,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 835143780
+    },
+    {
+      "utterance_index": 58,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1184301203
+    },
+    {
+      "utterance_index": 58,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 791817386
+    },
+    {
+      "utterance_index": 58,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 2042942755
+    },
+    {
+      "utterance_index": 59,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 16894395
+    },
+    {
+      "utterance_index": 59,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 594271263
+    },
+    {
+      "utterance_index": 59,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 1076554776
+    },
+    {
+      "utterance_index": 59,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1225953368
+    },
+    {
+      "utterance_index": 59,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 312090836
+    },
+    {
+      "utterance_index": 59,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 838310285
+    },
+    {
+      "utterance_index": 60,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1068601805
+    },
+    {
+      "utterance_index": 60,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1930055721
+    },
+    {
+      "utterance_index": 60,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 876601745
+    },
+    {
+      "utterance_index": 60,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 59627031
+    },
+    {
+      "utterance_index": 60,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1489911614
+    },
+    {
+      "utterance_index": 60,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1531010925
+    },
+    {
+      "utterance_index": 61,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1086931980
+    },
+    {
+      "utterance_index": 61,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 578910913
+    },
+    {
+      "utterance_index": 61,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 529227286
+    },
+    {
+      "utterance_index": 61,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 2053364200
+    },
+    {
+      "utterance_index": 61,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 1261421671
+    },
+    {
+      "utterance_index": 61,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1614257786
+    },
+    {
+      "utterance_index": 62,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 1238953203
+    },
+    {
+      "utterance_index": 62,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 2031432320
+    },
+    {
+      "utterance_index": 62,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 2119945849
+    },
+    {
+      "utterance_index": 62,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1659463878
+    },
+    {
+      "utterance_index": 62,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 685456124
+    },
+    {
+      "utterance_index": 62,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 1643264882
+    },
+    {
+      "utterance_index": 63,
+      "realization": 0,
+      "snr_db": 5.0,
+      "seed": 618313988
+    },
+    {
+      "utterance_index": 63,
+      "realization": 1,
+      "snr_db": 5.0,
+      "seed": 1023924312
+    },
+    {
+      "utterance_index": 63,
+      "realization": 0,
+      "snr_db": 10.0,
+      "seed": 2034748549
+    },
+    {
+      "utterance_index": 63,
+      "realization": 1,
+      "snr_db": 10.0,
+      "seed": 1070470288
+    },
+    {
+      "utterance_index": 63,
+      "realization": 0,
+      "snr_db": 15.0,
+      "seed": 204857214
+    },
+    {
+      "utterance_index": 63,
+      "realization": 1,
+      "snr_db": 15.0,
+      "seed": 484945450
+    }
+  ],
+  "suite_hash": "b7ad2980aed1d8112e6ea7317c302f88809a351854307282df0e5013d4da572d"
+}

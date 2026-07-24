@@ -1,0 +1,27 @@
+seed: 23
+source_checkpoint: runs/channel_free_revalidation/cf2_50frames_1920/best_waveform_si_sdr.pt
+output_root: runs/waveform_aware_wireless
+model:
+  grid_shape: [64, 32]
+channel:
+  fading: multipath_block
+  num_taps: 6
+  pdp_decay: 0.7
+  block_fading_over_time: true
+  assume_ideal_cp: true
+  channel_estimator: dft_tap_ls
+  estimator_num_taps: 6
+  estimator_ridge_lambda: 1.0e-6
+  pilot_spacing: 4
+  pilot_time_spacing: 4
+  fixed_snr_db: 10.0
+  random_snr_bins_db: [5.0, 10.0, 15.0]
+  realizations_per_utterance: 2
+evaluation:
+  utterances: 64
+  ideal_si_sdr_tolerance_db: 0.05
+  ideal_waveform_snr_tolerance_db: 0.05
+  ideal_stft_ratio_max: 1.01
+  delta_si_sdr_min_db: -1.0
+  delta_waveform_snr_min_db: -1.0
+  stft_ratio_max: 1.20

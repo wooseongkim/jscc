@@ -1,0 +1,7 @@
+seed: 23
+device: auto
+model: {architecture: conv_conformer_v1, architecture_version: conv_conformer_v1, layers: 8, frames: 50, latent_dim: 1024, channel_uses: 1920, grid_shape: [64, 32], channel_state_dim: 8, hidden_dim: 32, target_power: 1.0, d_model: 256, encoder_conformer_blocks: 4, decoder_conformer_blocks: 4, num_attention_heads: 4, ffn_expansion: 4, convolution_kernel_size: 15, dropout: 0.1, layer_mixer_blocks: 1, symbol_frames: 30, complex_channels_per_symbol_frame: 8}
+codec: {type: speechtokenizer, config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json, checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt, freeze: true, sample_rate: 16000, waveform_samples: 16000, n_q: 8}
+data: {train_manifest: manifests/mini_librispeech/train.jsonl, valid_manifest: manifests/mini_librispeech/valid.jsonl}
+train: {optimizer: adam, learning_rate: 0.0001, weight_decay: 0.0, gradient_clip_norm: 5.0, layer_weights: [1,1,1,1,1,1,1,1], latent_normalization: {mode: per_layer_power, epsilon: 1.0e-6}}
+feasibility: {version: channel_free_feasibility_v1, subset_size: 256, validation_utterances: 64, lambda_sum: 1.0, lambda_stft: 1.0, lambda_sisdr: 0.1, fft_sizes: [256,512,1024]}

@@ -1,0 +1,1 @@
+train_channel_free_feasibility.py --config configs/channel_free_feasibility.yaml --experiment c --output-dir runs/channel_free_feasibility/experiment_c_large_bottleneck --device cuda --steps 4096 --batch-size 4 --allow-long-run

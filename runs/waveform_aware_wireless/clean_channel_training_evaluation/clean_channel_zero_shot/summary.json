@@ -1,0 +1,124 @@
+{
+  "validation_suite_hash": "f42ce9450196dfd72cf4f48fed954a614791ab81c3a31606d5114153ffc3e3e6",
+  "utterances": 64,
+  "realizations_per_utterance": 2,
+  "fixed": {
+    "clean_si_sdr_db": 2.2619882519356906,
+    "si_sdr_db": 0.37481264618691057,
+    "delta_si_sdr_db": -1.88717560574878,
+    "clean_waveform_snr_db": 4.378468594281003,
+    "waveform_snr_db": 3.2879576832056046,
+    "delta_waveform_snr_db": -1.0905109110753983,
+    "clean_stft_l1": 0.07928910391638055,
+    "stft_l1": 0.0991137660748791,
+    "stft_ratio": 1.2498639496626953,
+    "aggregate_layer_nmse": 0.36564161721616983,
+    "summed_latent_nmse": 0.24964385177008808,
+    "summed_latent_snr_db": 6.112418197095394,
+    "summed_latent_correlation": 0.8663540650159121,
+    "summed_latent_power_ratio": 0.7946739192120731,
+    "gate": {
+      "passed": false,
+      "checks": {
+        "delta_si_sdr_pass": false,
+        "delta_waveform_snr_pass": false,
+        "stft_ratio_pass": false
+      },
+      "thresholds": {
+        "delta_si_sdr_min_db": -1.0,
+        "delta_waveform_snr_min_db": -1.0,
+        "stft_ratio_max": 1.2
+      }
+    }
+  },
+  "random": {
+    "clean_si_sdr_db": 2.2619882519356906,
+    "si_sdr_db": -1.3139823146132887,
+    "delta_si_sdr_db": -3.5759705665489796,
+    "clean_waveform_snr_db": 4.378468594281003,
+    "waveform_snr_db": 2.726479622918608,
+    "delta_waveform_snr_db": -1.651988971362395,
+    "clean_stft_l1": 0.07928910391638055,
+    "stft_l1": 0.10577844629491058,
+    "stft_ratio": 1.3414697629419552,
+    "aggregate_layer_nmse": 0.42416203576916206,
+    "summed_latent_nmse": 0.23797915577112386,
+    "summed_latent_snr_db": 6.589056163094938,
+    "summed_latent_correlation": 0.8710619808795551,
+    "summed_latent_power_ratio": 0.8042104929530373,
+    "gate": {
+      "passed": false,
+      "checks": {
+        "delta_si_sdr_pass": false,
+        "delta_waveform_snr_pass": false,
+        "stft_ratio_pass": false
+      },
+      "thresholds": {
+        "delta_si_sdr_min_db": -1.0,
+        "delta_waveform_snr_min_db": -1.0,
+        "stft_ratio_max": 1.2
+      }
+    }
+  },
+  "random_by_snr": {
+    "5.0": {
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": -4.499781355261803,
+      "delta_si_sdr_db": -6.761769607197493,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 1.6379336821119068,
+      "delta_waveform_snr_db": -2.740534912169096,
+      "clean_stft_l1": 0.07928910391638055,
+      "stft_l1": 0.12497214663017076,
+      "stft_ratio": 1.5993679964111351,
+      "aggregate_layer_nmse": 0.5829938915558159,
+      "summed_latent_nmse": 0.33185471035540104,
+      "summed_latent_snr_db": 5.026465826667845,
+      "summed_latent_correlation": 0.8147692950442433,
+      "summed_latent_power_ratio": 0.7051606057211757,
+      "csi_nmse": 0.01955821455339901,
+      "pilot_evm": 0.6131902828346938,
+      "post_equalization_sinr_db": -1.9647697287146002
+    },
+    "10.0": {
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": -0.31512060583918355,
+      "delta_si_sdr_db": -2.577108857774874,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 3.0001084820833057,
+      "delta_waveform_snr_db": -1.3783601121976972,
+      "clean_stft_l1": 0.07928910391638055,
+      "stft_l1": 0.10121375377639197,
+      "stft_ratio": 1.2731689669013826,
+      "aggregate_layer_nmse": 0.3915339473169297,
+      "summed_latent_nmse": 0.21312890376430005,
+      "summed_latent_snr_db": 6.874431509524584,
+      "summed_latent_correlation": 0.8867668118327856,
+      "summed_latent_power_ratio": 0.828083366388455,
+      "csi_nmse": 0.00590482715597318,
+      "pilot_evm": 0.33724018034990877,
+      "post_equalization_sinr_db": 3.3556674891733564
+    },
+    "15.0": {
+      "clean_si_sdr_db": 2.2619882519356906,
+      "si_sdr_db": 0.8729550172611198,
+      "delta_si_sdr_db": -1.3890332346745708,
+      "clean_waveform_snr_db": 4.378468594281003,
+      "waveform_snr_db": 3.5413967045606114,
+      "delta_waveform_snr_db": -0.8370718897203915,
+      "clean_stft_l1": 0.07928910391638055,
+      "stft_l1": 0.09114943847816903,
+      "stft_ratio": 1.1518723255133492,
+      "aggregate_layer_nmse": 0.2979582684347406,
+      "summed_latent_nmse": 0.1689538531936705,
+      "summed_latent_snr_db": 7.866271153092384,
+      "summed_latent_correlation": 0.9116498357616365,
+      "summed_latent_power_ratio": 0.879387506749481,
+      "csi_nmse": 0.0018618052731653734,
+      "pilot_evm": 0.18559127434855327,
+      "post_equalization_sinr_db": 8.080634456826374
+    }
+  },
+  "fine_tuning_required": true,
+  "jammer_experiments_unblocked": false
+}
