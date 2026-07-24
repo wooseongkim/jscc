@@ -32,6 +32,16 @@ from models.resource_allocator import allocate_resources, deallocate_resources
 from speech_jscc.data import synthetic_waveforms
 
 
+def equalizer_gain_statistics(channel_estimate: Tensor, clip_threshold: float | None) -> dict[str, float | None]:
+    raw=channel_estimate.detach().abs().clamp_min(1e-8).reciprocal().flatten()
+    applied=raw if clip_threshold is None else raw.clamp_max(float(clip_threshold))
+    def fields(prefix,value):
+        return {f"{prefix}_equalizer_gain_mean":float(value.mean()),f"{prefix}_equalizer_gain_p95":float(torch.quantile(value,.95)),
+                f"{prefix}_equalizer_gain_p99":float(torch.quantile(value,.99)),f"{prefix}_equalizer_gain_max":float(value.max())}
+    return {**fields("raw",raw),**fields("applied",applied),"equalizer_gain_clip_threshold":clip_threshold,
+            "clipped_resource_fraction":float((raw>float(clip_threshold)).float().mean()) if clip_threshold is not None else 0.0}
+
+
 @dataclass(frozen=True)
 class PairedEvaluationBatch:
     """All mode-invariant data and stochastic channel components for one batch."""
@@ -186,10 +196,11 @@ def _post_equalization_sinr(
     faded_jammer: Tensor,
     noise: Tensor,
     channel_for_equalization: Tensor,
+    gain_cap: float | None = None,
 ) -> Tensor:
-    desired = equalize_with_csi(faded_signal, channel_for_equalization)
-    interference = equalize_with_csi(faded_jammer, channel_for_equalization)
-    equalized_noise = equalize_with_csi(noise, channel_for_equalization)
+    desired = equalize_with_csi(faded_signal, channel_for_equalization, gain_cap=gain_cap)
+    interference = equalize_with_csi(faded_jammer, channel_for_equalization, gain_cap=gain_cap)
+    equalized_noise = equalize_with_csi(noise, channel_for_equalization, gain_cap=gain_cap)
     return compute_effective_sinr(desired, interference, equalized_noise)
 
 
@@ -329,6 +340,7 @@ def run_mode_on_paired_batch(
     layer_power_allocation: Tensor | None = None,
     receiver_state_mode: str = "legacy",
     decode_waveform: bool = True,
+    equalizer_gain_cap: float | None = None,
 ) -> dict[str, Tensor]:
     """Evaluate one mode without sampling any new waveform/channel randomness."""
     if equalizer not in {"estimated", "oracle"}:
@@ -387,12 +399,13 @@ def run_mode_on_paired_batch(
         estimator_ridge_lambda=estimator_ridge_lambda,
     )
     equalizer_channel = batch.signal_fading if equalizer == "oracle" else estimated_channel
-    equalized = equalize_with_csi(channel["received"], equalizer_channel)
+    equalized = equalize_with_csi(channel["received"], equalizer_channel, gain_cap=equalizer_gain_cap)
     post_equalization_sinr = _post_equalization_sinr(
         channel["faded_signal"],
         channel["faded_jammer"],
         channel["noise"],
         equalizer_channel,
+        equalizer_gain_cap,
     )
     received_resources = (
         extract_data_resources(equalized, batch.pilot_mask)
@@ -442,6 +455,8 @@ def run_mode_on_paired_batch(
         "encoder_data_power": data_symbols.abs().square().mean(),
         "transmitted_grid_power": transmitted.abs().square().mean(),
         "allocation_mode": allocation_mode,
+        "equalizer_gain_cap": equalizer_gain_cap,
+        "equalizer_gain_statistics": equalizer_gain_statistics(estimated_channel,equalizer_gain_cap),
         "resource_reliability": resource_reliability,
         "resource_to_source": allocation.resource_to_source,
         "layer_assignment": allocation.layer_assignment,

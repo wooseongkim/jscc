@@ -106,15 +106,25 @@ def make_jammer_mask(
         if pilot_mask is not None:
             supplied = pilot_mask.to(device=mask.device, dtype=torch.bool)
             try:
-                return torch.broadcast_to(supplied, shape).clone()
+                supplied = torch.broadcast_to(supplied, shape)
             except RuntimeError as error:
                 raise ValueError("pilot_mask is not broadcastable to the resource shape") from error
+            for batch_index in range(shape[0]):
+                indices=torch.where(supplied[batch_index].flatten())[0]
+                count=max(1,round(indices.numel()*jammed_fraction))
+                order=torch.randperm(indices.numel(),device=mask.device,generator=generator)[:count]
+                mask[batch_index].flatten()[indices[order]]=True
+            return mask
         if pilot_spacing <= 0:
             raise ValueError("pilot_spacing must be positive")
         if len(shape) == 2:
             mask[:, ::pilot_spacing] = True
         else:
             mask[:, ::pilot_spacing, ::pilot_spacing] = True
+        if jammed_fraction < 1.0:
+            full=mask.clone();mask.zero_()
+            for batch_index in range(shape[0]):
+                indices=torch.where(full[batch_index].flatten())[0];count=max(1,round(indices.numel()*jammed_fraction));order=torch.randperm(indices.numel(),device=mask.device,generator=generator)[:count];mask[batch_index].flatten()[indices[order]]=True
         return mask
     raise ValueError(f"unsupported jammer kind: {kind}")
 
@@ -164,7 +174,10 @@ def make_jammer(
     mask = make_jammer_mask(
         reference,
         kind,
-        jammed_fraction,
+        # Historical production semantics attack every pilot resource.  J5's
+        # partial pilot coverage uses make_jammer_mask explicitly so it cannot
+        # silently change existing Stage-1 behavior.
+        1.0 if kind == "pilot" else jammed_fraction,
         pilot_mask=pilot_mask,
         pilot_spacing=pilot_spacing,
         generator=generator,
@@ -177,4 +190,3 @@ def make_jammer(
     raw_power = raw.abs().square().mean(keep_dimensions, keepdim=True).clamp_min(1e-12)
     jammer = raw * torch.sqrt(target_power / raw_power)
     return jammer, mask
-

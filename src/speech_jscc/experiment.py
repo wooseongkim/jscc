@@ -42,7 +42,7 @@ def build_components(config: dict, device: torch.device):
     elif architecture == "conv_conformer_v1":
         keys = ("d_model", "encoder_conformer_blocks", "decoder_conformer_blocks", "num_attention_heads",
                 "ffn_expansion", "convolution_kernel_size", "dropout", "layer_mixer_blocks",
-                "symbol_frames", "complex_channels_per_symbol_frame")
+                "symbol_frames", "complex_channels_per_symbol_frame","temporal_symbol_layout")
         model = ConvConformerJSCC(shape, model_cfg["channel_uses"], model_cfg["channel_state_dim"],
                                   model_cfg["target_power"], **{key:model_cfg[key] for key in keys if key in model_cfg})
     else:

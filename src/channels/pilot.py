@@ -361,13 +361,25 @@ def estimate_channel_ls(
     raise ValueError("received must be [B,M] or [B,K,N]")
 
 
-def equalize_with_csi(received: Tensor, channel_estimate: Tensor, eps: float = 1e-6) -> Tensor:
+def equalize_with_csi(
+    received: Tensor,
+    channel_estimate: Tensor,
+    eps: float = 1e-6,
+    *,
+    gain_cap: float | None = None,
+) -> Tensor:
     """Complex zero-forcing equalization using estimated or oracle CSI."""
     try:
         torch.broadcast_shapes(received.shape, channel_estimate.shape)
     except RuntimeError as error:
         raise ValueError("channel estimate is not broadcastable to received") from error
-    return received * channel_estimate.conj() / channel_estimate.abs().square().clamp_min(eps)
+    coefficient = channel_estimate.conj() / channel_estimate.abs().square().clamp_min(eps)
+    if gain_cap is not None:
+        if gain_cap <= 0:
+            raise ValueError("gain_cap must be positive")
+        magnitude = coefficient.abs()
+        coefficient = coefficient * (float(gain_cap) / magnitude.clamp_min(1e-12)).clamp_max(1.0)
+    return received * coefficient
 
 
 def remove_pilot_resources(equalized: Tensor, pilot_mask: Tensor) -> Tensor:
