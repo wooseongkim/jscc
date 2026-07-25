@@ -94,9 +94,39 @@ def taps_to_slot_frequency_response(
     return response[..., None].expand(*response.shape, int(ofdm_symbols))
 
 
+def delay_samples_for_rate(
+    delay_seconds: tuple[float, ...] | list[float], sample_rate_hz: float
+) -> tuple[int, ...]:
+    if sample_rate_hz <= 0 or not delay_seconds:
+        raise ValueError("sample rate and delay list must be positive")
+    samples = tuple(int(round(float(delay) * float(sample_rate_hz))) for delay in delay_seconds)
+    if any(delay < 0 for delay in delay_seconds) or any(
+        right <= left for left, right in zip(samples, samples[1:])
+    ):
+        raise ValueError("physical tap delays must map to strictly increasing samples")
+    return samples
+
+
+def expand_taps_to_sample_delays(taps: Tensor, delay_samples: tuple[int, ...]) -> Tensor:
+    if not taps.is_complex() or taps.shape[-1] != len(delay_samples):
+        raise ValueError("tap coefficients and delay samples must match")
+    if not delay_samples or delay_samples[0] < 0:
+        raise ValueError("delay samples must be nonnegative")
+    output = torch.zeros(
+        *taps.shape[:-1],
+        max(delay_samples) + 1,
+        dtype=taps.dtype,
+        device=taps.device,
+    )
+    output[..., list(delay_samples)] = taps
+    return output
+
+
 __all__ = [
     "correlated_tap_trajectory",
     "doppler_frequency_hz",
+    "delay_samples_for_rate",
+    "expand_taps_to_sample_delays",
     "iid_tap_trajectory",
     "jakes_slot_correlation",
     "measured_lag1_correlation",
