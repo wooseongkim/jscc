@@ -1,0 +1,65 @@
+initial_checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+physical_profile_config: configs/ofdm_nr_like_r4.yaml
+output_dir: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune
+seed: 23
+compatibility:
+  codec_config_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/config.json
+  codec_checkpoint_path: artifacts/codecs/speechtokenizer/speechtokenizer_hubert_avg/SpeechTokenizer.pt
+  latent_shape: [8, 50, 1024]
+  architecture: conv_conformer_v1
+  channel_uses: 1920
+  channel_state_dim: 8
+  repetitions: 3
+  physical_profile: nr_like_r4
+training:
+  total_steps: 20000
+  batch_size: 4
+  stage_a_learning_rate: 1.0e-4
+  stage_b_learning_rate: 5.0e-5
+  stage_c_learning_rate: 2.0e-5
+  gradient_clip_norm: 5.0
+  mixed_precision: false
+  anomaly_detection: false
+curriculum:
+  stage_a:
+    steps: [0, 4000]
+    snr_probabilities: {10.0: 0.60, 15.0: 0.40}
+    mapping: bootstrap_fixed
+  stage_b:
+    steps: [4000, 12000]
+    snr_probabilities: {5.0: 0.50, 10.0: 0.30, 15.0: 0.20}
+    mapping: delayed_csi
+  stage_c:
+    steps: [12000, 20000]
+    snr_probabilities: {5.0: 0.65, 10.0: 0.25, 15.0: 0.10}
+    mapping: delayed_csi
+loss:
+  latent_mse_weight: 1.0
+  multires_stft_weight: 1.0
+  waveform_l1_weight: 0.1
+  channel_free_weight: 0.2
+  fft_sizes: [256, 512, 1024]
+validation:
+  light_every: 250
+  full_every: 1000
+  light_utterances: 6
+  full_utterances: 16
+  snr_db: [5.0, 10.0, 15.0]
+  light_seeds: [41001]
+  full_seeds: [41001, 41002, 41003]
+selection:
+  clean_constraints:
+    min_pure_neural_si_sdr_delta_db: -0.10
+    min_noiseless_r4_si_sdr_delta_db: -0.10
+    max_clean_stft_increase: 0.002
+    max_clean_latent_mse_ratio: 1.05
+physical:
+  repetitions: 3
+  allocation_mode: global_balanced_triplets
+  feedback_delay_ttis: 1
+  estimator: comb_dft_ls
+  estimator_ridge_lambda: 1.0e-6
+  epsilon: 1.0e-12
+  total_packet_data_energy: 5760
+debug:
+  smoke_steps: 3

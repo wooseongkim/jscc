@@ -1,0 +1,36 @@
+profile_config: configs/ofdm_nr_like_r3.yaml
+checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+output_root: runs/physical_ofdm_repetition3_mrc
+repetition:
+  copies: 3
+  frequency_groups: 3
+  subcarriers_per_group: 72
+  selected_re_per_group: 1920
+  unused_re_per_group: 24
+  time_offsets: [0, 9, 18]
+  combiner: coherent_reliability_weighted_mrc
+  epsilon: 1.0e-12
+energy:
+  contract: fixed_power_per_copy
+  per_copy_energy: 1920
+  total_packet_energy: 5760
+  baseline_energy: 1920
+  energy_increase_linear: 3.0
+  energy_increase_db: 4.771212547196624
+allocation:
+  layer_importance_order: [1, 0, 2, 5, 3, 4, 6, 7]
+  importance_evidence_status: smoke_derived_provisional_not_accepted
+  alpha: 0.5
+  minimum_relative_power: 0.5
+  maximum_relative_power: 2.0
+evaluation:
+  snr_db: [5.0, 10.0, 15.0]
+  utterances: 64
+  realizations: 2
+gates:
+  five_db_post_combining_sinr_min_db: 10.5
+  fallback_post_combining_sinr_min_db: 8.0
+  delta_si_sdr_min_db: -1.0
+  delta_waveform_snr_min_db: -1.0
+  stft_ratio_max: 1.2
+  oracle_empirical_theory_mismatch_max_db: 1.0

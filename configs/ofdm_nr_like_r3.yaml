@@ -1,0 +1,25 @@
+profile:
+  name: nr_like_r3
+  n_fft: 256
+  active_subcarriers: 216
+  subcarrier_spacing_hz: 30000
+  n_ofdm_symbols: 28
+  cp_samples: 18
+  pilot_symbol_indices: [3, 17]
+physical:
+  carrier_frequency_hz: 3500000000.0
+  user_speed_mps: 3.0
+  feedback_delay_ttis: 1
+channel:
+  num_taps: 6
+  pdp_decay: 0.7
+  estimator_ridge_lambda: 1.0e-6
+  snr_db: [5.0, 10.0, 15.0]
+allocation:
+  source_symbols: 1920
+  symbols_per_layer: 240
+  layer_importance_order: [1, 0, 2, 5, 3, 4, 6, 7]
+  importance_evidence_status: smoke_derived_provisional_not_accepted
+  alpha: 0.5
+  minimum_relative_power: 0.5
+  maximum_relative_power: 2.0

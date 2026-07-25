@@ -1,0 +1,33 @@
+profile_config: configs/ofdm_nr_like_r4.yaml
+checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+allocation:
+  mode: global_balanced_triplets
+  layer_importance_order: [1, 0, 2, 5, 3, 4, 6, 7]
+  layer_importance_provenance: smoke_derived_provisional_not_accepted
+  min_selected_re_per_subcarrier: 8
+  max_selected_re_per_subcarrier: 24
+  minimum_frequency_separation_subcarriers: 60
+  separation_relaxation: [60, 48, 36, 24]
+power:
+  triplet_rule: bounded_inverse_square_root_gain
+  q_min: 0.5
+  q_max: 2.0
+  branch_alpha: 0.5
+  branch_min_fraction: 0.15
+  total_packet_data_energy: 5760
+repetition:
+  copies: 3
+  combiner: coherent_current_csi_mrc
+  epsilon: 1.0e-12
+evaluation:
+  utterances: 64
+  realizations: 2
+  snr_db: [5, 10, 15]
+gates:
+  five_db_post_combining_sinr_min_db: 8.0
+  desired_post_combining_sinr_db: 9.0
+  delta_si_sdr_min_db: -1.0
+  delta_waveform_snr_min_db: -1.0
+  stft_ratio_max: 1.2
+  oracle_empirical_theory_mismatch_max_db: 0.75
+

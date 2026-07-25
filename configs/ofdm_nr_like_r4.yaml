@@ -1,0 +1,19 @@
+profile:
+  name: nr_like_r4
+  n_fft: 512
+  active_subcarriers: 360
+  subcarrier_spacing_hz: 30000
+  sample_rate_hz: 15360000
+  n_ofdm_symbols: 28
+  cp_samples: 36
+  pilot_symbol_indices: [3, 17]
+physical:
+  carrier_frequency_hz: 3500000000
+  user_speed_mps: 3.0
+channel:
+  num_taps: 6
+  pdp_decay: 0.65
+  r3_reference_sample_rate_hz: 7680000
+  tap_delay_seconds: [0.0, 1.3020833333333333e-7, 2.6041666666666666e-7, 3.90625e-7, 5.208333333333333e-7, 6.510416666666667e-7]
+  estimator_ridge_lambda: 1.0e-6
+
