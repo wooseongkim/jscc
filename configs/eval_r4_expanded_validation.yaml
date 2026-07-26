@@ -1,0 +1,55 @@
+initial_checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+checkpoint_run_dir: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune
+physical_profile_config: configs/ofdm_nr_like_r4.yaml
+output_dir: runs/waveform_aware_wireless/r4_expanded_validation
+device: cuda
+data:
+  selection_source_manifest: manifests/mini_librispeech/test.jsonl
+  selection_source_split: test-clean
+  selection_assigned_evaluation_role: selection_validation
+  selection_seed: 73051
+  legacy_final_source_split: dev-clean-2
+  legacy_final_assigned_evaluation_role: legacy_final_test
+light_validation:
+  utterances: 16
+  realizations: 1
+  snr_db: [5.0]
+  cadence_steps: 250
+full_selection_validation:
+  utterances: 48
+  realizations: 2
+  snr_db: [5.0, 10.0, 15.0]
+  realization_seeds: [52001, 52002]
+legacy_final:
+  utterances: 64
+  realizations: 2
+  snr_db: [5.0, 10.0, 15.0]
+  realization_seeds: [41001, 41002]
+  immutable: true
+candidate_selection:
+  light_top_k: 10
+  include_named_checkpoints: true
+  include_stage_boundaries: true
+  include_every_1000_steps: true
+bootstrap:
+  samples: 2000
+  seed: 91027
+gates:
+  five_db:
+    delta_si_sdr_vs_clean_codec_min_db: -1.0
+    delta_waveform_snr_vs_clean_codec_min_db: -1.0
+    stft_ratio_vs_clean_codec_max: 1.20
+  material_regression_10_15:
+    delta_si_sdr_vs_initial_r4_min_db: -0.5
+    delta_waveform_snr_vs_initial_r4_min_db: -0.5
+    delta_stft_ratio_vs_initial_r4_max: 0.05
+physical:
+  estimator_ridge_lambda: 1.0e-6
+  epsilon: 1.0e-12
+pairing:
+  share_channel_trajectory: true
+  share_awgn_tensor: true
+  share_delayed_csi_trajectory: true
+  share_pilot_observation: true
+  csi_report_tolerance: 1.0e-5
+
