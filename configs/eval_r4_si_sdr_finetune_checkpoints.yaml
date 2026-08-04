@@ -1,0 +1,25 @@
+source_checkpoint: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune/best_5db_si_sdr.pt
+training_root: runs/waveform_aware_wireless/r4_si_sdr_finetune
+output_root: runs/waveform_aware_wireless/r4_si_sdr_finetune/evaluation
+selection_output_root: runs/waveform_aware_wireless/r4_si_sdr_finetune/evaluation_selection_smoke
+expanded_selection_manifest: runs/waveform_aware_wireless/r4_expanded_validation/selection_validation_manifest.jsonl
+physical_profile_config: configs/ofdm_nr_like_r4.yaml
+realization_seeds: [52001, 52002]
+physical:
+  estimator_ridge_lambda: 1.0e-6
+  epsilon: 1.0e-12
+pairing:
+  csi_report_tolerance: 1.0e-5
+experiments:
+  control_no_si_sdr:
+    target_si_sdr_weight: 0.0
+  si_sdr_low:
+    target_si_sdr_weight: 0.01
+  si_sdr_medium:
+    target_si_sdr_weight: 0.02
+bootstrap_samples: 2000
+bootstrap_seed: 91027
+ranking_tolerance: 1.0e-6
+constraints:
+  catastrophic_lt_minus_3_fraction_max: 0.05
+  catastrophic_lt_minus_5_fraction_max: 0.02

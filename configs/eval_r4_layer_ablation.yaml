@@ -1,0 +1,21 @@
+initial_checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+selected_checkpoint: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune/best_5db_si_sdr.pt
+output_dir: runs/waveform_aware_wireless/r4_layer_ablation
+device: cuda
+physical_profile_config: configs/ofdm_nr_like_r4.yaml
+physical:
+  estimator_ridge_lambda: 1.0e-6
+  epsilon: 1.0e-12
+data:
+  legacy_manifest: runs/waveform_aware_wireless/r4_expanded_validation/final_test_manifest_reference.jsonl
+  selection_manifest: runs/waveform_aware_wireless/r4_expanded_validation/selection_validation_manifest.jsonl
+evaluation:
+  snr_db: [5.0]
+  realization_seeds: [41001, 41002]
+  replacement: zero
+  bootstrap_samples: 2000
+  bootstrap_seed: 91027
+  primary_metric: si_sdr_db
+priority_score:
+  alpha: 0.7
+  normalization: sum_one

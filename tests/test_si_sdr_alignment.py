@@ -1,6 +1,6 @@
 import torch
 
-from speech_jscc.evaluation.si_sdr_alignment import best_cross_correlation_alignment
+from speech_jscc.evaluation.si_sdr_alignment import aligned_waveform_metrics, best_cross_correlation_alignment
 from speech_jscc.metrics.audio_quality import compute_si_sdr
 
 
@@ -23,3 +23,11 @@ def test_alignment_rejects_empty_overlap():
     estimate = torch.ones(8)
     result = best_cross_correlation_alignment(reference, estimate, sample_rate=16000, max_lag_ms=0)
     assert result.overlap_samples == 8
+
+
+def test_aligned_metrics_are_explicit_and_finite():
+    reference = torch.sin(torch.linspace(0, 20, 1600))[None, :]
+    estimate = torch.roll(reference, shifts=8, dims=-1)
+    metrics = aligned_waveform_metrics(reference, estimate, 16000, max_lag_ms=5.0)
+    assert metrics["alignment_max_lag_ms"] == 5.0
+    assert all(torch.isfinite(torch.tensor(float(value))) for value in metrics.values())

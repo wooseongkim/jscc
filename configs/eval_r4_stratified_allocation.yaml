@@ -1,0 +1,38 @@
+selected_checkpoint: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune/best_5db_si_sdr.pt
+initial_checkpoint: runs/waveform_aware_wireless/clean_channel_training/best_waveform_si_sdr.pt
+output_root: runs/waveform_aware_wireless/r4_stratified_allocation
+device: cuda
+physical_profile_config: configs/ofdm_nr_like_r4.yaml
+physical:
+  estimator_ridge_lambda: 1.0e-6
+  epsilon: 1.0e-12
+data:
+  legacy_final_manifest: runs/waveform_aware_wireless/r4_expanded_validation/final_test_manifest_reference.jsonl
+  expanded_selection_manifest: runs/waveform_aware_wireless/r4_expanded_validation/selection_validation_manifest.jsonl
+evaluation:
+  snr_db: [5.0]
+  realization_seeds:
+    legacy_final: [41001, 41002]
+    expanded_selection: [52001, 52002]
+  utterances:
+    legacy_final: 64
+    expanded_selection: 48
+allocation_profile:
+  mapping_policy: balanced_triplet
+  repetition_policy: fixed_three
+  primary_profiles: [uniform, core_protection, layer1_focused]
+  raw_power_weights:
+    uniform: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    core_protection: [1.25, 1.25, 1.25, 1.25, 0.75, 0.75, 0.75, 0.75]
+    layer1_focused: [1.10, 1.45, 1.10, 1.10, 0.80, 0.80, 0.80, 0.80]
+reference:
+  legacy_final:
+    si_sdr_db: 0.9148236044566147
+    waveform_snr_db: 3.5485102984239347
+    stft_l1: 0.08801610904629342
+  si_sdr_tolerance: 0.02
+  waveform_snr_tolerance: 0.02
+  stft_tolerance: 0.001
+statistics:
+  bootstrap_samples: 2000
+  bootstrap_seed: 91027

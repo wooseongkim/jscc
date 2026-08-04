@@ -159,6 +159,9 @@ def _make_engine(codec, model, specification):
             specification["physical"]["estimator_ridge_lambda"]
         ),
         epsilon=float(specification["physical"]["epsilon"]),
+        minimum_copy_time_separation_symbols=int(
+            specification["physical"].get("minimum_copy_time_separation_symbols", 0)
+        ),
     )
 
 

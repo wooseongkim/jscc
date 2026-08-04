@@ -1,0 +1,33 @@
+medium_checkpoint: runs/waveform_aware_wireless/r4_si_sdr_finetune/si_sdr_medium/local_step_003000.pt
+csi_reference_checkpoint: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune/best_5db_si_sdr.pt
+legacy_final_manifest: runs/waveform_aware_wireless/r4_expanded_validation/final_test_manifest_reference.jsonl
+clean_reference_summary: runs/waveform_aware_wireless/r4_si_sdr_finetune/legacy_final_post_selection/checkpoint_summary.json
+physical_profile_config: configs/ofdm_nr_like_r4.yaml
+output_root: runs/waveform_aware_wireless/r4_jammer_baseline/legacy_final_medium
+realization_seeds: [41001, 41002]
+evaluation:
+  utterances: 64
+  realizations: 2
+  snr_db: [5, 10, 15]
+  smoke_max_rows: 64
+physical:
+  estimator_ridge_lambda: 1.0e-6
+  epsilon: 1.0e-12
+mapping:
+  policy: balanced_triplet
+  # Keep zero for the historical clean-anchor mapping.  The time-interleaved
+  # policy is opt-in and can be enabled with --minimum-copy-time-separation-symbols.
+  minimum_copy_time_separation_symbols: 0
+jammer_types: [broadband_awgn, subband, burst, block]
+jsr_db: [no_jammer, -5, 0, 5, 10, 15, 20]
+jammer:
+  injection_stage: transmit_resource_grid_then_same_multipath
+  jsr_reference: active_jammed_data_re_transmit_grid
+  subband_fraction: 0.25
+  burst_fraction: 0.25
+  subband_fractions: [0.25]
+  burst_fractions: [0.25]
+  tone_count: 4
+bootstrap_samples: 2000
+bootstrap_seed: 92031
+clean_anchor_tolerance_db: 0.005

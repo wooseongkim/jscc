@@ -91,6 +91,24 @@ def _allocation(tti: int = 1):
     )
 
 
+def _time_interleaved_allocation(tti: int = 1):
+    reliability = torch.linspace(0.01, 4.0, NR_LIKE_R4.candidate_data_re)
+    report = None if tti == 0 else GlobalTripletCSIReport.from_reliability(0, reliability)
+    return allocate_global_balanced_triplets(
+        profile=NR_LIKE_R4,
+        tx_tti=tti,
+        report=report,
+        layer_importance_order=IMPORTANCE,
+        min_selected_re_per_subcarrier=8,
+        max_selected_re_per_subcarrier=24,
+        minimum_frequency_separation_subcarriers=60,
+        minimum_time_separation_symbols=7,
+        q_min=0.5,
+        q_max=2.0,
+        branch_min_fraction=0.15,
+    )
+
+
 def test_global_triplet_mapping_counts_separation_and_inverse() -> None:
     allocation = _allocation()
     selected = allocation.selected_candidate_indices
@@ -139,6 +157,59 @@ def test_bootstrap_is_deterministic_and_report_is_causal() -> None:
         assert "causal" in str(error)
     else:
         raise AssertionError("same-TTI CSI leakage was accepted")
+
+
+def test_time_interleaved_triplets_enforce_minimum_copy_time_separation() -> None:
+    allocation = _time_interleaved_allocation()
+    coordinates = active_grid_masks(NR_LIKE_R4).candidate_data.nonzero()[
+        allocation.selected_candidate_indices
+    ]
+    times = coordinates[..., 1]
+    pairwise = torch.stack(
+        [
+            (times[0] - times[1]).abs(),
+            (times[0] - times[2]).abs(),
+            (times[1] - times[2]).abs(),
+        ]
+    )
+    # The OFDM frame is not cyclic: copies must be separated in actual symbol time.
+    assert int(pairwise.min()) >= 7
+    assert allocation.minimum_time_separation_symbols == 7
+    assert int(allocation.time_separation_levels.min()) >= 7
+    frequencies = coordinates[..., 0]
+    frequency_pairwise = torch.stack(
+        [
+            (frequencies[0] - frequencies[1]).abs(),
+            (frequencies[0] - frequencies[2]).abs(),
+            (frequencies[1] - frequencies[2]).abs(),
+        ]
+    )
+    assert int(frequency_pairwise.min()) >= 60
+    assert torch.isclose(allocation.power_source_order.sum(), torch.tensor(5760.0), atol=1e-3)
+
+
+def test_time_interleaved_triplets_are_deterministic_and_default_is_unchanged() -> None:
+    baseline = _allocation()
+    explicit_default = allocate_global_balanced_triplets(
+        profile=NR_LIKE_R4,
+        tx_tti=1,
+        report=GlobalTripletCSIReport.from_reliability(
+            0, torch.linspace(0.01, 4.0, NR_LIKE_R4.candidate_data_re)
+        ),
+        layer_importance_order=IMPORTANCE,
+        min_selected_re_per_subcarrier=8,
+        max_selected_re_per_subcarrier=24,
+        minimum_frequency_separation_subcarriers=60,
+        minimum_time_separation_symbols=0,
+        q_min=0.5,
+        q_max=2.0,
+        branch_min_fraction=0.15,
+    )
+    assert torch.equal(baseline.selected_candidate_indices, explicit_default.selected_candidate_indices)
+    first = _time_interleaved_allocation()
+    second = _time_interleaved_allocation()
+    assert torch.equal(first.selected_candidate_indices, second.selected_candidate_indices)
+    assert torch.equal(first.resource_to_source, second.resource_to_source)
 
 
 def test_triplet_and_branch_power_constraints() -> None:

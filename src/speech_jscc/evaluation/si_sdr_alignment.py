@@ -81,6 +81,43 @@ def best_cross_correlation_alignment(
     )
 
 
+def aligned_waveform_metrics(
+    reference: Tensor,
+    estimate: Tensor,
+    sample_rate: int,
+    *,
+    max_lag_ms: float = 5.0,
+) -> dict[str, float | int]:
+    """Return SI-SDR diagnostics after cross-correlation alignment.
+
+    This is the explicit metric entry point for new experiments.  It does not
+    alter :func:`src.evaluation.waveform_metrics.waveform_metrics`, preserving
+    comparability of historical artifacts.
+    """
+    from src.evaluation.waveform_metrics import waveform_metrics
+
+    if reference.ndim == 1:
+        reference = reference.unsqueeze(0)
+    if estimate.ndim == 1:
+        estimate = estimate.unsqueeze(0)
+    reference, estimate = reference[..., : min(reference.shape[-1], estimate.shape[-1])], estimate[..., : min(reference.shape[-1], estimate.shape[-1])]
+    results = []
+    for ref, est in zip(reference, estimate, strict=True):
+        result = best_cross_correlation_alignment(ref, est, sample_rate=sample_rate, max_lag_ms=max_lag_ms)
+        ref_seg, est_seg = _segments(ref.unsqueeze(0), est.unsqueeze(0), result.shift_samples)
+        metrics = waveform_metrics(ref_seg, est_seg, sample_rate)
+        results.append((result, metrics))
+    return {
+        "si_sdr_db": float(sum(item[1]["si_sdr_db"] for item in results) / len(results)),
+        "waveform_snr_db": float(sum(item[1]["waveform_snr_db"] for item in results) / len(results)),
+        "stft_l1": float(sum(item[1]["stft_l1"] for item in results) / len(results)),
+        "alignment_shift_samples_mean": float(sum(item[0].shift_samples for item in results) / len(results)),
+        "alignment_shift_ms_mean": float(sum(item[0].shift_samples for item in results) * 1000.0 / (len(results) * sample_rate)),
+        "alignment_max_lag_ms": float(max_lag_ms),
+        "alignment_sample_count": int(len(results)),
+    }
+
+
 def active_speech_fraction(reference: Tensor, threshold_ratio: float = 0.01) -> float:
     """Report the fraction above a conservative RMS-relative activity threshold."""
     if threshold_ratio <= 0:

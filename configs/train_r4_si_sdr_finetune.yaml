@@ -1,0 +1,25 @@
+source_checkpoint: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune/best_5db_si_sdr.pt
+source_global_step: 5750
+output_root: runs/waveform_aware_wireless/r4_si_sdr_finetune
+device: cuda
+resume_mode: weights_only
+training:
+  local_steps: 3000
+  batch_size: 4
+  learning_rate: 5.0e-6
+  warmup_steps: 200
+  gradient_clip_norm: 1.0
+  snr_probabilities: {5.0: 0.70, 10.0: 0.20, 15.0: 0.10}
+loss:
+  latent_mse_weight: 1.0
+  multires_stft_weight: 1.0
+  waveform_l1_weight: 0.1
+  channel_free_weight: 0.2
+  fft_sizes: [256, 512, 1024]
+  si_sdr_eps: 1.0e-8
+  si_sdr_clip_db: 30.0
+  si_sdr_ramp: {start: 250, full: 1000}
+experiments:
+  control_no_si_sdr: {si_sdr_target_weight: 0.0}
+  si_sdr_low: {si_sdr_target_weight: 0.01}
+  si_sdr_medium: {si_sdr_target_weight: 0.02}
