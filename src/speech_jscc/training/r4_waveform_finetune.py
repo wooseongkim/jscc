@@ -14,6 +14,7 @@ from channels.global_triplet_allocator import (
     GlobalTripletCSIReport,
     allocate_global_balanced_triplets,
 )
+from channels.r4_uep_allocator import UEPProfile, UEP_PROFILES, allocate_r4_uep
 from channels.physical_ofdm import (
     NR_LIKE_R4,
     active_grid_masks,
@@ -343,6 +344,7 @@ def r4_physical_layer_forward(
     jammer_subband_fraction: float = 0.25,
     jammer_burst_fraction: float = 0.25,
     jammer_tone_count: int = 4,
+    jammer_override=None,
 ) -> R4PhysicalLayerOutput:
     """Single source of truth for differentiable R4 OFDM, LS-CSI, and MRC."""
     profile = NR_LIKE_R4
@@ -350,7 +352,7 @@ def r4_physical_layer_forward(
     # Kept here (rather than in an evaluator) so jammer and clean runs share
     # exactly the canonical OFDM, LS-estimation, and MRC forward.
     from speech_jscc.evaluation.r4_jammer_baseline import build_r4_jammer
-    jammer = build_r4_jammer(
+    jammer = jammer_override or build_r4_jammer(
         data_grid, active_grid_masks(profile, device=source.device).candidate_data,
         jammer_type=jammer_type, jsr_db=jammer_jsr_db, seed=jammer_seed,
         subband_fraction=jammer_subband_fraction,
@@ -434,6 +436,8 @@ class R4WaveformForward:
         epsilon: float = 1e-12,
         layer_importance_order: list[int] | None = None,
         minimum_copy_time_separation_symbols: int = 0,
+        uep_profile_name: str = "U0",
+        uep_profile: UEPProfile | None = None,
     ):
         self.codec = codec
         self.model = model
@@ -446,6 +450,10 @@ class R4WaveformForward:
         )
         if self.minimum_copy_time_separation_symbols < 0:
             raise ValueError("minimum copy time separation must be nonnegative")
+        if uep_profile is None and uep_profile_name not in UEP_PROFILES:
+            raise ValueError(f"unknown UEP profile: {uep_profile_name}")
+        self.uep_profile = uep_profile or UEP_PROFILES[uep_profile_name]
+        self.uep_profile_name = self.uep_profile.name
 
     def forward(
         self,
@@ -461,6 +469,7 @@ class R4WaveformForward:
         jammer_subband_fraction: float = 0.25,
         jammer_burst_fraction: float = 0.25,
         jammer_tone_count: int = 4,
+        jammer_override=None,
     ) -> R4WaveformOutput:
         if channel_condition is None:
             raise ValueError("an explicit R4 channel condition is required")
@@ -473,13 +482,20 @@ class R4WaveformForward:
             allocation_tti = 0
         else:
             allocation_tti = channel_condition.tti
-        allocation = allocate_global_balanced_triplets(
-            profile=self.profile,
-            tx_tti=allocation_tti,
-            report=report,
-            layer_importance_order=self.importance,
-            minimum_time_separation_symbols=self.minimum_copy_time_separation_symbols,
-        )
+        if self.minimum_copy_time_separation_symbols > 0 and self.uep_profile_name != "U0":
+            raise ValueError("time-interleaved and variable-copy UEP policies cannot be combined")
+        if self.uep_profile.is_uniform:
+            allocation = allocate_global_balanced_triplets(
+                profile=self.profile, tx_tti=allocation_tti, report=report,
+                layer_importance_order=self.importance,
+                minimum_time_separation_symbols=self.minimum_copy_time_separation_symbols,
+            )
+        else:
+            allocation = allocate_r4_uep(
+                profile=self.profile, tx_tti=allocation_tti, report=report,
+                layer_importance_order=self.importance,
+                uep_profile=self.uep_profile,
+            )
         coefficients = channel_condition.tap_coefficients.to(source.device)
         if coefficients.shape[0] == 1 and batch > 1:
             coefficients = coefficients.expand(batch, -1)
@@ -515,6 +531,7 @@ class R4WaveformForward:
             jammer_subband_fraction=jammer_subband_fraction,
             jammer_burst_fraction=jammer_burst_fraction,
             jammer_tone_count=jammer_tone_count,
+            jammer_override=jammer_override,
         )
         reconstruction = self.model.decoder(
             physical.combined.estimate, physical.decoder_state

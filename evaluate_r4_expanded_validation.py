@@ -151,7 +151,7 @@ def _cache_codec_inputs(codec, entries, model_config, device):
     return cache
 
 
-def _make_engine(codec, model, specification):
+def _make_engine(codec, model, specification, *, uep_profile_name: str = "U0", uep_profile=None):
     return R4WaveformForward(
         codec,
         model,
@@ -162,6 +162,8 @@ def _make_engine(codec, model, specification):
         minimum_copy_time_separation_symbols=int(
             specification["physical"].get("minimum_copy_time_separation_symbols", 0)
         ),
+        uep_profile_name=uep_profile_name,
+        uep_profile=uep_profile,
     )
 
 

@@ -1,0 +1,20 @@
+medium_checkpoint: runs/waveform_aware_wireless/r4_si_sdr_finetune/si_sdr_medium/local_step_003000.pt
+csi_reference_checkpoint: runs/waveform_aware_wireless/r4_repetition3_mrc_finetune/best_5db_si_sdr.pt
+legacy_final_manifest: runs/waveform_aware_wireless/r4_expanded_validation/final_test_manifest_reference.jsonl
+expanded_selection_manifest: runs/waveform_aware_wireless/r4_expanded_validation/selection_validation_manifest.jsonl
+physical_profile_config: configs/ofdm_nr_like_r4.yaml
+output_root: runs/waveform_aware_wireless/r4_broadband_uep_profiles/legacy_final_medium
+realization_seeds: [41001, 41002]
+evaluation: {utterances: 64, realizations: 2, snr_db: [5, 10, 15], smoke_max_rows: 96}
+physical: {estimator_ridge_lambda: 1.0e-6, epsilon: 1.0e-12}
+jsr_db: [no_jammer, -5, 0, 5, 10]
+bootstrap_samples: 2000
+bootstrap_seed: 92031
+u0_anchor_tolerance_db: 0.005
+canonical_broadband_baseline_rows: runs/waveform_aware_wireless/r4_jammer_baseline/legacy_final_medium/per_sample_jammer_results.jsonl
+u0_legacy_5db_reference:
+  no_jammer: 1.3465616068569943
+  -5: 0.527
+  0: -2.061
+  5: -8.964
+  10: -22.927
