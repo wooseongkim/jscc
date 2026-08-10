@@ -1,6 +1,7 @@
 import pytest
 import torch
 
+from evaluate_r4_broadband_uep_profiles import _profiles_from_json
 from channels.global_triplet_allocator import GlobalTripletCSIReport, allocate_global_balanced_triplets
 from channels.physical_ofdm import NR_LIKE_R4
 from channels.r4_uep_allocator import UEP_PROFILES, UEPProfile, allocate_r4_uep
@@ -59,3 +60,15 @@ def test_invalid_profiles_are_rejected():
         UEPProfile("bad", (4,) + (3,) * 7, (1,) * 8)
     with pytest.raises(ValueError, match="positive"):
         UEPProfile("bad", (3,) * 8, (1, 1, 1, 1, 1, 1, 1, 0))
+
+
+def test_profile_json_normalizes_float32_simplex_roundoff(tmp_path):
+    path = tmp_path / "profiles.json"
+    path.write_text('''{"profiles": {"candidate": {
+        "repetition": [3, 4, 3, 1, 5, 1, 4, 3],
+        "power_share": [0.08763791620731354, 0.2577466368675232,
+                        0.2155657857656479, 0.10236416757106781,
+                        0.10394956916570663, 0.11150587350130081,
+                        0.06598904728889465, 0.055240992456674576]}}}''')
+    profile = _profiles_from_json(path)["candidate"]
+    assert sum(profile.power_share) == pytest.approx(1.0, abs=1e-12)

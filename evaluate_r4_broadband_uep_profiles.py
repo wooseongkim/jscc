@@ -24,7 +24,13 @@ def _profiles_from_json(path: Path | None):
  payload=json.loads(path.read_text()); items=payload.get('profiles',payload)
  profiles={}
  for name,value in items.items():
-  profiles[name]=UEPProfile(name,tuple(value['repetition']),power_share=tuple(value['power_share']))
+  # Search artifacts were serialized from float32 tensors.  Their simplex
+  # sum can differ from one by about 1e-8 even though the optimizer enforced
+  # it exactly.  Canonicalize only this serialization roundoff; materially
+  # invalid profile JSON remains an error in ``UEPProfile``.
+  shares=tuple(float(x) for x in value['power_share']); total=sum(shares)
+  if abs(total-1.0)<=1e-6: shares=tuple(x/total for x in shares)
+  profiles[name]=UEPProfile(name,tuple(value['repetition']),power_share=shares)
  return profiles
 def _selection_jammer_seed(utterance_id, realization_index, snr_db, jsr_db):
  # Stable condition-derived seed; independent of repetition/power candidate.
