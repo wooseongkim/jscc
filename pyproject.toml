@@ -18,6 +18,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=7.4"]
 audio-metrics = ["pystoi>=0.4"]
+evaluation-metrics = ["pystoi>=0.4", "openai-whisper>=20240930"]
 speechtokenizer = [
   "beartype>=0.22",
   "einops>=0.8",

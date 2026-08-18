@@ -81,7 +81,9 @@ class SpeechTokenizerWrapper(BaseCodec):
     """Continuous SpeechTokenizer RVQ-embedding adapter for JSCC.
 
     The wrapper calls `forward_feature` and transports `[B,L,T,D]` embedding
-    tensors. RVQ indices are never exposed to the communication system.
+    tensors.  The continuous interface remains the JSCC default.  A separate
+    explicit RVQ-index API is provided for the digital CRC-erasure baseline;
+    it is intentionally opt-in and does not alter the continuous path.
     """
 
     def __init__(
@@ -174,6 +176,61 @@ class SpeechTokenizerWrapper(BaseCodec):
             if not torch.isfinite(layer).all():
                 raise RuntimeError(f"SpeechTokenizer layer {index} contains NaN or Inf")
         return torch.stack([layer.permute(0, 2, 1) for layer in layers], dim=1)
+
+    def encode_rvq_indices(self, waveform: Tensor) -> Tensor:
+        """Return official RVQ indices in canonical ``[B,L,T]`` layout.
+
+        This calls SpeechTokenizer's official ``encode`` path, rather than
+        deriving indices from continuous JSCC embeddings.  It is reserved for
+        digital source coding and leaves :meth:`encode_waveform` unchanged.
+        """
+        if self.codec is not None:
+            raise NotImplementedError("the generic continuous codec has no official RVQ index API")
+        if waveform.ndim != 2 or waveform.shape[1] != self.waveform_samples:
+            raise ValueError(f"waveform must have shape [B,{self.waveform_samples}]")
+        if not torch.isfinite(waveform).all():
+            raise ValueError("waveform contains NaN or Inf")
+        self.model.eval()
+        with torch.no_grad():
+            raw_codes = self.model.encode(waveform.unsqueeze(1), n_q=self.n_q)
+        # SpeechTokenizer currently exposes [L,B,T].  Keep the conversion
+        # explicit so an upstream API change cannot silently transpose source
+        # packets in a digital experiment.
+        if raw_codes.ndim != 3 or raw_codes.shape[0] != self.n_q:
+            raise RuntimeError(
+                "official SpeechTokenizer RVQ codes must have shape [L,B,T], "
+                f"got {tuple(raw_codes.shape)}"
+            )
+        indices = raw_codes.permute(1, 0, 2).contiguous().to(torch.long)
+        if tuple(indices.shape[1:]) != (self.n_q, self.frames):
+            raise RuntimeError(
+                "official SpeechTokenizer RVQ index shape mismatch: "
+                f"got {tuple(indices.shape)}, expected [B,{self.n_q},{self.frames}]"
+            )
+        codebook = self.get_codebook()
+        assert codebook is not None
+        if int(indices.min()) < 0 or int(indices.max()) >= int(codebook.shape[1]):
+            raise RuntimeError("SpeechTokenizer emitted an RVQ index outside the shared codebook")
+        return indices
+
+    def lookup_rvq_indices(self, indices: Tensor) -> Tensor:
+        """Look up official RVQ indices as continuous ``[B,L,T,D]`` embeddings."""
+        if self.codec is not None:
+            raise NotImplementedError("the generic continuous codec has no RVQ codebook lookup")
+        if indices.ndim != 3 or tuple(indices.shape[1:]) != (self.n_q, self.frames):
+            raise ValueError(f"indices must have shape [B,{self.n_q},{self.frames}]")
+        if indices.dtype.is_floating_point:
+            raise TypeError("RVQ indices must be an integer tensor")
+        codebook = self.get_codebook()
+        assert codebook is not None
+        codebook = codebook.to(indices.device)
+        if int(indices.min()) < 0 or int(indices.max()) >= int(codebook.shape[1]):
+            raise ValueError("RVQ index is outside the shared codebook")
+        layers = [codebook[layer][indices[:, layer].to(torch.long)] for layer in range(self.n_q)]
+        representation = torch.stack(layers, dim=1)
+        if tuple(representation.shape[1:]) != self.representation_shape:
+            raise RuntimeError("RVQ codebook lookup produced an invalid continuous representation shape")
+        return representation
 
     def decode_representation(self, representation: Tensor) -> Tensor:
         if self.codec is not None:

@@ -1,0 +1,18 @@
+# Fair fixed-R4 digital CRC-erasure comparison. Existing artifacts are inputs.
+fixed_uep_artifact: runs/waveform_aware_wireless/r4_broadband_uep_optimization/stage1_screen/selected_profiles.json
+fixed_condition_plan: runs/waveform_aware_wireless/r4_xbest_csi_only_speech_metrics/fixed_condition_plan.json
+cpu_smoke_max_conditions: 2
+jammer_aware_allocation:
+  enabled: true
+  mode: csi_only
+  delay_ttis: 1
+digital:
+  crc_block_frames: 10
+  crc: CRC-16-CCITT
+  ldpc_implementation: sionna_5g_nr_ldpc
+  ldpc_iterations: 20
+  modulation: QPSK
+jammer:
+  subband_fraction: 0.25
+  burst_fraction: 0.25
+  tone_count: 4

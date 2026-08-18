@@ -26,6 +26,20 @@ from models.latent_refiner import (
     load_latent_refiner_checkpoint,
     save_latent_refiner_checkpoint,
 )
+from models.jammer_estimator import (
+    JAMMER_TYPE_CLASSES,
+    JammerEstimate,
+    JammerEstimator,
+    jammer_estimation_loss,
+    load_jammer_estimator_checkpoint,
+    save_jammer_estimator_checkpoint,
+)
+from models.adaptive_latent_refiner import (
+    MoEAdaptiveLatentRefiner,
+    load_adaptive_latent_refiner_checkpoint,
+    no_jammer_identity_regularization,
+    save_adaptive_latent_refiner_checkpoint,
+)
 from models.resource_allocator import allocate_resources, deallocate_resources
 
 __all__ = [
@@ -33,17 +47,27 @@ __all__ = [
     "CodecRepresentationLoss",
     "JSCCDecoder",
     "JSCCEncoder",
+    "JAMMER_TYPE_CLASSES",
+    "JammerEstimate",
+    "JammerEstimator",
     "LearnedLayerGate",
     "LatentRefiner",
+    "MoEAdaptiveLatentRefiner",
     "SoftCodebook",
     "build_channel_state",
     "continuous_latent_loss",
     "deterministic_layer_gates",
     "gate_budget_loss",
     "gate_smoothness_loss",
+    "jammer_estimation_loss",
+    "load_adaptive_latent_refiner_checkpoint",
+    "load_jammer_estimator_checkpoint",
     "load_learned_gate_checkpoint",
     "load_latent_refiner_checkpoint",
     "normalize_complex_power",
+    "no_jammer_identity_regularization",
+    "save_adaptive_latent_refiner_checkpoint",
+    "save_jammer_estimator_checkpoint",
     "save_learned_gate_checkpoint",
     "save_latent_refiner_checkpoint",
     "allocate_resources",

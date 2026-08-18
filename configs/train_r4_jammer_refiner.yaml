@@ -1,0 +1,49 @@
+source_checkpoint: runs/waveform_aware_wireless/r4_si_sdr_finetune/si_sdr_medium/local_step_003000.pt
+output_root: runs/waveform_aware_wireless/r4_jammer_refiner
+device: cuda
+seed: 1234
+max_steps: 20000
+batch_size: 2
+uep_profile: U0
+refiner_mode: learned_posterior_moe
+freeze_codec: true
+freeze_jscc_encoder: true
+freeze_jscc_decoder: true
+unfreeze_jscc_decoder: false
+estimator_hidden_dim: 32
+refiner_hidden_dim: 64
+refiner_state_features: 16
+estimator_lr: 1.0e-4
+refiner_lr: 1.0e-4
+weight_decay: 1.0e-5
+gradient_clip_norm: 1.0
+estimator_pretrain_steps: 4000
+oracle_mask_refiner_steps: 4000
+learned_mask_moe_steps: 12000
+jammer_types: [no_jammer, broadband_awgn, subband, burst, tone]
+jammer_probabilities:
+  no_jammer: 0.20
+  broadband_awgn: 0.25
+  subband: 0.25
+  burst: 0.20
+  tone: 0.10
+snr_db_choices: [5, 10, 15]
+jsr_db_choices: [0, 5, 10]
+jammer:
+  subband_fraction: 0.25
+  burst_fraction: 0.25
+  tone_count: 4
+loss:
+  lambda_type: 1.0
+  lambda_mask: 1.0
+  lambda_dice: 0.5
+  lambda_latent: 1.0
+  lambda_stft: 0.1
+  lambda_si_sdr: 0.0
+  lambda_identity: 0.1
+  mask_pos_weight: null
+  si_sdr_clip_db: 30.0
+  fft_sizes: [256, 512, 1024]
+validation_interval: 500
+validation_examples: 2
+checkpoint_interval: 500

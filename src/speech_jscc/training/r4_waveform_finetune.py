@@ -12,7 +12,18 @@ from torch import Tensor, nn
 from channels.global_triplet_allocator import (
     GlobalTripletAllocation,
     GlobalTripletCSIReport,
-    allocate_global_balanced_triplets,
+)
+from channels.re_risk import (
+    REInterferenceReport,
+    RERiskReport,
+    allocate_risk_aware_global_balanced_triplets,
+    combine_csi_and_risk_report,
+    estimate_rx_residual_risk_map,
+    estimate_rx_residual_interference_power,
+)
+from channels.r4_jammer_aware_allocator import (
+    allocate_r4_csi_only,
+    allocate_r4_jammer_aware_sinr,
 )
 from channels.r4_uep_allocator import UEPProfile, UEP_PROFILES, allocate_r4_uep
 from channels.physical_ofdm import (
@@ -25,6 +36,15 @@ from channels.physical_ofdm import (
     modulate_tti,
 )
 from channels.repetition_mrc import MRCResult, coherent_mrc
+from models.adaptive_latent_refiner import (
+    MoEAdaptiveLatentRefiner,
+    load_adaptive_latent_refiner_checkpoint,
+)
+from models.jammer_estimator import (
+    JammerEstimate,
+    JammerEstimator,
+    load_jammer_estimator_checkpoint,
+)
 from models.observable_channel_state import build_observable_receiver_state_v1
 from speech_jscc.training.channel_free_feasibility import (
     decode_frozen_representation_with_gradient,
@@ -213,6 +233,7 @@ def r4_training_objective(
     channel_free_reconstruction: Tensor,
     fft_sizes: tuple[int, ...] = (256, 512, 1024),
     si_sdr_clip_db: float | None = 30.0,
+    no_jammer_identity_regularization: Tensor | None = None,
 ) -> tuple[Tensor, dict[str, Tensor]]:
     latent = _normalized_layer_loss(reconstruction, target)
     decoded = decode_layers(reconstruction)
@@ -227,6 +248,10 @@ def r4_training_objective(
     }
     if "si_sdr" in weights:
         components["si_sdr"] = negative_si_sdr_loss(decoded, waveform_target, clip_db=si_sdr_clip_db)[0]
+    if no_jammer_identity_regularization is not None:
+        if no_jammer_identity_regularization.ndim != 0:
+            raise ValueError("no_jammer_identity_regularization must be scalar")
+        components["no_jammer_identity"] = no_jammer_identity_regularization
     total = sum(float(weights.get(name, 0.0)) * value for name, value in components.items())
     return total, components
 
@@ -267,6 +292,10 @@ class R4ForwardCondition:
 @dataclass
 class R4WaveformOutput:
     reconstruction: Tensor
+    raw_reconstruction: Tensor
+    jammer_posterior: Tensor | None
+    jammer_mask_prob: Tensor | None
+    refiner_mode: str
     decoded_waveform: Tensor | None
     tx_symbols: Tensor
     mapped_symbols: Tensor
@@ -274,6 +303,8 @@ class R4WaveformOutput:
     transmitted_time_domain: Tensor
     received_time_domain: Tensor
     received_resources: Tensor
+    pilots: Tensor
+    noise_variance: Tensor
     estimated_channel: Tensor
     true_channel: Tensor
     combined_symbols: Tensor
@@ -289,7 +320,9 @@ class R4WaveformOutput:
     transmit_power: Tensor
     mrc_output_power: Tensor
     next_delayed_csi: GlobalTripletCSIReport
-    allocation: GlobalTripletAllocation
+    next_re_risk_report: RERiskReport | None
+    next_re_interference_report: REInterferenceReport | None
+    allocation: object
     jammer_grid: Tensor | None = None
     jammer_mask: Tensor | None = None
     signal_received_time: Tensor | None = None
@@ -438,6 +471,13 @@ class R4WaveformForward:
         minimum_copy_time_separation_symbols: int = 0,
         uep_profile_name: str = "U0",
         uep_profile: UEPProfile | None = None,
+        jammer_estimator: JammerEstimator | None = None,
+        adaptive_refiner: MoEAdaptiveLatentRefiner | None = None,
+        refiner_mode: str = "no_refiner",
+        jammer_estimator_checkpoint: str | Path | None = None,
+        adaptive_refiner_checkpoint: str | Path | None = None,
+        risk_aware_allocation: dict | None = None,
+        jammer_aware_allocation: dict | None = None,
     ):
         self.codec = codec
         self.model = model
@@ -454,6 +494,102 @@ class R4WaveformForward:
             raise ValueError(f"unknown UEP profile: {uep_profile_name}")
         self.uep_profile = uep_profile or UEP_PROFILES[uep_profile_name]
         self.uep_profile_name = self.uep_profile.name
+        risk = {
+            "enabled": False, "risk_mode": "none", "risk_alpha": 0.0,
+            "risk_delay_ttis": 1, "normalize_risk": True,
+        }
+        risk.update(risk_aware_allocation or {})
+        if risk["risk_mode"] not in {"none", "oracle_jamming", "rx_residual", "delayed_rx_residual"}:
+            raise ValueError(f"unknown RE risk mode: {risk['risk_mode']}")
+        if float(risk["risk_alpha"]) < 0 or int(risk["risk_delay_ttis"]) < 1:
+            raise ValueError("RE risk alpha must be nonnegative and delay must be positive")
+        self.risk_aware_allocation = risk
+        jammer_aware = {
+            "enabled": False,
+            "mode": "none",  # none | csi_only | delayed_rx_interference | oracle_jamming_interference
+            "delay_ttis": 1,
+        }
+        jammer_aware.update(jammer_aware_allocation or {})
+        if jammer_aware["mode"] not in {
+            "none", "csi_only", "delayed_rx_interference", "oracle_jamming_interference",
+        }:
+            raise ValueError(f"unknown jammer-aware allocation mode: {jammer_aware['mode']}")
+        if int(jammer_aware["delay_ttis"]) < 1:
+            raise ValueError("jammer-aware allocation delay must be positive")
+        self.jammer_aware_allocation = jammer_aware
+        valid_refiner_modes = {
+            "no_refiner",
+            "oracle_mask_refiner",
+            "learned_mask_refiner",
+            "learned_posterior_moe_refiner",
+        }
+        if refiner_mode not in valid_refiner_modes:
+            raise ValueError(f"unknown refiner_mode: {refiner_mode}")
+        if jammer_estimator is not None and jammer_estimator_checkpoint is not None:
+            raise ValueError("provide jammer_estimator or jammer_estimator_checkpoint, not both")
+        if adaptive_refiner is not None and adaptive_refiner_checkpoint is not None:
+            raise ValueError("provide adaptive_refiner or adaptive_refiner_checkpoint, not both")
+        parameter = next(model.parameters(), None)
+        refinement_device = torch.device("cpu") if parameter is None else parameter.device
+        if jammer_estimator_checkpoint is not None:
+            checkpoint_path = Path(jammer_estimator_checkpoint)
+            if not checkpoint_path.is_file():
+                raise FileNotFoundError(f"jammer estimator checkpoint does not exist: {checkpoint_path}")
+            jammer_estimator = load_jammer_estimator_checkpoint(
+                torch.load(checkpoint_path, map_location=refinement_device, weights_only=False),
+                refinement_device,
+            )
+        if adaptive_refiner_checkpoint is not None:
+            checkpoint_path = Path(adaptive_refiner_checkpoint)
+            if not checkpoint_path.is_file():
+                raise FileNotFoundError(f"adaptive refiner checkpoint does not exist: {checkpoint_path}")
+            adaptive_refiner = load_adaptive_latent_refiner_checkpoint(
+                torch.load(checkpoint_path, map_location=refinement_device, weights_only=False),
+                refinement_device,
+            )
+        if refiner_mode in {"learned_mask_refiner", "learned_posterior_moe_refiner"}:
+            if jammer_estimator is None:
+                raise ValueError("learned refiner mode requires jammer_estimator")
+            if adaptive_refiner is None:
+                raise ValueError("learned refiner mode requires adaptive_refiner")
+        if refiner_mode == "oracle_mask_refiner" and adaptive_refiner is None:
+            raise ValueError("oracle_mask_refiner requires adaptive_refiner")
+        self.jammer_estimator = jammer_estimator
+        self.adaptive_refiner = adaptive_refiner
+        self.refiner_mode = refiner_mode
+
+    def _uniform_jammer_posterior(self, reference: Tensor, num_experts: int) -> Tensor:
+        return reference.new_full((reference.shape[0], num_experts), 1.0 / num_experts)
+
+    def _apply_refiner(
+        self,
+        raw_reconstruction: Tensor,
+        physical: R4PhysicalLayerOutput,
+    ) -> tuple[Tensor, JammerEstimate | None, Tensor | None]:
+        """Apply decoder-side denoising without changing physical transmission."""
+        if self.refiner_mode == "no_refiner":
+            return raw_reconstruction, None, None
+        assert self.adaptive_refiner is not None
+        estimate = None
+        if self.jammer_estimator is not None:
+            masks = active_grid_masks(self.profile, device=raw_reconstruction.device)
+            estimate = self.jammer_estimator(
+                physical.received_grid,
+                physical.pilots,
+                masks.pilot,
+                physical.estimated_channel,
+                physical.noise_variance,
+            )
+            posterior = estimate.posterior
+        else:
+            posterior = self._uniform_jammer_posterior(
+                raw_reconstruction, self.adaptive_refiner.num_experts
+            )
+        mask_prob = physical.jammer_mask.to(dtype=raw_reconstruction.dtype) if self.refiner_mode == "oracle_mask_refiner" else estimate.mask_prob
+        reconstruction = self.adaptive_refiner(
+            raw_reconstruction, physical.decoder_state, mask_prob, posterior
+        )
+        return reconstruction, estimate, mask_prob
 
     def forward(
         self,
@@ -461,6 +597,10 @@ class R4WaveformForward:
         waveform: Tensor | None = None,
         channel_condition: R4ForwardCondition | None = None,
         delayed_csi: GlobalTripletCSIReport | None = None,
+        delayed_re_risk: RERiskReport | None = None,
+        oracle_jamming_risk: RERiskReport | None = None,
+        delayed_re_interference: REInterferenceReport | None = None,
+        oracle_jamming_interference: REInterferenceReport | None = None,
         random_generator: torch.Generator | None = None,
         training: bool = True,
         jammer_type: str = "no_jammer",
@@ -484,15 +624,60 @@ class R4WaveformForward:
             allocation_tti = channel_condition.tti
         if self.minimum_copy_time_separation_symbols > 0 and self.uep_profile_name != "U0":
             raise ValueError("time-interleaved and variable-copy UEP policies cannot be combined")
-        if self.uep_profile.is_uniform:
-            allocation = allocate_global_balanced_triplets(
-                profile=self.profile, tx_tti=allocation_tti, report=report,
+        risk_enabled = bool(self.risk_aware_allocation["enabled"]) and self.risk_aware_allocation["risk_mode"] != "none" and float(self.risk_aware_allocation["risk_alpha"]) != 0.0
+        risk_mode = self.risk_aware_allocation["risk_mode"]
+        selected_risk = oracle_jamming_risk if risk_mode == "oracle_jamming" else delayed_re_risk
+        if risk_enabled and risk_mode == "oracle_jamming" and selected_risk is None:
+            raise ValueError("oracle_jamming risk mode requires an explicitly supplied oracle risk report")
+        effective_report = combine_csi_and_risk_report(
+            allocation_tti, report, selected_risk,
+            float(self.risk_aware_allocation["risk_alpha"]), self.epsilon,
+        ) if risk_enabled else report
+        jammer_aware_enabled = (
+            bool(self.jammer_aware_allocation["enabled"])
+            and self.jammer_aware_allocation["mode"] != "none"
+        )
+        jammer_aware_mode = self.jammer_aware_allocation["mode"]
+        selected_interference = (
+            oracle_jamming_interference
+            if jammer_aware_mode == "oracle_jamming_interference"
+            else delayed_re_interference
+        )
+        if allocation_tti == 0:
+            # Bootstrap has no preceding receiver observation.  It uses the
+            # deterministic neutral SINR map, even in explicitly-oracle mode.
+            selected_interference = None
+        if (
+            jammer_aware_enabled
+            and jammer_aware_mode == "oracle_jamming_interference"
+            and allocation_tti != 0
+            and selected_interference is None
+        ):
+            raise ValueError("oracle jammer-aware allocation requires an explicit oracle interference report")
+        if jammer_aware_enabled:
+            allocation_kwargs = dict(
+                profile=self.profile, tx_tti=allocation_tti, csi_report=report,
+                layer_importance_order=self.importance, uep_profile=self.uep_profile,
+                eps=self.epsilon,
+            )
+            allocation = (
+                allocate_r4_csi_only(**allocation_kwargs)
+                if jammer_aware_mode == "csi_only"
+                else allocate_r4_jammer_aware_sinr(
+                    **allocation_kwargs, interference_report=selected_interference,
+                )
+            )
+        elif self.uep_profile.is_uniform:
+            allocation = allocate_risk_aware_global_balanced_triplets(
+                profile=self.profile, tx_tti=allocation_tti, csi_report=report,
+                risk_report=selected_risk if risk_enabled else None,
+                risk_alpha=float(self.risk_aware_allocation["risk_alpha"]) if risk_enabled else 0.0,
                 layer_importance_order=self.importance,
                 minimum_time_separation_symbols=self.minimum_copy_time_separation_symbols,
             )
         else:
             allocation = allocate_r4_uep(
-                profile=self.profile, tx_tti=allocation_tti, report=report,
+                profile=self.profile, tx_tti=allocation_tti, report=effective_report,
                 layer_importance_order=self.importance,
                 uep_profile=self.uep_profile,
             )
@@ -533,8 +718,11 @@ class R4WaveformForward:
             jammer_tone_count=jammer_tone_count,
             jammer_override=jammer_override,
         )
-        reconstruction = self.model.decoder(
+        raw_reconstruction = self.model.decoder(
             physical.combined.estimate, physical.decoder_state
+        )
+        reconstruction, jammer_estimate, jammer_mask_prob = self._apply_refiner(
+            raw_reconstruction, physical
         )
         decoded = None
         if waveform is not None:
@@ -554,8 +742,45 @@ class R4WaveformForward:
         next_report = GlobalTripletCSIReport.from_reliability(
             channel_condition.tti, current_reliability
         )
+        next_re_risk_report = None
+        next_re_interference_report = None
+        if risk_mode in {"rx_residual", "delayed_rx_residual"}:
+            # Deployable modes use receiver observations after this packet only.
+            risk = estimate_rx_residual_risk_map(
+                physical.received_grid, physical.pilots, masks.pilot,
+                physical.estimated_channel, physical.noise_variance,
+                masks.candidate_data,
+                normalize=bool(self.risk_aware_allocation["normalize_risk"]),
+                eps=self.epsilon,
+            )
+            next_re_risk_report = RERiskReport.from_risk(
+                channel_condition.tti, risk,
+                delay_ttis=int(self.risk_aware_allocation["risk_delay_ttis"]),
+            )
+        if jammer_aware_mode == "delayed_rx_interference":
+            interference_power = estimate_rx_residual_interference_power(
+                physical.received_grid,
+                physical.pilots,
+                masks.pilot,
+                physical.estimated_channel,
+                physical.noise_variance,
+                masks.candidate_data,
+                eps=self.epsilon,
+            )
+            next_re_interference_report = REInterferenceReport.from_power(
+                channel_condition.tti,
+                interference_power,
+                noise_power=float(physical.noise_variance.mean()),
+                delay_ttis=int(self.jammer_aware_allocation["delay_ttis"]),
+            )
         return R4WaveformOutput(
             reconstruction=reconstruction,
+            raw_reconstruction=raw_reconstruction,
+            jammer_posterior=(
+                None if jammer_estimate is None else jammer_estimate.posterior
+            ),
+            jammer_mask_prob=jammer_mask_prob,
+            refiner_mode=self.refiner_mode,
             decoded_waveform=decoded,
             tx_symbols=source,
             mapped_symbols=allocation.extract_source_order(physical.data_grid),
@@ -563,6 +788,8 @@ class R4WaveformForward:
             transmitted_time_domain=physical.tx_time,
             received_time_domain=physical.received_time,
             received_resources=physical.received_grid,
+            pilots=physical.pilots,
+            noise_variance=physical.noise_variance,
             estimated_channel=physical.estimated_channel,
             true_channel=physical.true_channel,
             combined_symbols=physical.combined.estimate,
@@ -585,6 +812,8 @@ class R4WaveformForward:
             transmit_power=allocation.power_source_order.sum(),
             mrc_output_power=physical.combined.estimate.abs().square().mean(),
             next_delayed_csi=next_report,
+            next_re_risk_report=next_re_risk_report,
+            next_re_interference_report=next_re_interference_report,
             allocation=allocation,
             jammer_grid=physical.jammer_grid,
             jammer_mask=physical.jammer_mask,

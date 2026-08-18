@@ -3,9 +3,15 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .venv/
+.venv_py39_backup/
 artifacts/
 dist/
 *.egg-info/
+*.log
+nohup.out
+
+data/
+runs/
 
 # Do not commit large run artifacts (checkpoint files)
 runs/**/*.pt

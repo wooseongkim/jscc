@@ -48,6 +48,20 @@ def test_speechtokenizer_official_and_continuous_reconstruction_are_finite() -> 
     )
 
 
+def test_speechtokenizer_rvq_indices_round_trip_through_shared_codebook() -> None:
+    codec = _codec_or_skip()
+    waveform = torch.zeros(1, 16000)
+    with torch.inference_mode():
+        indices = codec.encode_rvq_indices(waveform)
+        representation = codec.lookup_rvq_indices(indices)
+        reconstructed = codec.decode_representation(representation)
+
+    assert indices.shape == (1, 8, 50)
+    assert representation.shape == (1, 8, 50, 1024)
+    assert reconstructed.shape == (1, 16000)
+    assert torch.isfinite(reconstructed).all()
+
+
 def test_peak_xcorr_alignment_preserves_batch_dimension() -> None:
     reference = torch.zeros(2, 32)
     reference[:, 8:16] = 1.0

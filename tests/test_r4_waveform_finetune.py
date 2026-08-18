@@ -290,3 +290,24 @@ def test_shared_ls_r4_forward_is_deterministic_finite_and_differentiable():
     assert float(model.encoder.scale.grad.abs()) > 0
     assert float(model.decoder.scale.grad.abs()) > 0
     assert all(parameter.grad is None for parameter in codec.parameters())
+
+
+def test_waveform_objective_adds_explicit_no_jammer_identity_regularization():
+    reconstruction = torch.zeros(1, 2, 8, 2)
+    target = torch.ones_like(reconstruction)
+    waveform = torch.zeros(1, 8)
+    baseline, _ = r4_training_objective(
+        reconstruction, target, waveform, lambda value: value.mean((1, 3)),
+        weights={"latent": 0.0, "stft": 0.0, "waveform": 0.0, "channel_free": 0.0},
+        channel_free_reconstruction=target,
+        fft_sizes=(4,),
+    )
+    total, components = r4_training_objective(
+        reconstruction, target, waveform, lambda value: value.mean((1, 3)),
+        weights={"latent": 0.0, "stft": 0.0, "waveform": 0.0, "channel_free": 0.0, "no_jammer_identity": 0.5},
+        channel_free_reconstruction=target,
+        no_jammer_identity_regularization=torch.tensor(2.0),
+        fft_sizes=(4,),
+    )
+    assert torch.allclose(total - baseline, torch.tensor(1.0))
+    assert torch.equal(components["no_jammer_identity"], torch.tensor(2.0))

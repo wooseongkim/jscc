@@ -1,0 +1,39 @@
+# Fixed held-out protocol for comparing saved jammer-refiner checkpoints.
+device: cuda
+output_root: runs/waveform_aware_wireless/r4_jammer_refiner/fixed_validation
+validation_seed: 240811
+max_utterances: 16
+realizations: 2
+snr_db: [5, 10, 15]
+jsr_db: [0, 5, 10]
+# The profile is read once from the completed optimizer artifact and then
+# remains fixed; this evaluator never changes r, p, or the importance order.
+uep_profile_selection_artifact: runs/waveform_aware_wireless/r4_broadband_uep_optimization/stage1_screen/selected_profiles.json
+uep_profile_selection_key: x_best
+# Use `uep_profile: U0` instead when reproducing the historical uniform mapping.
+mask_threshold: 0.5
+jammer:
+  subband_fraction: 0.25
+  burst_fraction: 0.25
+  tone_count: 4
+risk_aware_allocation:
+  enabled: false
+  risk_mode: none  # none | oracle_jamming | rx_residual | delayed_rx_residual
+  risk_alpha: 0.0
+  risk_delay_ttis: 1
+  normalize_risk: true
+# The deployable jammer-aware allocator is disabled by default.  When enabled
+# it keeps the frozen UEP r/p profile and moves only RE positions using the
+# delayed SINR-utility rule in design equation (44-R4).
+jammer_aware_allocation:
+  enabled: false
+  mode: none  # none | delayed_rx_interference | oracle_jamming_interference
+  delay_ttis: 1
+# Raw waveform quality metrics are opt-in because Whisper and ViSQOL are
+# external backends.  They do not alter the physical path or allocation.
+speech_metrics:
+  estoi_enabled: false
+  wer_enabled: false
+  visqol_enabled: false
+  asr_model: small.en
+  visqol_binary: visqol
